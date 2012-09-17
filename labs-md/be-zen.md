@@ -40,7 +40,7 @@ We need a summary webpage for a movie saga. It'll describe the different episode
 ### Steps
 
 * Choose a movie saga of at least 3 movies.
-* Have a look at the wireframe in [movie-saga.png](../labs.files/be-zen/movie-saga.png) and identify the different HTML elements you'll need.
+* Have a look at the wireframe in [movie-saga.png](../labs-files/be-zen/movie-saga.png) and identify the different HTML elements you'll need.
 * Gather the different texts and informations you'll need about your saga.
 * Create a valid HTML5 document containing the different parts needed according to the wireframe.
 
@@ -71,8 +71,8 @@ We have a broken email client. You'll need to write some CSS to "repair" the pos
 
 ### Steps
 
-* Have a look at the markup in [Hmail.html](../labs.files/be-zen/Hmail.html) and identify the 3 main blocks : `header`, `#boxes` and `#main`.
-* Have a look at the wireframe in [Hmail.png](../labs.files/be-zen/Hmail.png) and identify 3 main blocks.
+* Have a look at the markup in [Hmail.html](../labs-files/be-zen/Hmail.html) and identify the 3 main blocks : `header`, `#boxes` and `#main`.
+* Have a look at the wireframe in [Hmail.png](../labs-files/be-zen/Hmail.png) and identify 3 main blocks.
 * Create a valid CSS document and position the 3 main elements according to the image reference.
 
 ### Rules
@@ -102,8 +102,8 @@ You're going to try the [CSS Zen Garden](http://www.csszengarden.com) challenge.
 
 ### Steps
 
-* Have a look at the markup in [css-zen-garden.html](../labs.files/be-zen/css-zen-garden.html) and identify different main blocks.
-* Have a look at the wireframe in [css-zen-garden.png](../labs.files/be-zen/css-zen-garden.png) and identify different main blocks.
+* Have a look at the markup in [css-zen-garden.html](../labs-files/be-zen/css-zen-garden.html) and identify different main blocks.
+* Have a look at the wireframe in [css-zen-garden.png](../labs-files/be-zen/css-zen-garden.png) and identify different main blocks.
 * Create a valid CSS document and position the main blocks according to the wireframe.
 * Use all the CSS properties you want and create an awesome look and feel for the given HTML (without modifying it).
 * Don't hesitate to use the ones you don't know about, be curious, try and experiment...

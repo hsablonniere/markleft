@@ -1,0 +1,43 @@
+[alt="lab-logo"] {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+}
+
+@media screen and (min-width: 500px) {
+  [alt="lab-logo"] {
+    float: right;
+  }
+}
+
+h2 {
+  counter-reset: counter-h3;
+}
+
+h3 {
+  counter-increment: counter-h3;
+}
+
+h3:before {
+  content: counter(counter-h3, lower-alpha) ". ";
+  color: #777;
+}
+
+strong {
+  color: #CD0000;
+}
+
+.deliveries {
+  list-style: none;
+}
+
+.deliveries li {
+  background: #08C;
+  border-radius: 5px;
+  color: #FFF;
+  display: inline-block;
+  font-weight: bold;
+  margin: 0 5px 0 0;
+  padding: 0 5px;
+  text-shadow: 0px -1px 0px #666;
+}

@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Quando';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quando-Regular'), url(http://themes.googleusercontent.com/static/fonts/quando/v1/qVv1zuxOTRil_FcBMa30Kg.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/subtle-stripes.png);
+}
+body {
+  color: #96956d;
+  font-family: 'Quando';
+}
+.cover {
+  background-image: url(../img/don-t-you-like-my-style.png);
+  background-size: cover;
+}
+.cover > * {
+  bottom: auto;
+  font-size: 65px;
+  height: auto;
+  margin-top: 0;
+  padding-left: 30px;
+  position: absolute;
+  text-align: left;
+  top: 50px;
+}
+
+h2,
+h3,
+h4 {
+  font-size: 55px;
+  margin-bottom: 20px;
+}
+
+p.list strong,
+ol li,
+ul li {
+  padding: 8px 0;
+}

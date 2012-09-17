@@ -1,0 +1,182 @@
+/* DZSlides stuffs */
+
+body {
+  display: none;
+  height: 600px;
+  font-family: Arial, sans-serif;
+  left: 50%;
+  margin-left: -400px;
+  margin-top: -300px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  width: 800px;
+}
+body.loaded {
+  display: block;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  left: -150%;
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  -moz-transition: left 200ms linear 0s;
+  -ms-transition: left 200ms linear 0s;
+  -o-transition: left 200ms linear 0s;
+  -webkit-transition: left 200ms linear 0s;
+  transition: left 200ms linear 0s;
+  width: 100%;
+}
+section[aria-selected] {
+  left: 0;
+  opacity: 1;
+}
+section[aria-selected] ~ section {
+  left: +150%;
+  opacity: 0;
+}
+
+.incremental {
+  visibility: hidden;
+}
+.incremental[active] {
+  visibility: visible;
+}
+.incremental > * {
+  opacity: 1;
+}
+.incremental:not([active]) > * {
+  opacity: 0;
+}
+.incremental > *[aria-selected] {
+  opacity: 1;
+}
+.incremental > *[aria-selected] ~ * {
+  opacity: 0;
+}
+
+/* Slide stuffs */
+
+.cover h1 {
+  position: absolute;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-size: 60px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.cover > *,
+.title > * {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.cover > * {
+  text-align: center;
+}
+
+.title > *,
+.title.link a {
+  position: absolute;
+  top: 50%;
+  height: 200px;
+  margin: 0;
+  margin-top: -100px;
+  width: 100%;
+}
+
+.title.link a {
+  margin-top: 100px;
+  font-size: 40px;
+}
+
+p {
+  display: none;
+}
+
+p.list,
+ul,
+ol {
+  color: transparent;
+  display: block;
+  font-size: 0;
+  margin: 0 0 0 75px;
+  overflow: hidden;
+  text-shadow: none;
+}
+
+p.list strong,
+ol li,
+ul li {
+  clear: left;
+  color: #999;
+  display: block;
+  float: left;
+  font-size: 30px;
+  margin: 5px 0;
+  text-transform: capitalize;
+}
+
+p.list strong code,
+ol li code,
+ul li code {
+  text-transform: none;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #666;
+}
+
+.illustration img {
+  bottom: 15px;
+  position: absolute;
+  right: 0;
+  width: 200px;
+}
+
+/* code */
+
+pre {
+  font-size: 16px;
+  margin: 5px 0 20px 0;
+}
+
+pre code {
+  box-shadow: 0px 1px 5px #AAA inset;
+  border-radius: 5px;
+}
+
+iframe {
+  background: #FFF;
+  border: none;
+  box-shadow: 0 0 5px #AAA;
+}
+
+/* toc */
+
+.toc {
+  display: none;
+}
+
+.details {
+  display: none;
+}
+
+.useful-links {
+  display: none;
+}

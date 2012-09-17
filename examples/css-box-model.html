@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>CSS Box model</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      #menus {
+        left: 0;
+        position: absolute;
+        top: 0;
+        padding: 60px;
+        z-index: 2;
+      }
+      #out {
+        border: 1px solid #000;
+        height: 280px;
+        width: 280px;
+      }
+      #in {
+        background: #8C644C;
+        border: 0px solid #594D37;
+        color: #000;
+        font-family: monospace;
+        font-weight: bold;
+        height: 100px;
+        margin: 0px;
+        overflow: hidden;
+        padding: 0px;
+        text-align: center;
+        width: 100px;
+      }
+      #content {
+        background: #C4BE90;
+        height: 100%;
+      }
+      #margin-box {
+        background: #FAFAC0;
+        left: 61px;
+        height: 100px;
+        position: absolute;
+        top: 61px;
+        width: 100px;
+        z-index: 1;
+      }
+      #right {
+        right: 0;
+        position: absolute;
+        top: 0;
+        padding: 80px 60px;
+      }
+      label {
+        border-radius: 5px;
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        width: 100px;
+      }
+      input {
+        margin-right:20px;
+        width: 100px;
+      }
+      label[for="border"],
+      label[for="padding"] {
+        color: #FFF;
+      }
+      label[for="margin"] {
+        background: #FAFAC0;
+      }
+      label[for="border"] {
+        background: #594D37;
+      }
+      label[for="padding"] {
+        background: #8C644C;
+      }
+      label[for="height"] {
+        background: #C4BE90;
+      }
+      label[for="width"] {
+        background: #C4BE90;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="menus">
+      <div id="out">
+        <div id="in"><div id="content">a b c d e f g h i j k l m n o p q r s t u v w x y z 0 1 2 3 4 5 6 7 8 9</div></div>
+      </div>
+    </div>
+    <div id="margin-box"></div>
+    <div id="right">
+      <p><label for="height">height</label><input type="range" min="0" max="100" value="100" id="height"><span id="height-value">100px</span></p>
+      <p><label for="width">width</label><input type="range" min="0" max="100" value="100" id="width"><span id="width-value">100px</span></p>
+      <p><label for="border">border</label><input type="range" min="0" max="30" value="0" id="border"><span id="border-value">0px</span></p>
+      <p><label for="margin">margin</label><input type="range" min="0" max="30" value="0" id="margin"><span id="margin-value">0px</span></p>
+      <p><label for="padding">padding</label><input type="range" min="0" max="30" value="0" id="padding"><span id="padding-value">0px</span></p>
+    </div>
+    <script>
+      function $(query) { return document.getElementById(query)};
+      function updateMarginBox() {
+        $('margin-box').style.height = (+$('margin').value * 2 + +$('border').value * 2 + +$('padding').value * 2 + +$('height').value) + 'px';
+        $('margin-box').style.width = (+$('margin').value * 2 + +$('border').value * 2 + +$('padding').value * 2 + +$('width').value) + 'px';
+      };
+      $('margin').addEventListener('change', function() {
+        $('in').style.margin = this.value + 'px';
+        updateMarginBox();
+        $('margin-value').innerHTML = this.value + 'px';
+      });
+      $('border').addEventListener('change', function() {
+        $('in').style.borderWidth = this.value + 'px';
+        updateMarginBox();
+        $('border-value').innerHTML = this.value + 'px';
+      });
+      $('padding').addEventListener('change', function() {
+        $('in').style.padding = this.value + 'px';
+        updateMarginBox();
+        $('padding-value').innerHTML = this.value + 'px';
+      });
+      $('height').addEventListener('change', function() {
+        $('in').style.height = this.value + 'px';
+        updateMarginBox();
+        $('height-value').innerHTML = this.value + 'px';
+      });
+      $('width').addEventListener('change', function() {
+        $('in').style.width = this.value + 'px';
+        updateMarginBox();
+        $('width-value').innerHTML = this.value + 'px';
+      });
+
+      // HTML5 input range polyfill : https://github.com/fryn/html5slider
+      (function(){function a(){Array.forEach(document.querySelectorAll("input[type=range]"),c),document.addEventListener("DOMNodeInserted",f,!0)}function f(e){l(e.target),e.target.querySelectorAll&&Array.forEach(e.target.querySelectorAll("input"),l)}function l(e,t){e.localName=="input"&&e.type!="range"&&(e.getAttribute("type")=="range"?c(e):t||setTimeout(l,0,e,!0))}function c(e){function S(e){l=!0,setTimeout(function(){l=!1},0);if(e.button||!y)return;var t=parseFloat(getComputedStyle(this,0).width),n=(t-i.width)/y;if(!n)return;var r=e.clientX-this.getBoundingClientRect().left-i.width/2-(b-v)*n;Math.abs(r)>i.radius&&(f=!0,this.value-=-r/n),p=b,d=e.clientX,this.addEventListener("mousemove",x,!0),this.addEventListener("mouseup",T,!0)}function x(e){var t=parseFloat(getComputedStyle(this,0).width),n=(t-i.width)/y;if(!n)return;p+=(e.clientX-d)/n,d=e.clientX,f=!0,this.value=p}function T(){this.removeEventListener("mousemove",x,!0),this.removeEventListener("mouseup",T,!0)}function N(e){e.keyCode>36&&e.keyCode<41&&(C.call(this),f=!0,this.value=b+(e.keyCode==38||e.keyCode==39?g:-g))}function C(){l||(this.style.boxShadow=r?"0 0 2px 1px -moz-mac-focusring, inset 0 0 1px -moz-mac-focusring":"0 0 0 2px #fb0")}function k(){this.style.boxShadow=""}function L(e){return!isNaN(e)&&+e==parseFloat(e)}function A(){v=L(e.min)?+e.min:0,m=L(e.max)?+e.max:100,m<v&&(m=v>100?v:100),g=L(e.step)&&e.step>0?+e.step:1,y=m-v,M(!0)}function O(){!t&&!a&&(b=e.getAttribute("value")),L(b)||(b=(v+m)/2),b=Math.round((b-v)/g)*g+v,b<v?b=v:b>m&&(b=v+~~(y/g)*g)}function M(t){O(),f&&b!=c&&e.dispatchEvent(u),f=!1;if(!t&&b==c)return;c=b;var n=y?(b-v)/y*100:0,r="-moz-element(#__sliderthumb__) "+n+"% no-repeat, ";h(e,{background:r+s})}var t,a,f,l,c,p,d,v,m,g,y,b=e.value;n||(n=document.body.appendChild(document.createElement("hr")),h(n,{"-moz-appearance":r?"scale-horizontal":"scalethumb-horizontal",display:"block",visibility:"visible",opacity:1,position:"fixed",top:"-999999px"}),document.mozSetImageElement("__sliderthumb__",n));var w=function(){return""+b},E=function _(n){b=""+n,t=!0,M(),delete e.value,e.value=b,e.__defineGetter__("value",w),e.__defineSetter__("value",_)};e.__defineGetter__("value",w),e.__defineSetter__("value",E),e.__defineGetter__("type",function(){return"range"}),["min","max","step"].forEach(function(t){e.hasAttribute(t)&&(a=!0),e.__defineGetter__(t,function(){return this.hasAttribute(t)?this.getAttribute(t):""}),e.__defineSetter__(t,function(e){e===null?this.removeAttribute(t):this.setAttribute(t,e)})}),e.readOnly=!0,h(e,o),A(),e.addEventListener("DOMAttrModified",function(e){e.attrName=="value"&&!t?(b=e.newValue,M()):~["min","max","step"].indexOf(e.attrName)&&(A(),a=!0)},!0),e.addEventListener("mousedown",S,!0),e.addEventListener("keydown",N,!0),e.addEventListener("focus",C,!0),e.addEventListener("blur",k,!0)}function h(e,t){for(var n in t)e.style.setProperty(n,t[n],"important")}var e=document.createElement("input");try{e.type="range";if(e.type=="range")return}catch(t){return}if(!document.mozSetImageElement||!("MozAppearance"in e.style))return;var n,r=navigator.platform=="MacIntel",i={radius:r?9:6,width:r?22:12,height:r?16:20},s="-moz-linear-gradient(top, transparent "+(r?"6px, #999 6px, #999 7px, #ccc 9px, #bbb 11px, #bbb 12px, transparent 12px":"9px, #999 9px, #bbb 10px, #fff 11px, transparent 11px")+", transparent)",o={"min-width":i.width+"px","min-height":i.height+"px","max-height":i.height+"px",padding:0,border:0,"border-radius":0,cursor:"default","text-indent":"-999999px"},u=document.createEvent("HTMLEvents");u.initEvent("change",!0,!1),document.readyState=="loading"?document.addEventListener("DOMContentLoaded",a,!0):a()})()
+    </script>
+  </body>
+</html>

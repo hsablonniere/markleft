@@ -1,0 +1,32 @@
+a[title$=".picto"] {
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-left: 1.5em;
+}
+
+a[title$=".picto"][title="twitter.picto"] {
+  background-image: url(../img/twitter.png);
+}
+
+a[title$=".picto"][title="email.picto"] {
+  background-image: url(../img/gmail.png);
+}
+
+a[title$=".picto"][title="github.picto"] {
+  background-image: url(../img/github.png);
+}
+
+pre {
+  background-color: ghostWhite;
+}
+
+iframe {
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  width: 100%;
+}
+
+.deprecated {
+  text-decoration: line-through;
+}

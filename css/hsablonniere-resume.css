@@ -1,0 +1,97 @@
+@font-face {
+  font-family: MyHelvetica;
+  font-style: normal;
+  src: url(../fonts/HelveticaNeueLTCom-Md.ttf);
+}
+
+@font-face {
+  font-family: MyHelvetica;
+  font-style: bold;
+  src: url(../fonts/HelveticaNeueLTCom-Md.ttf);
+}
+
+html {
+  background: url(../img/inflicted.png);
+}
+
+body {
+  font-family: MyHelvetica;
+}
+
+.cover h1 {
+  bottom: 50px;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.title h2 {
+  bottom: 40px;
+  color: #FFF;
+  height: 100px;
+  text-align: center;
+  top: auto;
+}
+
+h2 {
+  color: #FFF;
+  height: 100px;
+  left: -35%;
+  margin-top: -50px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  width: 100%;
+}
+
+h2.reverse {
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+h2.happy {
+  color: #0D0;
+}
+
+h2.unhappy {
+  color: red;
+}
+
+p.list,
+ul {
+  margin-left: 250px;
+  margin-top: 75px;
+}
+
+p.list strong,
+ul li {
+  color: #DDD;
+  font-size: 60px;
+}
+
+p.list strong:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #AAA;
+}
+
+p.long.list,
+ul.long {
+  margin-top: 25px;
+}
+
+p.long.list strong,
+ul.long li {
+  font-size: 45px;
+}
+
+a {
+  color: #4da7ff;
+}

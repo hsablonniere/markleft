@@ -84,6 +84,7 @@ We have a broken email client. You'll need to write some CSS to "repair" the pos
 
 <!-- .deliveries -->
 * Hmail.css
+* Hmail.html
 
 ## Be zen!
 
@@ -118,6 +119,7 @@ You're going to try the [CSS Zen Garden](http://www.csszengarden.com) challenge.
 
 <!-- .deliveries -->
 * css-zen-garden.css
+* css-zen-garden.html
 
 <script src="../js/jquery-1.8.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

@@ -47,7 +47,7 @@ We need a summary webpage for a movie saga. It'll describe the different episode
 ### Rules
 
 * You **MUST** absolutely use these HTML elements : `article`, `section`, `header`, `footer`, `nav`, `hr`, `h1`, `h2`, `h3`, `ul`, `ol`, `thead`, `tbody`, `th`, `dl`, `dt`, `dd`, `form`, `label`, `textarea`
-* You **CANNOT** use these HTML elements : `div`, `span`, `br`
+* You **CANNOT** use these HTML elements : `div`, `span`, `br`. Since `br` would be a good fit to insert two lines (or more) quotes, just put one line movie quotes on your document.
 * You **MUST** follow all the instructions (post-it) of the wireframe.
 * You **MUST** validate your HTML and correct the possible errors.
 * You **MUST** cite your sources of information at the bottom.
@@ -85,6 +85,8 @@ We have a broken email client. You'll need to write some CSS to "repair" the pos
 <!-- .deliveries -->
 * Hmail.css
 * Hmail.html
+* Hmail-base.css
+* Hmail-logo.png
 
 ## Be zen!
 
@@ -111,7 +113,7 @@ You're going to try the [CSS Zen Garden](http://www.csszengarden.com) challenge.
 
 ### Rules
 
-* You **MUST** absolutely use these properties : `float`, `clear`, `position`, `margin-*`, `padding-*`, `border-*`, `background-*`, `font-*`, `color`
+* You **MUST** absolutely use these properties : `float`, `clear`, `position`, `margin-*`, `padding-*`, `border-*`, `background-*`, `font-*`, `color`.
 * You **MUST** validate your CSS and correct the possible errors.
 * You **CANNOT** modify the HTML.
 

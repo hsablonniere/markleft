@@ -659,6 +659,5 @@ Before trying new stuffs from HTML5 or CSS3 you can verify which browsers are co
 <div id="progress-bar"></div>
 
 <script src="../js/dzslides.core.js"></script>
-<script src="../js/dzslides.custom.js"></script>
 <script src="../js/jquery-1.8.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

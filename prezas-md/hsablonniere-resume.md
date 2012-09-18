@@ -87,6 +87,5 @@ You can find me on these websites :
 <div id="progress-bar"></div>
 
 <script src="../js/dzslides.core.js"></script>
-<script src="../js/dzslides.custom.js"></script>
 <script src="../js/jquery-1.8.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

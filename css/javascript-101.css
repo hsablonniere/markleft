@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Duru Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Duru Sans'), local('DuruSans-Regular'), url(http://themes.googleusercontent.com/static/fonts/durusans/v3/0rnIdjSQWlqFS5KpKzVfzj8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/carbon-fibre.png);
+}
+
+body {
+  color: #6d6d6d;
+  font-family: 'Duru Sans', sans-serif;
+}
+
+.cover {
+  /*background-image: url(../img/its-all-about-markup-and-semantics.png);*/
+  background-size: cover;
+}
+
+/*.cover > * {
+  border: 5px solid #6D6D6D;
+  border-width: 5px 0;
+  bottom: auto;
+  font-size: 35px;
+  font-weight: normal;
+  height: auto;
+  margin: 0 10%;
+  padding: 20px 0;
+  top: 70px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 80%;
+}
+
+.cover > * strong {
+  color: #4d4d4d;
+  font-weight: bold;
+}*/

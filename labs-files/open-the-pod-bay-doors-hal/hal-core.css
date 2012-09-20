@@ -1,0 +1,82 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  background-image: url(carbon-fibre.png);
+}
+
+body {
+  background-image: url(hal.jpg);
+  background-position: 30px center;
+  background-repeat: no-repeat;
+}
+
+body,
+#message-input {
+  font: bold 14px/1.5 monospace;
+}
+
+#thread {
+  bottom: 100px;
+  left: 225px;
+  margin: 10px 0;
+  overflow-y: scroll;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+
+#post-message {
+  background: #333;
+  box-shadow: 0 0 10px #000;
+  border-radius: 5px;
+  bottom: 30px;
+  left: 230px;
+  padding: .5%;
+  position: absolute;
+  right: 30px;
+}
+
+#message-input {
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0px 2px 5px #AAA inset;
+  color: #777;
+  padding: 1%;
+  width: 97.5%;
+}
+
+.hal-response,
+.you-message {
+  border-radius: 5px;
+  box-shadow: 0 0 10px #000;
+  color: #FFF;
+  margin: 10px 10px 10px 5px;
+  min-height: 1.5em;
+  padding: 5px 10px;
+  white-space: pre-line;
+}
+
+.hal-response {
+  background: #333;
+  padding-left: 30px;
+  position: relative;
+}
+
+.hal-response:before {
+  background: #F00;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 10px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  width: 10px;
+}
+
+.you-message {
+  background: #555;
+}

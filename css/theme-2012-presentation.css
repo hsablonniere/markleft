@@ -112,6 +112,7 @@ ul,
 ol {
   color: transparent;
   display: block;
+  font-weight: bold;
   font-size: 0;
   margin: 0 0 0 75px;
   overflow: hidden;
@@ -179,4 +180,30 @@ iframe {
 
 .useful-links {
   display: none;
+}
+
+/* introduction */
+
+.introduction p.list,
+.introduction ul,
+.introduction ol {
+  margin: 0;
+}
+
+.introduction p.list strong,
+.introduction u li,
+.introduction ol li {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: none;
+  height: 450px;
+  text-indent: -9999px;
+  width: 800px;
+}
+
+.introduction p.list strong[aria-selected="true"],
+.introduction u li[aria-selected="true"],
+.introduction ol li[aria-selected="true"] {
+  display: block;
 }

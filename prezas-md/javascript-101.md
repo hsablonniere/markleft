@@ -12,19 +12,20 @@
 <link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
 <link href="../css/javascript-101.css" rel="alternate stylesheet" data-dztheme="presentation">
 
-<!-- slide -->
+<!-- slide : cover -->
 
 # JavaScript 101
 
 <!-- toc -->
 
-<!-- slide -->
+<!-- slide : introduction -->
 
-*I know JavaScript - Show me!*
+#### I know JavaScript - Show me!
 
-Building a modern website without knowing JavaScript is nonsense. A lot of people working on web applications and web sites learnt the language on the job. Code written is often hard to understand and hard to maintain. It doesn't follow best practices or standard rules which provoke strange behaviours and bugs. Taking time to understand the fundamentals is really important! By doing so you can stop being **a normal human** and become **a true web developer**.
+<!-- .list.incremental -->
+JavaScript is a **real language**. Building a modern dynamic website without knowing it is nonsense. A lot of people working on web applications and web sites learnt the language on the job. Code written is often hard to understand and hard to maintain. It doesn't follow best practices or standard rules which provoke strange behaviours and bugs. Taking time to understand the fundamentals is really important! By doing so you can stop being **a normal human** and become **a true web developer**.
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## History
   
@@ -43,6 +44,7 @@ JavaScript is a scripting language that supports multiple programming styles. It
 
 JavaScript lovers consider these features as the force of the language. It's very common for people who try to write JavaScript like they write code in other languages to hate it. Don't make this mistake!
 
+<!-- .incremental -->
 * [Dynamic](http://en.wikipedia.org/wiki/Dynamic_language)
 * [Weakly typed](http://en.wikipedia.org/wiki/Weak_typing)
 * [Multi-paradigm](http://en.wikipedia.org/wiki/Multi-paradigm#Multi-paradigm_programming_language)
@@ -56,8 +58,10 @@ JavaScript lovers consider these features as the force of the language. It's ver
 
 ## Usages
 
+<!-- .list.incremental -->
 Even if it was originally designed to work in a **browser environment**, JavaScript is now used on several **different platforms**. Here are a few examples :
 
+<!-- .incremental -->
 * Web server
 * Browser addons/extensions
 * Mobile applications
@@ -70,7 +74,6 @@ Even if it was originally designed to work in a **browser environment**, JavaScr
 * [Building and extension for Firefox](https://developer.mozilla.org/en/Building_an_Extension)
 * [Get started with Chrome extension development](http://code.google.com/chrome/extensions/getstarted.html)
 * [PhoneGap](http://www.phonegap.com/)
-* [Appcelerator Titanium](http://www.appcelerator.com/)
 * [MongoDB](http://www.mongodb.org/)
 * [Mozilla Rhino](http://www.mozilla.org/rhino/)
 
@@ -78,12 +81,14 @@ Even if it was originally designed to work in a **browser environment**, JavaScr
 
 ## Basic syntax
 
+<!-- .list.incremental -->
 JavaScript is **case-sensitive**. **Lines end by semicolon `;`**. **Block are delimited curly brackets by `{ }`**. Comments are between **`/* */` for multiple lines** or after **`//` for one line**.
 
 <!-- slide -->
 
 ## Variables & Types
 
+<!-- .list.incremental -->
 In JavaScript, **Typing is dynamic**. Therefore, there is **NO type declaration** before variable names. Instead we use a **unique keyword : `var`**. Note that a variable **can be declared several times**. If it's non-declared, the variable is **automatically allocated at the first use**.
 
 <!-- slide -->
@@ -93,13 +98,15 @@ In JavaScript, **Typing is dynamic**. Therefore, there is **NO type declaration*
 Numbers like in any other languages are really important. Don't forget that a computer is primarly a super calculator. Integers and floats have the same type : `Number`. Of course, a variable can only be identified as type `Number` at execution time..
 
 If you want to manipulate numbers, the objects `Number` and `Math` has lots of useful properties and methods. The other useful way to manipulate them is operators of course. See reference for more details.
-  
+
+<!-- .incremental -->
 ```javascript
 // Integer
 var i;           // first declaration of i (type is undefined)
 i = 2;           // i is now a integer (type is number)
 ```
 
+<!-- .incremental -->
 ```javascript
 // Float
 var i = -5.01;   // second declaration of i as a float (type is number)
@@ -107,10 +114,12 @@ j = 2;           // j was not declared, automatic assignement to 2
 j = i + 1.12;    // j is now a float equal to 3.12 (still number)
 ```
 
+<!-- .incremental -->
 ```javascript
 var k = new Number(7);    // DO NOT USE : type is object and not number
 ```
 
+<!-- .incremental -->
 ```javascript
 // Specials
 var a = 10 / 0;           // => Infinity
@@ -131,7 +140,8 @@ var c = Math.sqrt(-1);    // => NaN : Not a Number
 Strings are really simple. Quotes or double quotes, no differences, some text in it and you're done. The most important property of a String when it comes to manipulation is `length`. It's not the only one, the `String` object contains a lot of useful properties and methods, see reference for more details.
 
 The other way a good programer should manipulate string is regular expressions and as expected, JavaScript provides a regex engine and a `RegExp` object. Regex can be complicated to master, but the game is worth it since it's a multi language concept. See reference for more details.
-  
+
+<!-- .incremental -->
 ```javascript
 var a = ""; // The empty string: it has zero characters
 var b = 'There is no spoon.';
@@ -141,6 +151,7 @@ var e = "Free your mind.";
 var f = "You're empty.\nSo are you."; // Type of all variables is string
 ```
 
+<!-- .incremental -->
 ```javascript
 var g = new String("Welcome to the real world.");
 // DO NOT USE : type is object and not string
@@ -157,12 +168,14 @@ var g = new String("Welcome to the real world.");
 ### Boolean
   
 Nothing fancy here, `true` of `false`. You'll see later that other types of variables (Number, String...) can by evaluated as booleans according to some rules.
-  
+
+<!-- .incremental -->
 ```javascript
 var realWorld = false;
 var matrix = true;         // Type of all variables is boolean
 ```
 
+<!-- .incremental -->
 ```javascript
 var a = new Boolean(true); // DO NOT USE : type is object and not boolean
 ```
@@ -174,8 +187,10 @@ var a = new Boolean(true); // DO NOT USE : type is object and not boolean
 
 ### null and undefined
 
+<!-- .list.incremental -->
 Both `null` and `undefined` are used for **absence of a value**. One is used when the variable **has been initialiazed : `null`**. The other one is used when the variable **has not been initialized : `undefined`**. It can be returned by **function that have no `return` statement**.
 
+<!-- .incremental -->
 ```javascript
 var neo;      // Type is undefined
 neo = null;   // Type is object
@@ -185,7 +200,7 @@ neo = null;   // Type is object
 * [Typeof null is object (MDN)](https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/typeof)
 * [undefined reference (MDN)](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/undefined)
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## Arrays
   
@@ -201,7 +216,7 @@ The `Array` object has several properties and methods. The most important proper
 ### Creating
   
 The easiest way to create an array is with square brackets and comma separated values in it. Note that you can create an array with 4 undefined elements, length will be 4.
-  
+
 ```javascript
 var a = [];                         // no elements
 var b = new Array();                // equivalent to a
@@ -218,16 +233,19 @@ var f = new Array("the", 1, true);  // equivalent to e
 Reading and writing in arrays is done with brackets and equal assignment operator. Note that reading from and index that haven't been initialized doesn't generate any errors, it returns `undefined`.
 
 You can insert values in non consecutive indexes, it create a what's called a "sparse array". The length is updated to maximum index + 1.
-  
+
+<!-- .incremental -->
 ```javascript
 var a = ["white"];    // Start with a one-element array
 ```
 
+<!-- .incremental -->
 ```javascript
 var b = a[0];         // b => "white"
 var c = a[100];       // c => undefined (no error)
 ```
 
+<!-- .incremental -->
 ```javascript
 a[1] = 3.14;          // a => ["white", 3.14]
 var i = 2;
@@ -236,6 +254,7 @@ a[i + 1] = "rabbit";  // a => ["white", 3.14, 3, "rabbit"]
 a[a[i]] = a[0];       // a => ["white", 3.14, 3, "white"]
 ```
 
+<!-- .incremental -->
 ```javascript
 var d = a.length;     // d => 4
 ```
@@ -245,11 +264,13 @@ var d = a.length;     // d => 4
 ### Adding and deleting
   
 To add and delete elements from an array, you can use the methods from the `Array` object. There's a lot of useful ones, from simple `pop` and `push` to more complex ones like `splice`. See reference for more details.
-  
+
+<!-- .incremental -->
 ```javascript
 var a = ["follow", "the", "white", "rabbit"];
 ```
 
+<!-- .incremental -->
 ```javascript
 var b = a.pop();             // a => ["follow", "the", "white"]
                              // b => "rabbit"
@@ -257,6 +278,7 @@ var c = a.push("RABBIT");    // a => ["follow", "the", "white", "RABBIT"]
                              // c => 4 (new length)
 ```
 
+<!-- .incremental -->
 ```javascript
 var d = a.shift();           // a => ["the", "white", "RABBIT"]
                              // d => "follow"
@@ -264,6 +286,7 @@ var e = a.unshift("FOLLOW"); // a => ["FOLLOW", "the", "white", "RABBIT"]
                              // e => 4 (new length)
 ```
 
+<!-- .incremental -->
 ```javascript
 var f = a.splice(2, 1);       // a => ["FOLLOW", "the", "RABBIT"]
                               // f => "white"
@@ -271,7 +294,7 @@ var g = a.splice(1, 2, "ME"); // a => ["FOLLOW", "ME"]
                               // g => ["the", "rabbit"]
 ```
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## Operators
   
@@ -285,13 +308,15 @@ Operators are really powerful in JavaScript. Unlike in some other languages like
 ### Arithmetics
   
 Arithmetics operators work the same way as a lot of other programming languages. Note that `+` is used to concatenate strings.
-  
+
+<!-- .incremental -->
 ```javascript
 var a = 6 + 4;                    // a => 10
 var b = -a;                       // b => -10
 var c = 6 - 4;                    // c => 2
 ```
 
+<!-- .incremental -->
 ```javascript
 var d = 1, e = ++d;               // d and e are both 2
 var f = 1, g = f++;               // f is 2, g is 1
@@ -299,12 +324,14 @@ var h = 7, i = --h;               // h and i are both 6
 var j = 7, k = j--;               // j is 6, k is 7
 ```
 
+<!-- .incremental -->
 ```javascript
 var l = 3 * 3                     // l => 9
 var m = 10 / 3                    // m => 3.3333333333333335
 var n = 10 % 3                    // n => 1
 ```
 
+<!-- .incremental -->
 ```javascript
 var o = "Dodge" + " " + "this."   // o => "Dodge this.";
 ```
@@ -317,13 +344,15 @@ var o = "Dodge" + " " + "this."   // o => "Dodge this.";
 ### Equality
   
 A particularity of JavaScript is the two kinds of equality comparison : strict and type-converting. Just remember that strict equal `===` compares both types and values and type-converting equal `==` converts one type to the other and just compares values.
-  
+
+<!-- .incremental -->
 ```javascript
 // Equality
 var a = "2" == 2;    // a => true
 var b = "2" != 2;    // b => false
 ```
 
+<!-- .incremental -->
 ```javascript
 // Strict equality
 var c = "2" === 2;   // c => false
@@ -338,7 +367,8 @@ var d = "2" !== 2;   // d => true
 ### Comparison
   
 Like arithmetics, comparison operators work the same way as a lot of other programming languages. Note that these operators can be used to compare string.
-  
+
+<!-- .incremental -->
 ```javascript
   var a = 2 > 2;          // a => false
   var b = 2 <= 2;         // b => true
@@ -347,6 +377,7 @@ Like arithmetics, comparison operators work the same way as a lot of other progr
   var e = 2 <= 2;         // e => true
 ```
 
+<!-- .incremental -->
 ```javascript
   var f = 'abc' < 'def'   // f => true
 ```
@@ -372,7 +403,7 @@ var c = !true;          // c => false
 ### Bitwise
   
 Bitwise operators help programmers to use numbers like sequences of 32 bits (zeros and ones). It's not always easy to understand what's going on but it's very useful, for example if you're implementing bitmasks.
-  
+
 ```javascript
 var a = 42 & 2   // a =>          2  (AND)
 var b =  7 | 2   // b =>          2  (OR)
@@ -392,7 +423,7 @@ var h = -1 >>> 2 // h => 1073741823  (Shift right with zero fill)
 ### Assignement
   
 Assignement operators saves you some place and can improve code readability. Use them carefuly!
-  
+
 ```javascript
 var a = 1, b = 0;
 a += b    // a = a + b
@@ -416,7 +447,7 @@ a ^= b    // a = a ^ b
 ### `in`
   
 The `in` operator is used to verify if a property is specified on an object. Be careful when you use it.
-  
+
 ```javascript
 var a = [1,9,4];
 var b = (2 in a);          // b => true
@@ -432,7 +463,7 @@ var d = (length in a);     // d => true
 ### `typeof`
   
 `typeof` is used at compilation time to verify the type of a variable.
-  
+
 ```javascript
 var a = 3;
 var b = typeof a;   // b => "number"
@@ -445,10 +476,10 @@ var f = typeof e;   // f => "boolean"
 <!-- .useful-links -->
 * [in operator reference (MDN)](https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/in)
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## Type conversions
-  
+
 JavaScript is not statically typed but you can determine the type of a variable at execution time. Conversion from one type to another can be done explicitly or implicitly. It's really important to understand implicit ones, they can help you to avoid strange behaviours and bugs.
   
 <!-- slide -->
@@ -456,7 +487,8 @@ JavaScript is not statically typed but you can determine the type of a variable 
 ### Explicit
   
 Explicit conversions can for example help you to convert a string to a number. Note that even if integers and floats are both number, using `parseInt` on a float removes the decimals and makes it by definition an integer.
-  
+
+<!-- .incremental -->
 ```javascript
 // to Number
 var a = Number("10");         // a => 10
@@ -466,6 +498,7 @@ var d = parseInt(10.2);       // d => 10
 var e = parseFloat("10.2");   // e => 10.2
 ```
 
+<!-- .incremental -->
 ```javascript
 // to String
 var a = String(false);        // a => "false"
@@ -474,6 +507,7 @@ var c = String(10.2);         // c => "10.2"
 var d = (10).toString();      // d => "10"
 ```
 
+<!-- .incremental -->
 ```javascript
 // to Boolean
 var a = Boolean(10);          // a => true
@@ -489,7 +523,8 @@ var d = Boolean("true");      // d => true
 There's a lot of ways to convert a string to a number. Performances can differ a lot depending on the technique used and the plateform. A shorter syntax is often prefered for bandwith uses.
 
 Look carefully how the `+` operator behaves with strings and numbers.
-  
+
+<!-- .incremental -->
 ```javascript
 // to Number
 var a = +"10";            // a => 10
@@ -499,6 +534,7 @@ var d = ~~"10";           // d => 10
 var e = "2" * "5";        // e => 10 (both strings converts to number)
 ```
 
+<!-- .incremental -->
 ```javascript
 // to String
 var a = 10 + "10";             // a => "1010"
@@ -507,6 +543,7 @@ var c = 10 + " agents";        // c => "10 agents"
 var d = 10 + 10 + " agents";   // d => "20 agents"
 ```
 
+<!-- .incremental -->
 ```javascript
 // to Boolean
 var a = !!'morpheus';     // a => true
@@ -556,7 +593,7 @@ Here's a little summary of conversions results. Pay attention especially to "any
   </tbody>
 </table>
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## Statements
 
@@ -570,12 +607,14 @@ Note that the conditional ternary operator should only be used in simple cases. 
   
 #### if/else
 
+<!-- .incremental -->
 ```javascript
 if (username == null) {  // if username is null or undefined,
   username = "Trinity";  // define it
 }
 ```
 
+<!-- .incremental -->
 ```javascript
 if (bulletCount == 1) {
   bulletCount += ' bullet';
@@ -584,6 +623,7 @@ if (bulletCount == 1) {
 }
 ```
 
+<!-- .incremental -->
 ```javascript
 var user = (name == null) ? 'default user' : name;
 ```
@@ -619,12 +659,14 @@ switch (characterName) {
 
 ### loops
 
+<!-- .incremental -->
 ```javascript
 for (var i = 0; i < 10 ; i++) {
   doSomething();
 }
 ```
 
+<!-- .incremental -->
 ```javascript
 var count = 0;
 while (count < 10) {
@@ -633,6 +675,7 @@ while (count < 10) {
 }
 ```
 
+<!-- .incremental -->
 ```javascript
 var count = 100;
 do {
@@ -660,6 +703,7 @@ for (var i in a) {      // DO NOT use with arrays
 }
 ```
 
+<!-- .list.incremental.warning -->
 Because of **performance issues** and in order to avoid **"bugs" and "strange behaviours"**, **use classic for loops instead** of for..in with arrays.
 
 <!-- .useful-links -->
@@ -671,7 +715,8 @@ Because of **performance issues** and in order to avoid **"bugs" and "strange be
 ## Simple functions
   
 Functions are declared with the `function` keyword. There's no return type and no variable type for the arguments.
-  
+
+<!-- .incremental -->
 ```javascript
 function function_name(var1, var2, var3) { // no variable types
   /*
@@ -681,6 +726,7 @@ function function_name(var1, var2, var3) { // no variable types
 }
 ```
 
+<!-- .incremental -->
 ```javascript
 function use_args(var1, var2, var3) {
   var a = arguments.length;       // array containing all the arguments
@@ -696,7 +742,7 @@ var b = use_args("Déjà", "vu");   // b => " Déjà vu", var3 = undefined
 <!-- .useful-links -->
 * [Function reference (MDN)](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function)
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## Variable scope
   
@@ -733,7 +779,8 @@ var a = lastName;           // ReferenceError lastName is not defined
 ### Don't forget `var`
   
 If you ommit the `var` keyword inside a function, the variable is automatically considered global. It can have serious side effects. It's considered bad practice, you shouldn't use this.
-  
+
+<!-- .incremental -->
 ```javascript
 var i = 1;
 function foo() {
@@ -743,6 +790,7 @@ foo();
 var a = i;        // a => 1
 ```
 
+<!-- .incremental -->
 ```javascript
 var i = 1;
 function foo() {
@@ -754,7 +802,7 @@ var a = i;        // a => 3
 var b = j;        // b => 4
 ```
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## Browser environment
 
@@ -763,7 +811,7 @@ var b = j;        // b => 4
 ### Integration
   
 The best way to integrate JavaScript in a web page is through a JavaScript file and a link to it in your HTML page. The link can be placed in `head` or `body` it really depends on the situation.
-  
+
 ```html5
 <!DOCTYPE html>
 <html>
@@ -777,6 +825,7 @@ The best way to integrate JavaScript in a web page is through a JavaScript file 
 </html>
 ```
 
+<!-- .list.incremental.warning -->
 **Avoid direct JavaScript in HTML documents**, it's a bad practice. It **breaks the structure/behaviour separation**. **Code can't be reused on other pages**. It also prevents you from having a changeable and maintenable code.
 
 <!-- .useful-links -->
@@ -789,19 +838,22 @@ The best way to integrate JavaScript in a web page is through a JavaScript file 
 Every JavaScript plateform/environment adds objects with global scope. They're meant to provide helpful features to developers. In web browsers the most important ones are : `document` and `window`.
 
 Another object is present but only in modern browsers : `console`. Since it's not standard, implementations may differ, see references for more details. Remember that older browsers don't support it, so don't let `console.log('foo')` etc... in production code.
-  
+
+<!-- .incremental -->
 ```javascript
 var title = document.title;
 var href = window.location.href;
 var userAgent = window.navigator.userAgent;
 ```
 
+<!-- .incremental -->
 ```javascript
 window.alert('Never send a human to do a machine\'s job.');
 var bluePill = confirm('Take the blue pill?');
 var name = prompt('What is your name?');
 ```
 
+<!-- .incremental -->
 ```javascript
 console.log('Perhaps we are asking the wrong questions.');
 console.error('Nothing. Just had a little déjà vu.');
@@ -814,7 +866,7 @@ console.warn('The Matrix is a system, Neo. That system is our enemy.');
 * [window reference (MDN)](https://developer.mozilla.org/en/DOM/window)
 * [Firefox web console (MDN)](https://developer.mozilla.org/en/Using_the_Web_Console)
 * [Chrome web console](http://code.google.com/chrome/devtools/docs/console.html)
-* [IE web console](http://msdn.microsoft.com/en-us/library/gg589530(v=VS.85).aspx)
+* [IE web console](http://msdn.microsoft.com/en-us/library/ie/gg589507.aspx)
 * [Opera web console](http://www.opera.com/dragonfly/documentation/console/)
 * [Safari web console](http://developer.apple.com/library/safari/%23documentation/AppleApplications/Conceptual/Safari%20Developer%20Guide/DebuggingYourWebsite/DebuggingYourWebsite.html#/apple_ref/doc/uid/TP40007874-CH8-SW17)
 
@@ -837,6 +889,7 @@ There's also great tools on the web :
 
 ## Compatibility
 
+<!-- .list.incremental -->
 Even if JavaScript has been standardized to ECMAScript, each platform doesn't always support all the latest features. You should **always read documentation** and **look up if it's supported**. You should also **test your code over the different browsers** of your audience.
   
 There's often two (or more) ways to do the same thing in JavaScript. It's not because two browsers have feature X and Y that they implemented it the same way. Performances can be very different. As always : read documentation and test...
@@ -846,12 +899,12 @@ There's often two (or more) ways to do the same thing in JavaScript. It's not be
 ## Documentation & links
 
 * [JavaScript Reference (MDN)](https://developer.mozilla.org/en/JavaScript/Reference)
-* [JavaScript Reference (W3School)](http://www.w3schools.com/jsref/default.asp)
 * [ECMAScript documentation](http://www.ecmascript.org/docs.php)
 * [JavaScript Garden (github)](http://bonsaiden.github.com/JavaScript-Garden)
 * [Eloquent JavaScript](http://eloquentjavascript.net/)
 
 <div id="progress-bar"></div>
 
-<script src="./js/dzslides.core.js"></script>
-<script src="./js/dzslides.custom.js"></script>
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>

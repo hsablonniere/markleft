@@ -116,6 +116,14 @@ h6 {
   position: relative;
 }
 
+.warning {
+  background: #FF6767;
+  border: 2px solid red;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+}
+
 /* code pre and live iframe */
 
 code,

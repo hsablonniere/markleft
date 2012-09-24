@@ -291,7 +291,7 @@ var e = a.unshift("FOLLOW"); // a => ["FOLLOW", "the", "white", "RABBIT"]
 var f = a.splice(2, 1);       // a => ["FOLLOW", "the", "RABBIT"]
                               // f => "white"
 var g = a.splice(1, 2, "ME"); // a => ["FOLLOW", "ME"]
-                              // g => ["the", "rabbit"]
+                              // g => ["the", "RABBIT"]
 ```
 
 <!-- slide : cover -->

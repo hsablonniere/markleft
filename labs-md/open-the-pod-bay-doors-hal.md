@@ -73,6 +73,8 @@ In this exercise, we'll need HAL to have his firsts very narrow conversation ski
 ### Deliveries
 
 <!-- .deliveries -->
+* carbon-fibre.png
+* hal.jpg
 * hal.html
 * hal-core.js
 * hal-core-knowledge.js
@@ -119,6 +121,8 @@ Dave is American. Using the metric system is hard for him, even with [XKCD's hel
 ### Deliveries
 
 <!-- .deliveries -->
+* carbon-fibre.png
+* hal.jpg
 * hal.html
 * hal-core.js
 * hal-core-knowledge.js
@@ -160,6 +164,8 @@ Don't forget that a good chatbot always has easter eggs...
 ### Deliveries
 
 <!-- .deliveries -->
+* carbon-fibre.png
+* hal.jpg
 * hal.html
 * hal-core.js
 * hal-core-knowledge.js

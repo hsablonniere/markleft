@@ -102,21 +102,25 @@ If you want to manipulate numbers, the objects `Number` and `Math` has lots of u
 <!-- .incremental -->
 ```javascript
 // Integer
-var i;           // first declaration of i (type is undefined)
-i = 2;           // i is now a integer (type is number)
+var i;            // first declaration of i (type is undefined)
+i = 2;            // i is now a integer (type is number)
 ```
+
+In this example we see that floats can have strange behaviour, don't forget the internals of the float storage. It's stored as [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 
 <!-- .incremental -->
 ```javascript
 // Float
-var i = -5.01;   // second declaration of i as a float (type is number)
-j = 2;           // j was not declared, automatic assignement to 2
-j = i + 1.12;    // j is now a float equal to 3.12 (still number)
+var i = -5.01;    // second declaration of i as a float (type is number)
+j = 2;            // j was not declared, automatic assignement to 2
+j = i + 1.12;     // j is now a float equal to 3.12 (still number)
+// Be careful
+var k = 0.1 + 0.2 // k => 0.30000000000000004
 ```
 
 <!-- .incremental -->
 ```javascript
-var k = new Number(7);    // DO NOT USE : type is object and not number
+var l = new Number(7);    // DO NOT USE : type is object and not number
 ```
 
 <!-- .incremental -->
@@ -345,6 +349,8 @@ var o = "Dodge" + " " + "this."   // o => "Dodge this.";
   
 A particularity of JavaScript is the two kinds of equality comparison : strict and type-converting. Just remember that strict equal `===` compares both types and values and type-converting equal `==` converts one type to the other and just compares values.
 
+Best practice is to always use the strict equality. It prevents a lot of mistakes.
+
 <!-- .incremental -->
 ```javascript
 // Equality
@@ -370,16 +376,16 @@ Like arithmetics, comparison operators work the same way as a lot of other progr
 
 <!-- .incremental -->
 ```javascript
-  var a = 2 > 2;          // a => false
-  var b = 2 <= 2;         // b => true
-  var c = "2" >= 2;       // c => true
-  var d = 2 < 2;          // d => false
-  var e = 2 <= 2;         // e => true
+var a = 2 > 2;          // a => false
+var b = 2 <= 2;         // b => true
+var c = "2" >= 2;       // c => true
+var d = 2 < 2;          // d => false
+var e = 2 <= 2;         // e => true
 ```
 
 <!-- .incremental -->
 ```javascript
-  var f = 'abc' < 'def'   // f => true
+var f = 'abc' < 'def'   // f => true
 ```
 
 <!-- .useful-links -->
@@ -607,6 +613,8 @@ Note that the conditional ternary operator should only be used in simple cases. 
   
 #### if/else
 
+In this case, normal equality is handy, used with `null`, it can test null || `undefined`.
+
 <!-- .incremental -->
 ```javascript
 if (username == null) {  // if username is null or undefined,
@@ -616,7 +624,7 @@ if (username == null) {  // if username is null or undefined,
 
 <!-- .incremental -->
 ```javascript
-if (bulletCount == 1) {
+if (bulletCount === 1) {
   bulletCount += ' bullet';
 } else {
   bulletCount += ' bullets';
@@ -661,7 +669,7 @@ switch (characterName) {
 
 <!-- .incremental -->
 ```javascript
-for (var i = 0; i < 10 ; i++) {
+for (var i = 0; i < 10; i++) {
   doSomething();
 }
 ```
@@ -718,17 +726,17 @@ Functions are declared with the `function` keyword. There's no return type and n
 
 <!-- .incremental -->
 ```javascript
-function function_name(var1, var2, var3) { // no variable types
+function functionName(var1, var2, var3) { // no variable types
   /*
     Some code here
   */
-  return return_val;                       // optional
+  return returnVal;                       // optional
 }
 ```
 
 <!-- .incremental -->
 ```javascript
-function use_args(var1, var2, var3) {
+function useArgs(var1, var2, var3) {
   var a = arguments.length;       // array containing all the arguments
   var result = "";
   for (var i = 0; i < a; i++) {
@@ -736,7 +744,7 @@ function use_args(var1, var2, var3) {
   }
   return result;
 }
-var b = use_args("Déjà", "vu");   // b => " Déjà vu", var3 = undefined
+var b = useArgs("Déjà", "vu");    // b => " Déjà vu", var3 = undefined
 ```
 
 <!-- .useful-links -->
@@ -794,8 +802,8 @@ var a = i;        // a => 1
 ```javascript
 var i = 1;
 function foo() {
-      i = 3;      // no var keyword !!! :-(
-      j = 4;      // no var keyword !!! :-(
+  i = 3;          // no var keyword !!! :-(
+  j = 4;          // no var keyword !!! :-(
 }
 foo();
 var a = i;        // a => 3
@@ -820,7 +828,7 @@ The best way to integrate JavaScript in a web page is through a JavaScript file 
     <script> // some code </script>        <!-- REALLY BAD PRACTICE -->
   </head>
   <body>
-    <script src="myscript2.js"></script>   <!-- unobstrusive JS -->
+    <script src="myscript2.js"></script>   <!-- better unobstrusive JS -->
   </body>
 </html>
 ```
@@ -828,8 +836,12 @@ The best way to integrate JavaScript in a web page is through a JavaScript file 
 <!-- .list.incremental.warning -->
 **Avoid direct JavaScript in HTML documents**, it's a bad practice. It **breaks the structure/behaviour separation**. **Code can't be reused on other pages**. It also prevents you from having a changeable and maintenable code.
 
+Putting your scripts at the just before the `</body>` is a good practice. We'll see that in details in performances lesson.
+
 <!-- .useful-links -->
 * [Unobstrusive JavaScript (labs.adobe.com)](http://labs.adobe.com/technologies/spry/articles/best_practices/separating_behavior.html)
+* [Why Inline CSS And JavaScript Code Is Such A Bad Thing (http://robertnyman.com/)](http://robertnyman.com/2008/11/20/why-inline-css-and-javascript-code-is-such-a-bad-thing/)
+* [Where To Include JavaScript Files In A Document](http://robertnyman.com/2008/04/23/where-to-include-javascript-files-in-a-document/)
 
 <!-- slide -->
 
@@ -882,6 +894,8 @@ Your browser should have two very useful tools to work with JavaScript :
 There's also great tools on the web :
 
 * [JSfiddle (online playground)](http://jsfiddle.net/)
+* [JS Bin (online playground)](http://jsbin.com/)
+* [Codepen (online playground)](http://codepen.io/)
 * [tinkerbin (online playground)](http://tinkerbin.com/)
 * [JSperf (online benchmarking tool)](http://jsperf.com/)
 

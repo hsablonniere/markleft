@@ -51,6 +51,11 @@ section[aria-selected] ~ section {
 }
 .incremental > * {
   opacity: 1;
+  -moz-transition: opacity 200ms linear 0s;
+  -ms-transition: opacity 200ms linear 0s;
+  -o-transition: opacity 200ms linear 0s;
+  -webkit-transition: opacity 200ms linear 0s;
+  transition: opacity 200ms linear 0s;
 }
 .incremental:not([active]) > * {
   opacity: 0;

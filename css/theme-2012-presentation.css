@@ -112,6 +112,13 @@ p {
   display: none;
 }
 
+blockquote p {
+  color: #000;
+  display: block;
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
 p.list,
 ul,
 ol {
@@ -160,6 +167,7 @@ ul li:nth-child(2n+1) {
 pre {
   font-size: 16px;
   margin: 5px 0 20px 0;
+  white-space: pre-wrap;
 }
 
 pre code {
@@ -211,4 +219,13 @@ iframe {
 .introduction u li[aria-selected="true"],
 .introduction ol li[aria-selected="true"] {
   display: block;
+}
+
+/* examples */
+
+.example,
+.example button {
+  color: #000;
+  font-family: monospace;
+  padding: 5px 10px;
 }

@@ -668,9 +668,9 @@ var endOfTheWorld = new Date(2012,11,21); // Months from 0 to 11 !!!!
 ```
 
 <!-- Inline JS for quick demo purposes -->
-<!-- .incremental -->
-<div>
-    <button onclick="javascript:document.getElementById('date-example').innerHTML = new Date().toString();">new Date().toString() =></button> <span id="date-example" class="example"></span>
+<div class="example incremental">
+    <button onclick="javascript:document.getElementById('date-example').innerHTML = new Date().toString();">new Date().toString() =></button>
+    <span id="date-example" class="example"></span>
 </div>
 
 <!-- .useful-links -->
@@ -696,9 +696,9 @@ var timeoutId = setTimeout(foo, 2000);
 ```
 
 <!-- Inline JS for quick demo purposes -->
-<!-- .incremental -->
-<div>
-  <button onclick="javascript:function foo() { document.getElementById('timeout-example').innerHTML = 'Downwards is the only way forwards.'; }; setTimeout(foo, 2000);">setTimeout(foo, 2000); =></button> <span id="timeout-example" class="example"></span>
+<div class="example incremental">
+  <button onclick="javascript:function foo() { document.getElementById('timeout-example').innerHTML = 'Downwards is the only way forwards.'; }; setTimeout(foo, 2000);">setTimeout(foo, 2000); =></button>
+  <span id="timeout-example" class="example"></span>
 </div>
 
 <!-- .incremental -->
@@ -714,9 +714,9 @@ var intervalId = setInterval(baz, 1000);
 ```
 
 <!-- Inline JS for quick demo purposes -->
-<!-- .incremental -->
-<div>
-  <button onclick="javascript:var bar = 0; function baz() { bar = (bar + 2) % 20; document.getElementById('interval-example').innerText = bar; }; setInterval(baz, 1000);">setInterval(baz, 1000); =></button> <span class="example">bar : </span><span id="interval-example" class="example">0</span>
+<div class="example incremental">
+  <button onclick="javascript:var bar = 0; function baz() { bar = (bar + 2) % 20; document.getElementById('interval-example').innerText = bar; }; setInterval(baz, 1000);">setInterval(baz, 1000); =></button> <span class="example">bar : </span>
+  <span id="interval-example" class="example">0</span>
 </div>
 
 <!-- .useful-links -->

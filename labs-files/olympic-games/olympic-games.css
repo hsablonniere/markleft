@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'Rye';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rye Regular'), local('Rye-Regular'), url(http://themes.googleusercontent.com/static/fonts/rye/v1/o1b_1mvE63vyDpMCbEPL_A.woff) format('woff');
+}
+
+html {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.infos {
+  background: rgba(255, 255, 255, .85);
+  box-shadow: 0 0 10px #AAA;
+  bottom: 0;
+  left: 0;
+  padding: 10px 145px 10px 20px;
+  position: absolute;
+  right: 50%;
+  top: 0;
+}
+
+.infos div {
+  margin-bottom: 10px;
+}
+
+.city {
+  font-size: 100px;
+}
+
+.moto {
+  font-style: italic;
+}
+
+.season {
+  font-size: 30px;
+}
+
+.big-ben,
+.big-ben-bg,
+.big-ben-hours,
+.big-ben-minutes {
+  height: 250px;
+  width: 250px;
+}
+
+.big-ben {
+  background: #FFF;
+  border-radius: 10px 10px 0 0;
+  bottom: 0;
+  box-shadow: 0 0 10px #AAA;
+  left: 50%;
+  margin: 0 0 0 -125px;
+  overflow: hidden;
+  padding: 10px 10px 40px 10px;
+  position: absolute;
+}
+
+.big-ben-bg,
+.big-ben-hours,
+.big-ben-minutes,
+.big-ben-date {
+  position: absolute;
+}
+
+.big-ben-hours,
+.big-ben-minutes {
+  -moz-transition: all 500ms linear;
+  -ms-transition: all 500ms linear;
+  -o-transition: all 500ms linear;
+  -webkit-transition: all 500ms linear;
+  transition: all 500ms linear;
+}
+
+.big-ben-date {
+  bottom: 0;
+  color: #e8ab2d;
+  font-family: 'Rye', serif;
+  font-size: 19px;
+  left: 0;
+  padding: 10px;
+  right: 0;
+  text-align: center;
+  text-shadow: 1px 1px 0 #333;
+}

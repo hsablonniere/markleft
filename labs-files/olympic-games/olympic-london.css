@@ -1,0 +1,7 @@
+[data-city="london"] {
+  background-image: url(http://azjewishpost.com/files/Tower-Bridge-Olympics.jpeg);
+}
+
+[data-city="london"] .infos {
+  font-family: 'Rye', serif;
+}

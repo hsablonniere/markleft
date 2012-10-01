@@ -16,6 +16,8 @@
 
 # JavaScript for Ninjas
 
+<!-- toc -->
+
 <!-- slide : introduction -->
 
 #### A function within a function. I'm impressed.

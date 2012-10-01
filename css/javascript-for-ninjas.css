@@ -1,0 +1,116 @@
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url(http://themes.googleusercontent.com/static/fonts/oswald/v5/bH7276GfdCjMjApa_dkG6T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald '), local('Oswald'), url(http://themes.googleusercontent.com/static/fonts/oswald/v5/-g5pDUSRgvxvOl5u-a_WHw.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/carbon-fibre.png);
+}
+
+body {
+  color: #FFF;
+  font-family: 'Oswald', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #f0db4f;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.cover {
+  background-image: url(../img/javascript-101.png);
+  background-size: cover;
+}
+
+.cover > * {
+  /*border: 5px solid #6D6D6D;*/
+  /*border-width: 5px 0;*/
+  /*bottom: auto;*/
+  /*font-size: 35px;*/
+  /*font-weight: normal;*/
+  /*height: auto;*/
+  margin: 0;
+  /*padding: 20px 0;*/
+  top: 50px;
+  /*text-align: center;*/
+  /*text-transform: uppercase;*/
+  /*width: 80%;*/
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #AAA;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #EEE;
+}
+
+.list.warning strong,
+.list.warning li,
+.list.warning strong:nth-child(2n+1),
+.list.warning li:nth-child(2n+1) {
+  background: #F00;
+  color: #FFF;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+a, a:visited {
+  color: #81ddff;
+}
+
+pre {
+  font-size: 16px;
+  margin: 5px 0 20px 0;
+}
+
+pre code {
+  box-shadow: 0 0 10px #000;
+  border-radius: 0;
+}
+
+.table {
+  border-collapse: collapse;
+  font-family: monospace;
+  font-size: 15px;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #999;
+  padding: 5px 10px;
+}
+
+th {
+  background: #999;
+}
+
+/* introduction */
+
+.introduction strong:nth-child(1) {
+  background-image: url(../img/morpheus-js-real.jpg);
+}
+
+.introduction strong:nth-child(2) {
+  background-image: url(../img/neo-interview.jpg);
+}
+
+.introduction strong:nth-child(3) {
+  background-image: url(../img/neo-bullets.jpg);
+}

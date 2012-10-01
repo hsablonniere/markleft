@@ -237,14 +237,14 @@ This way to create function is very common. Some developers don't even use the c
 <!-- .incremental -->
 ```javascript
 function validateLength(tokens) {
-  return tokens.length == 4;
+  return tokens.length === 4;
 };
 ```
 
 <!-- .incremental -->
 ```javascript
 var validateLength2 = function (tokens) {   // This function is anonymous
-  return tokens.length == 4;
+  return tokens.length === 4;
 };
 ```
 
@@ -280,7 +280,7 @@ var validateLength = function v(tokens) {
   if (tokens.length != 4) {
     console.error(v.errorMsg);
   }
-  return tokens.length == 4;
+  return tokens.length === 4;
 };
 ```
 
@@ -347,11 +347,11 @@ var updateError = function (error) {
 
 <!-- .incremental -->
 ```javascript
-var validateLength = function v(tokens, updateErrorFct) {
+var validateLength = function (tokens, updateErrorFct) {
   if (tokens.length != 4) {
     updateErrorFct('Error!');
   }
-  return tokens.length == 4;
+  return tokens.length === 4;
 };
 ```
 
@@ -478,13 +478,13 @@ var what = function (before, after) {
 
 <!-- .incremental -->
 ```javascript
-what('>> ', '...'); // => >> undefined is dreaming of http://server-of-this-page/this-page.html
+what('>> ', '...'); // => >> undefined is dreaming of http://server-of-this-page/this-page.html...
 ```
 
 #### As an object method
 
 <!-- .incremental -->
-```
+```javascript
 dream.w = what;
 dream.w('>> ', '...'); // => >> Yusuf is dreaming of a van...
 ```
@@ -667,12 +667,6 @@ var display = today.toString();
 var endOfTheWorld = new Date(2012,11,21); // Months from 0 to 11 !!!!
 ```
 
-<!-- Inline JS for quick demo purposes -->
-<div class="example incremental">
-    <button onclick="javascript:document.getElementById('date-example').innerHTML = new Date().toString();">new Date().toString() =></button>
-    <span id="date-example" class="example"></span>
-</div>
-
 <!-- .useful-links -->
 * [Date reference (MDN)](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date)
 
@@ -695,12 +689,6 @@ var timeoutId = setTimeout(foo, 2000);
 // id can be used to cancel => clearTimeout(timeoutId)
 ```
 
-<!-- Inline JS for quick demo purposes -->
-<div class="example incremental">
-  <button onclick="javascript:function foo() { document.getElementById('timeout-example').innerHTML = 'Downwards is the only way forwards.'; }; setTimeout(foo, 2000);">setTimeout(foo, 2000); =></button>
-  <span id="timeout-example" class="example"></span>
-</div>
-
 <!-- .incremental -->
 ```javascript
 var bar = 0;
@@ -712,12 +700,6 @@ function baz() {
 var intervalId = setInterval(baz, 1000);
 // id can be used to cancel => clearInterval(intervalId)
 ```
-
-<!-- Inline JS for quick demo purposes -->
-<div class="example incremental">
-  <button onclick="javascript:var bar = 0; function baz() { bar = (bar + 2) % 20; document.getElementById('interval-example').innerText = bar; }; setInterval(baz, 1000);">setInterval(baz, 1000); =></button> <span class="example">bar : </span>
-  <span id="interval-example" class="example">0</span>
-</div>
 
 <!-- .useful-links -->
 * [setTimeout reference (MDN)](https://developer.mozilla.org/en/window.setTimeout)

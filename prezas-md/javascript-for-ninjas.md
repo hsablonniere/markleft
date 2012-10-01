@@ -509,7 +509,7 @@ var dream = {
 
 <!-- .incremental -->
 ```javascript
-function times(n, func, arg) {
+var times = function (n, func, arg) {
   for (var i = 0; i < n; i++) {
     func(arg + ' (' + i + ')');
   }
@@ -553,7 +553,7 @@ var dream = {
 
 <!-- .incremental -->
 ```javascript
-function times(n, func, target, arg) {            // add target
+var times = function (n, func, target, arg) {     // add target
   for (var i = 0; i < n; i++) {
     func.call(target, arg + ' (' + i + ')');      // directly args
   }
@@ -591,7 +591,7 @@ var dream = {
 
 <!-- .incremental -->
 ```javascript
-function times(n, func, target, arg) {            // add target
+var times = function (n, func, target, arg) {     // add target
   for (var i = 0; i < n; i++) {
     func.apply(target, [arg + ' (' + i + ')']);   // args as an array
   }
@@ -629,7 +629,7 @@ var dream = {
 
 <!-- .incremental -->
 ```javascript
-function times(n, func, arg) {
+var times = function (n, func, arg) {
   for (var i = 0; i < n; i++) {
     func(arg + ' (' + i + ')');              // direct
   }
@@ -682,7 +682,7 @@ Look carefully what is passed as first argument
 
 <!-- .incremental -->
 ```javascript
-function foo() {
+var foo = function () {
   console.log('Downwards is the only way forwards.');
 }
 var timeoutId = setTimeout(foo, 2000);
@@ -692,7 +692,7 @@ var timeoutId = setTimeout(foo, 2000);
 <!-- .incremental -->
 ```javascript
 var bar = 0;
-function baz() {
+var baz = function () {
   // if we define var bar here, it would be reset each call
   bar = (bar + 2) % 20;
   console.log(bar);

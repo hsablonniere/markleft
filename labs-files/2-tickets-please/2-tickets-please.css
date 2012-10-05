@@ -1,0 +1,210 @@
+@font-face {
+  font-family: 'Bangers';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bangers'), local('Bangers-Regular'), url(http://themes.googleusercontent.com/static/fonts/bangers/v4/DqeGA7eaz0hhOYTfkeJBIA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Yanone Kaffeesatz ExtraLight'), local('YanoneKaffeesatz-ExtraLight'), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRYa6iXjgqaxY3DU3RqApPOI.woff) format('woff');
+}
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Yanone Kaffeesatz Regular'), local('YanoneKaffeesatz-Regular'), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/YDAoLskQQ5MOAgvHUQCcLRTHiN2BPBirwIkMLKUspj4.woff) format('woff');
+}
+@font-face {
+  font-family: 'Yanone Kaffeesatz';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Yanone Kaffeesatz Bold'), local('YanoneKaffeesatz-Bold'), url(http://themes.googleusercontent.com/static/fonts/yanonekaffeesatz/v4/We_iSDqttE3etzfdfhuPRWwXwFHHZlCwprwJOQ-Se7k.woff) format('woff');
+}
+
+html {
+  background-image: url(./diagonal-striped-brick.png);
+  background-attachment: fixed;
+}
+
+body {
+  color: #333;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  margin: 0;
+}
+
+header,
+.months,
+.venues,
+.cal-month,
+footer {
+  background: #FFF;
+  background: rgba(255, 255, 255, .8);
+  border-radius: 5px;
+  box-shadow: 0 0 10px #777;
+  padding: 10px;
+}
+
+header,
+.months,
+.venues,
+footer {
+  left: 10px;
+  position: fixed;
+  width: 220px;
+}
+
+header {
+  top: 10px;
+}
+
+h1 {
+  font-family: Bangers, sans-serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0;
+  text-align: center;
+}
+
+header, h1 {
+  height: 60px;
+  line-height: 60px;
+  padding: 0;
+  width: 240px;
+}
+
+.months,
+.venues {
+  list-style: none;
+  font-family: Bangers, sans-serif;
+  font-size: 26px;
+}
+
+.month-name,
+.venue-name {
+  height: 34px;
+  line-height: 34px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.months {
+  bottom: 52%;
+  margin: 0 0 5px 0;
+  top: 80px;
+}
+
+.venues {
+  bottom: 10px;
+  margin: 5px 0 0 0;
+  top: 48%;
+}
+
+.cal-month {
+  margin: 10px 10px 10px 260px;
+}
+
+/* Shift the first day by 0.2% + 14.27% * nb of days */
+
+/* Thursday */
+[data-day-start="2"] .day:first-child {
+  margin-left: 14.47%;
+}
+
+/* Wednesday */
+[data-day-start="3"] .day:first-child {
+  margin-left: 28.74%;
+}
+
+/* Tuesday */
+[data-day-start="4"] .day:first-child {
+  margin-left: 43.01%;
+}
+
+/* Friday */
+[data-day-start="5"] .day:first-child {
+  margin-left: 57.28%;
+}
+
+/* Saturday */
+[data-day-start="6"] .day:first-child {
+  margin-left: 71.55%;
+}
+
+/* Sunday */
+[data-day-start="0"] .day:first-child {
+  margin-left: 85.82%;
+}
+
+.cal-month-name {
+  font-family: Bangers, sans-serif;
+  font-size: 30px;
+  font-weight: normal;
+  margin: 0 0 10px 0;
+}
+
+.day-names {
+  overflow: hidden;
+}
+
+.day-name {
+  background: #DDD;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0.2%;
+  overflow: hidden;
+  padding: 5px;
+  text-overflow: ellipsis;
+  text-overflow: '.';
+  white-space: nowrap;
+  width: 13.87%;
+}
+
+.days {
+  overflow: hidden;
+}
+
+.day {
+  background: #F7F7F7;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  height: 110px;
+  margin: 0.2%;
+  padding: 5px;
+  position: relative;
+  overflow: hidden;
+  width: 13.87%;
+}
+
+.day-number {
+  color: #777;
+  font-size: 20px;
+}
+
+.day:nth-child(2n+1) {
+  background: #F0F0F0;
+}
+
+.day.past {
+  opacity: .5;
+}
+
+.day.today {
+  border: 2px solid #269;
+  border-radius: 5px;
+}
+
+.event {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

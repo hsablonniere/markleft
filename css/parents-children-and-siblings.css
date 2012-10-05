@@ -1,0 +1,90 @@
+@font-face {
+  font-family: Corleone;
+  font-style: normal;
+  src: url(../fonts/CorleoneDue.ttf);
+}
+
+@font-face {
+  font-family: 'Vidaloka';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Vidaloka '), local('Vidaloka-Regular'), url(http://themes.googleusercontent.com/static/fonts/vidaloka/v5/ggtjDKUwkCAXpO92rmcBQPesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+
+html {
+  /*background-image: url(http://subtlepatterns.com/patterns/pinstriped_suit.png);*/
+  background: #000;
+}
+
+body {
+  color: #FFF;
+  font-family: 'Vidaloka', serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: Corleone, sans-serif;
+  font-weight: normal;
+  color: #ffa851;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.cover {
+  background-image: url(../img/pacino.jpg);
+  background-size: cover;
+}
+
+.cover > * {
+  bottom: 20px;
+  font-size: 100px;
+  padding-left: 30px;
+  text-align: left;
+  width: 380px;
+}
+
+.cover > *:before {
+  background-image: url(../img/manipulation.png);
+  content: '';
+  display: block;
+  height: 160px;
+  width: 129px;
+  position: relative;
+  bottom: -51px;
+  left: 13PX;
+  background-size: cover;
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #AAA;
+  font-size: 35px;
+  padding: 5px 0;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #ffa851;
+}
+
+a, a:visited {
+  color: #81ddff;
+}
+
+/*pre {*/
+  /*font-size: 16px;*/
+  /*margin: 5px 0 20px 0;*/
+/*}*/
+
+/*pre code {*/
+  /*box-shadow: 0 0 10px #000;*/
+  /*border-radius: 0;*/
+/*}*/
+
+
+/* introduction */
+

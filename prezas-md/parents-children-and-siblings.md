@@ -22,11 +22,10 @@
 
 #### I'll show you features you can't refuse.
 
-<!-- .list.incremental -->
 Now that we have covered basic and advanced features of the JavaScript language, it's time to move on. We're going to take advantage of our main platform : the browser. We'll learn how to interact with HTML and CSS to make dynamic pages.
 
 <!-- .list.incremental -->
-In this course we'll introduce **the** **DOM**. We'll also talk about **manipulation**, **trees** and **dollars**.
+Interacting with a webpage and its resources is done using a tree. It's a bit like a **family tree**. Some nodes representing HTML tags are linked as **parents**, **children**, **brothers** **and** **sisters**. We'll also see how this tree can be **manipulated** especially with **dollars**.
 
 <!-- slide -->
 
@@ -550,7 +549,7 @@ vito.insertBefore(michael, vito.children[2]);   // insert before connie
 * [insertBefore reference (MDN)](https://developer.mozilla.org/en/DOM/Node.insertBefore)
 * [replaceChild reference (MDN)](https://developer.mozilla.org/en/DOM/Node.replaceChild)
 
-<!-- slide -->
+<!-- slide : cover -->
 
 ## jQuery & the DOM
 

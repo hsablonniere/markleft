@@ -30,3 +30,11 @@ iframe {
 .deprecated {
   text-decoration: line-through;
 }
+
+svg {
+  background: #333;
+}
+
+svg * {
+  font-family: monospace !important;
+}

@@ -12,7 +12,6 @@
 }
 
 html {
-  /*background-image: url(http://subtlepatterns.com/patterns/pinstriped_suit.png);*/
   background: #000;
 }
 
@@ -24,7 +23,8 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
   font-family: Corleone, sans-serif;
   font-weight: normal;
   color: #ffa851;
@@ -49,11 +49,11 @@ h4 {
   background-image: url(../img/manipulation.png);
   content: '';
   display: block;
-  height: 160px;
-  width: 129px;
+  height: 130px;
+  width: 135px;
   position: relative;
-  bottom: -51px;
-  left: 13PX;
+  bottom: -50px;
+  left: 2px;
   background-size: cover;
 }
 
@@ -62,7 +62,7 @@ ol li,
 ul li {
   color: #AAA;
   font-size: 35px;
-  padding: 5px 0;
+  padding: 3px 0;
 }
 
 p.list strong:nth-child(2n+1),
@@ -75,16 +75,40 @@ a, a:visited {
   color: #81ddff;
 }
 
-/*pre {*/
-  /*font-size: 16px;*/
-  /*margin: 5px 0 20px 0;*/
-/*}*/
-
-/*pre code {*/
-  /*box-shadow: 0 0 10px #000;*/
-  /*border-radius: 0;*/
-/*}*/
-
-
 /* introduction */
 
+.introduction strong:nth-child(1) {
+  background-image: url(../img/gf-family.jpg);
+}
+
+.introduction strong:nth-child(2) {
+  background-image: url(../img/gf-parents.jpg);
+}
+
+.introduction strong:nth-child(3) {
+  background-image: url(../img/gf-children.jpg);
+}
+
+.introduction strong:nth-child(4) {
+  background-image: url(../img/gf-brothers1.jpg);
+}
+
+.introduction strong:nth-child(5) {
+  background-image: url(../img/gf-brothers2.png);
+}
+
+.introduction strong:nth-child(6) {
+  background-image: url(../img/gf-sisters.jpg);
+}
+
+.introduction strong:nth-child(7) {
+  background-image: url(../img/manipulation.png);
+}
+
+.introduction strong:nth-child(8) {
+  background-image: url(../img/dollars.jpg);
+}
+
+.introduction strong:nth-child(9) {
+  background-image: url(../img/the-dom.png);
+}

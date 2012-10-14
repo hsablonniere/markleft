@@ -230,3 +230,30 @@ iframe {
   font-family: monospace;
   padding: 5px 10px;
 }
+
+.jsfiddle {
+  margin-top: 10px;
+}
+
+/* columned layout */
+
+.two-columns {
+  padding-top: 80px;
+  -webkit-columns: 2;
+}
+
+.two-columns > :first-child {
+  position: absolute;
+  top: 0;
+}
+
+.two-columns p.list strong,
+.two-columns ol li,
+.two-columns ul li {
+  font-size: 20px;
+}
+
+.two-columns > ul,
+.two-columns > ol {
+  -webkit-column-break-after: always;
+}

@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Orbitron-Light'), local('Orbitron-Regular'), url(http://themes.googleusercontent.com/static/fonts/orbitron/v3/94ug0rEgQO_WuI_xKJMFc_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/pinstriped_suit.png);
+}
+
+body {
+  color: #FFF;
+  font-family: 'Orbitron', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+p {
+  font-style: italic;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #FF5A33;
+}
+
+h4 {
+  font-size: 40px;
+}
+
+.cover {
+  background-image: url(../img/james-bond-bg.png);
+  background-size: cover;
+}
+
+.cover > * {
+  background: white;
+  color: #007;
+  margin: 0;
+  padding: 20px 0;
+  position: absolute;
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #DFB781;
+  font-size: 30px;
+  padding: 5px 5px 5px 0;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #F9E9DC;
+}
+
+pre {
+  background: none;
+  font-size: 16px;
+  margin: 5px 0 20px 0;
+}
+
+pre code {
+  box-shadow: 0 0 10px #000;
+}

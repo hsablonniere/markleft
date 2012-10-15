@@ -1,0 +1,32 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@font-face {
+  font-family: 'Stardos Stencil';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Stardos Stencil Bold'), local('StardosStencil-Bold'), url(http://themes.googleusercontent.com/static/fonts/stardosstencil/v3/h4ExtgvoXhPtv9Ieqd-XC1wGrrdhLiiI2fKzDWNA2i0.woff) format('woff');
+}
+
+h1 {
+  color: #333;
+  font-family: 'Stardos Stencil', sans-serif;
+  font-size: 80px;
+  left: 50%;
+  line-height: 80px;
+  margin: 0;
+  position: absolute;
+  margin: -264px 0 0 -320px;
+  top: 50%;
+  width: 640px;
+}

@@ -1,0 +1,23 @@
+.tank,
+.tank .base,
+.tank .turret {
+  background-position: top center;
+  background-repeat: no-repeat;
+  height: 32px;
+  position: absolute;
+  width: 32px;
+}
+
+.tank {
+  left: 304px;
+  top: 208px;
+  z-index: 2;
+}
+
+.tank .base {
+  background-image: url(img/tank-base.png);
+}
+
+.tank .turret {
+  background-image: url(img/tank-turret.png);
+}

@@ -1,0 +1,50 @@
+.area {
+  left: 50%;
+  position: absolute;
+  height: 448px;
+  margin: -184px 0 0 -320px;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  width: 640px;
+}
+
+.map {
+  height: 1344px;
+  cursor: url(img/target.png) 12 12, pointer;
+  overflow: hidden;
+  position: absolute;
+  width: 1920px;
+}
+
+.tile {
+  float: left;
+  height: 32px;
+  width: 32px;
+}
+
+.tile.dirt {
+  background-image: url(img/bg-dirt.png);
+}
+
+.tile.grass {
+  background-image: url(img/bg-grass.png);
+}
+
+.tile.tree {
+  background-image: url(img/object-tree.png), url(img/bg-grass.png);
+}
+
+.tile.stone {
+  background-image: url(img/bg-stone.png);
+}
+
+.tile.water {
+  background-image: url(img/bg-water.png);
+}
+
+.tile.explosion {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(img/explosion-1.png), url(img/bg-grass.png);
+}

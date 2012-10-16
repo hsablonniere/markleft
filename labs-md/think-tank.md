@@ -174,8 +174,7 @@ Because you'll probably need to modify the HTML, use the [think-tank-custom.html
 
 * Simultaneous keypress (drive an turn at the same time). Try to find out how and ask if you're lost.
 * A secret konami code.
-* Customize the map, look at the available images.
-* Customize the map, look at the available images.
+* Customize the map, look at the available images. All images comes from http://www.vickiwenderlich.com/2011/10/free-game-art-tanks-top-down-tiles.
 * Add sounds.
 * ...
 

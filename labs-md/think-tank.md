@@ -172,7 +172,7 @@ Because you'll probably need to modify the HTML, use the [think-tank-custom.html
 
 ### Ideas
 
-* Simultaneous keypress (drive an turn at the same time). Trye to find out how and ask if you're lost.
+* Simultaneous keypress (drive an turn at the same time). Try to find out how and ask if you're lost.
 * A secret konami code.
 * Customize the map, look at the available images.
 * Customize the map, look at the available images.

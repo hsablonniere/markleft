@@ -5,6 +5,7 @@ var thinkTank = (function () {
       mapLeft = parseInt($map.css('left')) || 0,
       mapTop = parseInt($map.css('top')) || 0,
       $tank = $('.tank'),
+      $tankBase = $('.tank .base'),
       tankLeft = parseInt($tank.css('left')) || 0,
       tankTop = parseInt($tank.css('top')) || 0,
       $turret = $('.turret'),
@@ -27,10 +28,16 @@ var thinkTank = (function () {
   turn = function () {
     vectorX = driveStep * Math.sin(vectorAngle);
     vectorY = driveStep * Math.cos(vectorAngle);
-    rotate($tank, vectorAngle.toFixed(2));
+    rotate($tankBase, vectorAngle.toFixed(2));
   };
 
   return {
+    getVector: function () {
+      return {
+        x: vectorX,
+        y: vectorY
+      }
+    },
     tank: {
       driveForward: function () {
         tankLeft += vectorX;
@@ -49,6 +56,12 @@ var thinkTank = (function () {
       rotateTurret: function (angle) {
         rotate($turret, angle);
       },
+      getSize: function () {
+        return {
+          height: $tank.height(),
+          width: $tank.width()
+        };
+      },
       getPosition: function () {
         return {
           top: tankTop,
@@ -59,8 +72,8 @@ var thinkTank = (function () {
     area: {
       getSize: function () {
         return {
-          height: $map.height(),
-          width: $map.width()
+          height: $area.height(),
+          width: $area.width()
         };
       },
       getPosition: function () {

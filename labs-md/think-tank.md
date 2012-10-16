@@ -86,7 +86,7 @@ Our tank can only go forward and turn left or right. Don't worry, all the trigon
 #### Better moves
 
 * If you look closer to the DOM, the `.map` is bigger than `.area`. This means sometimes the tank should move and sometimes, the map should move.
-* Implement a system that allow that in a smart way.
+* Implement a system that allow that in a smart way. `thinkTank` will help you to know the different size, positions and where the tank is going (with vectors).
 
 ### Rules
 
@@ -123,6 +123,7 @@ In this exercise, we'll make the tank turret rotate with the mouse.
 
 * Create a file named `mouse-turret.js` and add some code to detect mouse move events.
 * Try to find a way to get the coordinates of the tank and of the mouse pointer using the same reference point.
+* You have everything you need to retrieve this coordinates with the same reference with `thinkTank`.
 * Try to compute the angle in radiants and use the `thinkTank` to rotate the turret.
 * The turrent should point to the mouse pointer.
 
@@ -171,7 +172,8 @@ Because you'll probably need to modify the HTML, use the [think-tank-custom.html
 
 ### Ideas
 
-* Simultaneous keypress (drive an turn at the same time).
+* Simultaneous keypress (drive an turn at the same time). Trye to find out how and ask if you're lost.
+* A secret konami code.
 * Customize the map, look at the available images.
 * Customize the map, look at the available images.
 * Add sounds.

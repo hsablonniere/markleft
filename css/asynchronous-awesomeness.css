@@ -1,0 +1,58 @@
+@font-face {
+  font-family: 'Fredericka the Great';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Fredericka the Great'), local('FrederickatheGreat'), url(http://themes.googleusercontent.com/static/fonts/frederickathegreat/v2/7Es8Lxoku-e5eOZWpxw18vc3vBAn7YvtW9hNjxWZBR0.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/groovepaper.png);
+}
+
+body {
+  color: #FFF;
+  font-family: 'Fredericka the Great', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: #007;
+  font-weight: normal;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h3 code {
+  font-size: 46px;
+}
+
+.cover {
+  background-size: cover;
+}
+
+.cover > * {
+  font-size: 100px;
+  height: 240px;
+  line-height: 120px;
+  margin-top: -120px;
+  top: 50%;
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #030;
+  font-size: 32px;
+  font-weight: normal;
+  padding: 3px 0;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #033;
+}

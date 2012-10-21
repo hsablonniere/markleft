@@ -90,10 +90,6 @@ h5 {
   width: 100%;
 }
 
-.cover > * {
-  text-align: center;
-}
-
 .title > *,
 .title.link a {
   position: absolute;

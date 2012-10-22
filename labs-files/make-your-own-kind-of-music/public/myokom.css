@@ -1,0 +1,256 @@
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Titillium WebBold'), local('TitilliumWeb-Bold'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr0bathaSTBR2c4i13_wzlb0.woff) format('woff');
+}
+
+html {
+  background-image: url(navy-blue.png);
+  background-attachment: fixed;
+  height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 700px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+body,
+button {
+  color: #FFF;
+  font: bold 15px Titillium Web, sans-serif;
+}
+
+button {
+  border-radius: 0;
+  cursor: pointer;
+}
+
+header {
+  overflow: hidden;
+}
+
+.app-name {
+  background: #E88317;
+  margin: 10px;
+  padding: 5px 10px;
+}
+
+.app-name .long {
+  display: none;
+}
+
+@media screen and (min-width: 450px) {
+  .app-name .long {
+    display: block;
+  }
+
+  .app-name .short {
+    display: none;
+  }
+}
+
+.current-track,
+.track-title,
+.track-control {
+  height: 40px;
+  line-height: 40px;
+}
+
+.current-track {
+  margin: 10px;
+  position: relative;
+}
+
+.current-track[data-status="stop"] {
+  opacity: .2;
+}
+
+.current-track[data-status="stop"] [data-action="pause"],
+.current-track[data-status="play"] [data-action="play"],
+.current-track[data-status="pause"] [data-action="pause"] {
+  display: none;
+}
+
+.track-infos {
+  background: #1A52FF;
+  left: 0;
+  padding: 0 10px;
+  position: absolute;
+  right: 150px;
+}
+
+.track-title,
+.dir,
+.track-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track-title {
+  font-style: italic;
+}
+
+.track-progress {
+  bottom: 0;
+  background: #FFF;
+  left: 0;
+  position: absolute;
+  height: 2px;
+  -moz-transition: width 100ms linear;
+  -ms-transition: width 100ms linear;
+  -o-transition: width 100ms linear;
+  -webkit-transition: width 100ms linear;
+  transition: width 100ms linear;
+  width: 0%;
+}
+
+.track-controls {
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  width: 140px;
+}
+
+.track-control {
+  background-color: #FF1D95;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 50%;
+  border: none;
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 0;
+  -moz-transition: border-radius 100ms linear;
+  -ms-transition: border-radius 100ms linear;
+  -o-transition: border-radius 100ms linear;
+  -webkit-transition: border-radius 100ms linear;
+  transition: border-radius 100ms linear;
+  width: 40px;
+}
+
+.track-control:hover {
+  border-radius: 50%;
+}
+
+[data-action="previous"] {
+  background-image: url(./previous.png);
+}
+
+[data-action="play"] {
+  background-image: url(./play.png);
+}
+
+[data-action="pause"] {
+  background-image: url(./pause.png);
+}
+
+[data-action="next"] {
+  background-image: url(./next.png);
+  margin-right: 0;
+}
+
+.help {
+  background: #555;
+  padding: 0 10px;
+  margin: 0 10px 10px 10px;
+}
+
+.close-help {
+  background: #E88317;
+  border: none;
+  float: right;
+  margin: 10px 0;
+  padding: 0;
+  width: auto;
+}
+
+.display-help {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.help p {
+  padding: 10px 0;
+  margin: 0;
+}
+
+.help a {
+  color: #E88317;
+}
+
+.track-list {
+  margin: 0 10px;
+}
+
+.dir,
+.track {
+  background: #00A735;
+  border: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #FFF;
+  display: block;
+  height: 40px;
+  margin: 0 0 10px 0;
+  padding: 0 10px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  -moz-transition: border-radius 100ms linear;
+  -ms-transition: border-radius 100ms linear;
+  -o-transition: border-radius 100ms linear;
+  -webkit-transition: border-radius 100ms linear;
+  transition: border-radius 100ms linear;
+  width: 100%;
+}
+
+.dir {
+  line-height: 40px;
+}
+
+.dir:hover,
+.track:hover {
+  border-left: 5px solid #E88317;
+  border-radius: 10px 0 0 10px;
+  padding-left: 5px;
+}
+
+.dir:nth-child(2n+1),
+.track:nth-child(2n+1) {
+  background: #00832A;
+}
+
+.dir:last-child,
+.track:last-child {
+  margin-bottom: 0;
+}
+
+.track-name {
+  left: 10px;
+  line-height: 40px;
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+
+.track:hover .track-name {
+  left: 5px;
+}
+
+.track-counter {
+  line-height: 40px;
+  position: absolute;
+  right: 10px;
+  text-align: right;
+  top: 0;
+  width: 30px;
+}

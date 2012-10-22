@@ -1,0 +1,15 @@
+{
+  "name": "make-your-own-kind-of-music",
+  "version": "1.0.0",
+  "description": "Web music player",
+  "main": "server.js",
+  "dependencies": {
+    "node-static": "0.6.4",
+    "musicmetadata": "0.1.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node myokom-server.js"
+  },
+  "engine": "node 0.8.x"
+}

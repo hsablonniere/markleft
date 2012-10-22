@@ -56,3 +56,18 @@ ol li:nth-child(2n+1),
 ul li:nth-child(2n+1) {
   color: #033;
 }
+
+.introduction strong:nth-child(1) {
+  background-image: url(../img/social-network-computer.jpg);
+}
+
+.introduction strong:nth-child(2) {
+  background-image: url(../img/social-network-twin.jpg);
+}
+
+.last-question {
+  background-image: url(../img/ajax-explained.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

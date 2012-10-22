@@ -18,6 +18,13 @@
 
 <!-- toc -->
 
+<!-- slide : introduction -->
+
+#### Thousand, twenty-two THOUSAND...
+
+<!-- .list.incremental -->
+If you wanna build the next billion user website, you need **cool stuffs like AJAX** or you'll end up running after **others**...
+
 <!-- slide -->
 
 ## Definition
@@ -111,7 +118,7 @@ try {
 <!-- .incremental -->
 ```javascript
 var httpMethod = 'GET';   // could be POST, PUT, DELETE...
-var url = 'http://localhost/helloWorld.php';
+var url = 'https://www.facebook.com/markzuckerberg/friends';
 var asynchronous = true;  // false means synchronous
                           // it frozes your browser
                           // until response if received
@@ -139,23 +146,23 @@ xhr.onreadystatechange = callback;
 <!-- .incremental -->
 ```javascript
 // Without request body
-xhr.open('GET', 'http://localhost/helloWorld.php', true);
+xhr.open('GET', 'https://www.facebook.com/markzuckerberg/friends', true);
 xhr.send();
 ```
 
 <!-- .incremental -->
 ```javascript
 // With request URL encoded body
-xhr.open('POST', 'http://localhost/login.php', true);
-var requestBody = 'email=john.smith%40world.com&password=123456';
+xhr.open('POST', 'https://www.facebook.com/login', true);
+var requestBody = 'email=mark.zuckerberg%40facebook.com&password=imceobitch';
 xhr.send(requestBody);
 ```
 
 <!-- .incremental -->
 ```javascript
 // With request JSON body
-xhr.open('POST', 'http://localhost/login.php', true);
-var requestBody = '{"email":"john.smith@world.com","password":"123456"}';
+xhr.open('POST', 'https://www.facebook.com/login', true);
+var requestBody = '{"email":"mark.zuckerberg%40facebook.com","password":"imceobitch"}';
 xhr.send(requestBody);
 ```
 
@@ -260,7 +267,7 @@ Because AJAX is often used to modify a part of the page, one could think that br
 If you don't do anything about it, your website will suffer from bad user experience and you don't really want that.
 
 <!-- .list.incremental -->
-The other drawback is bookmarking, in a world wide web where **everyone share anything ** every millisecond, being able to **retrieve state with unique URL ** is fundamental.
+The other drawback is bookmarking, in a world wide web where **everyone share anything** every millisecond, being able to **retrieve state with unique URL ** is fundamental.
 
 <!-- .list.incremental -->
 Common **work around technique** is to use **iframes and URL fragments ** (part after # in URL) to provide such features. Look how Gmail does it, it works really well.
@@ -284,7 +291,7 @@ The **HTML5 history API** will allow lots of cool behaviours to **address these 
 ```javascript
 // Low level method
 $.ajax({
-  url: 'http://localhost/helloWorld.php',
+  url: 'hhttps://www.facebook.com/markzuckerberg/friends',
   success: function (data) {
     $('h1').html(data);
   }
@@ -294,15 +301,15 @@ $.ajax({
 <!-- .incremental -->
 ```javascript
 // Short hand method
-$.get('http://localhost/helloWorld.php', function (data) {
-  $('h1').html(data);
+$.get('https://www.facebook.com/markzuckerberg/friends', function (data) {
+  $('.friends').html(data);
 });
 ```
 
 <!-- .incremental -->
 ```javascript
 // Fast AJAX partial reload
-$('h1').load('http://localhost/helloWorld.php');
+$('.friends').load('https://www.facebook.com/markzuckerberg/friends');
 ```
 
 <!-- .useful-links -->
@@ -317,23 +324,23 @@ $('h1').load('http://localhost/helloWorld.php');
 // Low level method
 $.ajax({
   type: 'POST',
-  url: './vote.php',
-  data: 'email=john.smith%40world.com&password=123456',
+  url: 'https://www.facebook.com/login',
+  data: 'email=mark.zuckerberg%40facebook.com&password=imceobitch',
   success: function (data) { /* some code */ }
 });
 ```
 
 ```javascript
 // Short hand method
-$.post('./login.php',
-  'email=john.smith%40world.com&password=123456',
+$.post('https://www.facebook.com//login',
+  'email=mark.zuckerberg%40facebook.com&password=imceobitch',
   function (data) { /* some code */ });
 ```
 
 ```javascript
 // Short hand method with data object
-$.post('./login.php',
-  { email: 'john.smith@world.com', password: '123456' },
+$.post('/login',
+  { email: 'mark.zuckerberg@facebook.com', password: 'imceobitch' },
   function (data) { /* some code */ });
 ```
 
@@ -351,12 +358,12 @@ $.post('./login.php',
 
 ```javascript
 $.ajax({
-  url: 'http://localhost/helloWorld.php',
+  url: 'https://www.facebook.com/friends',
   complete: function (jqXHR, textStatus) {
     console.log('AJAX response received: ' + textStatus);
   },
   success: function (data) {
-    $('h1').html(data);
+    $('.friends').html(data);
   },
   error: function (jqXHR, textStatus, errorThrown) {
     console.error('Error: ' + textStatus);
@@ -373,10 +380,10 @@ $.ajax({
 
 ```javascript
 $.ajax({
-  url: 'http://localhost/helloWorld.php'
+  url: 'https://www.facebook.com/friends'
 })
 .always(function (data) {
-  $('h1').html(data);
+  $('.friends').html(data);
 })
 .done(function (jqXHR, textStatus) {
   console.log('AJAX response received: ' + textStatus);
@@ -398,7 +405,7 @@ $.ajax({
 
 ```javascript
 $.ajax({
-  url: 'http://localhost/hello-world.php',
+  url: 'https://www.facebook.com/friends',
   statusCode: {
     404: function (jqXHR, textStatus, errorThrown) {
       console.error('Page could not be found');
@@ -415,7 +422,7 @@ $.ajax({
 #### Script loading
 
 ```javascript
-$.getScript('helloWorld.js', function (data, textStatus) {
+$.getScript('https://www.facebook.com/fb-core.js', function (data, textStatus) {
    console.log(data);
    console.log(textStatus);
 });
@@ -423,6 +430,10 @@ $.getScript('helloWorld.js', function (data, textStatus) {
 
 <!-- .useful-links -->
 * [$.getScript documentation (jQuery)](http://api.jquery.com/jQuery.getScript/)
+
+<!-- slide : last-question -->
+
+Have you understand **all the concepts**?
 
 <div id="progress-bar"></div>
 

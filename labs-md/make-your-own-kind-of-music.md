@@ -33,6 +33,7 @@ Bon courage...
 * Install the modules. Just go to the project root and type `npm install`.
 * Start the server. Just type `node myokom-server` in the project root.
 * You should see an ASCII are and the url at which the project can be browsed.
+* Create a directory named `music` in the project root directory and add music directories and files into it.
 * The project works with ogg files on all major recent browsers. You can use mp3 files but it won't work on Firefox and some others...
 * If you need music just try http://www.jamendo.com/fr/. It's a free and creative common. Downloading ogg from the website is tricky, don't hesistate to ask for help.&
 
@@ -48,9 +49,9 @@ In this exercise, we'll display some help when the user needs it.
 
 ### Steps
 
-* Have a look at `myokom.html`. You'll see a `.help-button` button element.
+* Have a look at `myokom.html`. You'll see a `.display-help` button element.
 * Create a file named `myokom-client.js` in the `public` directory.
-* Add some code to detect clicks on `.help-button`.
+* Add some code to detect clicks on `.display-help`.
 * Add some code to load HTML from `/public/myokom-help.html` using AJAX and replace the content of `.help` with it when the button is clicked.
 * If the person clicks on the `.close-help`, just remove the `.help` element.
 
@@ -88,8 +89,9 @@ In this exercise, we'll display the directories and the track-list.
 * Have a look at `myokom.html`. You'll see a `.track-list` element.
 * In your `myokom-client.js` file, add a `browseFromUrl` function.
 * Listen to the `load` event on the window and use your `browseFromUrl` function.
-* In this function, add some code to retrieve the current pathname of the `location` object and load information from the server via AJAX.
-* If the pathname is `/`, you'll do a GET on `/browse/`. If the pathname is `/Anitek`, you'll do a GET on `/browse/Anitek`.
+* In this function, we'll use the API offered by the server. One of the URLs allows you to find out what's available on the server (directories and music files).
+* Try to open a tab with `http://localhost:8080/browse/`, you'll see what's in your `music` directory as JSON.
+* This URL works with any directory. If you have a directory called `Anitek` in your `music` directory, you can try `http://localhost:8080/browse/Anitek`. It work with sub directory and so on...
 * Here's an example of what the informations retrieved in JSON can look like :
 
 ```javascript
@@ -112,7 +114,8 @@ In this exercise, we'll display the directories and the track-list.
 }
 ```
 
-* Use this informations and add `.dir` and `.track` elements to the DOM, like this :
+* In your `browseFromUrl` function, start an AJAX request to retrieve these informations.
+* Use these informations and add `.dir` and `.track` elements to the DOM in `.track-list`, like this :
 
 ```html
 <a class="dir" href="/Anitek/">Anitek</a>
@@ -127,6 +130,9 @@ In this exercise, we'll display the directories and the track-list.
 <!-- and so on -->
 ```
 
+* Because clicking on the `.dir` links will change the URL, reload the page and execute `browseFromUrl`, your AJAX call must use the URL.
+* Add some code to retrieve the current pathname of the `location` global object and load information from the server via AJAX.
+* If the pathname is `/`, you'll do a GET on `/browse/`. If the pathname is `/Anitek`, you'll do a GET on `/browse/Anitek`.
 * Keep the informations object in memory, it will be useful after...
 
 ### Rules

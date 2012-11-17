@@ -263,3 +263,8 @@ p {
     width: 150px;
   }
 }
+
+hr {
+  visibility: hidden;
+  page-break-after: always;
+}

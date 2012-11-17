@@ -1,0 +1,117 @@
+html {
+  background: #333;
+}
+
+body {
+  background: #333;
+  color: #FFF;
+  font: 16px/1.5 Arial, sans-serif;
+  margin: 10px auto 70px auto;
+  max-width: 1200px;
+}
+
+.app-title {
+  background: #333;
+  bottom: 0;
+  box-shadow: 0 0 10px #000;
+  font-size: 25px;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+  margin: 0;
+  padding-right: 10px;
+  position: fixed;
+  text-align: right;
+  right: 0;
+  z-index: 2;
+}
+
+.keyboard-shortcuts {
+  float: left;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.keyboard-shortcut {
+  padding: 0 10px;
+}
+
+.schedule-day:nth-child(1) .schedule-talk {
+  background: #EC663C;
+}
+
+.schedule-day:nth-child(2) .schedule-talk {
+  background: #9C4274;
+}
+
+.schedule-day:nth-child(3) .schedule-talk {
+  background: #12B0C5;
+}
+
+.schedule-day:nth-child(4) .schedule-talk {
+  background: #FF9618;
+}
+
+.schedule-day:nth-child(5) .schedule-talk {
+  background: #47BBB3;
+}
+
+.schedule-day-name,
+.schedule-talk,
+.schedule-from-to-title {
+  margin: .5%;
+}
+
+.schedule-day-name,
+.schedule-from-to-title {
+  font-size: 30px;
+  padding: 5px 0;
+}
+
+.schedule-day-name {
+  font-size: 50px;
+}
+
+.schedule-from-to {
+  margin: 1% 0;
+}
+
+.schedule-from-to:hover {
+  box-shadow: 0 0 10px #000;
+}
+
+.schedule-from-to-title {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.schedule-talk {
+  padding: 1%;
+}
+
+.schedule-talk-title,
+.schedule-talk-speakers {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.schedule-talk-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.schedule-talk-speakers,
+.schedule-talk-room {
+  color: #333;
+  color: rgba(0, 0, 0, .5);
+}
+
+.schedule-talk-speakers {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.schedule-talk-room {
+  font-size: 20px;
+  font-weight: bold;
+}

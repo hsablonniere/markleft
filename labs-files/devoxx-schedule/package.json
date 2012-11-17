@@ -1,0 +1,14 @@
+{
+  "name": "devoxx-schedule",
+  "version": "1.0.0",
+  "description": "Devoxx Conference Schedule",
+  "main": "devoxx-server.js",
+  "dependencies": {
+    "node-static": "0.6.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node devoxx-server.js"
+  },
+  "engine": "node 0.8.x"
+}

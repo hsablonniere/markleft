@@ -1,0 +1,132 @@
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Press Start 2P'), local('PressStart2P-Regular'), url(http://themes.googleusercontent.com/static/fonts/pressstart2p/v1/8Lg6LX8-ntOHUQnvQ0E7o3dD2UuwsmbX3BOp4SL_VwM.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/twinkle-twinkle.png);
+}
+
+body,
+.quote p {
+  color: #FFF;
+  font-family: 'Press Start 2P', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #FF0;
+  font-size: 45px;
+  font-weight: normal;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.cover {
+  background-image: url(../img/batman-logo.png);
+  background-position: center 200px;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+
+.cover > * {
+  margin: 0;
+  top: 50px;
+}
+
+img {
+  max-height: 430px;
+  max-width: 780px;
+  margin: 10px;
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #AAA;
+  margin: 20px 0;
+  font-size: 22px;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #EEE;
+}
+
+p.list strong code, ol li code, ul li code {
+  font-size: 30px;
+  text-transform: none;
+  white-space: pre;
+}
+
+.list.warning strong,
+.list.warning li,
+.list.warning strong:nth-child(2n+1),
+.list.warning li:nth-child(2n+1) {
+  background: #F00;
+  color: #FFF;
+  border-radius: 5px;
+  padding: 5px 20px;
+}
+
+a, a:visited {
+  color: #81ddff;
+}
+
+pre {
+  font-size: 16px;
+  margin: 5px 0 20px 0;
+}
+
+pre code {
+  box-shadow: 0 0 10px #000;
+  border-radius: 0;
+}
+
+.table {
+  border-collapse: collapse;
+  font-family: monospace;
+  font-size: 15px;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #999;
+  padding: 5px 10px;
+}
+
+th {
+  background: #999;
+}
+
+/* introduction */
+
+.introduction strong:nth-child(1) {
+  background-image: url(../img/batman-bike.jpg);
+}
+
+.introduction strong:nth-child(2) {
+  background-image: url(../img/batman-bruce.jpg);
+}
+
+.introduction strong:nth-child(3) {
+  background-image: url(../img/batman-tools.jpg);
+}
+
+.introduction strong:nth-child(4) {
+  background-image: url(../img/batman-joker.jpg);
+}
+
+.introduction strong:nth-child(5) {
+  background-image: url(../img/batman-rules.jpg);
+}
+
+.introduction strong:nth-child(6) {
+  background-image: url(../img/batman.jpg);
+}

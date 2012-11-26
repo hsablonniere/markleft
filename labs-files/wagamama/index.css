@@ -1,0 +1,220 @@
+/* global and reset */
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body,
+button {
+  font: 16px/1.5 Arial, sans-serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+.main-header {
+  background: #000;
+  color: #FFF;
+  height: 60px;
+  line-height: 60px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.main-header-title {
+  padding: 0 20px;
+}
+
+[role="main"] {
+  background: #E53328;
+  bottom: 0;
+  color: #FFF;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 60px;
+}
+
+.table-view,
+.order-view {
+  -moz-transition: all 300ms ease-in-out;
+  -mz-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+.table-header,
+.order-header,
+.menu-header {
+  left: 0;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+}
+
+.table-view {
+  height: 100%;
+  left: -100%;
+  position: absolute;
+  width: 100%;
+}
+
+[data-view="table"] .table-view {
+  left: 0;
+}
+
+.tables {
+  margin: 0;
+  padding: 0;
+}
+
+.table {
+  background: #000;
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  list-style: none;
+  font-weight: bold;
+  margin: 1%;
+  min-width: 90px;
+  text-align: center;
+  width: 23%;
+}
+
+.order-view {
+  height: 100%;
+  left: 100%;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+[data-view="order"] .order-view {
+  left: 0;
+}
+
+.order-panel,
+.menu-panel {
+  bottom: 0;
+  position: absolute;
+  top: 0;
+  width: 50%;
+}
+
+.order-panel {
+  left: 0;
+}
+
+.menu-panel {
+  box-shadow: 0 0 15px #000;
+  right: 0;
+}
+
+.tables,
+.order-items,
+.menu-categories {
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 40px;
+}
+
+.order-items {
+  bottom: 40px;
+}
+
+.order-total {
+  background: #000;
+  bottom: 0;
+  height: 40px;
+  line-height: 40px;
+  left: 0;
+  padding: 0 20px;
+  position: absolute;
+  right: 0;
+}
+
+.order-total-name {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.order-total-price {
+  display: inline-block;
+  position: absolute;
+  right: 60px;
+}
+
+.menu-category-name {
+  background: #000;
+  padding: 2px 5px;
+}
+
+.menu-category-items {
+  padding: 0;
+}
+
+.menu-item {
+  height: 30px;
+  line-height: 30px;
+  list-style: none;
+  padding: 0 5px;
+  position: relative;
+}
+
+.menu-item-name {
+  display: inline-block;
+  left: 0;
+  overflow: hidden;
+  padding: 0 5px;
+  position: absolute;
+  right: 140px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-item-price {
+  display: inline-block;
+  padding: 0;
+  position: absolute;
+  right: 60px;
+  text-align: right;
+  width: 70px;
+}
+
+.menu-item-add {
+  background: #FFF;
+  border: none;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  width: 50px;
+}
+
+.payment-view {
+  display: none;
+}

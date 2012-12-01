@@ -9,8 +9,6 @@
 <link href="../css/theme-2012.css" rel="stylesheet">
 <link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
 <link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
-<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
-<link href="../css/have-a-look-at-my-prototype.css" rel="alternate stylesheet" data-dztheme="presentation">
 
 <!-- slide : cover -->
 
@@ -20,110 +18,170 @@
 
 <!-- slide -->
 
+#### What do you mean by "testing"
+
+You're probably already testing your application to verify if everything works as you intend to. This process takes time, it's cumbersome. In this course we'll try to improve our testing process using automated test and some new approach called TDD.
+
+## Unit testing
+
+A unit tests aims at testing only a small unit of code. You define a given situation and then you pass some arguments to a function and a expect a specific result. Here's an example :
+
+```javascript
+var input = 64,
+    expectedOutput = 8;
+
+console.log('Root square of 64 should be 8');
+
+if (Math.sqrt(input) === expectedOutput) {
+  console.log('SUCCESS');
+} else {
+  console.log('FAIL');
+}
+```
+
+### Frameworks
+
+To improve this code we could use a testing framework. There are many advantages to do so. You can write faster testing code in a more readable way. Theses frameworks provide a lot of ways to assert code expectations and often helps with non trivial situations like asynchronous stuffs...
+
+#### JasmineJS
+
+Here's an example using JasmineJS :
+
+```javascript
+describe('Square roots', function() {
+  var input = 64,
+      expectedOutput = 8;
+
+  it('of 64 should be 8', function() {
+    expect(Math.sqrt(input)).toBe(expectedOutput);
+  });
+});
+```
+
+<!-- .useful-links -->
+* [JasmineJS homepage](http://pivotal.github.com/jasmine/)
+* [JasmineJS wiki](https://github.com/pivotal/jasmine/wiki)
+
+#### qUnit
+
+Here's an example using qUnit :
+
+```javascript
+test('Square roots', function() {
+  var input = 64,
+      expectedOutput = 8;
+
+  deepEqual(Math.sqrt(input), expectedOutput, 'of 64 should be 8');
+});
+```
+
+<!-- .useful-links -->
+* [qUnit homepage](http://qunitjs.com/)
+* [qUnit cookbook](http://qunitjs.com/cookbook/)
+* [How to Test your JavaScript Code with QUnit (net.tutsplus.com)](http://net.tutsplus.com/tutorials/javascript-ajax/how-to-test-your-javascript-code-with-qunit/)
+
+#### Mocha
+
+Here's an example using JasmineJS :
+
+```javascript
+describe('Square roots', function() {
+  var input = 64,
+      expectedOutput = 8;
+
+  it('of 64 should be 8', function() {
+    assert.equal(Math.sqrt(input), expectedOutput);
+  });
+});
+```
+
+<!-- .useful-links -->
+* [Mocha homepage](http://visionmedia.github.com/mocha/)
+
+## Callbacks and async
+
+Unit testing asynchronous code can be troublesome. JasmineJS can help a lot on this kind of matter.
+
+Let's use a function that uses a callback example :
+
+```javascript
+// Executes a function on each element of the array
+var arrayEach = function (array, callback) {
+  for (var i = 0; i < array.length; i++) {
+    callback(array, array[i], i, array);
+  }
+};
+```
+
+Now I can verify that `arrayEach` does what it's supposed to do : call a function over the elements of an array.
+
+```javascript
+describe('arrayEach', function() {
+  var fakeCallback = jasmine.createSpy('fakeCallback'),
+      someArray = ['a', 'b', 'c', 'd'];
+
+  arrayEach(someArray, fakeCallback);
+
+  it('should iterate over all the elements of an array', function() {
+    expect(fakeCallback).toHaveBeenCalled();
+    expect(fakeCallback.mostRecentCall.args[0]).toEqual('d');
+    expect(fakeCallback.mostRecentCall.args[1]).toEqual(3);
+    expect(fakeCallback.mostRecentCall.args[2]).toEqual(someArray);
+  });
+});
+```
+
 ## TDD
   
 TDD means Test Driven Developement. The process is fairly simple. Don't forget that your code should only pass the test and not the specifications. If your code passes the tests and doesn't follow the specifications, it means your test is wrong.
   
 ![TDD](../img/tdd.png)
 
-<!-- slide : cover -->
+## Test runner
 
-## Synchronous code
+When you use JasmineJS, qUnit or any other testing framework, it would be great if tests could be run automatically without going to a web browser and manually refresh asserting that everything works.
 
-<!-- slide -->
-  
-To perform a synchronous test, you must use the `test()` function and provide it a name and a function to execute. This function should contain from 1 to many assertions.
-  
-### Simple example
+Here's some test runner that does exactly that...
 
-<!-- .incremental -->
-```javascript
-var add = function(a, b) {
-  return a + b;
-}
+### Testacular
+
+This tool can run automatically your JasmineJS and Mocha tests on browsers like PhantomJS for quick response or other real browsers for real behaviour. It verifies when you save new versions of your source code and relaunch all the tests.
+
+Here's how you can install testacular :
+
+```bash
+npm -g install phantomjs testacular
 ```
 
-<!-- .incremental -->
-```javascript
-test('Try with positive numbers', function() {
-  strictEqual(add(3, 8), 11, '3 + 8 = 11');
-  strictEqual(add(0, 5), 5, '0 + 5 = 5');
-});
+Once you're done installing, you can start the good stuffs :
+
+```bash
+# create config file (testacular.conf.js by default)
+testacular init
+
+# start server
+testacular start
+
+# open browsers you want to test (if testacular is not configured to do it for you)
+open http://localhost:8080
+
+# if you want to run tests manually (without auto watching file changes), you can:
+testacular run
 ```
 
-<!-- .incremental -->
-```javascript
-test('Try with negative numbers', function() {
-  strictEqual(add(-5, -7), 12, '-5 + -7 = -12');
-  strictEqual(add(-0, -8), -8, '-0 + -8 = -8');
-});
-```
-
-<!-- slide -->
-
-### Other assertions
-  
-There's plenty of other assertions that `strictEqual`, use them carefully.
-
-<!-- .incremental -->
-* `ok(state, message)`
-* `equal(actual, expected, message)`
-* `notEqual(actual, expected, message)`
-* `deepEqual(actual, expected, message)`
-* `notDeepEqual(actual, expected, message)`
-* `strictEqual(actual, expected, message)`
-* `notStrictEqual(actual, expected, message)`
-* `raises(block, expected, message)`
+You'll probably have to modify the config file to specify where your tests are.
 
 <!-- .useful-links -->
-* [QUnit documentation (jquery.com)](http://docs.jquery.com/QUnit#API_documentation)
-  
-<!-- slide -->
+* [Testacular homepage](http://vojtajina.github.com/testacular/)
 
-## Asynchronous code
-  
-To perform an asynchronous test, you must use the `asyncTest()` function and provide it a name and a function to execute. This function should contain from 1 to many assertions. One of the ways to handle async stuffs such as AJAX calls is to use `setTimeout()`.
+### JS test driver
 
-<!-- .incremental -->
-```javascript
-function someFunctionWithAjax() {
-  $.ajax({
-    url: 'hello-world.php',
-    success: function(data) { globalVar = data; }
-  });
-}
-```
+JS test driver is older than testacular. It was the inspiration that led to testacular. It works on the same concepts but has different details.
 
-<!-- .incremental -->
-```javascript
-asyncTest('Testing AJAX function', function() {
-  // Pause the test
-  stop();
-
-  someFunctionWithAjax();
-
-  setTimeout(function() {
-    ok(typeof globalVar !== undefined, 'globalVar is defined');
-    // After the assertion has been called, continue the test
-    start();
-  }, 2000);
-});
-```
+You can find more on how to install and use if on the homepage.
 
 <!-- .useful-links -->
-* [How to Test your JavaScript Code with QUnit (net.tutsplus.com)](http://net.tutsplus.com/tutorials/javascript-ajax/how-to-test-your-javascript-code-with-qunit/)
-  
-<!-- slide : cover -->
+* [JS test driver homepage](http://code.google.com/p/js-test-driver/)
 
-## Functional tests
-  
-The best tool in this area is Selenium. The project provide Macro recordin IDE and some drivers for programming languages and browsers.
-
-<!-- .useful-links -->
-* [Selenium IDE](http://seleniumhq.org/projects/ide/)
-
-<div id="progress-bar"></div>
-
-<script src="../js/dzslides.core.js"></script>
 <script src="../js/jquery-1.8.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

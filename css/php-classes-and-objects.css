@@ -1,0 +1,105 @@
+@font-face {
+  font-family: 'Bangers';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bangers'), local('Bangers-Regular'), url(http://themes.googleusercontent.com/static/fonts/bangers/v4/DqeGA7eaz0hhOYTfkeJBIA.woff) format('woff');
+}
+
+html {
+  background-image: url(../img/indy-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body {
+  color: #46351a;
+  font-family: 'Bangers', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+h3 code {
+  font-size: 46px;
+}
+
+.cover {
+  background-image: url(../img/fedora.svg);
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-size: 45% auto;
+}
+
+.cover > * {
+  bottom: 0;
+  font-size: 80px;
+  height: 180px;
+  line-height: 90px;
+  text-align: center;
+}
+
+pre {
+  background: transparent;
+}
+
+pre code {
+  box-shadow: 0 0 10px #46351a;
+}
+
+a {
+  color: #3d5d20;
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #030;
+  font-size: 32px;
+  font-weight: normal;
+  padding: 3px 0;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #033;
+}
+
+.introduction strong:nth-child(1) {
+  background-image: url(../img/indy-jacket.gif);
+}
+
+.introduction strong:nth-child(2) {
+  background-image: url(../img/indy-hat.jpg);
+}
+
+.introduction strong:nth-child(3) {
+  background-image: url(../img/indy-whip.jpg);
+}
+
+.introduction strong:nth-child(4) {
+  background-image: url(../img/indy-ark-real.jpg);
+}
+
+.introduction strong:nth-child(5) {
+  background-image: url(../img/indy-ark-toy.jpg);
+}
+
+.introduction strong:nth-child(6) {
+  background-image: url(../img/indy-teacher.jpg);
+}
+
+.introduction strong:nth-child(7) {
+  background-image: url(../img/indy-action.jpg);
+}
+
+.introduction strong:nth-child(8) {
+  background-image: url(../img/indy-classy.jpg);
+}

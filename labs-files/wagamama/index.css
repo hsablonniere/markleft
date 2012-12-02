@@ -215,6 +215,48 @@ h3 {
   width: 50px;
 }
 
+.order-items .menu-item-name {
+  width: 340px;
+}
+
+.order-items .menu-item-price {
+  right: 120px;
+  width: 175px;
+}
+
+.menu-item-inc {
+  background: #FFF;
+  border: none;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  width: 50px;
+}
+
+.menu-item-quantity {
+  border: none;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0;
+  position: absolute;
+  right: 60px;
+  text-align: center;
+  width: 50px;
+}
+
+.menu-item-dec {
+  background: #FFF;
+  border: none;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0;
+  position: absolute;
+  right: 60px;
+  width: 50px;
+}
+
 .payment-view {
   display: none;
 }

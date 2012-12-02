@@ -15,6 +15,7 @@ files = [
   JASMINE_ADAPTER,
   'lib/*',
   'src/wgmm/quantity-collection.js',
+  'src/wgmm/priced-collection.js',
   'src/wgmm/money.js',
   'src/wgmm/data.js',
   'src/wgmm/tables.js',

@@ -52,9 +52,10 @@ Because our file browser file have to manipulate files and directories, we'll cr
 * Before we start, let's get the root path from configuration file. Use the `Config` class correctly and set the value of `$rootPath` in [public/index.php](../labs-files/miller-columns/public/index.php) at line 11. Change the value in [config.json](../labs-files/miller-columns/config.json) if you need to.
 * Create an abstract class named `MillerPath` in [model/MillerPath.class.php](../labs-files/miller-columns/model/MillerPath.class.php).
 * Add a private property named `path`, it will represent the absolute path of the directory or the file.
+* Add a private property named `parentPath`, it will represent the absolute path of the parent directory of the directory or the file.
 * Add a private property named `name`, it will represent name (last part of the path) of the directory or the file.
-* Add a constructor that takes an absolute path as only argument and sets the `path` and `name` properties correctly. You'll have to retrieve the last part of the path to get the name.
-* Add the appropriate getters for your properties : `getPath` and `getName`. If you use a decent IDE, it should be able to generate them ;-)
+* Add a constructor that takes an absolute path as only argument and sets the `path`, `parentPath` and `name` properties correctly.You'll have to retrieve the last part of the path to get the name. Parent path will also be quick to retrieve.
+* Add the appropriate getters for your properties : `getPath`, `getParentPath` and `getName`. If you use a decent IDE, it should be able to generate them ;-)
 * Override the `__toString` method and return the name.
 * Uncomment the parts of the code that needs to.
 

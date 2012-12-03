@@ -1,0 +1,103 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font: 16px/1.5 sans-serif;
+}
+
+.base-directory-name,
+.browser-column {
+  background: #EEE;
+  border-radius: 5px;
+}
+
+.base-directory-name {
+  background: #EEE;
+  border-radius: 5px;
+  font-size: 30px;
+  height: 60px;
+  line-height: 60px;
+  left: 1%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 15px;
+  position: absolute;
+  right: 1%;
+  text-overflow: ellipsis;
+  top: 10px;
+  white-space: nowrap;
+}
+
+.browser-columns {
+  bottom: 10px;
+  left: 0;
+  margin: 0 .5%;
+  position: absolute;
+  right: 0;
+  top: 80px;
+  white-space: nowrap;
+}
+
+.browser-column {
+  float: left;
+  list-style: none;
+  margin: 0 .5%;
+  padding: 0;
+  overflow: auto;
+  height: 100%;
+  vertical-align: top;
+  width: 24%;
+}
+
+.browser-path {
+  padding: 2px 5px;
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  background-size: auto 80%;
+  padding-left: 35px;
+}
+
+.browser-directory {
+  background-image: url(directory.svg);
+}
+
+.browser-file {
+  background-image: url(file.svg);
+  color: #555;
+}
+
+.browser-directory a,
+.browser-file {
+  color: #000;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.browser-path.current,
+.browser-path:hover {
+  background-color: #269;
+  cursor: pointer;
+}
+
+.browser-directory.current,
+.browser-directory:hover {
+  background-image: url(directory-white.svg);
+}
+
+.browser-file.current,
+.browser-file:hover {
+  background-image: url(file-white.svg);
+}
+
+.browser-directory.current a,
+.browser-file.current,
+.browser-directory:hover a,
+.browser-file:hover {
+  color: #FFF;
+}

@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'BTTF';
+  font-style: normal;
+  src: url(../fonts/BTTF.ttf);
+}
+
+html {
+  /*background-image: url(../img/wild-oliva.png);*/
+  background-image: -moz-radial-gradient(#222 0%, #000 70%);
+  background-image: -webkit-radial-gradient(#222 0%, #000 70%);
+  background-image: -o-radial-gradient(#222 0%, #000 70%);
+  background-image: -ms-radial-gradient(#222 0%, #000 70%);
+  background-image: radial-gradient(#222 0%, #000 70%);
+  height: 100%;
+}
+
+body {
+  color: #FFF;
+  font-family: 'BTTF', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #E8B830;
+  font-size: 55px;
+  font-weight: normal;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+
+.cover {
+  background-image: url(../img/delorean.svg);
+  background-size: 600px auto;
+  background-repeat: no-repeat;
+  background-position: center 200px;
+}
+
+p.list strong,
+ol li,
+ul li {
+  color: #AAA;
+  font-weight: normal;
+  text-transform: lowercase;
+  margin: 15px 0;
+}
+
+p.list strong:nth-child(2n+1),
+ol li:nth-child(2n+1),
+ul li:nth-child(2n+1) {
+  color: #EEE;
+}
+
+pre {
+  font-size: 16px;
+  margin: 5px 0 20px 0;
+}
+
+pre code {
+  box-shadow: 0 0 10px #000;
+  border-radius: 0;
+}
+
+/* introduction */
+
+.introduction strong:nth-child(1) {
+  background-image: url(../img/bttf-fast.jpg);
+}
+
+.introduction strong:nth-child(2) {
+  background-image: url(../img/bttf-past.jpg);
+}
+
+.introduction strong:nth-child(3) {
+  background-image: url(../img/bttf-future.jpg);
+}
+
+.introduction strong:nth-child(4) {
+  background-image: url(../img/bttf-skate.jpg);
+}
+
+.introduction strong:nth-child(5) {
+  background-image: url(../img/bttf-hoverboard.jpg);
+}
+
+.introduction strong:nth-child(6) {
+  background-image: url(../img/bttf-shoes.jpg);
+}
+
+.introduction strong:nth-child(7) {
+  background-image: url(../img/bttf-pizza.jpg);
+}
+
+.introduction strong:nth-child(8) {
+  background-image: url(../img/bttf-tv.jpg);
+}

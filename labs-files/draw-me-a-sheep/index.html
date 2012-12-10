@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Draw me a sheep</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<div class="drawing-panel">
+  <canvas class="drawing-canvas" width="2000" height="2000"></canvas>
+</div>
+<div class="tools-panel">
+  <h1 class="app-title">Draw me a sheep</h1>
+  <ul class="brushes">
+    <li><label>Brushes:</label></li>
+    <li class="brush">
+      <button data-brush="square" class="selected">Square</button>
+    </li>
+    <li class="brush">
+      <button data-brush="circle">Circle</button>
+    </li>
+    <li class="brush">
+      <button data-brush="sheep">Sheep</button>
+    </li>
+    <li class="brush">
+      <button data-brush="eraser">Eraser</button>
+    </li>
+  </ul>
+  <ul class="options">
+    <li class="option">
+      <label for="option-color">Color:</label><input type="color" id="option-color" value="#000000">
+    </li>
+    <li class="option">
+      <label for="option-size">Brush size:</label><input type="number" id="option-size" min="1" max="100" value="10">
+    </li>
+  </ul>
+</div>
+<script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+thtml,
+body {
+  margin: 0;
+}
+
+html {
+  background: #AAA;
+}
+
+body {
+  font: 16px/1.5 Arial, sans-serif;
+}
+
+.drawing-panel,
+.tools-panel {
+  background: #FFF;
+  border-radius: 5px;
+  bottom: 10px;
+  box-shadow: 0 0 10px #000;
+  position: absolute;
+  top: 10px;
+}
+
+.drawing-panel{
+  left: 10px;
+  right: 320px;
+  overflow: auto;
+}
+
+.drawing-canvas {
+  cursor: crosshair;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tools-panel {
+  right: 10px;
+  width: 300px;
+}
+
+.app-title {
+  margin: 10px;
+}
+
+.brushes,
+.options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin: 10px;
+}
+
+.brush button {
+  width: 80px;
+}
+
+.option label,
+.option input {
+  display: inline-block;
+  padding: 5px;
+  width: 40%;
+}
+
+.option input {
+  border: 1px solid #AAA;
+  border-radius: 5px;
+}

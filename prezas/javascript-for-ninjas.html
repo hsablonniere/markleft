@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>JavaScript for Ninjas</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Advanced JavaScript concepts : objects, binding and closures">
+<meta name="keywords" content="javascript, object, binding, closures">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/javascript-for-ninjas.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>JavaScript for Ninjas</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#json">JSON</a></li>
+<li><a href="#closure">Closure</a></li>
+<li><a href="#binding">Binding</a></li>
+<li><a href="#date">Date</a></li>
+<li><a href="#intervals-amp-timeouts">Intervals &amp; timeouts</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>A function within a function. I&#39;m impressed.</h4>
+
+<p class="list incremental">Last time, we introduced first features of JavaScript. Most of its basic syntax look like other languages such as C or PHP.</p>
+
+<p class="list incremental">JavaScript is way more powerful than that. In this course we&#39;ll introduce <strong>new concepts</strong>. Most of them will look <strong>strange</strong> or <strong>abnormal</strong> at first. People who hate JavaScript often hate it because <strong>they don&#39;t fully understand these concepts</strong>. <strong>Pay attention to details</strong> and <strong>don&#39;t fall asleep</strong>, you&#39;re <strong>not in a dream.</strong></p>
+</section>
+
+<section class="cover">
+<h2 id="objects">Objects</h2>
+</section>
+
+<section>
+<h3>Definition</h3>
+<p>In JavaScript anything that is not a <code>Number</code>, a <code>String</code>, a <code>Boolean</code>, <code>null</code> or <code>undefined</code> is an object.</p>
+
+<p class="list incremental">The object is JavaScript&#39;s <strong>fundamental datatype</strong>. It is an <strong>unordered collection of properties</strong>. Each property has a <strong>name and a value</strong>. You could say it looks like PHP&#39;s associative arrays.</p>
+</section>
+
+<section>
+<h3>Examples</h3>
+<p>You can put (almost) whatever you want in an object :
+<em> Number
+</em> String
+<em> Boolean
+</em> null
+<em> undefined
+</em> Array
+* Object</p>
+<p>Note that an object can be empty.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> emptyObject = {};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> reality = {
+  level: <span class="number">1</span>,
+  real: <span class="literal">true</span>,
+  team: [<span class="string">'Ariadne'</span>,<span class="string">'Arthur'</span>,<span class="string">'Cobb'</span>,<span class="string">'Eames'</span>,<span class="string">'Fischer'</span>,<span class="string">'Saito'</span>,<span class="string">'Yusuf'</span>],
+  dream: {
+    level: <span class="number">2</span>,
+    team: [<span class="string">'Ariadne'</span>,<span class="string">'Arthur'</span>,<span class="string">'Cobb'</span>,<span class="string">'Eames'</span>,<span class="string">'Fischer'</span>,<span class="string">'Saito'</span>,<span class="string">'Yusuf'</span>],
+    dreamer: <span class="string">'Yusuf'</span>,
+    dream: {
+      level: <span class="number">3</span>,
+      team: [<span class="string">'Ariadne'</span>,<span class="string">'Arthur'</span>,<span class="string">'Cobb'</span>,<span class="string">'Eames'</span>,<span class="string">'Fischer'</span>,<span class="string">'Saito'</span>],
+      dreamer: <span class="string">'Arthur'</span>
+      <span class="comment">// You get the point...</span>
+    }
+  }
+};</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object">Object reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Properties and values</h3>
+<p>Properties can be added or deleted and their values read and modified at anytime using different techniques.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Read value</span>
+console.log(reality.level);        <span class="comment">// => 1</span>
+console.log(reality[<span class="string">'level'</span>]);     <span class="comment">// => 1</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Write value</span>
+reality.team[<span class="number">4</span>] = <span class="string">'Mr. Fisher'</span>;    <span class="comment">// reality.team[4] => 'Mr. Fisher'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Add property</span>
+reality.location = <span class="string">'In a plane'</span>;   <span class="comment">// adds a property called 'location'</span>
+                                   <span class="comment">// and assign it a String</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Delete property</span>
+<span class="keyword">delete</span> reality.location;           <span class="comment">// deletes location property</span>
+                                   <span class="comment">// reality.location is undefined</span></code></pre>
+
+</section>
+
+<section>
+<h3>Property enumeration</h3>
+<p>Properties can be enumerated using a <code>for..in</code> loop.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> reality.dream) {
+  console.log(i + <span class="string">' ==> '</span> + reality.dream[i]);
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">/** Console output :
+  level ==> 2
+  team ==> Ariadne,Arthur,Cobb,Eames,Fischer,Saito,Yusuf
+  dreamer ==> Yusuf
+  dream ==> [object Object]
+*/</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Statements/for...in">for..in reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Type and reference</h3>
+<p>Objects are mutable and manipulated by reference.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Primitive types : manipulated by value</span>
+<span class="keyword">var</span> dreamer = <span class="string">'Yusuf'</span>;
+<span class="keyword">var</span> dreamer2 = dreamer;
+dreamer = <span class="string">'Saito'</span>;
+console.log(dreamer2);              <span class="comment">// => 'Yusuf'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Objects : manipulated by reference</span>
+<span class="keyword">var</span> reality2 = reality;
+reality.dream.dreamer = <span class="string">'Saito'</span>;
+console.log(reality2.dream.dreamer) <span class="comment">// => 'Saito' !!!!</span></code></pre>
+
+</section>
+
+<section class="cover json">
+<h2 id="json">JSON</h2>
+</section>
+
+<section>
+<h3>Definition</h3>
+
+<p class="list incremental">JSON is a <strong>lightweight text-based</strong> open standard designed for <strong>human-readable data interchange</strong>. It is based upon <strong>JavaScript Object Notation</strong> but it&#39;s <strong>purpose is multilanguage</strong>. It was specified in <strong>RFC 4627</strong> by <strong>Douglas Crockford in 2006</strong>. Since then it has become very popular. It&#39;s commonly used as an exchange format for <strong>Web Services</strong>. Note that Firefox and Chrome use it for addon/extension configuration files.</p>
+
+<ul class="useful-links">
+<li><a href="http://json.org/">JSON.org</a></li>
+<li><a href="http://tools.ietf.org/html/rfc4627">RFC 4627</a></li>
+<li><a href="http://yuilibrary.com/theater/douglas-crockford/crockford-json/">JSON saga (video by Douglas Crockford)</a></li>
+<li><a href="https://cfp.devoxx.com/rest/v1/events/presentations/532">Web Service example returning JSON (devoxx.com)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Usage</h3>
+<p>Using the <code>JSON</code> object you&#39;re able to convert from Object to JSON string with <code>JSON.stringify()</code> and vice versa  with<code>JSON.parse()</code>.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> reality = <span class="string">'{"level": 1, "team": ["Ariadne", "Arthur", "Cobb", "Eames", "Fischer", "Saito", "Yusuf"], "dream": {"dreamer": "Yusuf"}}'</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> realityObject = JSON.parse(reality); <span class="comment">// JSON String to JS Object</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(realityObject.team[<span class="number">0</span>]);      <span class="comment">// => "Ariadne"</span>
+realityObject.level = <span class="number">42</span>;
+realityObject.dream.dreamer = <span class="string">"Charles"</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">reality = JSON.stringify(realityObject); <span class="comment">// JS Object to JSON String</span>
+console.log(reality);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Console output :</span>
+<span class="comment">// {"level":42,"team":["Ariadne","Arthur","Cobb","Eames","Fischer","Saito","Yusuf"],"dream":{"dreamer":"Charles"}}</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/JSON">JSON object reference (MDN)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>Functions are first class citizens!</h3>
+<p>This feature is very important. Functions are special kind of object. Having first-class functions means a lots of things, let&#39;s review them in details.</p>
+
+<ul class="useful-links">
+<li><a href="http://en.wikipedia.org/wiki/First_class_function">First class functions</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Be assigned to a variable</h4>
+<p>This way to create function is very common. Some developers don&#39;t even use the classic declaration.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="function"><span class="keyword">function</span> <span class="title">validateLength</span><span class="params">(tokens)</span> {</span>
+  <span class="keyword">return</span> tokens.length === <span class="number">4</span>;
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> validateLength2 = <span class="function"><span class="keyword">function</span> <span class="params">(tokens)</span> {</span>   <span class="comment">// This function is anonymous</span>
+  <span class="keyword">return</span> tokens.length === <span class="number">4</span>;
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="function"><span class="keyword">function</span> <span class="title">fact</span><span class="params">(x)</span> {</span>
+  <span class="keyword">return</span> (x &lt;= <span class="number">1</span>) ? <span class="number">1</span> : x * fact(x - <span class="number">1</span>);
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> fact2 = <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">(x)</span> {</span>                <span class="comment">// This function has a name</span>
+  <span class="keyword">return</span> (x &lt;= <span class="number">1</span>) ? <span class="number">1</span> : x * f(x - <span class="number">1</span>);      <span class="comment">// used for recursion</span>
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(<span class="keyword">typeof</span> f);                     <span class="comment">// => "undefined"</span></code></pre>
+
+</section>
+
+<section>
+<h4>Have properties</h4>
+<p>The feature is not a common pattern.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> validateLength = <span class="function"><span class="keyword">function</span> <span class="title">v</span><span class="params">(tokens)</span> {</span>
+  v.errorMsg = (v.errorMsg !== <span class="literal">undefined</span>) ? v.errorMsg : <span class="string">'Error!'</span>;
+  <span class="keyword">if</span> (tokens.length != <span class="number">4</span>) {
+    console.error(v.errorMsg);
+  }
+  <span class="keyword">return</span> tokens.length === <span class="number">4</span>;
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">validateLength([<span class="string">'dream'</span>]); <span class="comment">// => 'Error!' in console</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">validateLength.errorMsg = <span class="string">'Query must contain 4 words.'</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">validateLength([<span class="string">'dream'</span>]); <span class="comment">// => 'Query must contain 4 words.' in console</span></code></pre>
+
+</section>
+
+<section>
+<h4>Be another object&#39;s property</h4>
+<p>When a function is assigned to an object property, it&#39;s called a method.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> inception = {
+  level: <span class="number">1</span>,
+  team: [<span class="string">'Ariadne'</span>,<span class="string">'Arthur'</span>,<span class="string">'Cobb'</span>,<span class="string">'Eames'</span>,<span class="string">'Fischer'</span>,<span class="string">'Saito'</span>,<span class="string">'Yusuf'</span>],
+  dream: {
+    level: <span class="number">2</span>,
+    team: [<span class="string">'Ariadne'</span>,<span class="string">'Arthur'</span>,<span class="string">'Cobb'</span>,<span class="string">'Eames'</span>,<span class="string">'Fischer'</span>,<span class="string">'Saito'</span>,<span class="string">'Yusuf'</span>],
+    dreamer: <span class="string">'Yusuf'</span>,
+    dream: {
+      <span class="comment">// You get the point...</span>
+    }
+  },
+  explainTheMovie: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">'Are you kidding me?'</span>);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">inception.explainTheMovie();
+</code></pre>
+
+</section>
+
+<section>
+<h4>Be another function&#39;s argument</h4>
+<p>This kind a technique is very frequent in JavaScript and the simplicity of it is brilliant! Just call a function and give it another function to call for when it&#39;s done.</p>
+<p>Function passed as arguments are often called callbacks.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> updateError = <span class="function"><span class="keyword">function</span> <span class="params">(error)</span> {</span>
+  console.error(<span class="string">'An error occured : '</span> + error);
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> validateLength = <span class="function"><span class="keyword">function</span> <span class="params">(tokens, updateErrorFct)</span> {</span>
+  <span class="keyword">if</span> (tokens.length != <span class="number">4</span>) {
+    updateErrorFct(<span class="string">'Error!'</span>);
+  }
+  <span class="keyword">return</span> tokens.length === <span class="number">4</span>;
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">validateLength([<span class="string">'dream'</span>], updateError);
+<span class="comment">// 'An error occured : Error!' in console</span></code></pre>
+
+</section>
+
+<section class="cover closure">
+<h2 id="closure">Closure</h2>
+</section>
+
+<section>
+<h3>Definition</h3>
+<p>The definition of a closure is never a good way to have a explanation of what it is.</p>
+<p>It&#39;s often easier to remember : &quot;a function within a function&quot;. But the best way to understand it is through an example.</p>
+
+<blockquote class="incremental">
+<p>« In computer science, a closure is a function that is evaluated in an environment containing one or more bound variables. When called, the function can access these variables. »</p>
+<p>« A function within a function. I&#39;m impressed. »</p>
+</blockquote>
+</section>
+
+<section>
+<h3>Example</h3>
+<p>Starting from this point, we&#39;re going to modify it to use a closure and resolve the different problems.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> counter = <span class="number">0</span>;       <span class="comment">// Everyone can modify this       :-(</span>
+<span class="keyword">var</span> getUniqueInt = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">return</span> counter++;
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> getUniqueInt = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">var</span> counter = <span class="number">0</span>;     <span class="comment">// Nobody outside can modify this :-)</span>
+  <span class="keyword">return</span> counter++;    <span class="comment">// But function always return 0   :-(</span>
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> getUniqueInt = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">var</span> counter = <span class="number">0</span>;     <span class="comment">// Nobody can modify this         :-)</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> <span class="comment">// A function within a function   :-) yeah baby!</span>
+    <span class="keyword">return</span> counter++;  <span class="comment">// Function remembers counter     :-)</span>
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(<span class="keyword">typeof</span> getUniqueInt())     <span class="comment">// => "function"  :-(</span>
+console.log(<span class="keyword">typeof</span> getUniqueInt()())   <span class="comment">// => "number"    :-)</span></code></pre>
+
+</section>
+
+<section>
+
+<p>Since no one really understand this definition the first time (and even after), we&#39;ll use an example.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> getUniqueInt = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">var</span> counter = <span class="number">0</span>;     <span class="comment">// Nobody can modify this         :-)</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> <span class="comment">// A function within a function   :-) yeah baby!</span>
+    <span class="keyword">return</span> counter++;  <span class="comment">// Function remembers counter     :-)</span>
+  }
+};
+getUniqueInt = getUniqueInt();  <span class="comment">// Assign inner function to getUniqueInt</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(<span class="keyword">typeof</span> getUniqueInt())     <span class="comment">// => "number"    :-)</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> getUniqueInt = (<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">var</span> counter = <span class="number">0</span>;     <span class="comment">// Nobody can modify this         :-)</span>
+  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span> <span class="comment">// A function within a function   :-) yeah baby!</span>
+    <span class="keyword">return</span> counter++;  <span class="comment">// Function remembers counter     :-)</span>
+  }
+})();                  <span class="comment">// Direct execution of 1st anonymous function</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(<span class="keyword">typeof</span> getUniqueInt())     <span class="comment">// => "number"    :-)</span></code></pre>
+
+<p>The last example is a very classic pattern in JavaScript when you deal with closure. It allows you to add private &quot;memory&quot; to a function.</p>
+</section>
+
+<section class="cover">
+<h2 id="binding">Binding</h2>
+</section>
+
+<section>
+<h3><code>this</code></h3>
+<p><code>this</code> can reference different stuffs. It depends how it&#39;s used. For our example, we&#39;ll use an object : <code>dream</code> and a function : <code>what</code>.
+If we execute <code>what</code> directly, <code>this</code> will reference the browser global object : <code>window</code>. Look at the example.
+If we set <code>what</code> as a method of <code>dream</code>, <code>this</code> will reference <code>dream</code>. Look at the example.--&gt;</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> dream = { location: <span class="string">'a van'</span>, dreamer: <span class="string">'Yusuf'</span> };
+<span class="keyword">var</span> what = <span class="function"><span class="keyword">function</span> <span class="params">(before, after)</span> {</span>
+  console.log(before + <span class="keyword">this</span>.dreamer + <span class="string">' is dreaming of '</span> + <span class="keyword">this</span>.location + after);
+}</code></pre>
+
+<h4>From global object</h4>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">what(<span class="string">'>> '</span>, <span class="string">'...'</span>); <span class="comment">// => >> undefined is dreaming of http://server-of-this-page/this-page.html...</span></code></pre>
+
+<h4>As an object method</h4>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">dream.w = what;
+dream.w(<span class="string">'>> '</span>, <span class="string">'...'</span>); <span class="comment">// => >> Yusuf is dreaming of a van...</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/this">this reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Common problems</h3>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> dream = {
+  location: <span class="string">'a van'</span>,
+  dreamer: <span class="string">'Yusuf'</span>,
+  whoDreams: <span class="function"><span class="keyword">function</span> <span class="params">(isDreamingMsg)</span> {</span>
+    console.log(<span class="keyword">this</span>.dreamer + isDreamingMsg);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> times = <span class="function"><span class="keyword">function</span> <span class="params">(n, func, arg)</span> {</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) {
+    func(arg + <span class="string">' ('</span> + i + <span class="string">')'</span>);
+  }
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">times(<span class="number">2</span>, dream.whoDreams, <span class="string">' is dreaming'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// undefined is dreaming (0)</span>
+<span class="comment">// undefined is dreaming (1)</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.alistapart.com/articles/getoutbindingsituations/">Get out of binding situations (A list apart)</a></li>
+<li><a href="http://api.jquery.com/jQuery.proxy/">jQuery.proxy() in jQuery</a></li>
+<li><a href="http://api.prototypejs.org/language/Function/prototype/bind/">Function.bind() in prototype.js</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>Solutions</h3>
+</section>
+
+<section>
+<h4>Using <code>call</code></h4>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> dream = {
+  location: <span class="string">'a van'</span>,
+  dreamer: <span class="string">'Yusuf'</span>,
+  whoDreams: <span class="function"><span class="keyword">function</span> <span class="params">(isDreamingMsg)</span> {</span>
+    console.log(<span class="keyword">this</span>.dreamer + isDreamingMsg);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> times = <span class="function"><span class="keyword">function</span> <span class="params">(n, func, target, arg)</span> {</span>     <span class="comment">// add target</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) {
+    func.call(target, arg + <span class="string">' ('</span> + i + <span class="string">')'</span>);      <span class="comment">// directly args</span>
+  }
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">times(<span class="number">2</span>, dream.whoDreams, dream, <span class="string">' is dreaming'</span>); <span class="comment">// target is passed</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Yusuf is dreaming (0)</span>
+<span class="comment">// Yusuf is dreaming (1)</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/call">call reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Using <code>apply</code></h4>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> dream = {
+  location: <span class="string">'a hotel'</span>,
+  dreamer: <span class="string">'Charles'</span>,
+  whoDreams: <span class="function"><span class="keyword">function</span> <span class="params">(isDreamingMsg)</span> {</span>
+    console.log(<span class="keyword">this</span>.dreamer + isDreamingMsg);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> times = <span class="function"><span class="keyword">function</span> <span class="params">(n, func, target, arg)</span> {</span>     <span class="comment">// add target</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) {
+    func.apply(target, [arg + <span class="string">' ('</span> + i + <span class="string">')'</span>]);   <span class="comment">// args as an array</span>
+  }
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">times(<span class="number">2</span>, dream.whoDreams, dream, <span class="string">' is dreaming'</span>); <span class="comment">// target is passed</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Charles is dreaming (0)</span>
+<span class="comment">// Charles is dreaming (1)</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/apply">apply reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Using <code>bind</code></h4>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> dream = {
+  location: <span class="string">'a snow fortress'</span>,
+  dreamer: <span class="string">'Eames'</span>,
+  whoDreams: <span class="function"><span class="keyword">function</span> <span class="params">(isDreamingMsg)</span> {</span>
+    console.log(<span class="keyword">this</span>.dreamer + isDreamingMsg);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> times = <span class="function"><span class="keyword">function</span> <span class="params">(n, func, arg)</span> {</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) {
+    func(arg + <span class="string">' ('</span> + i + <span class="string">')'</span>);              <span class="comment">// direct</span>
+  }
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> bindedWD = dream.whoDreams.bind(dream);  <span class="comment">// bind target to function</span>
+times(<span class="number">2</span>, bindedWD, <span class="string">' is dreaming'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Eames is dreaming (0)</span>
+<span class="comment">// Eames is dreaming (1)</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">bind reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="date">Date</h2>
+<p>The <code>Date</code> object provides a ways to handle date and time. Calling <code>new Date()</code> creates a new Date object for today&#39;s date and time according to local time. The object has a lot of methods to handle itself. See reference for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> today = <span class="keyword">new</span> Date();
+<span class="keyword">var</span> month = today.getMonth();             <span class="comment">// .getDay() .getYear() etc...</span>
+<span class="keyword">var</span> unixTime = today.getTime();           <span class="comment">// Milliseconds since</span>
+                                          <span class="comment">// 1 January 1970 00:00:00 UTC</span>
+<span class="keyword">var</span> display = today.toString();
+<span class="keyword">var</span> endOfTheWorld = <span class="keyword">new</span> Date(<span class="number">2012</span>,<span class="number">11</span>,<span class="number">21</span>); <span class="comment">// Months from 0 to 11 !!!!</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date">Date reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="intervals-amp-timeouts">Intervals &amp; timeouts</h2>
+<p>When you want your JavaScript code to depend on time, you need some mechanism to delay execution. <code>setTimeout</code> and <code>setInterval</code> to the rescue. See reference for more details.</p>
+<p>Both functions are properties of the <code>window</code> object in browser environments. They can also be found on other platforms like Node.js with the same behaviour.</p>
+<p>Look carefully what is passed as first argument</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(<span class="string">'Downwards is the only way forwards.'</span>);
+}
+<span class="keyword">var</span> timeoutId = setTimeout(foo, <span class="number">2000</span>);
+<span class="comment">// id can be used to cancel => clearTimeout(timeoutId)</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> bar = <span class="number">0</span>;
+<span class="keyword">var</span> baz = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="comment">// if we define var bar here, it would be reset each call</span>
+  bar = (bar + <span class="number">2</span>) % <span class="number">20</span>;
+  console.log(bar);
+}
+<span class="keyword">var</span> intervalId = setInterval(baz, <span class="number">1000</span>);
+<span class="comment">// id can be used to cancel => clearInterval(intervalId)</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/window.setTimeout">setTimeout reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/window.setInterval">setInterval reference (MDN)</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

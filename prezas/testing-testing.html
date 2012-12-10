@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Testing, testing...</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Details about how to test a JavaScript application/website.">
+<meta name="keywords" content="unit-tests, functional tests...">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+
+<section class="cover">
+<h1>Testing, testing...</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#unit-testing">Unit testing</a></li>
+<li><a href="#callbacks-and-async">Callbacks and async</a></li>
+<li><a href="#tdd">TDD</a></li>
+<li><a href="#test-runner">Test runner</a></li>
+</ul>
+</div>
+
+</section>
+
+<section>
+<h4>What do you mean by &quot;testing&quot;</h4>
+<p>You&#39;re probably already testing your application to verify if everything works as you intend to. This process takes time, it&#39;s cumbersome. In this course we&#39;ll try to improve our testing process using automated test and some new approach called TDD.</p>
+<h2 id="unit-testing">Unit testing</h2>
+<p>A unit tests aims at testing only a small unit of code. You define a given situation and then you pass some arguments to a function and a expect a specific result. Here&#39;s an example :</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> input = <span class="number">64</span>,
+    expectedOutput = <span class="number">8</span>;
+
+console.log(<span class="string">'Root square of 64 should be 8'</span>);
+
+<span class="keyword">if</span> (Math.sqrt(input) === expectedOutput) {
+  console.log(<span class="string">'SUCCESS'</span>);
+} <span class="keyword">else</span> {
+  console.log(<span class="string">'FAIL'</span>);
+}</code></pre>
+
+<h3>Frameworks</h3>
+<p>To improve this code we could use a testing framework. There are many advantages to do so. You can write faster testing code in a more readable way. Theses frameworks provide a lot of ways to assert code expectations and often helps with non trivial situations like asynchronous stuffs...</p>
+<h4>JasmineJS</h4>
+<p>Here&#39;s an example using JasmineJS :</p>
+<pre data-language="javascript"><code class="language-javascript">describe(<span class="string">'Square roots'</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> input = <span class="number">64</span>,
+      expectedOutput = <span class="number">8</span>;
+
+  it(<span class="string">'of 64 should be 8'</span>, <span class="keyword">function</span>() {
+    expect(Math.sqrt(input)).toBe(expectedOutput);
+  });
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://pivotal.github.com/jasmine/">JasmineJS homepage</a></li>
+<li><a href="https://github.com/pivotal/jasmine/wiki">JasmineJS wiki</a></li>
+</ul>
+<h4>qUnit</h4>
+<p>Here&#39;s an example using qUnit :</p>
+<pre data-language="javascript"><code class="language-javascript">test(<span class="string">'Square roots'</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> input = <span class="number">64</span>,
+      expectedOutput = <span class="number">8</span>;
+
+  deepEqual(Math.sqrt(input), expectedOutput, <span class="string">'of 64 should be 8'</span>);
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://qunitjs.com/">qUnit homepage</a></li>
+<li><a href="http://qunitjs.com/cookbook/">qUnit cookbook</a></li>
+<li><a href="http://net.tutsplus.com/tutorials/javascript-ajax/how-to-test-your-javascript-code-with-qunit/">How to Test your JavaScript Code with QUnit (net.tutsplus.com)</a></li>
+</ul>
+<h4>Mocha</h4>
+<p>Here&#39;s an example using JasmineJS :</p>
+<pre data-language="javascript"><code class="language-javascript">describe(<span class="string">'Square roots'</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> input = <span class="number">64</span>,
+      expectedOutput = <span class="number">8</span>;
+
+  it(<span class="string">'of 64 should be 8'</span>, <span class="keyword">function</span>() {
+    assert.equal(Math.sqrt(input), expectedOutput);
+  });
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://visionmedia.github.com/mocha/">Mocha homepage</a></li>
+</ul>
+<h2 id="callbacks-and-async">Callbacks and async</h2>
+<p>Unit testing asynchronous code can be troublesome. JasmineJS can help a lot on this kind of matter.</p>
+<p>Let&#39;s use a function that uses a callback example :</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="comment">// Executes a function on each element of the array</span>
+<span class="keyword">var</span> arrayEach = <span class="function"><span class="keyword">function</span> <span class="params">(array, callback)</span> {</span>
+  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) {
+    callback(array, array[i], i, array);
+  }
+};</code></pre>
+
+<p>Now I can verify that <code>arrayEach</code> does what it&#39;s supposed to do : call a function over the elements of an array.</p>
+<pre data-language="javascript"><code class="language-javascript">describe(<span class="string">'arrayEach'</span>, <span class="keyword">function</span>() {
+  <span class="keyword">var</span> fakeCallback = jasmine.createSpy(<span class="string">'fakeCallback'</span>),
+      someArray = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>];
+
+  arrayEach(someArray, fakeCallback);
+
+  it(<span class="string">'should iterate over all the elements of an array'</span>, <span class="keyword">function</span>() {
+    expect(fakeCallback).toHaveBeenCalled();
+    expect(fakeCallback.mostRecentCall.args[<span class="number">0</span>]).toEqual(<span class="string">'d'</span>);
+    expect(fakeCallback.mostRecentCall.args[<span class="number">1</span>]).toEqual(<span class="number">3</span>);
+    expect(fakeCallback.mostRecentCall.args[<span class="number">2</span>]).toEqual(someArray);
+  });
+});</code></pre>
+
+<h2 id="tdd">TDD</h2>
+<p>TDD means Test Driven Developement. The process is fairly simple. Don&#39;t forget that your code should only pass the test and not the specifications. If your code passes the tests and doesn&#39;t follow the specifications, it means your test is wrong.</p>
+<img src="../img/tdd.png" alt="TDD">
+<h2 id="test-runner">Test runner</h2>
+<p>When you use JasmineJS, qUnit or any other testing framework, it would be great if tests could be run automatically without going to a web browser and manually refresh asserting that everything works.</p>
+<p>Here&#39;s some test runner that does exactly that...</p>
+<h3>Testacular</h3>
+<p>This tool can run automatically your JasmineJS and Mocha tests on browsers like PhantomJS for quick response or other real browsers for real behaviour. It verifies when you save new versions of your source code and relaunch all the tests.</p>
+<p>Here&#39;s how you can install testacular :</p>
+<pre data-language="bash"><code class="language-bash">npm -g install phantomjs testacular</code></pre>
+
+<p>Once you&#39;re done installing, you can start the good stuffs :</p>
+<pre data-language="bash"><code class="language-bash"><span class="comment"># create config file (testacular.conf.js by default)</span>
+testacular init
+
+<span class="comment"># start server</span>
+testacular start
+
+<span class="comment"># open browsers you want to test (if testacular is not configured to do it for you)</span>
+open http://localhost:8080
+
+<span class="comment"># if you want to run tests manually (without auto watching file changes), you can:</span>
+testacular run</code></pre>
+
+<p>You&#39;ll probably have to modify the config file to specify where your tests are.</p>
+
+<ul class="useful-links">
+<li><a href="http://vojtajina.github.com/testacular/">Testacular homepage</a></li>
+</ul>
+<h3>JS test driver</h3>
+<p>JS test driver is older than testacular. It was the inspiration that led to testacular. It works on the same concepts but has different details.</p>
+<p>You can find more on how to install and use if on the homepage.</p>
+
+<ul class="useful-links">
+<li><a href="http://code.google.com/p/js-test-driver/">JS test driver homepage</a></li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : 2 tickets please</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Experimenting with the DOM, create, manipulate, remove, transform...">
+<meta name="keywords" content="javascript, dom, tree, manipulation, json">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>2 tickets please!</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#one-month-two-months-three-months">One month, two months, three months...</a></li>
+<li><a href="#and-now-we-can-begin-the-show">And now we can begin the show.</a></li>
+<li><a href="#crazy-ideas">Crazy ideas!</a></li>
+</ul>
+</div>
+
+<img src="../img/concert-ticket.jpg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h2 id="one-month-two-months-three-months">One month, two months, three months...</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to manipulate dates.</li>
+<li>Know how to add elements to the DOM (directly and with jQuery).</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll try to display an empty calendar for the next 6 months. The result should look like <a href="../labs-files/2-tickets-please/2-tickets-please-calendar.html">2-tickets-please-calendar.html</a>.</p>
+<p>We&#39;ll use both direct DOM manipulation and using jQuery. If you&#39;re still wondering which one is better, have look at this <a href="http://jsperf.com/dom-vs-innerhtml/21">jsperf</a>.</p>
+<h3>Steps</h3>
+<h4>Months (no jQuery)</h4>
+<ul>
+<li>Create a file named <code>2-tickets-please-calendar.js</code>.</li>
+<li>Add an array of all the 12 months names in this file.</li>
+<li>Starting from current month, add some code to display 6 months names in the existing <code>.calendar</code> div with this structure :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"calendar"</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"9"</span> <span class="attribute">data-year</span>=<span class="value">"2012"</span>></span>
+    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>October 2012<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"10"</span> <span class="attribute">data-year</span>=<span class="value">"2012"</span>></span>
+    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>November 2012<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"11"</span> <span class="attribute">data-year</span>=<span class="value">"2012"</span>></span>
+    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>December 2012<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"0"</span> <span class="attribute">data-year</span>=<span class="value">"2013"</span>></span>
+    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>January 2013<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"1"</span> <span class="attribute">data-year</span>=<span class="value">"2013"</span>></span>
+    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>February 2013<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"2"</span> <span class="attribute">data-year</span>=<span class="value">"2013"</span>></span>
+    <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>March 2013<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>In the same loop, you must also insert months names in the <code>.months</code> unordered list with this structure :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"months"</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"month-name"</span>></span>October 2012<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"month-name"</span>></span>November 2012<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"month-name"</span>></span>December 2012<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"month-name"</span>></span>January 2013<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"month-name"</span>></span>February 2013<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"month-name"</span>></span>March 2013<span class="tag">&lt;/<span class="title">li</span>></span>
+<span class="tag">&lt;/<span class="title">ul</span>></span></code></pre>
+
+<h4>Day names (using jQuery)</h4>
+<ul>
+<li>Add an array of all the 7 day names in your file.</li>
+<li>In the same loop, for each months, you&#39;re going to add the day names of the week. Here&#39;s an example for a month :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"9"</span> <span class="attribute">data-year</span>=<span class="value">"2012"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>October 2012<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-names"</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Monday<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Tuesday<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Wednesday<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Thursday<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Friday<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Saturday<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-name"</span>></span>Sunday<span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>Look carefully at the jQuery documentation on how to add elements to another.</li>
+</ul>
+<h4>Days (using jQuery)</h4>
+<ul>
+<li>To finish this empty calendar, we just miss the days of the months.</li>
+<li>We&#39;ll need a function that computes the number of days in a month, add it to your file. Number of days in February is not as easy as you think. Verify what you are doing.</li>
+<li>In your loop that iterates over the 6 months, add some code to insert the right amount of days in the <code>.cal-month</code> div. Use this structure :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-month</span>=<span class="value">"9"</span> <span class="attribute">data-year</span>=<span class="value">"2012"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>October 2012<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-names"</span>></span><span class="comment">&lt;!-- day names... --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"days"</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day"</span> <span class="attribute">data-day</span>=<span class="value">"1"</span>></span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-number"</span>></span>1<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day"</span> <span class="attribute">data-day</span>=<span class="value">"2"</span>></span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-number"</span>></span>2<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="comment">&lt;!-- and so on... --></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<h4>Last details (no jQuery)</h4>
+<ul>
+<li>If you have a closer look at your calendar, all the months start on monday. Because we use CSS floats, we only need to shift the first day to the right and all the other days will be in the right place.</li>
+<li>In order to achieve that, we&#39;ll use the already existing CSS rules :</li>
+</ul>
+<pre data-language="css"><code class="language-css"><span class="comment">/* Thursday */</span>
+<span class="attr_selector">[data-day-start="2"]</span> <span class="class">.day</span><span class="pseudo">:first-child</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">14.47</span>%</span>;</span>
+<span class="rule">}</span></span>
+<span class="comment">/* Wednesday */</span>
+<span class="attr_selector">[data-day-start="3"]</span> <span class="class">.day</span><span class="pseudo">:first-child</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">28.74</span>%</span>;</span>
+<span class="rule">}</span></span>
+<span class="comment">/* Tuesday */</span>
+<span class="attr_selector">[data-day-start="4"]</span> <span class="class">.day</span><span class="pseudo">:first-child</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">43.01</span>%</span>;</span>
+<span class="rule">}</span></span>
+<span class="comment">/* Friday */</span>
+<span class="attr_selector">[data-day-start="5"]</span> <span class="class">.day</span><span class="pseudo">:first-child</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">57.28</span>%</span>;</span>
+<span class="rule">}</span></span>
+<span class="comment">/* Saturday */</span>
+<span class="attr_selector">[data-day-start="6"]</span> <span class="class">.day</span><span class="pseudo">:first-child</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">71.55</span>%</span>;</span>
+<span class="rule">}</span></span>
+<span class="comment">/* Sunday */</span>
+<span class="attr_selector">[data-day-start="0"]</span> <span class="class">.day</span><span class="pseudo">:first-child</span> <span class="rules">{
+  <span class="rule"><span class="attribute">margin-left</span>:<span class="value"> <span class="number">85.82</span>%</span>;</span>
+<span class="rule">}</span></span></code></pre>
+
+<ul>
+<li>These rules add a margin on the first day of each month. The <code>data-day-start</code> value correspond to the result of <code>getDay()</code> from <code>Date</code> : <code>0 =&gt; &quot;Sunday&quot;</code>, <code>1 =&gt; &quot;Monday&quot;</code>...</li>
+<li>Modify your code so each <code>.cal-month</code> div has this particular attribute with the correct value. Here&#39;s an example :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"cal-month"</span> <span class="attribute">data-day-start</span>=<span class="value">"4"</span> <span class="attribute">data-month</span>=<span class="value">"10"</span> <span class="attribute">data-year</span>=<span class="value">"2012"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"cal-month-name"</span>></span>November 2012<span class="tag">&lt;/<span class="title">h2</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> have any global variables.</li>
+<li>You <strong>CANNOT</strong> use <code>innerHTML</code> for the no-jQuery parts.</li>
+<li>You <strong>MUST</strong> split your code into functions. Be organized and smart.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>2-tickets-please.css</li>
+<li>2-tickets-please.html</li>
+<li>2-tickets-please-calendar.js</li>
+<li>diagonal-striped-brick.png</li>
+<li>jquery-1.8.2.min.js</li>
+</ul>
+<h2 id="and-now-we-can-begin-the-show">And now we can begin the show.</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how retrieve elements from the DOM and modify them (directly and with jQuery).</li>
+<li>Know how to parse and read complex JSON.</li>
+</ol>
+<h3>Context</h3>
+<p>Now that we have our beautiful empty calendar, it&#39;s time to fill it with some events such as concerts, one-man-show, plays...</p>
+<p>The result should look like <a href="../labs-files/2-tickets-please/2-tickets-please-events.html">2-tickets-please-events.html</a>.</p>
+<p>In real life, these events would be retrieved from a server or something. We haven&#39;t covered that in the lessons, we&#39;ll see more about that next week.</p>
+<p>The <a href="../labs-files/2-tickets-please/2-tickets-please-events.js">2-tickets-please-events.js</a> script provides a JSON strings that contains venues and events.</p>
+<h3>Steps</h3>
+<h4>Venue list (jQuery)</h4>
+<ul>
+<li>Parse the JSON string <code>venues</code> and try to figure out how it is structured. Use <code>console.log</code> and/or the JavaScript debugger.</li>
+<li>Add some code in <a href="../labs-files/2-tickets-please/2-tickets-please-events.js">2-tickets-please-events.js</a> to iterate over the different venues.</li>
+<li>For each venue, add its name to the <code>.venues</code> div like this :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"venues"</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"venue-name zenith"</span>></span>Le Zénith<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span> <span class="attribute">class</span>=<span class="value">"venue-name aeronef"</span>></span>L'Aéronef<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="comment">&lt;!-- and so on... --></span>
+<span class="tag">&lt;/<span class="title">ul</span>></span></code></pre>
+
+<h4>Events (jQuery)</h4>
+<ul>
+<li>Each venue contains some events. Iterate over all of them and for each one retrieve the <code>.day</code> div corresponding to the date of the event.</li>
+<li>Once you retrieved the <code>.day</code> element, insert a new element into it like this example :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day"</span> <span class="attribute">data-day</span>=<span class="value">"23"</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"day-number"</span>></span>23<span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"event"</span> <span class="attribute">data-venue</span>=<span class="value">"zenith"</span> <span class="attribute">title</span>=<span class="value">"CARAVAN PALACE"</span>></span>CARAVAN PALACE<span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>The <code>.day-number</code> div was already a child of <code>.day</code>, you just have to append your <code>.event</code> div after.</li>
+<li>The title attribute allows use to have tooltips when the name is very long.</li>
+<li>The <code>data-venue</code> will be useful for adding colors to each venue.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> have any global variables.</li>
+<li>You <strong>MUST</strong> split your code into functions. Be organized and smart.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>2-tickets-please.css</li>
+<li>2-tickets-please.html</li>
+<li>2-tickets-please-calendar.js</li>
+<li>2-tickets-please-events.js</li>
+<li>diagonal-striped-brick.png</li>
+<li>jquery-1.8.2.min.js</li>
+</ul>
+<h2 id="crazy-ideas">Crazy ideas!</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Learn new stuffs from another website.</li>
+<li>Try out and experiment stuffs.</li>
+</ol>
+<h3>Context</h3>
+<p>Our &quot;2 Tickets Please!&quot; application works fine, let&#39;s try to improve it. In the following steps, you&#39;ll find easy stuffs you can add, more complex ones and resources to learn new features...</p>
+<p>It&#39;s your app, do what you want and be awesome.</p>
+<h3>Steps</h3>
+<h4>Easy tasks</h4>
+<ul>
+<li>Add some inner anchors on months. Click on one month in the list on the right and the page scrolls.</li>
+<li>Add some colors for the different venues. One color for each venue, in the list and on the events. It&#39;s just CSS, the HTML already contains what&#39;s necessary.</li>
+<li>Change the style of the current day.</li>
+<li>Change the style of days before today.</li>
+</ul>
+<h4>Ideas you can implement</h4>
+<ul>
+<li>Try to display how many events for a month and/or for a venue.</li>
+<li>Try to display more informations on the event (time, venue...).</li>
+<li>Try to display some informations on the venue (address, picture, capacity, map...).</li>
+<li>Try to add more style to improve the design.</li>
+</ul>
+<h4>The &quot;checkbox hack&quot;</h4>
+<p>There&#39;s a way to implement selector/filter without JavaScript. Using that, you could :</p>
+<ul>
+<li>Try to implement a month selector using the months on the right.</li>
+<li>Try to implement a venues filter using the venue list on the right.</li>
+</ul>
+
+<p class="warning">This &quot;hack&quot; crosses the line of what you &quot;should&quot; do with CSS and introduces some bad semantics. However, it&#39;s fun to play with it and you&#39;ll realize how much CSS is powerful. Don&#39;t use it on real websites unless you have a very good reason.</p>
+
+<ul class="useful-links">
+<li><a href="http://css-tricks.com/the-checkbox-hack/">Stuff you can do with the &quot;Checkbox Hack&quot; (CSS-Tricks)</a></li>
+</ul>
+<h4>Go mobile</h4>
+<p>Try to add some responsivity with media queries. Have some different CSS for phone, tablet... resolutions.</p>
+
+<ul class="useful-links">
+<li><a href="http://coding.smashingmagazine.com/2011/01/12/guidelines-for-responsive-web-design/">Responsive Web Design: What It Is and How To Use It (Smashing Magazine)</a></li>
+<li><a href="http://mobile.smashingmagazine.com/2010/07/19/how-to-use-css3-media-queries-to-create-a-mobile-version-of-your-website/">How To Use CSS3 Media Queries To Create a Mobile Version of Your Website (Smashing Magazine)</a></li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>MUST</strong> be totally awesome on this lab ;-)</li>
+<li>You <strong>CANNOT</strong> modify <code>2-tickets-please.css</code> and <code>2-tickets-please.html</code>. If you wanna modify the CSS, use <code>2-tickets-please-custom.css</code>. If you wanna add some HTML, use the DOM.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>2-tickets-please.css</li>
+<li>(2-tickets-please-custom.css)</li>
+<li>2-tickets-please.html</li>
+<li>2-tickets-please-calendar.js</li>
+<li>2-tickets-please-events.js</li>
+<li>diagonal-striped-brick.png</li>
+<li>jquery-1.8.2.min.js</li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

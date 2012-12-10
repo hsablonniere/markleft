@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>It's all about markup and semantics.</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Review of the basics of HTML and focus on the important parts.">
+<meta name="keywords" content="markup, semantic, html, doctype, elements, tags, attributes">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/its-all-about-markup-and-semantics.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>It&#39;s all about <strong>markup</strong> and <strong>semantics</strong></h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#html-definition">HTML : Definition</a></li>
+<li><a href="#doctype">Doctype</a></li>
+<li><a href="#doctype-examples">Doctype Examples</a></li>
+<li><a href="#classic-html-elements">Classic HTML elements</a></li>
+<li><a href="#attributes">Attributes</a></li>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#comments">Comments</a></li>
+<li><a href="#full-example">Full example</a></li>
+<li><a href="#elements">Elements</a></li>
+<li><a href="#html5-new-elements">HTML5 new elements</a></li>
+<li><a href="#xhtml">XHTML</a></li>
+<li><a href="#tools">Tools</a></li>
+<li><a href="#validation-amp-compatibility">Validation &amp; compatibility</a></li>
+<li><a href="#documentation-amp-links">Documentation &amp; links</a></li>
+</ul>
+</div>
+
+</section>
+
+<section>
+<h2 id="html-definition">HTML : Definition</h2>
+
+<p class="list incremental">HTML stands for <strong>HyperText Markup Language</strong>. It is <strong>not a programing language</strong>, it is a <strong>markup language</strong>. It is based on <strong>SGML</strong>. This markup defines the <strong>structure</strong> and <strong>semantics</strong> of the document but not directly how it should be presented.</p>
+</section>
+
+<section>
+<h2 id="doctype">Doctype</h2>
+
+<p class="list incremental"><strong>Every HTML document</strong> starts with a Doctype. Since there&#39;s evolutions in the HTML language, there&#39;s multiple versions. Doctypes are used by <strong>web browsers</strong> to determine the <strong>version (or variant)</strong> of the language of the document. It helps to <strong>display</strong> the contents properly. Doctypes are also used for <strong>validation</strong> purposes to determine the set of rules to apply to a document. HTML 4 and XHTML have 3 variant of their doctype : strict, transitional and frameset.</p>
+</section>
+
+<section>
+<h2 id="doctype-examples">Doctype Examples</h2>
+<h3>HTML 4.01 Transitional</h3>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="doctype">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd"></span></code></pre>
+
+<h3>XHTML 1.1 Basic</h3>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"></span></code></pre>
+
+<h3>HTML 5</h3>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="doctype">&lt;!DOCTYPE html></span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/QA/2002/04/valid-dtd-list.html">Recommended Doctype Declarations (W3C)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="classic-html-elements">Classic HTML elements</h2>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">p</span>></span>May the <span class="tag">&lt;<span class="title">b</span>></span>Force<span class="tag">&lt;/<span class="title">b</span>></span> be with you.<span class="tag">&lt;/<span class="title">p</span>></span></code></pre>
+
+
+<p class="list incremental">Apart from the Doctype, an HTML document is composed of elements. They are organised in parent/child <strong>tree structure</strong>. An element starts with an <strong>opening tag</strong> and ends with a <strong>closing tag</strong>. An element can be <strong>empty</strong> or contain <strong>text</strong> and/or <strong>other elements</strong>.</p>
+</section>
+
+<section>
+<h2 id="attributes">Attributes</h2>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://www.donothingfor2minutes.com"</span>></span>Do nothing for 2 Minutes<span class="tag">&lt;/<span class="title">a</span>></span></code></pre>
+
+
+<p class="list incremental">Attributes are <strong>additional information</strong> set <strong>on opening tags</strong>. They consist of <strong>key/value pairs</strong>.</p>
+</section>
+
+<section class="compact">
+<h2 id="structure">Structure</h2>
+<h3>html</h3>
+
+<p class="list incremental">It is the <strong>root element</strong> of any document.</p>
+<h3>head</h3>
+
+<p class="list incremental">Always the <strong>first child</strong> of the <code>html</code> element. It contains general <strong>information</strong> about the document: title, metadata such as keywords and description, etc. It&#39;s also where you&#39;ll find <strong>link to other resources</strong> (CSS and JS).</p>
+<h3>body</h3>
+
+<p class="list incremental">Always the <strong>second and last child</strong> of the <code>html</code> element. It represents the actual <strong>contents</strong> of the document.</p>
+</section>
+
+<section>
+<h2 id="comments">Comments</h2>
+<pre data-language="html"><code class="language-html"><span class="comment">&lt;!-- Help me Obi-Wan Kenobi. You're my only hope. --></span></code></pre>
+
+
+<p class="list incremental">They are used to <strong>annotate markup</strong>. They are <strong>not displayed by browsers</strong> but don&#39;t forget that they are still <strong>transfered to visitors</strong> and <strong>can be read</strong> indirectly.</p>
+</section>
+
+<section>
+<h2 id="full-example">Full example</h2>
+<!-- render iframe : 75 -->
+<pre data-language="html5"><code class="language-html5"><span class="doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;<span class="title">html</span>&gt;</span>
+<span class="tag">&lt;<span class="title">head</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">&quot;utf-8&quot;</span>&gt;</span>
+  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Use the Force, Luke.<span class="tag">&lt;/<span class="title">title</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">head</span>&gt;</span>
+<span class="tag">&lt;<span class="title">body</span>&gt;</span>
+  <span class="comment">&lt;!-- Help me Obi-Wan Kenobi. You&#39;re my only hope. --&gt;</span>
+  <span class="tag">&lt;<span class="title">p</span>&gt;</span>I find your lack of faith disturbing.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></pre>
+
+</section>
+
+<section class="cover">
+<h2 id="elements">Elements</h2>
+
+<ul class="useful-links">
+<li><a href="http://html5doctor.com/element-index">HTML element index (HTML5 Doctor)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/HTML/Element">HTML elements (MDN)</a></li>
+<li><a href="http://www.w3.org/TR/html5/">HTML specification (W3C)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Head elements</h3>
+<p>Head contains elements for title, document metadatas but also for styles and scripts either directly or through a link to another file.</p>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">head</span>></span>
+  <span class="tag">&lt;<span class="title">title</span>></span>A long time ago in a galaxy far far away<span class="tag">&lt;/<span class="title">title</span>></span>
+
+  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>></span>
+  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"author"</span> <span class="attribute">content</span>=<span class="value">"Luke S."</span>></span>
+
+  <span class="tag">&lt;<span class="title">style</span>></span><span class="css">
+    <span class="tag">p</span> <span class="rules">{
+      <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#222</span></span>;</span>
+    <span class="rule">}</span></span>
+  </span><span class="tag">&lt;/<span class="title">style</span>></span>
+  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"style.css"</span>></span>
+
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>></span><span class="javascript">
+    <span class="keyword">var</span> quote = <span class="string">"You must unlearn what you have learned."</span>;
+  </span><span class="tag">&lt;/<span class="title">script</span>></span>
+  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"script.js"</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>></span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>></span>
+<span class="tag">&lt;/<span class="title">head</span>></span></code></pre>
+
+</section>
+
+<section>
+<h3>Block elements</h3>
+
+<p class="list incremental">For block elements, the <strong>normal flow</strong> of an HTML document goes <strong>up to down</strong>. When you use a block element, it places itself on a new line and the next element will also be on a <strong>new line</strong>. Any block element <strong>can have dimensions</strong> (height and width).</p>
+</section>
+
+<section>
+<h4>Headings</h4>
+<p>Use headings to describe your document structure. Search engines use them to index your structure and content of your pages. It&#39;s also important for visitors, it will help them locate what they want in your page.</p>
+
+<pre data-language="html" class="rendered-iframe"><code class="language-html"><span class="tag">&lt;<span class="title">h1</span>></span>George Lucas<span class="tag">&lt;/<span class="title">h1</span>></span>
+<span class="tag">&lt;<span class="title">h2</span>></span>Sagas<span class="tag">&lt;/<span class="title">h2</span>></span>
+<span class="tag">&lt;<span class="title">h3</span>></span>Star Wars<span class="tag">&lt;/<span class="title">h3</span>></span>
+<span class="tag">&lt;<span class="title">h4</span>></span>Episodes<span class="tag">&lt;/<span class="title">h4</span>></span>
+<span class="tag">&lt;<span class="title">h5</span>></span>The Return of the Jedi<span class="tag">&lt;/<span class="title">h5</span>></span>
+<span class="tag">&lt;<span class="title">h6</span>></span>The Battle Of Endor<span class="tag">&lt;/<span class="title">h6</span>></span></code></pre>
+
+<iframe class="rendered-iframe" src="data:text/html,%3Ch1%3EGeorge%20Lucas%3C%2Fh1%3E%0A%3Ch2%3ESagas%3C%2Fh2%3E%0A%3Ch3%3EStar%20Wars%3C%2Fh3%3E%0A%3Ch4%3EEpisodes%3C%2Fh4%3E%0A%3Ch5%3EThe%20Return%20of%20the%20Jedi%3C%2Fh5%3E%0A%3Ch6%3EThe%20Battle%20Of%20Endor%3C%2Fh6%3E" height="300px"></iframe>
+
+</section>
+
+<section>
+<h4>Lists</h4>
+<p>There are three kinds of lists : unordered, ordered and definition. Bullets and numerotation can be customized with CSS.</p>
+
+<pre data-language="html" class="rendered-iframe"><code class="language-html"><span class="tag">&lt;<span class="title">ul</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>Han Solo<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>Chewbacca<span class="tag">&lt;/<span class="title">li</span>></span>
+<span class="tag">&lt;/<span class="title">ul</span>></span>
+<span class="tag">&lt;<span class="title">ol</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>R2-D2<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>C3PO<span class="tag">&lt;/<span class="title">li</span>></span>
+<span class="tag">&lt;/<span class="title">ol</span>></span>
+<span class="tag">&lt;<span class="title">dl</span>></span>
+  <span class="tag">&lt;<span class="title">dt</span>></span>#000000<span class="tag">&lt;/<span class="title">dt</span>></span><span class="tag">&lt;<span class="title">dd</span>></span>Darth vador's color<span class="tag">&lt;/<span class="title">dd</span>></span>
+  <span class="tag">&lt;<span class="title">dt</span>></span>#FFFFFF<span class="tag">&lt;/<span class="title">dt</span>></span><span class="tag">&lt;<span class="title">dd</span>></span>Leia's color<span class="tag">&lt;/<span class="title">dd</span>></span>
+<span class="tag">&lt;/<span class="title">dl</span>></span></code></pre>
+
+<iframe class="rendered-iframe" src="data:text/html,%3Cul%3E%0A%20%20%3Cli%3EHan%20Solo%3C%2Fli%3E%0A%20%20%3Cli%3EChewbacca%3C%2Fli%3E%0A%3C%2Ful%3E%0A%3Col%3E%0A%20%20%3Cli%3ER2-D2%3C%2Fli%3E%0A%20%20%3Cli%3EC3PO%3C%2Fli%3E%0A%3C%2Fol%3E%0A%3Cdl%3E%0A%20%20%3Cdt%3E%23000000%3C%2Fdt%3E%3Cdd%3EDarth%20vador's%20color%3C%2Fdd%3E%0A%20%20%3Cdt%3E%23FFFFFF%3C%2Fdt%3E%3Cdd%3ELeia's%20color%3C%2Fdd%3E%0A%3C%2Fdl%3E" height="225px"></iframe>
+
+</section>
+
+<section class="compact">
+<h4>Other</h4>
+<p>The <strong><code>&lt;p&gt;...&lt;/p&gt;</code></strong> element is mainly used for paragraphs of text. It&#39;s alter ego <strong><code>&lt;div&gt;...</code></strong> has the same behaviour but without the semantic meaning. It&#39;s the generic block element. Here are other block elements, see <a href="http://html5doctor.com/element-index/">HTML element index</a> for more details.</p>
+<ul>
+<li><code>&lt;address&gt;...&lt;/address&gt;</code></li>
+<li><code>&lt;blockquote&gt;...&lt;/blockquote&gt;</code></li>
+<li><code>&lt;del&gt;...&lt;/del&gt;</code></li>
+<li><code>&lt;hr&gt;</code></li>
+<li><code>&lt;ins&gt;...&lt;/ins&gt;</code></li>
+<li><code>&lt;noscript&gt;...&lt;/noscript&gt;</code></li>
+<li><code>&lt;pre&gt;...&lt;/pre&gt;</code></li>
+<li><code>&lt;script&gt;...&lt;/script&gt;</code></li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>Inline elements</h3>
+<p>Unlike block elements, inline ones continue the <strong>normal flow</strong> <strong>like normal text</strong> from <strong>left to right</strong>. Inline elements <strong>can&#39;t have dimensions</strong>. Here are some examples, see <a href="http://html5doctor.com/element-index/">HTML element index</a> for more details.</p>
+</section>
+
+<section>
+<h4>Anchor</h4>
+<ul>
+<li><code>&lt;a&gt;...&lt;/a&gt;</code></li>
+</ul>
+</section>
+
+<section>
+<h4>Phrase</h4>
+<ul>
+<li><code>&lt;abbr&gt;...&lt;/abbr&gt;</code></li>
+<li><code>&lt;dfn&gt;...&lt;/dfn&gt;</code></li>
+<li><code>&lt;em&gt;...&lt;/em&gt;</code></li>
+<li><code>&lt;strong&gt;...&lt;/strong&gt;</code></li>
+</ul>
+</section>
+
+<section>
+<h4>Computer phrase</h4>
+<ul>
+<li><code>&lt;code&gt;...&lt;/code&gt;</code></li>
+<li><code>&lt;samp&gt;...&lt;/samp&gt;</code></li>
+<li><code>&lt;kbd&gt;...&lt;/kbd&gt;</code></li>
+<li><code>&lt;var&gt;...&lt;/var&gt;</code></li>
+</ul>
+</section>
+
+<section>
+<h4>Presentation phrase</h4>
+<ul>
+<li><code>&lt;b&gt;...&lt;/b&gt;</code></li>
+<li><code>&lt;i&gt;...&lt;/i&gt;</code></li>
+<li><code>&lt;big&gt;...&lt;/big&gt;</code></li>
+<li><code>&lt;small&gt;...&lt;/small&gt;</code></li>
+<li><code>&lt;tt&gt;...&lt;/tt&gt;</code></li>
+<li><code>&lt;u&gt;...&lt;/u&gt;</code></li>
+</ul>
+</section>
+
+<section class="compact">
+<h4>Other</h4>
+<p>The <code>&lt;span&gt;...&lt;/span&gt;</code> element is the generic inline element.</p>
+<ul>
+<li><code>&lt;br&gt;</code></li>
+<li><code>&lt;bdo&gt;...&lt;/bdo&gt;</code></li>
+<li><code>&lt;cite&gt;...&lt;/cite&gt;</code></li>
+<li><code>&lt;del&gt;...&lt;/del&gt;</code></li>
+<li><code>&lt;ins&gt;...&lt;/ins&gt;</code></li>
+<li><code>&lt;q&gt;...&lt;/q&gt;</code></li>
+<li><code>&lt;script&gt;...&lt;/script&gt;</code></li>
+<li><code>&lt;sub&gt;...&lt;/sub&gt;</code></li>
+<li><code>&lt;sup&gt;...&lt;/sup&gt;</code></li>
+</ul>
+</section>
+
+<section>
+<h3>Image and object elements</h3>
+<p>These elements are used for multimedia : image, flash, java applet...</p>
+<ul>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;map&gt;...&lt;/map&gt;</code></li>
+<li><code>&lt;area&gt;</code></li>
+<li><code>&lt;object&gt;...&lt;/object&gt;</code></li>
+<li><code>&lt;param&gt;</code></li>
+</ul>
+</section>
+
+<section class="compact">
+<h3>Forms</h3>
+<p>Sending informations back to server is really important in the Web. Here are elements used to display a form. Visitors can interact with the page and send informations back to the server.</p>
+<ul>
+<li><code>&lt;form&gt;...&lt;/form&gt;</code></li>
+<li><code>&lt;button&gt;...&lt;/button&gt;</code></li>
+<li><code>&lt;fieldset&gt;...&lt;/fieldset&gt;</code></li>
+<li><code>&lt;legend&gt;...&lt;/legend&gt;</code></li>
+<li><code>&lt;label&gt;...&lt;/label&gt;</code></li>
+<li><code>&lt;input&gt;</code></li>
+<li><code>&lt;select&gt;...&lt;/select&gt;</code></li>
+<li><code>&lt;optgroup&gt;...&lt;/optgroup&gt;</code></li>
+<li><code>&lt;option&gt;...&lt;/option&gt;</code></li>
+<li><code>&lt; textarea &gt;...&lt;/ textarea &gt;</code></li>
+</ul>
+</section>
+
+<section>
+<h4>Forms : example</h4>
+<p>Sending informations back to server is really important in the Web. Here are elements used to display a form. Visitors can interact with the page and send informations back to the server.</p>
+
+<pre data-language="html" class="rendered-iframe"><code class="language-html"><span class="tag">&lt;<span class="title">form</span> <span class="attribute">action</span>=<span class="value">"./send.php"</span> <span class="attribute">method</span>=<span class="value">"post"</span>></span>
+  <span class="tag">&lt;<span class="title">p</span>></span>
+    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"firstname"</span>></span>First name:<span class="tag">&lt;/<span class="title">label</span>></span>
+    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"firstname"</span> <span class="attribute">id</span>=<span class="value">"firstname"</span>></span>
+  <span class="tag">&lt;/<span class="title">p</span>></span><span class="tag">&lt;<span class="title">p</span>></span>
+    <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"lastname"</span>></span>Last name:<span class="tag">&lt;/<span class="title">label</span>></span>
+    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">name</span>=<span class="value">"lastname"</span> <span class="attribute">id</span>=<span class="value">"lastname"</span>></span>
+  <span class="tag">&lt;/<span class="title">p</span>></span><span class="tag">&lt;<span class="title">p</span>></span>
+    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> <span class="attribute">name</span>=<span class="value">"droid"</span> <span class="attribute">value</span>=<span class="value">"yes"</span>></span> I'm a droid
+    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"checkbox"</span> <span class="attribute">name</span>=<span class="value">"speak"</span> <span class="attribute">value</span>=<span class="value">"yes"</span>></span> I can speak
+  <span class="tag">&lt;/<span class="title">p</span>></span><span class="tag">&lt;<span class="title">p</span>></span>
+    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">value</span>=<span class="value">"Submit"</span>></span>
+  <span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;/<span class="title">form</span>></span></code></pre>
+
+<iframe class="rendered-iframe" src="data:text/html,%3Cform%20action%3D%22.%2Fsend.php%22%20method%3D%22post%22%3E%0A%20%20%3Cp%3E%0A%20%20%20%20%3Clabel%20for%3D%22firstname%22%3EFirst%20name%3A%3C%2Flabel%3E%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20name%3D%22firstname%22%20id%3D%22firstname%22%3E%0A%20%20%3C%2Fp%3E%3Cp%3E%0A%20%20%20%20%3Clabel%20for%3D%22lastname%22%3ELast%20name%3A%3C%2Flabel%3E%0A%20%20%20%20%3Cinput%20type%3D%22text%22%20name%3D%22lastname%22%20id%3D%22lastname%22%3E%0A%20%20%3C%2Fp%3E%3Cp%3E%0A%20%20%20%20%3Cinput%20type%3D%22checkbox%22%20name%3D%22droid%22%20value%3D%22yes%22%3E%20I'm%20a%20droid%0A%20%20%20%20%3Cinput%20type%3D%22checkbox%22%20name%3D%22speak%22%20value%3D%22yes%22%3E%20I%20can%20speak%0A%20%20%3C%2Fp%3E%3Cp%3E%0A%20%20%20%20%3Cinput%20type%3D%22submit%22%20value%3D%22Submit%22%3E%0A%20%20%3C%2Fp%3E%0A%3C%2Fform%3E" height="200px"></iframe>
+
+</section>
+
+<section>
+<h3>Tables</h3>
+<p>Tables must be used to display datas formatted as grid. They shouldn&#39;t be used for document layout purposes.</p>
+
+<pre data-language="html" class="rendered-iframe"><code class="language-html"><span class="tag">&lt;<span class="title">table</span>></span>
+  <span class="tag">&lt;<span class="title">caption</span>></span>Cast<span class="tag">&lt;/<span class="title">caption</span>></span>
+  <span class="tag">&lt;<span class="title">thead</span>></span>
+    <span class="tag">&lt;<span class="title">tr</span>></span><span class="tag">&lt;<span class="title">th</span>></span>Actor<span class="tag">&lt;/<span class="title">th</span>></span><span class="tag">&lt;<span class="title">th</span>></span>Character<span class="tag">&lt;/<span class="title">th</span>></span><span class="tag">&lt;/<span class="title">tr</span>></span>
+  <span class="tag">&lt;/<span class="title">thead</span>></span>
+  <span class="tag">&lt;<span class="title">tbody</span>></span>
+    <span class="tag">&lt;<span class="title">tr</span>></span><span class="tag">&lt;<span class="title">td</span>></span>Mark Hamill<span class="tag">&lt;/<span class="title">td</span>></span><span class="tag">&lt;<span class="title">td</span>></span>Luke Skywalker<span class="tag">&lt;/<span class="title">td</span>></span><span class="tag">&lt;/<span class="title">tr</span>></span>
+    <span class="tag">&lt;<span class="title">tr</span>></span><span class="tag">&lt;<span class="title">td</span>></span>Harrison Ford<span class="tag">&lt;/<span class="title">td</span>></span><span class="tag">&lt;<span class="title">td</span>></span>Han Solo<span class="tag">&lt;/<span class="title">td</span>></span><span class="tag">&lt;/<span class="title">tr</span>></span>
+    <span class="tag">&lt;<span class="title">tr</span>></span><span class="tag">&lt;<span class="title">td</span>></span>Carrie Fisher<span class="tag">&lt;/<span class="title">td</span>></span><span class="tag">&lt;<span class="title">td</span>></span>Princess Leia Organa<span class="tag">&lt;/<span class="title">td</span>></span><span class="tag">&lt;/<span class="title">tr</span>></span>
+  <span class="tag">&lt;/<span class="title">tbody</span>></span>
+  <span class="tag">&lt;<span class="title">tfoot</span>></span>
+    <span class="tag">&lt;<span class="title">tr</span>></span><span class="tag">&lt;<span class="title">th</span>></span>Actor<span class="tag">&lt;/<span class="title">th</span>></span><span class="tag">&lt;<span class="title">th</span>></span>Character<span class="tag">&lt;/<span class="title">th</span>></span><span class="tag">&lt;/<span class="title">tr</span>></span>
+  <span class="tag">&lt;/<span class="title">tfoot</span>></span>
+<span class="tag">&lt;/<span class="title">table</span>></span></code></pre>
+
+<iframe class="rendered-iframe" src="data:text/html,%3Ctable%3E%0A%20%20%3Ccaption%3ECast%3C%2Fcaption%3E%0A%20%20%3Cthead%3E%0A%20%20%20%20%3Ctr%3E%3Cth%3EActor%3C%2Fth%3E%3Cth%3ECharacter%3C%2Fth%3E%3C%2Ftr%3E%0A%20%20%3C%2Fthead%3E%0A%20%20%3Ctbody%3E%0A%20%20%20%20%3Ctr%3E%3Ctd%3EMark%20Hamill%3C%2Ftd%3E%3Ctd%3ELuke%20Skywalker%3C%2Ftd%3E%3C%2Ftr%3E%0A%20%20%20%20%3Ctr%3E%3Ctd%3EHarrison%20Ford%3C%2Ftd%3E%3Ctd%3EHan%20Solo%3C%2Ftd%3E%3C%2Ftr%3E%0A%20%20%20%20%3Ctr%3E%3Ctd%3ECarrie%20Fisher%3C%2Ftd%3E%3Ctd%3EPrincess%20Leia%20Organa%3C%2Ftd%3E%3C%2Ftr%3E%0A%20%20%3C%2Ftbody%3E%0A%20%20%3Ctfoot%3E%0A%20%20%20%20%3Ctr%3E%3Cth%3EActor%3C%2Fth%3E%3Cth%3ECharacter%3C%2Fth%3E%3C%2Ftr%3E%0A%20%20%3C%2Ftfoot%3E%0A%3C%2Ftable%3E" height="175px"></iframe>
+
+</section>
+
+<section>
+<h3>Frames</h3>
+<p>The <code>&lt;iframe&gt;...&lt;/iframe&gt;</code> element is used to embbed another page in a document. It has serious drawbacks and should be used carefully. Frameset/frame are considered bad practice and should not be used anymore. They&#39;re still used for genereted documentation (like <a href="http://docs.oracle.com/javase/7/docs/api/">javadoc</a>).</p>
+<ul>
+<li><code>&lt;iframe&gt;...&lt;/iframe&gt;</code></li>
+<li><span class="deprecated"><code>&lt;frameset&gt;...&lt;/frameset&gt;</code></span></li>
+<li><span class="deprecated"><code>&lt;frame&gt;...&lt;/frame&gt;</code></span></li>
+<li><span class="deprecated"><code>&lt;noframes&gt;...&lt;/noframes&gt;</code></span></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="html5-new-elements">HTML5 new elements</h2>
+</section>
+
+<section class="compact">
+<h3>Structure/semantic tags</h3>
+<p>New semantic tags appear in HTML5. They will help authors to add a semantic value to the structure of their documents. It will also help search engines to index contents with more accuracy.</p>
+<ul>
+<li><code>&lt;article&gt;...&lt;/article&gt;</code></li>
+<li><code>&lt;aside&gt;...&lt;/aside&gt;</code></li>
+<li><code>&lt;figcaption&gt;...&lt;/figcaption&gt;</code></li>
+<li><code>&lt;figure&gt;...&lt;/figure&gt;</code></li>
+<li><code>&lt;footer&gt;...&lt;/footer&gt;</code></li>
+<li><code>&lt;header&gt;...&lt;/header&gt;</code></li>
+<li><code>&lt;nav&gt;...&lt;/nav&gt;</code></li>
+<li><code>&lt;section&gt;...&lt;/section&gt;</code></li>
+</ul>
+</section>
+
+<section>
+<h3>Graphics and multimedia</h3>
+<p>Adobe flash is not dead yet but with these new tags and the features that come along, it takes a serious hit. Popular music player and video sites already have beta version using this.</p>
+
+<pre data-language="html5" class="incremental"><code class="language-html5"><span class="tag">&lt;<span class="title">audio</span> <span class="attribute">controls</span>=<span class="value">"controls"</span>></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"horse.ogg"</span> <span class="attribute">type</span>=<span class="value">"audio/ogg"</span>></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"horse.mp3"</span> <span class="attribute">type</span>=<span class="value">"audio/mp3"</span>></span>
+  Your browser does not support the audio element.
+<span class="tag">&lt;/<span class="title">audio</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5"><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">id</span>=<span class="value">"myCanvas"</span>></span><span class="tag">&lt;/<span class="title">canvas</span>></span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>></span><span class="javascript">
+  <span class="keyword">var</span> canvas=document.getElementById(<span class="string">'myCanvas'</span>);
+  <span class="keyword">var</span> ctx=canvas.getContext(<span class="string">'2d'</span>);
+  ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">80</span>,<span class="number">100</span>);
+</span><span class="tag">&lt;/<span class="title">script</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5"><span class="tag">&lt;<span class="title">video</span> <span class="attribute">width</span>=<span class="value">"320"</span> <span class="attribute">height</span>=<span class="value">"240"</span> <span class="attribute">controls</span>=<span class="value">"controls"</span>></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"movie.ogg"</span> <span class="attribute">type</span>=<span class="value">"video/ogg"</span>></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"movie.mp4"</span> <span class="attribute">type</span>=<span class="value">"video/mp4"</span>></span>
+  Your browser does not support the video tag.
+<span class="tag">&lt;/<span class="title">video</span>></span></code></pre>
+
+</section>
+
+<section>
+<h3>New inputs and attributes</h3>
+<p>New input types will solve many problems that are still resolved with javascript (field validation, placeholder...). Mobile will be able to provide adequate keyboard if field requires a numeric value...</p>
+
+<pre data-language="html5" class="incremental"><code class="language-html5">E-mail: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"email"</span> <span class="attribute">name</span>=<span class="value">"user_email"</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5">Number: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"number"</span> <span class="attribute">name</span>=<span class="value">"number"</span> <span class="attribute">min</span>=<span class="value">"1"</span> <span class="attribute">max</span>=<span class="value">"10"</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5">Range: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"range"</span> <span class="attribute">name</span>=<span class="value">"range"</span> <span class="attribute">min</span>=<span class="value">"1"</span> <span class="attribute">max</span>=<span class="value">"10"</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5">Date: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"date"</span> <span class="attribute">name</span>=<span class="value">"date"</span> <span class="attribute">min</span>=<span class="value">"2010-08-14"</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5">Time: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"time"</span> <span class="attribute">name</span>=<span class="value">"time"</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5">Search: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"search"</span> <span class="attribute">results</span>=<span class="value">"10"</span> <span class="attribute">placeholder</span>=<span class="value">"Search here"</span>></span></code></pre>
+
+
+<pre data-language="html5" class="incremental"><code class="language-html5">Required: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">required</span>=<span class="value">"required"</span>></span></code></pre>
+
+</section>
+
+<section>
+<h3>There&#39;s more...</h3>
+<p>There are <strong>many more features</strong> in HTML5 semantics, see <a href="http://html5doctor.com/element-index/">reference</a> for more details. <strong>Be careful</strong> of what you use. Use <strong>feature detection</strong> and apply <strong>graceful degradation</strong> or <strong>progressive enhancement</strong>.</p>
+<ul>
+<li><a href="http://slides.html5rocks.com/#semantics-markup-title">HTML5 rocks demo</a></li>
+<li><a href="http://www.modernizr.com/">Modernizr</a></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://dev.opera.com/articles/view/graceful-degradation-progressive-enhance/">Graceful degradation vs. progressive enhancement</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="xhtml">XHTML</h2>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/XHTML">XHTML reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Properly_Using_CSS_and_JavaScript_in_XHTML_Documents">CSS and JavaScript in XHTML documents (MDN)</a></li>
+<li><a href="http://www.w3.org/TR/xhtml1/">XHTML specification (W3C)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Definition</h3>
+
+<p class="list incremental">XHTML is a <strong>variant of HTML</strong> based on valid XML markup. A valid XHTML document is by nature a <strong>valid XML document</strong>. To do so, XHTML imposes <strong>stricter</strong> rules upon HTML rules. It was created for <strong>interoperability purposes</strong> with other data formats and <strong>common XML tools</strong>. If all web pages were using XHTML, transformation could be done by servers or proxies if necessary.</p>
+<p>Browsers should not display invalid XHTML markup at all but they tend to do it anyway.</p>
+</section>
+
+<section class="cover">
+<h3>XHTML rules</h3>
+</section>
+
+<section>
+
+<h4 class="rule-to-follow">XHTML documents have a unique root element call <code>html</code></h4>
+<pre data-language="xhtml"><code class="language-xhtml"><span class="doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"></span>
+<span class="tag">&lt;<span class="title">html</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.w3.org/1999/xhtml"</span> <span class="attribute">xml:lang</span>=<span class="value">"en"</span>></span>
+<span class="tag">&lt;<span class="title">head</span>></span>
+  <span class="tag">&lt;<span class="title">title</span>></span>Use the Force, Luke.<span class="tag">&lt;/<span class="title">title</span>></span>
+<span class="tag">&lt;/<span class="title">head</span>></span>
+<span class="tag">&lt;<span class="title">body</span>></span>
+  <span class="comment">&lt;!-- Help me Obi-Wan Kenobi. You're my only hope. --></span>
+  <span class="tag">&lt;<span class="title">p</span>></span>I find your lack of faith disturbing.<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;/<span class="title">body</span>></span>
+<span class="tag">&lt;/<span class="title">html</span>></span></code></pre>
+
+</section>
+
+<section>
+
+<h4 class="rule-to-follow">All elements should be closed (or self-closed)</h4>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="comment">&lt;!-- HTML --></span>
+<span class="tag">&lt;<span class="title">ul</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>One
+  <span class="tag">&lt;<span class="title">li</span>></span>Two
+<span class="tag">&lt;/<span class="title">ul</span>></span>
+
+<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"light-sabre.png"</span> <span class="attribute">alt</span>=<span class="value">"Light saber"</span>></span></code></pre>
+
+
+<pre data-language="xhtml" class="incremental"><code class="language-xhtml"><span class="comment">&lt;!-- XHTML --></span>
+<span class="tag">&lt;<span class="title">ul</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>One<span class="tag">&lt;/<span class="title">li</span>></span>
+  <span class="tag">&lt;<span class="title">li</span>></span>Two<span class="tag">&lt;/<span class="title">li</span>></span>
+<span class="tag">&lt;/<span class="title">ul</span>></span>
+
+<span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"light-sabre.png"</span> <span class="attribute">alt</span>=<span class="value">"Light saber"</span> /></span></code></pre>
+
+</section>
+
+<section>
+
+<h4 class="rule-to-follow">All characters in lower case (because of case-sensitiveness)</h4>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="comment">&lt;!-- HTML --></span>
+<span class="tag">&lt;<span class="title">P</span> <span class="attribute">ID</span>=<span class="value">"description"</span>></span>This is a paragraph of text<span class="tag">&lt;/<span class="title">P</span>></span></code></pre>
+
+
+<pre data-language="xhtml" class="incremental"><code class="language-xhtml"><span class="comment">&lt;!-- XHTML --></span>
+<span class="tag">&lt;<span class="title">p</span> <span class="attribute">id</span>=<span class="value">"description"</span>></span>This is a paragraph of text<span class="tag">&lt;/<span class="title">p</span>></span></code></pre>
+
+</section>
+
+<section>
+
+<h4 class="rule-to-follow">No attribute minimization &amp; quotes mandatory</h4>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="comment">&lt;!-- HTML --></span>
+<span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">3</span> <span class="attribute">checked</span>></span></code></pre>
+
+
+<pre data-language="xhtml" class="incremental"><code class="language-xhtml"><span class="comment">&lt;!-- XHTML --></span>
+<span class="tag">&lt;<span class="title">input</span> <span class="attribute">id</span>=<span class="value">"3"</span> <span class="attribute">checked</span>=<span class="value">"checked"</span> /></span></code></pre>
+
+</section>
+
+<section>
+
+<h4 class="rule-to-follow">All elements must be properly nested</h4>
+<p>Although overlapping is illegal in HTML, it is widely tolerated in existing browsers.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="comment">&lt;!-- Absolutely forbidden in HTML and XHTML! --></span>
+<span class="tag">&lt;<span class="title">b</span>></span><span class="tag">&lt;<span class="title">i</span>></span>This text is bold and italic<span class="tag">&lt;/<span class="title">b</span>></span><span class="tag">&lt;/<span class="title">i</span>></span></code></pre>
+
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="comment">&lt;!-- HTML or XHTML --></span>
+<span class="tag">&lt;<span class="title">b</span>></span><span class="tag">&lt;<span class="title">i</span>></span>This text is bold and italic<span class="tag">&lt;/<span class="title">i</span>></span><span class="tag">&lt;/<span class="title">b</span>></span></code></pre>
+
+</section>
+
+<section class="compact">
+<h2 id="tools">Tools</h2>
+<p>Modern browsers now provides tools for web developer. It helps them to build powerful websites with different tools.</p>
+
+<ul class="list incremental">
+<li>Firefox : Firebug (addon)</li>
+<li>Opera : Dragonfly (since #9.5)</li>
+<li>Safari &amp; Chrome : Developer tools</li>
+<li>IE : Developer tools (since #8)</li>
+</ul>
+<p>They all share similar tools and quite similar interface :</p>
+
+<ul class="list incremental">
+<li>HTML Element inspector</li>
+<li>CSS Editor</li>
+<li>Javascript debugger</li>
+<li>Javascript console</li>
+<li>Network inspector</li>
+</ul>
+</section>
+
+<section class="compact">
+<h2 id="validation-amp-compatibility">Validation &amp; compatibility</h2>
+<p>W3C website provides different validators for your documents : HTML, CSS... You should always <strong>validate your work!</strong> Once your work is valid, you must absolutely <strong>test it</strong> over different browsers and platforms.</p>
+<ul>
+<li><a href="http://validator.w3.org">W3C HTML validator</a></li>
+<li><a href="http://jigsaw.w3.org/css-validator/">W3C CSS validator</a></li>
+<li><a href="http://validator.w3.org/mobile/">W3C mobile validator</a></li>
+</ul>
+<p>Before trying new stuffs from HTML5 or CSS3 you can verify which browsers are compatible.</p>
+<ul>
+<li><a href="http://caniuse.com">Can I use ?</a></li>
+<li><a href="http://html5test.com">HTML5 test</a></li>
+<li><a href="http://html5please.com/">HTML5 please</a></li>
+<li><a href="http://beta.theexpressiveweb.com">The expressive web</a></li>
+<li><a href="http://browsershots.org">Browser shots</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="documentation-amp-links">Documentation &amp; links</h2>
+<ul>
+<li><a href="http://www.w3.org">W3C</a></li>
+<li><a href="http://developer.mozilla.org">Mozilla Developer Network</a></li>
+<li><a href="http://www.html5rocks.com">HTML5 rocks</a></li>
+<li><a href="http://diveintohtml5.info">Dive into HTML5</a></li>
+<li><a href="http://www.acidtests.org">Acid tests</a></li>
+<li><a href="http://gs.statcounter.com">Stat counter</a></li>
+<li><a href="http://h5bp.com">HTML5 boilerplate</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

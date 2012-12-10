@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Parents, children and siblings...</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="This is an introduction to the Document Object Model, its purpose, usage...">
+<meta name="keywords" content="javascript, dom, elements, traversing, manipulation">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/parents-children-and-siblings.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>Parents, children and siblings...</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#definition-of-the-dom">Definition of the DOM</a></li>
+<li><a href="#tree-representation">Tree representation</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#manipulation">Manipulation</a></li>
+<li><a href="#jquery-amp-the-dom">jQuery &amp; the DOM</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>I&#39;ll show you features you can&#39;t refuse.</h4>
+<p>Now that we have covered basic and advanced features of the JavaScript language, it&#39;s time to move on. We&#39;re going to take advantage of our main platform : the browser. We&#39;ll learn how to interact with HTML and CSS to make dynamic pages.</p>
+
+<p class="list incremental">Interacting with a webpage and its resources is done using a tree. It&#39;s a bit like a <strong>family tree</strong>. Some nodes representing HTML tags are linked as <strong>parents</strong>, <strong>children</strong>, <strong>brothers</strong> <strong>and</strong> <strong>sisters</strong>. We&#39;ll also see how this tree can be <strong>manipulated</strong> especially with <strong>dollars</strong>.</p>
+</section>
+
+<section>
+<h2 id="definition-of-the-dom">Definition of the DOM</h2>
+
+<p class="list incremental">DOM stands for <strong>Document Object Model</strong>. It is an <strong><a href="http://en.wikipedia.org/wiki/Api">API</a></strong> that allows access for <strong>HTML and XML documents</strong>. This API provides a <strong>representation of the document</strong> and ways to <strong>retrieve and manipulate</strong> it. It is <strong>cross-platform</strong> and <strong>language-independant</strong>. The DOM is a standard maintained by <strong>W3C</strong>.</p>
+<p>The DOM specification has evolved since it&#39;s standardization. The current version/level is 3. See links for more informations...</p>
+<p>This course is about Web so we&#39;ll address JavaScript&#39;s implementation but remember that a lot of languages have a DOM implementation.</p>
+<p>When a navigator display a web page, the rendering engine parses the HTML code to turn the tags to DOM nodes in a tree called the content tree. After that, the rendering engine takes care of style (external CSS files and style elements) to create the render tree. Then rendering finishes its task with 2 steps : layout and painting. See links for more informations...</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM_Levels">DOM Levels (MDN)</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/internals/howbrowserswork/">How browsers work (HTML5 rocks)</a></li>
+<li><a href="http://php.net/manual/fr/book.dom.php">PHP DOM (php.net)</a></li>
+<li><a href="http://xerces.apache.org/xerces-c/ApacheDOMC++Binding.html">C++ DOM (xerces.apache.org)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="tree-representation">Tree representation</h2>
+</section>
+
+<section class="cover">
+<h3>Nodes</h3>
+</section>
+
+<section>
+<h4>Definition</h4>
+
+<p class="list incremental">In an <strong>HTML document</strong>, <strong>everything</strong> is <strong>represented</strong> as a <strong><code>Node</code> object</strong>. The different nodes are <strong>organized</strong> in the <strong>DOM tree</strong> with parent/children/sibling <strong>relationships</strong>.</p>
+</section>
+
+<section>
+<h4>Types</h4>
+<p>There are different types of nodes. The HTML document itself is the root node and is a property of the global <code>window</code> object. Every HTML element is represented by a node. Note that text between or inside HTML elements is considered as text nodes. Attributes set on HTML tags are also considered as nodes. Node types are listed as properties on the <code>Node</code> object and have an integer value. Here are some examples :</p>
+
+<ul class="incremental">
+<li><code>ELEMENT_NODE</code> (1)<br>HTML element</li>
+<li><code>ATTRIBUTE_NODE</code> (2)<br>on HTML elements</li>
+<li><code>TEXT_NODE</code> (3)<br>between or inside elements</li>
+<li><code>COMMENT_NODE</code> (8)<br><code>&lt;!-- comments --&gt;</code></li>
+<li><code>DOCUMENT_NODE</code> (9)<br>root node</li>
+</ul>
+</section>
+
+<section class="cover">
+<h4>Properties</h4>
+<p>On each node, you can access various properties to obtain more informations on the node. Here are a few examples...</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/En/DOM/Node#Properties">Node properties reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h5><code>nodeType</code></h5>
+<p>It contains an integer value corresponding to one of the properties of the <code>Node</code> object.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> doc = document;              <span class="comment">// direct access to window property</span>
+console.log(doc.nodeType);       <span class="comment">// => 9</span>
+console.log(Node.DOCUMENT_NODE); <span class="comment">// => 9</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/Node.nodeType">Node.nodeType reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h5><code>nodeName</code></h5>
+<p>It contains a string value. If the node represents an HTML element, its nodeName is the tag name in uppercase. Example : <code>DIV</code>, <code>A</code> ... For text nodes it returns <code>#text</code>. See reference for more details.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"vito"</span> <span class="attribute">class</span>=<span class="value">"sicilian"</span>></span>Vito Andolini (Corleone)<span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="comment">&lt;!-- Corleone is his origin village --></span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(document.nodeName); <span class="comment">// => '#document'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(elt.nodeName);      <span class="comment">// => 'DIV'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(txt.nodeName);      <span class="comment">// => '#text'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(com.nodeName);      <span class="comment">// => '#comment'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(att.nodeName);      <span class="comment">// => 'id'</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/Node.nodeName">Node.nodeName reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h5><code>nodeValue</code></h5>
+<p>Contains the textual value of the node. Element nodes (and the document node) doesn&#39;t have a <code>nodeValue</code>. Their text contents can be found in one of their children text nodes.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"vito"</span> <span class="attribute">class</span>=<span class="value">"sicilian"</span>></span>Vito Andolini (Corleone)<span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="comment">&lt;!-- Corleone is his origin village --></span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(document.nodeValue); <span class="comment">// => null</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(div.nodeValue);      <span class="comment">// => null</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(txt.nodeValue);      <span class="comment">// => 'Vito Andolini (Corleone)'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(com.nodeValue);      <span class="comment">// => ' Corleone is his origin village '</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(att.nodeValue);      <span class="comment">// => 'vito'</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/Node.nodeValue">Node.nodeValue reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h5><code>attributes</code></h5>
+<p>Excepted for text nodes, every node can have attributes. It&#39;s a collection of attribute nodes and can be iterated like an array with a for loop and using its length property.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"vito"</span> <span class="attribute">class</span>=<span class="value">"sicilian"</span>></span>Vito Andolini (Corleone)<span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="comment">&lt;!-- Corleone is his origin village --></span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(document.attributes);         <span class="comment">// => null</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(div.attributes.length);       <span class="comment">// => 2</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(div.attributes[<span class="number">1</span>].nodeName);  <span class="comment">// => 'class'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(div.attributes[<span class="number">1</span>].nodeValue); <span class="comment">// => 'sicilian'</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(txt.attributes);              <span class="comment">// => null</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(com.attributes);              <span class="comment">// => null</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(att.attributes);              <span class="comment">// => null</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/Node.attributes">Node.attributes reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Tree Example : HTML</h3>
+<p>Let&#39;s see and example of an HTML document and its DOM tree equivalent.</p>
+<pre data-language="html"><code class="language-html"><span class="doctype">&lt;!DOCTYPE html></span>
+<span class="tag">&lt;<span class="title">html</span>></span>
+  <span class="tag">&lt;<span class="title">head</span>></span>
+    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>></span>
+    <span class="tag">&lt;<span class="title">title</span>></span>Corleone Family : HTML to JSON<span class="tag">&lt;/<span class="title">title</span>></span>
+  <span class="tag">&lt;/<span class="title">head</span>></span>
+  <span class="tag">&lt;<span class="title">body</span>></span>
+    <span class="tag">&lt;<span class="title">h1</span>></span>Corleone Family<span class="tag">&lt;/<span class="title">h1</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"vito"</span> <span class="attribute">class</span>=<span class="value">"sicilian"</span>></span>Vito Andolini (Corleone)
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"santino"</span>></span>Santino ("Sonny") Corleone<span class="tag">&lt;/<span class="title">div</span>></span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"frederico"</span>></span>Frederico ("Fredo") Corleone<span class="tag">&lt;/<span class="title">div</span>></span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"michael"</span>></span>Michael Corleone<span class="tag">&lt;/<span class="title">div</span>></span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"constanzia"</span>></span>Constanzia ("Connie") Corleone<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;/<span class="title">body</span>></span>
+<span class="tag">&lt;/<span class="title">html</span>></span></code></pre>
+
+</section>
+
+<section>
+<h3>Tree Example : DOM Tree</h3>
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" class="incremental" width="780" height="480" id="svg2" version="1.1" inkscape:version="0.47 r22583" sodipodi:docname="dom-tree-example.svg"> <g inkscape:groupmode="layer" id="layer2" inkscape:label="c1" transform="translate(0,-572.36218)" style="display:inline"> <rect style="color:#000000;fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886" width="740" height="35" x="20.000002" y="592.36218" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="390.12912" y="619.30481" id="text3684"><tspan sodipodi:role="line" id="tspan3686" x="390.12912" y="619.30481" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#document</tspan></text> <g id="g3688-0" transform="translate(-38.588846,639.84797)" /> <text id="text3684-8-8-2-0-8-31-7-6-2-59-8-9-8" y="412.3855" x="65" style="display:inline;font-size:25.18028259000000091px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve" transform="translate(0,572.36218)"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="412.3855" x="65" id="tspan3686-9-7-9-2-3-88-2-7-8-78-6-9-5" sodipodi:role="line">DOCUMENT_NODE</tspan></text> <rect style="display:inline;color:#000000;fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-13-6-5" width="35" height="22" x="20" y="396" ry="2.0354629" transform="translate(0,572.36218)" /> </g> <g inkscape:groupmode="layer" id="layer3" inkscape:label="c2" style="display:inline"> <rect transform="translate(0,-572.36218)" ry="3.2382364" y="647.36218" x="20.000002" height="35" width="70" id="rect2886-3" style="color:#000000;fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" /> <text transform="translate(0,-572.36218)" id="text3684-4" y="674.30481" x="54.993858" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="674.30481" x="54.993858" id="tspan3686-6" sodipodi:role="line">html</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5" width="650" height="35" x="109.99999" y="75" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="434.29916" y="101.48769" id="text3684-8"><tspan sodipodi:role="line" id="tspan3686-9" x="434.29916" y="101.48769" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">HTML</tspan></text> <text id="text3684-8-8-2-0-8-31-7-6-2-59-8-6" y="412.3855" x="356.6875" style="font-size:25.18028259px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="412.3855" x="356.6875" id="tspan3686-9-7-9-2-3-88-2-7-8-78-6-1" sodipodi:role="line">ELEMENT_NODE</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-13-3" width="35" height="22" x="311.6875" y="396" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2-59-8-9" y="454.3855" x="65" style="font-size:25.18028259px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="454.3855" x="65" id="tspan3686-9-7-9-2-3-88-2-7-8-78-6-9" sodipodi:role="line">DOCUMENT_TYPE_NODE</tspan></text> <rect style="color:#000000;fill:#abc837;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-13-6" width="35" height="22" x="20" y="438" ry="2.0354629" /> </g> <g inkscape:groupmode="layer" id="layer4" inkscape:label="c3" style="display:inline"> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3" width="158" height="35" x="109.99999" y="130" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="188.6127" y="156.52457" id="text3684-8-8"><tspan sodipodi:role="line" id="tspan3686-9-7" x="188.6127" y="156.52457" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">HEAD</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-5" width="472" height="35" x="288" y="130" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="544.8689" y="156.50612" id="text3684-8-8-7"><tspan sodipodi:role="line" id="tspan3686-9-7-3" x="544.8689" y="156.50612" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">BODY</tspan></text> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,163.48,-16.02002)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-9" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,446.79445,283.97998)" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans" x="588.81445" y="440.2312" id="text3684-8-8-2-0-8-31-6-1"><tspan sodipodi:role="line" x="588.81445" y="440.2312" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" id="tspan3106">TEXT_NODE</tspan><tspan sodipodi:role="line" x="588.81445" y="463.9812" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" id="tspan3110">(with whitespaces)</tspan></text> </g> <g inkscape:groupmode="layer" id="layer5" inkscape:label="c4" style="display:inline"> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-4" width="69" height="35" x="198.99998" y="184" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="232.65111" y="208.30957" id="text3684-8-8-6"><tspan sodipodi:role="line" id="tspan3686-9-7-1" x="232.65111" y="208.30957" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">META</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2" width="69" height="35" x="109.99999" y="184" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="144.87572" y="208.28174" id="text3684-8-8-2"><tspan sodipodi:role="line" id="tspan3686-9-7-9" x="144.87572" y="208.28174" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">TITLE</tspan></text> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-0" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,74.479984,37.97999)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,29.979991,10.97999)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,118.97998,10.97999)" /> </g> <g inkscape:groupmode="layer" id="layer6" inkscape:label="c5" style="display:inline"> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-1" width="69" height="35" x="109.99999" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="144.59741" y="263.17969" id="text3684-8-8-2-0-8-31-6"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88-6" x="144.59741" y="263.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> <text id="text3684-8-8-2-0-8-31-7-6-2-59-8-6-1" y="412.3855" x="588.81445" style="font-size:25.18028259px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="412.3855" x="588.81445" id="tspan3686-9-7-9-2-3-88-2-7-8-78-6-1-5" sodipodi:role="line">TEXT_NODE</tspan></text> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-13-3-9" width="35" height="22" x="543.81445" y="396" ry="2.0354629" /> </g> <g inkscape:groupmode="layer" id="layer7" inkscape:label="c6" style="display:inline"> <rect ry="3.2382364" y="184" x="370" height="35" width="390" id="rect2886-5-3-4-5" style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="563.86273" y="210.48769" id="text3684-8-8-6-0"><tspan sodipodi:role="line" id="tspan3686-9-7-1-9" x="563.86273" y="210.48769" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">DIV</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8" width="62" height="35" x="288" y="184" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="319.78073" y="210.48769" id="text3684-8-8-2-0"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2" x="319.78073" y="210.48769" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">H1</tspan></text> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,204.48001,10.97998)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1-0" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,245.48,37.97999)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1-0-3" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,450.48,10.97998)" /> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-6" width="35" height="22" x="378" y="210.5" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2-59" y="228.625" x="395.55566" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="228.625" x="395.55566" id="tspan3686-9-7-9-2-3-88-2-7-8-78" sodipodi:role="line">id</tspan></text> <text id="text3684-8-8-2-0-8-31-7-6-2-59-8" y="454.3855" x="356.6875" style="font-size:25.18028259px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;text-anchor:start;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="454.3855" x="356.6875" id="tspan3686-9-7-9-2-3-88-2-7-8-78-6" sodipodi:role="line">ATTRIBUTE_NODE</tspan></text> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-13" width="35" height="22" x="311.6875" y="438" ry="2.0354629" /> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-6-2" width="60" height="22" x="433" y="210.5" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2-59-1" y="228.625" x="462.89331" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="228.625" x="462.89331" id="tspan3686-9-7-9-2-3-88-2-7-8-78-7" sodipodi:role="line">class</tspan></text> </g> <g inkscape:groupmode="layer" id="layer8" inkscape:label="c7" style="display:inline"> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4" width="62" height="35" x="288" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="319.09741" y="263.17969" id="text3684-8-8-2-0-8-31"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88" x="319.09741" y="263.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> </g> <g inkscape:groupmode="layer" id="layer9" inkscape:label="c8" style="display:inline"> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-2" width="62" height="35" x="698" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="727.86273" y="265.4877" id="text3684-8-8-2-0-8-7"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-2" x="727.86273" y="265.4877" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">DIV</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-8" width="62" height="35" x="616" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="645.86273" y="265.4877" id="text3684-8-8-2-0-8-1"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-5" x="645.86273" y="265.4877" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">DIV</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-6" width="62" height="35" x="534" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="563.86273" y="265.4877" id="text3684-8-8-2-0-8-2"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-9" x="563.86273" y="265.4877" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">DIV</tspan></text> <rect style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-89" width="62" height="35" x="452" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="481.8627" y="265.4877" id="text3684-8-8-2-0-8-3"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-8" x="481.8627" y="265.4877" style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">DIV</tspan></text> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-5" width="62" height="35" x="370" y="239" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="401.09741" y="263.17969" id="text3684-8-8-2-0-8-31-0"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88-0" x="401.09741" y="263.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1-0-1" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,409.48,92.97999)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1-0-0" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,491.48,92.97999)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1-0-8" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,573.48,92.97999)" /> <path sodipodi:type="arc" style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="path4253-2-7-1-0-8-5" sodipodi:cx="272.66666" sodipodi:cy="389.33334" sodipodi:rx="16.666666" sodipodi:ry="16.666666" d="m 289.33332,389.33334 a 16.666666,16.666666 0 1 1 -33.33333,0 16.666666,16.666666 0 1 1 33.33333,0 z" transform="matrix(0.42000002,0,0,0.42000002,614.48,65.81332)" /> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2" width="35" height="22" x="458" y="269" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2" y="287.125" x="475.55566" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="287.125" x="475.55566" id="tspan3686-9-7-9-2-3-88-2-7-8" sodipodi:role="line">id</tspan></text> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-1" width="35" height="22" x="540" y="269" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2-4" y="287.125" x="557.55566" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="287.125" x="557.55566" id="tspan3686-9-7-9-2-3-88-2-7-8-1" sodipodi:role="line">id</tspan></text> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-7" width="35" height="22" x="622" y="269" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2-6" y="287.125" x="639.55566" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="287.125" x="639.55566" id="tspan3686-9-7-9-2-3-88-2-7-8-7" sodipodi:role="line">id</tspan></text> <rect style="color:#000000;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7-7-2-0" width="35" height="22" x="704" y="269" ry="2.0354629" /> <text id="text3684-8-8-2-0-8-31-7-6-2-5" y="287.125" x="721.55566" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" xml:space="preserve"><tspan style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold" y="287.125" x="721.55566" id="tspan3686-9-7-9-2-3-88-2-7-8-77" sodipodi:role="line">id</tspan></text> </g> <g inkscape:groupmode="layer" id="layer10" inkscape:label="c9" style="display:inline"> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-7" width="62" height="35" x="452" y="300" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="483.09741" y="324.17969" id="text3684-8-8-2-0-8-31-7"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88-2" x="483.09741" y="324.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-2" width="62" height="35" x="534" y="300" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="565.09741" y="324.17969" id="text3684-8-8-2-0-8-31-5"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88-26" x="565.09741" y="324.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-4" width="62" height="35" x="616" y="300" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="647.09741" y="324.17969" id="text3684-8-8-2-0-8-31-04"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88-8" x="647.09741" y="324.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> <rect style="color:#000000;fill:#0000ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" id="rect2886-5-3-2-8-1-4-51" width="62" height="35" x="698" y="300" ry="3.2382364" /> <text xml:space="preserve" style="font-size:25.18028259px;font-style:normal;font-weight:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans" x="729.09741" y="324.17969" id="text3684-8-8-2-0-8-31-2"><tspan sodipodi:role="line" id="tspan3686-9-7-9-2-3-88-82" x="729.09741" y="324.17969" style="font-size:19px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Droid Sans;-inkscape-font-specification:Droid Sans Bold">#text</tspan></text> </g> </svg>
+
+</section>
+
+<section class="cover">
+<h2 id="navigation">Navigation</h2>
+</section>
+
+<section>
+<h3>Family properties</h3>
+<p>In order to traverse the document, you have a lot of &quot;family&quot; properties. Here&#39;s a few examples. See reference for more details.</p>
+<p>Be careful, these properties take the text node into account.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> doctype = document.firstChild;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> html = doctype.nextSibling;        <span class="comment">// previousSibling also exists</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> body = html.lastChild;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> h1 = body.firstChild;
+console.log(h1.nodeName);              <span class="comment">// => "#text"  :-(</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">h1 = h1.nextSibling;
+console.log(h1.nodeName);              <span class="comment">// => "H1"     :-)</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(h1.parentNode === body);   <span class="comment">// => true</span>
+console.log(h1.parentNode === html);   <span class="comment">// => false</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> vito = h1.nextSibling.nextSibling; <span class="comment">// skip "empty" text nodes</span>
+console.log(vito.childNodes.length);   <span class="comment">// => 9 !!!</span>
+<span class="comment">// 1 text node + 4 div nodes + 4 "empty" text nodes = 9 children</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/Node.childNodes">childNodes reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.firstChild">firstChild reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.lastChild">lastChild reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.nextSibling">nextSibling reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.previousSibling">previousSibling reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.parentNode">parentNode reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Family properties (elements)</h3>
+<p>It&#39;s often annoying to retrieve the texts nodes when traversing the DOM tree. Classic nodes are more interesting! Some properties exists to ease that.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> vito = document.lastChild.lastChild.lastElementChild;
+<span class="comment">// document => &lt;html> => &lt;body> => &lt;div id="vito"></span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> children = vito.children;                    <span class="comment">// live list!</span></code></pre>
+
+<p>Note that the <code>children</code> property is live. The children variables points to something that is always synced with DOM tree.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> santino = vito.firstElementChild;
+console.log(santino === children[<span class="number">0</span>]);            <span class="comment">// => true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> frederico = santino.nextElementSibling;
+console.log(frederico === children[<span class="number">1</span>]);          <span class="comment">// => true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> constanzia = vito.lastElementChild;
+console.log(constanzia === children[<span class="number">3</span>]);         <span class="comment">// => true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael = constanzia.previousElementSibling;
+console.log(michael === children[<span class="number">2</span>]);            <span class="comment">// => true</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/Element.children">children reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/En/DOM/Element.firstElementChild">firstElementChild reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/En/DOM/Element.lastElementChild">lastElementChild reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/En/DOM/Element.nextElementSibling">nextElementSibling reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/En/DOM/Element.previousElementSibling">previousElementSibling reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Search methods</h3>
+<p>Better than traversing the DOM tree, direct search is faster and simpler to use in most cases. Here&#39;s a few examples. See reference for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> vito = document.getElementById(<span class="string">'vito'</span>);
+<span class="keyword">var</span> michael = document.getElementById(<span class="string">'michael'</span>);
+console.log(vito === michael.parentNode);         <span class="comment">// => true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> divs = document.getElementsByTagName(<span class="string">'div'</span>);
+console.log(divs.length);                         <span class="comment">// => 5</span>
+console.log(divs[<span class="number">3</span>].firstChild.nodeValue);        <span class="comment">// => Michael Corleone</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> sicilians = document.getElementsByClassName(<span class="string">'sicilian'</span>);
+console.log(sicilians[<span class="number">0</span>] === vito);               <span class="comment">// => true</span></code></pre>
+
+<p>Support for <code>getElementsByClassName</code> is not present on very old browers. Look at <a href="http://caniuse.com/#feat=getelementsbyclassname">Can I Use?</a> for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> constanzia = document.querySelector(<span class="string">'.sicilian #constanzia'</span>);
+<span class="keyword">var</span> herYoungerBrother = constanzia.previousSibling.previousSibling;
+console.log(herYoungerBrother === michael);       <span class="comment">// => true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> vitosChildren = document.querySelectorAll(<span class="string">'#vito div'</span>);
+console.log(vitosChildren.length);                <span class="comment">// => 4</span>
+console.log(vitosChildren[<span class="number">2</span>] === michael);        <span class="comment">// => true</span></code></pre>
+
+<p>Support for <code>querySelector</code> and <code>querySelectorAll</code> is not present on old browers. Look at <a href="http://caniuse.com/#feat=queryselector">Can I Use?</a> for more details.</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/fr/DOM/document.getElementById">getElementById reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/fr/DOM/element.getElementsByTagName">getElementsByTagName reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/fr/DOM/document.getElementsByClassName">getElementsByClassName reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/element.querySelector">querySelector reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/element.querySelectorAll">querySelectorAll reference (MDN)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="manipulation">Manipulation</h2>
+</section>
+
+<section>
+<h3>Element manipulation</h3>
+<p>Now that we know how to retrieve the node we&#39;re interested in, it would be very nice to do some modifications. Here&#39;s some examples of the different properties you can use to alter the DOM. Look at reference for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael = document.getElementById(<span class="string">'michael'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael.id);                    <span class="comment">// => michael</span>
+michael.id = <span class="string">'MICHAEL'</span>;                     <span class="comment">// => id modified!</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael.innerHTML);             <span class="comment">// => Michael Corleone</span>
+michael.innerHTML = <span class="string">'Michael CORLEONE'</span>;     <span class="comment">// => HTML content modified!</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael.hasAttribute(<span class="string">'title'</span>)); <span class="comment">// => false</span>
+michael.setAttribute(<span class="string">'title'</span>, <span class="string">'Michael Corleone!!'</span>);
+console.log(michael.getAttribute(<span class="string">'title'</span>)); <span class="comment">// => Michael Corleone!!</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael.className);             <span class="comment">// => ""</span>
+michael.classList.add(<span class="string">'character'</span>);
+michael.classList.add(<span class="string">'male'</span>);
+console.log(michael.className);             <span class="comment">// => "character male"</span></code></pre>
+
+<p>Support for <code>classlist</code> is not present on old browers. Look at <a href="http://caniuse.com/#feat=classlist">Can I Use?</a> for more details.</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/element">Element reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Style manipulation</h3>
+<p>If you wanna manipulate the style of an element, here&#39;s some examples showing off the properties. Look at reference for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael = document.getElementById(<span class="string">'michael'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.style.paddingLeft = <span class="string">'10px'</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.style.borderLeft = <span class="string">'5px solid #00F'</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.style.color = <span class="string">'blue'</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.style.cssFloat = <span class="string">'left'</span>;
+michael.style.styleFloat = <span class="string">'left'</span>; <span class="comment">// IE :-(</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/element.style">element.style reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/CSS">DOM CSS reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Element tree manipulation</h3>
+<p>The only thing we miss now is how to create and delete elements. We&#39;ll also see how to manipulate the different relationships (parent/child/sibling). Here&#39;s a few examples. Look at reference for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> tom = document.createElement(<span class="string">'div'</span>);
+tom.innerHTML = <span class="string">'Tom Hagen'</span>;
+tom.id = <span class="string">'tom'</span>;
+tom.classList.add(<span class="string">'adopted'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> vito = document.getElementById(<span class="string">'vito'</span>);
+vito.appendChild(tom);                          <span class="comment">// inserts at the end</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">vito.removeChild(vito.children[<span class="number">2</span>]);             <span class="comment">// removes michael</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael = vito.cloneNode(vito.children[<span class="number">0</span>]); <span class="comment">// clones santino</span>
+michael.id = <span class="string">'michael'</span>;                         <span class="comment">// replace id</span>
+michael.innerHTML = <span class="string">'Michael Corleone'</span>;         <span class="comment">// replace HTML content</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">vito.insertBefore(michael, vito.children[<span class="number">2</span>]);   <span class="comment">// insert before connie</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/element">Element reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/fr/DOM/document.createElement">createElement reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.appendChild">appendChild reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.removeChild">removeChild reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.cloneNode">cloneNode reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.insertBefore">insertBefore reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Node.replaceChild">replaceChild reference (MDN)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="jquery-amp-the-dom">jQuery &amp; the DOM</h2>
+</section>
+
+<section>
+<h3>What is jQuery ?</h3>
+
+<p class="list incremental">jQuery is a powerful <strong>JavaScript library</strong> originally created by <strong>John Resig</strong>. It has a lot of features for JS developers. For this course we&#39;ll focus on how it can help us with the DOM. jQuery aims to provide <strong>easier/simpler features</strong> and <strong>implementations of existing ones</strong> that are <strong>not supported on old browsers</strong>. They try their best to have the same behaviour and results on each browser.</p>
+
+<p class="list incremental">The library provides a <strong>main function</strong> that also <strong>has properties</strong>. It can be accessed through two names : <strong><code>jQuery</code> and the <code>$</code> sign</strong>.</p>
+
+<ul class="useful-links">
+<li><a href="http://docs.jquery.com/Main_Page">jQuery official documentation (doc.jquery.com)</a></li>
+<li><a href="http://jqapi.com/">Alternative documentation (jqapi.com)</a></li>
+<li><a href="http://jqfundamentals.com/">jQuery Fundamentals (by Rebecca Murphey)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>How it works ?</h3>
+<p>Let&#39;s use some example to understand in details how the library works. Remember that everything is based on the <code>$</code> function and that it takes CSS selectors as an argument.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael1 = document.querySelector(<span class="string">'#michael'</span>);
+<span class="keyword">var</span> michael2 = $(<span class="string">'#michael'</span>); <span class="comment">// similar to document.querySelector</span>
+                              <span class="comment">// but returned value has more properties</span>
+                              <span class="comment">// and more functions</span>
+                              <span class="comment">// works on old browsers :-D</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael1.getAttribute(<span class="string">'id'</span>));       <span class="comment">// => michael</span>
+console.log(michael2.attr(<span class="string">'id'</span>));               <span class="comment">// => michael</span>
+michael2.attr(<span class="string">'id'</span>, <span class="string">'MICHAEL'</span>);                 <span class="comment">// => id modified!</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael1.innerHTML);                <span class="comment">// => Michael Corleone</span>
+console.log(michael2.html());                   <span class="comment">// => Michael Corleone</span>
+michael2.html(<span class="string">'Michael CORLEONE'</span>);              <span class="comment">// => content modified!</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(michael1 === michael2);             <span class="comment">// => false</span>
+console.log(michael1 === michael2[<span class="number">0</span>]);          <span class="comment">// => true</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/category/selectors/">jQuery selectors documentation (doc.jquery.com)</a></li>
+<li><a href="http://api.jquery.com/category/attributes/">jQuery attributes documentation (doc.jquery.com)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Easier manipulation</h3>
+<p>jQuery is very efficient on parent/child/sibling manipulation. The syntax is easy to use.</p>
+<p>Note that jQuery calls can be chained. This is pretty elegant and useful. This means you can select an element, call a function and call directly another function on the result. Look at the examples for more details.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">$(<span class="string">'#michael'</span>).remove();         <span class="comment">// don't need parent reference</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael = document.createElement(<span class="string">'div'</span>);
+$(michael)
+  .attr(<span class="string">'id'</span>, <span class="string">'michael'</span>)        <span class="comment">// methods calls can be chained</span>
+  .html(<span class="string">'Michael Corleone'</span>)
+  .addClass(<span class="string">'character'</span>)
+  .addClass(<span class="string">'male'</span>)
+  .insertBefore(<span class="string">'#constanzia'</span>); <span class="comment">// can insert before</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> children = $(<span class="string">'#vito'</span>).children();
+<span class="keyword">var</span> santino = children.eq(<span class="number">0</span>);
+<span class="keyword">var</span> siblings = santino.siblings();
+<span class="keyword">var</span> constanzia = siblings.last();
+<span class="keyword">var</span> familyOrder = children.index(constanzia);
+console.log(familyOrder);                      <span class="comment">// => 3 (4th)</span>
+<span class="keyword">var</span> michael = constanzia.prev();</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/category/traversing/">jQuery traversing documentation (doc.jquery.com)</a></li>
+<li><a href="http://api.jquery.com/category/manipulation/">jQuery manipulation documentation (doc.jquery.com)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Easier CSS</h3>
+<p>The CSS manipulations are also easier. Have a look at the examples. If you need help, the reference is here...</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> michael = $(<span class="string">'michael'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.css(<span class="string">'padding-left'</span>, <span class="string">'10px'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.css(<span class="string">'border-left'</span>, <span class="string">'5px solid #00F'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.css(<span class="string">'color'</span>, <span class="string">'blue'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">michael.css(<span class="string">'float'</span>, <span class="string">'left'</span>);  <span class="comment">// Every browser</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/category/css/">jQuery CSS documentation (doc.jquery.com)</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

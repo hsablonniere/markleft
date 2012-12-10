@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Think tank</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Experimenting with events (keyboard, mouse) to build a game">
+<meta name="keywords" content="javascript, events, keyboard, mouse, game">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Think tank</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#mouse-shoot-no-jquery">Mouse shoot (no jQuery)</a></li>
+<li><a href="#keyboard-move">Keyboard move</a></li>
+<li><a href="#mouse-canon">Mouse canon</a></li>
+<li><a href="#the-game">The game</a></li>
+</ul>
+</div>
+
+<img src="../img/goldeneye-tank.jpg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h2 id="mouse-shoot-no-jquery">Mouse shoot (no jQuery)</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to use basic mouse event.</li>
+<li>Know how to use event delegation.</li>
+</ol>
+<h3>Context</h3>
+<p>This exercise is simple. You have display an explosion when the user clicks on a part of the map.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have a look at <a href="../labs-files/think-tank/think-tank.html">think-tank.html</a> DOM. You&#39;ll see a <code>.map</code> that contains little <code>.tile</code> squares.</li>
+<li>Create a file named <code>mouse-shoot.js</code> and add some code that detects mouse clicks on the little <code>.tile</code> squares.</li>
+<li>Once a <code>.tile</code> has been clicked, add a CSS class <code>explosion</code> to the element and remove it one second after.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>Your code <strong>MUST</strong> use event delegation. If you added 1 listener for each <code>.tile</code>, you&#39;re doing it wrong.</li>
+<li>You <strong>CANNOT</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>think-tank.html</li>
+<li>game.css</li>
+<li>map.css</li>
+<li>tank.css</li>
+<li>custom-think-tank.css</li>
+<li>jquery-1.8.2.min.js</li>
+<li>map.js</li>
+<li>mouse-shoot.js</li>
+<li>img/*</li>
+</ul>
+<h2 id="keyboard-move">Keyboard move</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to use basic keyboard events.</li>
+<li>Understand game movement, coordinates...</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll add moving capabilities to our tank.</p>
+<p>Our tank can only go forward and turn left or right. Don&#39;t worry, all the trigonometric maths are provided ;-)</p>
+<h3>Steps</h3>
+<h4>Basic move</h4>
+<ul>
+<li>Create a file named <code>keyboard-move.js</code> and add some code to detect <code>left</code>, <code>up</code> and <code>right</code> keys. If you&#39;re a PGM, maybe <code>Q</code>, <code>Z</code> and <code>D</code> will be better. Maybe you can support both.</li>
+<li>Use the global <code>thinkTank</code> object to drive the tank forward (<code>up</code> key) and to turn left or right. Look at <a href="../labs-files/think-tank/game.js">game.js</a> for more details.</li>
+</ul>
+<h4>Better moves</h4>
+<ul>
+<li>If you look closer to the DOM, the <code>.map</code> is bigger than <code>.area</code>. This means sometimes the tank should move and sometimes, the map should move.</li>
+<li>Implement a system that allow that in a smart way. <code>thinkTank</code> will help you to know the different size, positions and where the tank is going (with vectors).</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+<li>The map <strong>MUST</strong> always cover all the area.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>think-tank.html</li>
+<li>game.css</li>
+<li>map.css</li>
+<li>tank.css</li>
+<li>custom-think-tank.css</li>
+<li>jquery-1.8.2.min.js</li>
+<li>map.js</li>
+<li>game.js</li>
+<li>mouse-shoot.js</li>
+<li>keyboard-move.js</li>
+<li>img/*</li>
+</ul>
+<h2 id="mouse-canon">Mouse canon</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to use complex mouse events and DOM position.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll make the tank turret rotate with the mouse.</p>
+<h3>Steps</h3>
+<ul>
+<li>Create a file named <code>mouse-turret.js</code> and add some code to detect mouse move events.</li>
+<li>Try to find a way to get the coordinates of the tank and of the mouse pointer using the same reference point.</li>
+<li>You have everything you need to retrieve this coordinates with the same reference with <code>thinkTank</code>.</li>
+<li>Try to compute the angle in radiants and use the <code>thinkTank</code> to rotate the turret.</li>
+<li>The turrent should point to the mouse pointer.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>think-tank.html</li>
+<li>game.css</li>
+<li>map.css</li>
+<li>tank.css</li>
+<li>custom-think-tank.css</li>
+<li>jquery-1.8.2.min.js</li>
+<li>map.js</li>
+<li>game.js</li>
+<li>mouse-shoot.js</li>
+<li>keyboard-move.js</li>
+<li>mouse-turret.js</li>
+<li>img/*</li>
+</ul>
+<h2 id="the-game">The game</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Experiment with events.</li>
+<li>Develop new skills.</li>
+</ol>
+<h3>Context</h3>
+<p>It&#39;s supposed to be a game. We miss a lot of stuffs :</p>
+<ul>
+<li>Main achievement</li>
+<li>Enemies</li>
+<li>Stuffs that make lose/win points</li>
+<li>Levels</li>
+</ul>
+<p>Use whatever you want to make this code base an awesome game.</p>
+<p>Because you&#39;ll probably need to modify the HTML, use the <a href="../lab-files/think-tank-custom.html">think-tank-custom.html</a> but don&#39;t touch the <a href="../lab-files/think-tank.html">think-tank.html</a>.</p>
+<h3>Ideas</h3>
+<ul>
+<li>Simultaneous keypress (drive an turn at the same time). Try to find out how and ask if you&#39;re lost.</li>
+<li>A secret konami code.</li>
+<li>Customize the map, look at the available images. All images comes from <a href="http://www.vickiwenderlich.com/2011/10/free-game-art-tanks-top-down-tiles">http://www.vickiwenderlich.com/2011/10/free-game-art-tanks-top-down-tiles</a>.</li>
+<li>Add sounds.</li>
+<li>...</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+<li>You <strong>CANNOT</strong> use or modify the <a href="../lab-files/think-tank.html">think-tank.html</a>.</li>
+<li>You <strong>MUST</strong> use and/or modify the <a href="../lab-files/think-tank-custom.html">think-tank-custom.html</a>.</li>
+<li>You <strong>CAN</strong> add any CSS, JS or images file you want.</li>
+<li>You <strong>MUST</strong> put the images in the <code>img</code> directory and prefix the CSS and JS files by <code>custom-</code>.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>think-tank-game.html</li>
+<li>game.css</li>
+<li>map.css</li>
+<li>tank.css</li>
+<li>custom-think-tank.css</li>
+<li>jquery-1.8.2.min.js</li>
+<li>map.js</li>
+<li>game.js</li>
+<li>mouse-shoot.js</li>
+<li>keyboard-move.js</li>
+<li>mouse-turret.js</li>
+<li>img/*</li>
+<li>custom-*</li>
+</ul>
+
+</section>

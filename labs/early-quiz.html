@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Early quiz</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Quiz about Web History, HTML and JavaScript">
+<meta name="keywords" content="history, html, javascript">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Early quiz</h1>
+<form>
+  <label>First name : </label><input type="text">
+  <label>Last name : </label><input type="text">
+</form>
+
+<h2 id="history">History</h2>
+<h3>Who invented the World Wide Web?</h3>
+<form>
+  <label class="radio"><input type="radio" name="web">Håkon Wium Lie</label>
+  <label class="radio"><input type="radio" name="web">Brendan Eich</label>
+  <label class="radio"><input type="radio" name="web">Tim Berners-Lee</label>
+  <label class="radio"><input type="radio" name="web">Marc Andreessen</label>
+</form>
+
+<h3>Who invented HTML?</h3>
+<form>
+  <label class="radio"><input type="radio" name="html">Håkon Wium Lie</label>
+  <label class="radio"><input type="radio" name="html">Brendan Eich</label>
+  <label class="radio"><input type="radio" name="html">Tim Berners-Lee</label>
+  <label class="radio"><input type="radio" name="html">Marc Andreessen</label>
+</form>
+
+<h3>Who invented JavaScript?</h3>
+<form>
+  <label class="radio"><input type="radio" name="js">Håkon Wium Lie</label>
+  <label class="radio"><input type="radio" name="js">Brendan Eich</label>
+  <label class="radio"><input type="radio" name="js">Tim Berners-Lee</label>
+  <label class="radio"><input type="radio" name="js">Marc Andreessen</label>
+</form>
+
+<h3>Who co-invented CSS?</h3>
+<form>
+  <label class="radio"><input type="radio" name="css">Håkon Wium Lie</label>
+  <label class="radio"><input type="radio" name="css">Brendan Eich</label>
+  <label class="radio"><input type="radio" name="css">Tim Berners-Lee</label>
+  <label class="radio"><input type="radio" name="css">Marc Andreessen</label>
+</form>
+
+<hr>
+
+<h3>Cite 2 early web browsers that aren&#39;t around anymore.</h3>
+<form>
+  <div><input type="text"></div>
+  <div><input type="text"></div>
+</form>
+
+<h3>Which browser(s) uses the Webkit rendering engine?</h3>
+<form>
+  <label class="checkbox"><input type="checkbox" name="webkit">Internet Explorer</label>
+  <label class="checkbox"><input type="checkbox" name="webkit">Opera</label>
+  <label class="checkbox"><input type="checkbox" name="webkit">Safari</label>
+  <label class="checkbox"><input type="checkbox" name="webkit">Firefox</label>
+  <label class="checkbox"><input type="checkbox" name="webkit">Chrome</label>
+</form>
+
+<h2 id="html">HTML</h2>
+<h3>Which tag(s) have a default display block ?</h3>
+<form>
+  <label class="checkbox"><input type="checkbox" name="display">p</label>
+  <label class="checkbox"><input type="checkbox" name="display">li</label>
+  <label class="checkbox"><input type="checkbox" name="display">ul</label>
+  <label class="checkbox"><input type="checkbox" name="display">span</label>
+  <label class="checkbox"><input type="checkbox" name="display">strong</label>
+  <label class="checkbox"><input type="checkbox" name="display">article</label>
+</form>
+
+<h3>Name 5 new HTML5 semantic tag ?</h3>
+<form>
+  <div><input type="text" name="semantic1"></div>
+  <div><input type="text" name="semantic2"></div>
+  <div><input type="text" name="semantic3"></div>
+  <div><input type="text" name="semantic4"></div>
+  <div><input type="text" name="semantic5"></div>
+</form>
+
+<hr>
+
+<h3>Name 6 tags that can only be used in a <code>&lt;table&gt;</code> ?</h3>
+<form>
+  <div><input type="text" name="table1"></div>
+  <div><input type="text" name="table2"></div>
+  <div><input type="text" name="table3"></div>
+  <div><input type="text" name="table4"></div>
+  <div><input type="text" name="table5"></div>
+  <div><input type="text" name="table6"></div>
+</form>
+
+<h3>Name 5 tags that can only be used in a <code>&lt;form&gt;</code> ?</h3>
+<form>
+  <div><input type="text" name="form1"></div>
+  <div><input type="text" name="form2"></div>
+  <div><input type="text" name="form3"></div>
+  <div><input type="text" name="form4"></div>
+  <div><input type="text" name="form5"></div>
+</form>
+
+<hr>
+
+<h2 id="css">CSS</h2>
+<h3>Given this example, which element(s) are red?</h3>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">p</span>></span>Orange<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;<span class="title">h1</span> <span class="attribute">class</span>=<span class="value">"foo bar"</span>></span>Apple<span class="tag">&lt;/<span class="title">h1</span>></span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"bar"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"foo"</span>></span>Kiwi<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">p</span>></span>Banana<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<pre data-language="css"><code class="language-css"><span class="tag">p</span>, <span class="class">.foo</span> <span class="rules">{ <span class="rule"><span class="attribute">color</span>:<span class="value"> red</span>;</span> <span class="rule">}</span></span></code></pre>
+
+<form>
+  <label class="checkbox"><input type="checkbox" name="css1">Orange</label>
+  <label class="checkbox"><input type="checkbox" name="css1">Apple</label>
+  <label class="checkbox"><input type="checkbox" name="css1">Kiwi</label>
+  <label class="checkbox"><input type="checkbox" name="css1">Banana</label>
+</form>
+
+<h3>Given this example, which element(s) are blue?</h3>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">p</span>></span>Orange<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;<span class="title">h1</span> <span class="attribute">class</span>=<span class="value">"foo bar"</span>></span>Apple<span class="tag">&lt;/<span class="title">h1</span>></span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"bar"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"foo"</span>></span>Kiwi<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">p</span>></span>Banana<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<pre data-language="css"><code class="language-css"><span class="class">.bar</span> <span class="class">.foo</span> <span class="rules">{ <span class="rule"><span class="attribute">color</span>:<span class="value"> blue</span>;</span> <span class="rule">}</span></span></code></pre>
+
+<form>
+  <label class="checkbox"><input type="checkbox" name="css2">Orange</label>
+  <label class="checkbox"><input type="checkbox" name="css2">Apple</label>
+  <label class="checkbox"><input type="checkbox" name="css2">Kiwi</label>
+  <label class="checkbox"><input type="checkbox" name="css2">Banana</label>
+</form>
+
+<hr>
+
+<h3>Given this example, which element(s) are green?</h3>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">p</span>></span>Orange<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;<span class="title">h1</span> <span class="attribute">class</span>=<span class="value">"foo bar"</span>></span>Apple<span class="tag">&lt;/<span class="title">h1</span>></span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"bar"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"foo"</span>></span>Kiwi<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">p</span>></span>Banana<span class="tag">&lt;/<span class="title">p</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<pre data-language="css"><code class="language-css"><span class="class">.bar</span><span class="class">.foo</span> <span class="rules">{ <span class="rule"><span class="attribute">color</span>:<span class="value"> green</span>;</span> <span class="rule">}</span></span></code></pre>
+
+<form>
+  <label class="checkbox"><input type="checkbox" name="css3">Orange</label>
+  <label class="checkbox"><input type="checkbox" name="css3">Apple</label>
+  <label class="checkbox"><input type="checkbox" name="css3">Kiwi</label>
+  <label class="checkbox"><input type="checkbox" name="css3">Banana</label>
+</form>
+
+<h2 id="javascript">JavaScript</h2>
+<h3>Given this example, what is the console output?</h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> a = <span class="number">2</span>;
+
+<span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> {</span>
+  <span class="keyword">var</span> a = <span class="number">3</span>;
+}
+
+foo();
+console.log(a);</code></pre>
+
+<form>
+  <label class="radio"><input type="radio" name="js1">2</label>
+  <label class="radio"><input type="radio" name="js1">3</label>
+  <label class="radio"><input type="radio" name="js1">undefined</label>
+  <label class="radio"><input type="radio" name="js1">null</label>
+</form>
+
+<hr>
+
+<h3>Given this example, what is the console output?</h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="number">9</span>, <span class="number">4</span>];
+console.log(<span class="number">9</span> <span class="keyword">in</span> a);</code></pre>
+
+<form>
+  <label class="radio"><input type="radio" name="js2">true</label>
+  <label class="radio"><input type="radio" name="js2">false</label>
+  <label class="radio"><input type="radio" name="js2">9</label>
+  <label class="radio"><input type="radio" name="js2">1</label>
+  <label class="radio"><input type="radio" name="js2">undefined</label>
+  <label class="radio"><input type="radio" name="js2">null</label>
+</form>
+
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<h3>Given this example, what is the console output?</h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> a = (<span class="keyword">function</span>() {
+  <span class="keyword">return</span> <span class="number">2</span> === <span class="number">2</span>;
+})();
+
+console.log(<span class="keyword">typeof</span> a);</code></pre>
+
+<form>
+  <label class="radio"><input type="radio" name="js3">number</label>
+  <label class="radio"><input type="radio" name="js3">string</label>
+  <label class="radio"><input type="radio" name="js3">boolean</label>
+  <label class="radio"><input type="radio" name="js3">function</label>
+  <label class="radio"><input type="radio" name="js3">array</label>
+  <label class="radio"><input type="radio" name="js3">object</label>
+  <label class="radio"><input type="radio" name="js2">undefined</label>
+  <label class="radio"><input type="radio" name="js2">null</label>
+</form>
+
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

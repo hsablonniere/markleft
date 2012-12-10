@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Spying on elements!</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Introduction to browser events, how to "spy" on the document and its elements by listening to specific events.">
+<meta name="keywords" content="javascript, event, listener, asynchronous">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/spying-on-elements.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>Spying on elements!</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#listeners">Listeners</a></li>
+<li><a href="#types-amp-properties">Types &amp; properties</a></li>
+<li><a href="#bubbling-propagation">Bubbling / propagation</a></li>
+<li><a href="#cancellation-prevent-nbsp-default">Cancellation / prevent&nbsp;default</a></li>
+<li><a href="#capture">Capture</a></li>
+<li><a href="#jquery-amp-events">jQuery &amp; Events</a></li>
+</ul>
+</div>
+
+</section>
+
+<section>
+<h2 id="definition">Definition</h2>
+
+<p class="list incremental">An event is a <strong>&quot;message&quot;</strong> <strong>sent by the browser</strong> to inform that the <strong>internal state</strong> of a <strong>DOM object</strong> <strong>has changed</strong>.</p>
+<p>DOM objects concerned can be the <code>window</code> or any element node of the DOM tree.</p>
+
+<p class="list incremental">To get these &quot;messages&quot;, you must use <strong>listeners</strong>.</p>
+
+<p class="list incremental">This design pattern is know as the <strong>&quot;observer pattern&quot;</strong>.</p>
+</section>
+
+<section class="cover">
+<h2 id="listeners">Listeners</h2>
+</section>
+
+<section>
+<p>There are different ways of listening to events on elements of the DOM. The correct solution is to use the <code>addEventListener</code> method directly on the element.</p>
+<p>In order to keep the content/behaviour separation, you shouldn&#39;t use <code>onclick</code>, <code>onload</code>... attributes in your HTML code.</p>
+<p>If you use IE before version 9, you&#39;ll have to deal with their specific method <code>attachEvent</code>. Event names a prefixed by <code>on</code> and the event object is not passed to your callback, it can be accessed with <code>window.event</code>.</p>
+<h3>Add</h3>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"james"</span> <span class="attribute">onclick</span>=<span class="value">"bond()"</span>></span>
+<span class="comment">&lt;!-- no content/behaviour separation :-( --></span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> james = document.getElementById(<span class="string">'james'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">james.onclick = bond;                         <span class="comment">// only one listener :-(</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">james.addEventListener(<span class="string">'click'</span>, bond, <span class="literal">false</span>); <span class="comment">// W3C Standard</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">james.attachEvent(<span class="string">'onclick'</span>, bond);           <span class="comment">// IE &lt; 9            :-(</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> bond = <span class="keyword">function</span>(ev) {
+  ev = ev != <span class="literal">null</span> ? ev : window.event;        <span class="comment">// IE &lt; 9 needs this :-(</span>
+  console.log(ev);
+  console.log(<span class="string">'My Name is Bond...'</span>);
+  setTimeout(<span class="keyword">function</span>() { console.log(<span class="string">'...James Bond.'</span>); }, <span class="number">800</span>);
+}</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/element.addEventListener">addEventListener reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Remove</h3>
+<p>Same remarks as for adding event listeners, use the W3C standard when you can. Note that you must use the same <code>function</code> reference to remove an event listener. Removing an anonymous <code>function</code> won&#39;t work.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> james = document.getElementById(<span class="string">'james'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">div.onclick = <span class="literal">null</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">div.removeEventListener(<span class="string">'click'</span>, bond, <span class="literal">false</span>);  <span class="comment">// W3C Standard</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">div.dettachEvent(<span class="string">'onclick'</span>, bond);              <span class="comment">// IE &lt; 9         :-(</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/element.removeEventListener">removeEventListener reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Example</h3>
+<p>Try to click on the actors with or without maintaining the <code>ctrl</code> key down.</p>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/8Pd2T/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="cover">
+<h2 id="types-amp-properties">Types &amp; properties</h2>
+</section>
+
+<section>
+<h3>Common properties</h3>
+<p>When you receive an event with your listener, you can access the <code>event</code> object. It has several useful properties like <code>target</code> or <code>type</code>. Some of them are used in special conditions like bubbling, capturing or cancelling. See reference for more details.</p>
+
+<ul class="incremental">
+<li><code>target</code></li>
+<li><code>type</code></li>
+<li><code>timeStamp</code></li>
+<li><code>eventPhase</code></li>
+<li><code>bubbles</code></li>
+<li><code>currentTarget</code></li>
+<li><code>cancelable</code></li>
+<li><code>defaultPrevented</code></li>
+<li><code>isTrusted</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/DOM/event">Event reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>UI Events</h3>
+<p>UI Events are special kind of events important for window, resources like images or just simple HTML elements.</p>
+
+<ul class="incremental">
+<li><code>load</code></li>
+<li><code>unload</code></li>
+<li><code>abort</code></li>
+<li><code>error</code></li>
+<li><code>resize</code></li>
+<li><code>scroll</code></li>
+<li><code>select</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-uievents">User Interface Event Types (w3c.org)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Example : <code>scroll</code></h4>
+<p>Scroll the window with your mouse or using the scrollbars!</p>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/hd2qL/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="two-columns">
+<h3>Mouse</h3>
+<p>Mouse events are really popular when dealing with web applications. There&#39;s a lot of events available. Understanding the differences between them is not so simple.</p>
+<p>When you reveive a mouse event with a listener, you can access mouse specific properties such as cursor position etc... See reference for more details.</p>
+<p>Note that <code>mouseenter</code> and <code>mouseleave</code> are only supported by IE and Opera.</p>
+<h4>Events</h4>
+
+<ul class="incremental">
+<li><code>click</code></li>
+<li><code>dblclick</code></li>
+<li><code>mousedown</code></li>
+<li><code>mouseenter</code></li>
+<li><code>mouseleave</code></li>
+<li><code>mouseup</code></li>
+<li><code>mouseover</code></li>
+<li><code>mousemove</code></li>
+<li><code>mouseout</code></li>
+</ul>
+<h4>Properties</h4>
+
+<ul class="incremental">
+<li><code>screenX</code></li>
+<li><code>screenY</code></li>
+<li><code>clientX</code></li>
+<li><code>clientY</code></li>
+<li><code>ctrlKey</code></li>
+<li><code>shiftKey</code></li>
+<li><code>relatedTarget</code></li>
+<li><code>altKey</code></li>
+<li><code>metaKey</code></li>
+<li><code>button</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-mouseevents">Mouse Event Types (w3c.org)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/Event/UIEvent/MouseEvent">MouseEvent (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Example : Mouse events</h4>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/8vBXX/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="two-columns">
+<h3>Keyboard</h3>
+<p>Except for <code>input</code> and <code>textarea</code>, it is often better to listen to keyboard events on the window object. See bubbling/propagation below for more details.</p>
+<p>When you reveive a keyboard event with a listener, you can access keyboard specific properties to know which key was pressed etc... See reference for more details.</p>
+<p>DOM Event specification level 3 deprecates widely used properties such as <code>keyCode</code> or <code>charCode</code>. They are replaced by <code>key</code> and <code>char</code> but have a different behaviour. See reference for more details.</p>
+<h4>Events</h4>
+
+<ul class="incremental">
+<li><code>keydown</code></li>
+<li><code>keypress</code></li>
+<li><code>keyup</code></li>
+</ul>
+<h4>Properties</h4>
+
+<ul class="incremental">
+<li><code>altKey</code></li>
+<li><code>ctrlKey</code></li>
+<li><code>char</code> &amp; <code>charCode</code></li>
+<li><code>key</code> &amp; <code>keyCode</code></li>
+<li><code>location</code></li>
+<li><code>metaKey</code></li>
+<li><code>shiftKey</code></li>
+<li><code>repeat</code></li>
+<li><code>locale</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-keyboardevents">Keyboard Event Types (w3c.org)</a></li>
+<li><a href="https://developer.mozilla.org/en/DOM/KeyboardEvent">KeyboardEvent (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Example : Keyboard events</h4>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/DGdW2/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="two-columns">
+<h3>Focus</h3>
+<p>Focus events are often used on HTML forms. Note that getting and losing focus is not only done by mouse clicks. The order in which those different events are fired is not consistent over each browsers. See reference for more details.</p>
+<h4>Events</h4>
+
+<ul class="incremental">
+<li><code>blur</code></li>
+<li><code>focus</code></li>
+<li><code>focusin</code></li>
+<li><code>focusout</code></li>
+<li><code>DOMFocusIn</code></li>
+<li><code>DOMFocusOut</code></li>
+</ul>
+<h4>Properties</h4>
+
+<ul class="incremental">
+<li><code>relatedTarget</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-focusevent">Focus Event Types (w3c.org)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Example : Focus events</h4>
+<p>Click on the two gray input text!.</p>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/7T238/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section>
+<h3>Forms</h3>
+<p>These events are specific to HTML forms and are not part of the DOM 3 specification. See reference for more details...</p>
+<h4>Events</h4>
+
+<ul class="incremental">
+<li><code>change</code></li>
+<li><code>submit</code></li>
+<li><code>reset</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-eventgroupings-htmlevents">DOM Events 2 HTML events (w3c.org)</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#changes-drafts">Why form events are not in the DOM Events 3 specification (w3c.org)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>There&#39;s more...</h3>
+<p>Mutation events were a DOM Events level 2 specification. There&#39;s a few reason for its deprecation in DOM Events level 3. There&#39;s a work in progress to find a replacement. See reference for more details.</p>
+<p>In order to go further from just handling simple keyboard events, the <code>textinput</code> event is added to handle new ways to input text : speech, handwriting...  See reference for more details.</p>
+<p>Composition events are also added to handle specific and special text input. See reference for more details.</p>
+
+<ul class="incremental">
+<li>Touch gestures</li>
+<li>Device orientation</li>
+<li>Custom events</li>
+<li>Drag n drop</li>
+<li>History</li>
+<li>Message</li>
+<li>Mutation</li>
+<li>TextInput</li>
+<li>Composition</li>
+<li>Wheel</li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/touch-events/">Touch Events (w3c.org)</a></li>
+<li><a href="http://www.w3.org/TR/orientation-event/">Device Orientation Events (w3c.org)</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-eventgroupings-mutationevents">Mutation Event Types (w3c.org)</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-wheelevents">Wheel Event Types (w3c.org)</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-textevents">Text Event Types (w3c.org)</a></li>
+<li><a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-compositionevents">Composition Event Types (w3c.org)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="bubbling-propagation">Bubbling / propagation</h2>
+</section>
+
+<section>
+<h3>Principle</h3>
+
+<p class="list incremental">When an <strong>event is fired</strong> on an element of the DOM, the event registered <strong>listeners are invoked</strong>. After this step, <strong>most events</strong> <strong>“bubble” up the DOM tree</strong>.</p>
+
+<p class="list incremental">This behaviour can be used to <strong>improve performances</strong>. Instead of adding N listeners for N sibling elements, just listen to their parent. Because of event propagration your unique listener set on the parent will still receive events fired on children elements.</p>
+<p>You can determine if the event you&#39;re dealing with has been bubbled to your listener or not with <code>eventPhase</code> property.</p>
+<p>You can prevent an event from bubbling up the DOM tree by calling <code>stopPropagation()</code> on the event.</p>
+<p>Bubbling is also called propagation.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Determine if the event has bubbled up to the listener</span>
+console.log(ev.eventPhase === Event.BUBBLING_PHASE); <span class="comment">// true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Prevents event from "bubbling" up the DOM tree</span>
+ev.stopPropagation();</code></pre>
+
+</section>
+
+<section>
+<h3>Example : propagation</h3>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/yJGCk/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="cover">
+<h2 id="cancellation-prevent-nbsp-default">Cancellation / prevent&nbsp;default</h2>
+</section>
+
+<section>
+<h3>Principle</h3>
+
+<p class="list incremental">A lot of <strong>events have a default behaviour</strong>. The most common example is <strong>clicks on links</strong>.</p>
+<p>You can determine if the default behaviour of an event can be cancelled using the <code>cancelable</code> property.</p>
+<p>You prevent an event from firing default behaviour after being handled by your listener by calling <code>preventDefault()</code> on the event.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Determine if the default behaviour of the event can be cancelled</span>
+console.log(ev.cancelable);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Prevents event from firing default behaviour</span>
+ev.preventDefault();</code></pre>
+
+</section>
+
+<section>
+<h3>Example : cancellation</h3>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/qptU4/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="cover">
+<h2 id="capture">Capture</h2>
+</section>
+
+<section>
+<h3>Principle</h3>
+<p>When you listen to events on a given element using the W3C standard <code>addEventListener</code> method, you can specify if you want to capture events.</p>
+
+<p class="list incremental">A <strong>listener with capture</strong> will <strong>receive events</strong> <strong>from children elements</strong> <strong>BEFORE</strong> they receive it themselves.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Set last argument to true to capture</span>
+<span class="comment">// Doesn't work on IE &lt; 9 with attachEvent</span>
+james.addEventListener(<span class="string">'click'</span>, bond, <span class="literal">true</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Determine if the event was "captured" by the listener</span>
+console.log(event.eventPhase === Event.CAPTURING_PHASE); <span class="comment">// true</span></code></pre>
+
+</section>
+
+<section>
+<h3>Example</h3>
+<iframe class="jsfiddle" height="500" src="http://jsfiddle.net/hsablonniere/NABSL/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+</section>
+
+<section class="cover">
+<h2 id="jquery-amp-events">jQuery &amp; Events</h2>
+</section>
+
+<section>
+<h3>How jQuery helps</h3>
+
+<p class="list incremental">In general jQuery makes the <strong>code easier to read</strong> when dealing with events. It&#39;s incredibly easier to implement <strong>event delegation</strong>. It also helps a lot to <strong>deal with IE</strong> strange way to manipulate events.</p>
+</section>
+
+<section>
+<h3>Classic <code>on/off</code></h3>
+<p>Since jQuery 1.7, all event listening are done using <code>on</code> and <code>off</code> methods. If you were used to use <code>bind/unbind</code>, <code>delegate/undelegate</code> or <code>live/die</code>, you should stop and prefer <code>on</code> and <code>off</code>.</p>
+<p>For example a classic <code>addEventListener</code> like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> james = document.getElementById(<span class="string">'james'</span>);
+james.addEventListener(<span class="string">'click'</span>, bond, <span class="literal">false</span>);</code></pre>
+
+<p>Would be replaced by this jQuery code :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">$(<span class="string">'#james'</span>).on(<span class="string">'click'</span>, bond);</code></pre>
+
+<p>It also works for many elements.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> lis = document.querySelectorAll(<span class="string">'#actors li'</span>);
+<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.length; i++) {
+  lis[i].addEventListener(<span class="string">'click'</span>, callback, <span class="literal">false</span>);
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">$(<span class="string">'#actors li'</span>).on(<span class="string">'click'</span>, callback);</code></pre>
+
+
+<p class="warning">The code above creates as many listeners as <code>li</code> elements in the DOM. It&#39;s usually bad. Be sure to prefer a syntax that leverage event delegation.</p>
+<p>You could also use shortcuts like that. There&#39;s almost one shortcut for each event type.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">$(<span class="string">'#actors li'</span>).click(callback);
+<span class="comment">// same shortcuts for other events</span></code></pre>
+
+<p>When you wanna <code>removeEventListener</code>, just call <code>off</code> method.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">$(<span class="string">'#actors li'</span>).off(<span class="string">'click'</span>, callback);</code></pre>
+
+</section>
+
+<section>
+<h3>Event delegation</h3>
+<p>The new <code>on</code> method eases event delegation. Just select the node you want to delegate events to using <code>$</code> and pass the targeted children selector as second argument of <code>on</code>.</p>
+<p>This example would be easy to change to use event delegation.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Doesn't uses event delegation</span>
+$(<span class="string">'#actors li'</span>).on(<span class="string">'click'</span>, callback);</code></pre>
+
+<p>Now that&#39;s better.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Uses event delegation</span>
+$(<span class="string">'#actors'</span>).on(<span class="string">'click'</span>, <span class="string">'li'</span>, callback);</code></pre>
+
+<p>It&#39;s almost the same as doing that :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// More or less equivalent to that</span>
+<span class="keyword">var</span> ul = querySelector(<span class="string">'#actors'</span>);
+ul.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span>(ev) {
+  <span class="keyword">if</span> (ev.target.nodeName === <span class="string">'LI'</span>) {
+    callback(ev);
+  }
+}, <span class="literal">false</span>);</code></pre>
+
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

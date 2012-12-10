@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Speed is your #1 feature</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Web performances in general : JS, DOM, CSS, Network...">
+<meta name="keywords" content="performances, speed, JavaScript, DOM, CSS, Network">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/speed-is-your-1-feature.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>Speed is your #1 feature</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#the-golden-rule">The golden rule</a></li>
+<li><a href="#importance-of-performance">Importance of performance</a></li>
+<li><a href="#network">Network</a></li>
+<li><a href="#html">HTML</a></li>
+<li><a href="#css">CSS</a></li>
+<li><a href="#javascript">JavaScript</a></li>
+<li><a href="#images">Images</a></li>
+<li><a href="#links-amp-documentation">Links &amp; documentation</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>This isn&#39;t a car</h4>
+
+<p class="list incremental">Like some big search engine says, <strong>&quot;Speed should be your number one feature!&quot;</strong>. If you were aksed to build a website now, you&#39;ll have <strong>trouble to make it scale</strong>. Building an optimized website is hard. There&#39;s a <strong>lot of techniques</strong> to master. Each one has an explanation, <strong>there&#39;s no magic tricks</strong>. <strong>Pay attention to details</strong> and you&#39;re next huge website will be <strong>really fast</strong>!</p>
+</section>
+
+<section>
+<h2 id="the-golden-rule">The golden rule</h2>
+
+<blockquote class="quote">
+<p>&quot;If you don&#39;t have optimized your frontend, you don&#39;t have optimized.&quot;</p>
+</blockquote>
+</section>
+
+<section>
+<h2 id="importance-of-performance">Importance of performance</h2>
+
+<ul class="incremental">
+<li>Google<br>500 ms slower =&gt; 20% drop in traffic</li>
+<li>Yahoo!<br>400 ms slower =&gt; 5-9% drop in full page traffic</li>
+<li>Amazon<br>100 ms slower =&gt; 1% drop in sales</li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="network">Network</h2>
+</section>
+
+<section class="cover">
+<h3>The 80/20 rule</h3>
+<p>Only 10-20% of the end user response time is spent downloading the HTML document.</p>
+<p>The other 80-90% is spent downloading all the components and parsing/executing them...</p>
+</section>
+
+<section>
+<h4>Example with <code>www.fnac.com</code></h4>
+<p>46ms are spent just to establish the connection.</p>
+<p>211ms are spent on server side.</p>
+<p>156ms are spent to download the response.</p>
+<p>It makes a total of 412ms for a 3100ms loading time =&gt; 13%.</p>
+<img src="../img/80-20-rule-fnac.com.png" alt="www.fnac.com network analysis">
+</section>
+
+<section>
+<h4>Other websites</h4>
+<table id="time-spent-table">
+  <thead>
+    <tr><td class="empty">  <td>Time Retrieving HTML  <td>Time Elsewhere
+  </thead>
+  <tbody>
+    <tr><td>Yahoo!   <td>10%  <td>90%
+    <tr><td>Google   <td>25%  <td>75%
+    <tr><td>MySpace  <td>9%   <td>91%
+    <tr><td>MSN      <td>5%   <td>95%
+    <tr><td>ebay     <td>5%   <td>95%
+    <tr><td>Amazon   <td>38%  <td>62%
+    <tr><td>YouTube  <td>9%   <td>91%
+    <tr><td>CNN      <td>15%  <td>85%
+  </tbody>
+</table>
+
+</section>
+
+<section>
+<h3>Reduce the number of requests</h3>
+<p>Each time you make an HTTP round trip, you&#39;re losing time and bandwith. Don&#39;t forget about the HTTP header and the time spent to send the request and receive the response.</p>
+<p>The best thing to do is to merge resources. Be smart don&#39;t deliver just one CSS and one JavaScript file. A good idea is to have a global one that is used all over the site and one specific for the current page. Here&#39;s an example.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/main.css"</span> /></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/forms.css"</span> /></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/table.css"</span> /></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/layout.css"</span> /></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/signup.css"</span> /></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/faq.css"</span> /></span>
+<span class="comment">&lt;!-- etc... --></span></code></pre>
+
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="comment">&lt;!-- One file global for the entire site --></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/global.css"</span> /></span>
+<span class="comment">&lt;!-- One file specific to the current page --></span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"/css/my-page.css"</span> /></span></code></pre>
+
+</section>
+
+<section class="cover">
+<h3>Split components across domains</h3>
+<p>The HTTP 1.1 specification suggests that browsers download two components in parallel per hostname. Nowaday, most recent browsers paralellize 6 downloads in parallel but IE6 and IE7 are still limited to 2.</p>
+<p>Using multiple subdomains you can parallelize more components and load your pages faster.</p>
+</section>
+
+<section>
+<h4>One domain example</h4>
+<img src="../img/http-parallelize-downloads-unique-domain.png" alt="Example of parallel downloads with one domain">
+</section>
+
+<section>
+<h4>Multiple domains example</h4>
+<img src="../img/http-parallelize-downloads-multiple-domain.png" alt="Example of parallel downloads with multiple domains">
+
+<ul class="useful-links">
+<li><a href="http://stevesouders.com/cuzillion/">Cuzillion (stevesouders.com)</a></li>
+<li><a href="http://www.softwareishard.com/har/viewer/">Har viewer (softwareishard.com)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>Reduce DNS lookup</h3>
+<p>Each time your browser needs to reach a new hostname, it has to resolve its IP using DNS. It adds time to your total reponse time and can damage performance. However, because there are benefits from using multiple hostnames to induce parallel downloads, this depends somewhat on the number of resources served per page. The optimal number is somewhere between 1 and 5 hosts (1 main host plus 4 hosts on which to parallelize cacheable resources). As a rule of thumb, you shouldn&#39;t use more than 1 host for fewer than 6 resources; fewer than 2 resources on a single host is especially wasteful.</p>
+</section>
+
+<section class="cover">
+<h3>Use compression</h3>
+<p>Enable compression on server side. This is mandatory, you can save huge amount of bandwith using this. DO NOT compress binary files, only text ones.</p>
+</section>
+
+<section>
+<h4>Example with compression</h4>
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="request">GET <span class="string">/wiki/The_Dark_Knight</span> HTTP/1.1</span>
+<span class="attribute">Host</span>: <span class="string">fr.wikipedia.org</span>
+<span class="attribute">User-Agent</span>: <span class="string">Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.2...</span>
+<span class="attribute">Accept</span>: <span class="string">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span>
+<span class="attribute">Accept-Encoding</span>: <span class="string">gzip,deflate,sdch</span>
+<span class="attribute">Accept-Language</span>: <span class="string">en-US,en;q=0.8,fr-FR;q=0.6,fr;q=0.4</span>
+<span class="attribute">Accept-Charset</span>: <span class="string">ISO-8859-1,utf-8;q=0.7,*;q=0.3          /* ... */</span></code></pre>
+
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="status">HTTP/1.0 <span class="number">200</span> OK</span>
+<span class="attribute">Server</span>: <span class="string">Apache</span>
+<span class="attribute">Content-Type</span>: <span class="string">text/html; charset=UTF-8</span>
+<span class="attribute">Content-Encoding</span>: <span class="string">gzip</span>
+<span class="attribute">Content-Language</span>: <span class="string">fr</span>
+<span class="attribute">Content-Length</span>: <span class="string">62477                                   /* ... */</span></code></pre>
+
+</section>
+
+<section>
+<h4>Comparison</h4>
+<pre data-language="http"><code class="language-http"><span class="request">GET <span class="string">/wiki/The_Dark_Knight</span> HTTP/1.1</span></code></pre>
+
+
+<ul class="incremental">
+<li>294 306B   100% (no compression)</li>
+<li>62 477B    21%  (gzip)</li>
+</ul>
+</section>
+
+<section>
+<h3>Cookies</h3>
+
+<ul class="incremental">
+<li>Reduce their size</li>
+<li>Serve static contents with cookie less domain</li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>Use HTTP cache properly</h3>
+</section>
+
+<section>
+<h4>Expiration</h4>
+<p>Expiration can use two headers <code>Expires</code> and <code>Cache-Control: max-age=5</code>. Using these headers, servers provide informations for content expiration. Clients can overload them.</p>
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="request">GET <span class="string">/skins-1.18/common/images/magnify-clip.png</span> HTTP/1.1</span>
+<span class="attribute">Host</span>: <span class="string">bits.wikimedia.org</span>
+<span class="attribute">Cache-Control</span>: <span class="string">no-cache    /* ... */</span></code></pre>
+
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="status">HTTP/1.1 <span class="number">200</span> OK</span>
+<span class="attribute">Cache-Control</span>: <span class="string">max-age=2592000</span>
+<span class="attribute">Expires</span>: <span class="string">Wed, 14 Dec 2011 12:07:44 GMT</span>
+<span class="attribute">Age</span>: <span class="string">588240                /* ... */</span></code></pre>
+
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="request">GET <span class="string">/skins-1.18/common/images/magnify-clip.png</span> HTTP/1.1</span>
+<span class="attribute">Host</span>: <span class="string">bits.wikimedia.org</span>
+<span class="attribute">Cache-Control</span>: <span class="string">max-age=0   /* ... */</span></code></pre>
+
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="status">HTTP/1.1 <span class="number">304</span> Not Modified</span>
+<span class="attribute">Cache-Control</span>: <span class="string">max-age=2592000</span>
+<span class="attribute">Expires</span>: <span class="string">Wed, 14 Dec 2011 12:07:44 GMT</span>
+<span class="attribute">Age</span>: <span class="string">588240                /* ... */</span></code></pre>
+
+</section>
+
+<section>
+<h4>Validation</h4>
+<p>Validation can use two set of headers <code>If-Modified-Since/Last-Modified</code> and <code>If-None-Match/ETag</code>. Using these headers, servers provide informations for content validation (date and data). Clients can overload them.</p>
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="request">GET <span class="string">/skins-1.18/common/images/magnify-clip.png</span> HTTP/1.1</span>
+<span class="attribute">Host</span>: <span class="string">bits.wikimedia.org</span>
+<span class="attribute">If-Modified-Since</span>: <span class="string">Mon, 19 Sep 2011 16:10:23 GMT</span>
+<span class="attribute">If-None-Match</span>: <span class="string">"cc-4ad4d9489f9c0"                   /* ... */</span></code></pre>
+
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="status">HTTP/1.1 <span class="number">304</span> Not Modified</span>
+<span class="attribute">Last-Modified</span>: <span class="string">Mon, 19 Sep 2011 16:10:23 GMT</span>
+<span class="attribute">ETag</span>: <span class="string">"cc-4ad4d9489f9c0"                            /* ... */</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.slideshare.net/fabpot/caching-on-the-edge">Caching on the edge (by Fabien Potencier slideshare)</a></li>
+<li><a href="http://www.ietf.org/rfc/rfc2616.txt">RFC 2616 (IETF)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Use a CDN</h3>
+<p>A CDN is a content delivery network. It consist of a system of computers containing copies of data placed at various nodes of a network. Request are served by the closest node which has a cached version of the contents from yout central server.</p>
+<img src="../img/cdn-how-it-works.jpg" alt="CDN : how is works ?">
+
+<ul class="useful-links">
+<li><a href="http://www.akamai.fr/enfr/">Akamai</a></li>
+<li><a href="http://aws.amazon.com/cloudfront/">Amazon CloudFront</a></li>
+<li><a href="https://www.cloudflare.com/">Cloudflare</a></li>
+<li><a href="http://www.mirror-image.com/site/">Mirror image</a></li>
+<li><a href="http://www.limelight.com/">Limelight</a></li>
+<li><a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=gISR8aUgYRQ#!">Challenges of delivering content and applications on the Internet (by Tom Leighton, Akamai founder) (Youtube)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Avoid redirects and errors</h3>
+<p>Redirects can have useful usage :</p>
+
+<ul class="incremental">
+<li>To indicate that something has moved.</li>
+<li>To catch mispelled URLs.</li>
+<li>To connect between different parts of a site or application (country-code, protocols...).</li>
+<li>After a form POST.</li>
+</ul>
+<p>Except from theses cases, try to avoid redirects, it saves time and bandwidth.</p>
+</section>
+
+<section class="cover">
+<h2 id="html">HTML</h2>
+</section>
+
+<section class="cover">
+<h3>Validate your markup</h3>
+<p>Except from the fact that unvalid documents do not ensure correct browser handling, they can also push browsers to take more time to process markup.</p>
+</section>
+
+<section>
+<h3>DOM Elements</h3>
+<p>Because the DOM is an object representing a giant DOM, the less elements you have the faster web page you get.Try to keep it small.</p>
+<p>Not only for JavaScript but also for CSS computations, the depth of your DOM can have impacts on perfomances. Try to keep it low.</p>
+
+<ul class="incremental">
+<li>DOM depth : small is better</li>
+<li>Number of elements : small is better</li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://mir.aculo.us/dom-monster/">DOM Monster</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="css">CSS</h2>
+</section>
+
+<section>
+<h3>Minify/compress</h3>
+<p>It&#39;s one of the most important rule. The process consist of 2 steps : removing all unnecessary characters. Some tools are also able to optimize some parts of the code. It&#39;s a great way to save bandwidth.</p>
+
+<ul class="incremental">
+<li>Twitter bootstrap :</li>
+<li><code>bootstrap.css       121.7KB   100%</code></li>
+<li><code>bootstrap.min.css   101.3KB    83%</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://960.gs/">960.gs</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>CSS on top</h3>
+<p>Browsers block rendering a web page until all external stylesheets have been downloaded. If you used, inline <code>style</code> elements, it can cause reflows and shifting of contents. This way the page can be progressively rendered.</p>
+</section>
+
+<section class="cover">
+<h2 id="javascript">JavaScript</h2>
+</section>
+
+<section>
+<h3>Minify/compress</h3>
+<p>It&#39;s one of the most important rule. The process consist of 2 steps : removing all unnecessary characters and potentially rename functions and variables where it has no consequenses. Some tools are also able to optimize some parts of the code. It&#39;s a great way to save bandwidth.</p>
+
+<ul class="incremental">
+<li>jQuery bootstrap :</li>
+<li><code>jquery-1.8.3.min.js   262KB   100%</code></li>
+<li><code>jquery-1.8.3.min.js    92KB    35%</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://code.jquery.com/jquery-1.7.min.js">jQuery 1.7 minified (jquery.com)</a></li>
+<li><a href="http://code.jquery.com/jquery-1.7.js">jQuery 1.7 non-minified (jquery.com)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>JavaScript at bottom</h3>
+<p>Even if it&#39;s not natural, putting JavaScript at the bottom should be the golden rule!</p>
+<p>The different advantages are :</p>
+
+<ul class="incremental">
+<li>You don&#39;t need to listen and wait for <code>load</code> or <code>DOMContentLoaded</code> events to fire.</li>
+<li>Page will render before trying to parse scripts...</li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://robertnyman.com/2008/04/23/where-to-include-javascript-files-in-a-document/">Where To Include JavaScript Files In A Document (<a href="http://robertnyman.com">http://robertnyman.com</a>)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>JS in head</h4>
+<p>When the JavaScript is in the <code>head</code>, the browser waits for scripts to be downloaded to calculate style and paint the layout.</p>
+<img src="../img/js-at-top.png" alt="JavaScript at top in head">
+</section>
+
+<section>
+<h4>JS at end of body</h4>
+<p>When the JavaScript is at the bottom of <code>body</code>, the browser does not wait for scripts to be downloaded to calculate style and paint the layout.</p>
+<img src="../img/js-at-bottom.png" alt="JavaScript at bottom of body">
+</section>
+
+<section>
+<h3>Minimize DOM Access</h3>
+<p>Nowadays, JavaScript is really fast. What can be slow in a browser is the DOM. Optimize your access (read/write) to the DOM and you&#39;ll have a faster website.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// BAD</span>
+<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) {
+  document.getElementById(<span class="string">'joker'</span>).innerHTML += i + <span class="string">' '</span>;
+}</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// DOM access => (1 get + 1 set) * 1000 => 2000 operations ~ 120ms</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// GOOD</span>
+<span class="keyword">var</span> content = <span class="string">''</span>;
+<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) {
+  content += i + <span class="string">' '</span>;
+}
+document.getElementById(<span class="string">'joker'</span>).innerHTML += content;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// DOM access => 1 get + 1 set          =>    2 operations ~ 1ms</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://jsperf.com/simple-dom-access">Simple DOM access (jsperf.com)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="images">Images</h2>
+</section>
+
+<section>
+<h3>Use sprites</h3>
+<p>Sprites allow you to use only one HTTP request/response to retreive images. It saves time and bandwidth.</p>
+<p>All the big web sites use it to get faster.</p>
+<p>Use it for icons and decoratives stuffs but keep separates files for photos and real images.</p>
+<img src="../img/google-sprite-nav_logo95.png" alt="Google sprite">
+</section>
+
+<section>
+<h4>Google example</h4>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"csb gbil ch"</span> <span class="attribute">style</span>=<span class="value">"background-position:-74px 0;width:20px"</span>></span><span class="tag">&lt;/<span class="title">span</span>></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="class">.csb</span>, <span class="class">.ss</span>, <span class="class">.play_icon</span>, <span class="class">.mini_play_icon</span>, <span class="class">.micon</span>, <span class="class">.licon</span>, <span class="class">.close_btn</span>, <span class="id">#tbp</span>, <span class="class">.mbi</span>, <span class="class">.inline_close_btn</span> <span class="rules">{
+  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="function">url(/images/nav_logo95.png)</span> no-repeat</span>;</span>
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="class">.csb</span>, <span class="class">.ss</span> <span class="rules">{
+  <span class="rule"><span class="attribute">background-position</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span></span>;</span>
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">40</span>px</span>;</span>
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span>;</span>
+<span class="rule">}</span></span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.smushit.com/ysmush.it/">smushit.com</a></li>
+<li><a href="http://spritegen.website-performance.org/">spritegen</a></li>
+<li><a href="http://compass-style.org/help/tutorials/spriting/">compass-style.org</a></li>
+<li><a href="http://csssprites.com/">csssprites.com</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Specify dimensions</h3>
+<p>If you specify dimensions on images like in the example, your browser will only paint the images once they&#39;re downloaded. If you don&#39;t, you&#39;re browser will recalculate the layout each time an image is downloaded. It can be a visual issue for your visitors and it consumes time and CPU.</p>
+
+<pre class="incremental"><code class="language-unknown"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"the-dark-knight.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Poster"</span>></span></code></pre>
+
+
+<pre class="incremental"><code class="language-unknown"><span class="tag">&lt;<span class="title">img</span>  <span class="attribute">src</span>=<span class="value">"the-dark-knight.jpg"</span> <span class="attribute">alt</span>=<span class="value">"Poster"</span> <span class="attribute">height</span>=<span class="value">"400"</span> <span class="attribute">width</span>=<span class="value">"300"</span>></span></code></pre>
+
+</section>
+
+<section>
+<h3>Inline images / Data URIs</h3>
+<p>This process can be an alternative to sprites. You can convert your images to a text representation. It takes a little more space but if you gzip you should be OK. It&#39;s better to use it in CSS an cachable resources.</p>
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">li</span> <span class="rules">{
+  <span class="rule"><span class="attribute">background</span>:<span class="value">
+    <span class="function">url(data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7)</span> no-repeat left center</span>;</span>
+  <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">5</span>px <span class="number">0</span> <span class="number">5</span>px <span class="number">25</span>px</span>;</span>
+<span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">width</span>=<span class="value">"16"</span> <span class="attribute">height</span>=<span class="value">"16"</span> <span class="attribute">alt</span>=<span class="value">"star"</span> <span class="attribute">src</span>=<span class="value">"data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"</span> /></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">data</span>:<span class="attr_selector">[&lt;mime type>]</span><span class="attr_selector">[;charset=&lt;charset>]</span><span class="attr_selector">[;base64]</span>,&lt;<span class="tag">encoded</span> <span class="tag">data</span>></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="comment">/* Doesn't work on IE&lt;8 */</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://css-tricks.com/5970-data-uris/">Data URIs (css-tricks.com)</a></li>
+<li><a href="http://websemantics.co.uk/online_tools/image_to_data_uri_convertor">Image to Data URI convertor (websemantics.co.uk)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Optimize images</h3>
+<p>There&#39;s plenty of tools on the web to compress your images, with or without data loss.</p>
+<ul>
+<li><a href="http://freecode.com/projects/jpegoptim">jpegoptim</a></li>
+<li><a href="http://optipng.sourceforge.net/">OptiPNG</a></li>
+<li><a href="http://www.advsys.net/ken/util/pngout.htm">PNGOUT</a></li>
+<li><a href="http://www.punypng.com/">PunyPNG</a></li>
+<li><a href="http://www.jpegmini.com/main/home">JPEGmini</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="links-amp-documentation">Links &amp; documentation</h2>
+<ul>
+<li><a href="http://code.google.com/speed/page-speed/docs/rules_intro.html">Google page speed (google.com)</a></li>
+<li><a href="http://www.slideshare.net/caillou/speedy-app-frontend-performance-considerations">Speedy apps (slideshare.net)</a></li>
+<li><a href="http://www.slideshare.net/fabpot/caching-on-the-edge">Caching on the edge (slideshare.net)</a></li>
+<li><a href="http://www.slideshare.net/stoyan/high-performance-web-pages-20-new-best-practices">High performance web pages... (slideshare.net)</a></li>
+<li><a href="http://www.slideshare.net/stoyan/dont-make-me-wait-or-building-highperformance-web-applications">Don&#39;t make me wait... (slideshare.net)</a></li>
+<li><a href="http://www.slideshare.net/stoyan/high-performance-dom-scripting">High performance DOM scripting (slideshare.net)</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

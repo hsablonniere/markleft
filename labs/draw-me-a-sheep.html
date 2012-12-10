@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Draw me a sheep</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Experimenting with canvas and SVG">
+<meta name="keywords" content="javascript, canvas, SVG">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Draw me a sheep</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#squares">Squares</a></li>
+<li><a href="#circles-sheep-and-eraser">Circles, sheep and eraser...</a></li>
+<li><a href="#make-the-desert-beautiful">Make the desert beautiful</a></li>
+</ul>
+</div>
+
+<img src="../img/petit-prince.jpg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h2 id="squares">Squares</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to use a canvas and draw squares.</li>
+</ol>
+<h3>Context</h3>
+<p>We&#39;ll be building a simple drawing tool that can at least draw squares.</p>
+<h3>Steps</h3>
+<ul>
+<li>Add some event listeners to intercept <code>mouseup</code>, <code>mousedown</code> and <code>mousemove</code> on the <code>.drawing-canvas</code> element.</li>
+<li>If you detect a <code>mousedown</code> or a <code>mousemove</code>, just draw a square of the appropriate color and size centered around cursor position.</li>
+<li>You&#39;ll have to retrieve the color input value. Don&#39;t get it from the DOM each time you draw, listen to <code>change</code> event on the input.</li>
+<li>You&#39;ll have to retrieve the size input value. Don&#39;t get it from the DOM each time you draw, listen to <code>change</code> event on the input.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>MUST</strong> organize your code into functions...</li>
+<li><strong>DO NOT</strong> repeat yourself.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>index.js</li>
+</ul>
+<h2 id="circles-sheep-and-eraser">Circles, sheep and eraser...</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to draw circle and images on a canvas.</li>
+<li>Know how to clear something from the canvas.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll add some brushes to our drawing tool.</p>
+<h3>Steps</h3>
+<ul>
+<li>Add some event listeners to intercept <code>click</code> events on the different brushes button. Use event delegation.</li>
+<li>Set the value of the current brush in memory.</li>
+<li>Add some CSS and manipulate the DOM to identify which brush is selected.</li>
+<li>Add some code to draw a circle of the correct size and color at the correct position if circle brush is selected.</li>
+<li>Add some code to draw a sheep at the correct position if sheep brush is selected.</li>
+<li>Add some code to erase a square of the correct size from the canvas if eraser brush is selected.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>MUST</strong> organize your code into functions...</li>
+<li><strong>DO NOT</strong> repeat yourself.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>index.js</li>
+<li>index.css</li>
+</ul>
+<h2 id="make-the-desert-beautiful">Make the desert beautiful</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Go beyond simple tasks using a canvas.</li>
+</ol>
+<h3>Context</h3>
+<p>We already have a simple drawing tool. It&#39;s time to push the limits and try unbelivable stuffs. Stuffs that was impossible without flash a few years ago...</p>
+<h3>Ideas</h3>
+<ul>
+<li>Implement the quick fill algorythm</li>
+<li>Use touch events so it works on tablets.</li>
+<li>Improve the design of the app.</li>
+<li>Draw some cubic bezier curves.</li>
+<li>Import images.</li>
+<li>Copy/cut/paste selections...</li>
+<li>Export to file</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>MUST</strong> organize your code into functions...</li>
+<li><strong>DO NOT</strong> repeat yourself.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>index.js</li>
+<li>index.css</li>
+</ul>
+
+</section>

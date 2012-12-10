@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Open the pod bay doors HAL!</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="First JavaScript exercises. String manipulation, type conversion, array traversing...">
+<meta name="keywords" content="javascript, string, types, array">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+
+<h1>Open the pod bay doors HAL!</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#be-polite-and-say-hi">Be polite and say Hi!</a></li>
+<li><a href="#the-metric-system">The metric system!</a></li>
+<li><a href="#open-the-pod-bay-doors-hal">Open the pod bay doors HAL!</a></li>
+</ul>
+</div>
+
+<img src="../img/hal-9000.png" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to JavaScript references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h4>Introduction</h4>
+<p>In the movie &quot;2001, A Space Odyssey&quot;, one of the main character is not a human, he is a computer. His name is HAL 9000. He is one of the most famous A.I. computer in fiction.</p>
+<p>If you don&#39;t know him yet, here&#39;s the anthology scene everyone remembers about him. He refuses to let the astronaut come back into the spaceship after finding out that he wanted to shut him down. Since HAL controls the spaceship and he is the only one &quot;on board&quot;, Dave is in deep troubles.</p>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/6MMmYyIZlC4" frameborder="0" allowfullscreen></iframe>
+
+<p>It seems that other speech capable &quot;so-called&quot; A.I. like Apple Siri has easter eggs concerning this movie :</p>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/YAjhDx4yoAA" frameborder="0" allowfullscreen></iframe>
+
+<p>This lab will help you to build a client side <a href="http://en.wikipedia.org/wiki/Chatterbot">chatbot</a>, step by step. As you guessed, our chatbot is named HAL, we&#39;ll try to mimic some of his best quotes and add a lot of other features to his skillset.</p>
+<h2 id="be-polite-and-say-hi">Be polite and say Hi!</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to manipulate and analyse strings.</li>
+<li>Separate and organize your code into small functions.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll need HAL to have his firsts very narrow conversation skills. He must be able to :</p>
+<ul>
+<li>Reply to some famous Dave questions from the movie (look at <a href="http://www.imdb.com/title/tt0062622/quotes?qt=qt0396921">quotes</a>).</li>
+<li>Remember your name and use it when answering theses questions.</li>
+</ul>
+<h3>Steps</h3>
+<ul>
+<li>Create a file named <code>hal-custom.js</code> and create a function with one parameter named <code>halHandleMessage(msg)</code>.</li>
+<li>After adding this function, you&#39;ll see that submitting text from the input at the bottom of the screen automatically calls your function with the text as argument. This behaviour is handled by the code in <a href="../labs-files/open-the-pod-bay-doors-hal/hal-core.js">hal-core.js</a>. We&#39;ll explain the code of this file in another lesson.</li>
+<li>Add some code in <code>hal-custom.js</code> to handle questions from the movie and reply with the correct answer.</li>
+<li>Add some code in <code>hal-custom.js</code> to handle something like <code>My name is John</code> and save the name. Look at <a href="../labs-files/open-the-pod-bay-doors-hal/hal-core-knowledge.js">hal-core-knowledge.js</a>. You&#39;ll see that by default HAL thinks your name is <code>Dave</code>. If you say your name to HAL, he should use the famous quotes but use your name instead of Dave.</li>
+<li>Add some code in <code>hal-custom.js</code> to always answer the same sentence by default : <code>I&#39;m sorry, Dave. I&#39;m afraid I can&#39;t do that.</code>. Don&#39;t forget to adapt the name.</li>
+<li>Use already existing functions <code>halWrite(stringToWrite)</code> and <code>halSay(stringToSay)</code> when you want HAL to write and/or say something.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>Questions to HAL <strong>MUST</strong> be case insensitive.</li>
+<li>Questions to HAL <strong>MUST</strong> be understood even with punctuation differences.</li>
+<li>You <strong>MUST</strong> organize your code in several functions when you think it&#39;s necessary.</li>
+<li>All the functions you add <strong>MUST</strong> start with the prefix <code>hal</code>.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>carbon-fibre.png</li>
+<li>hal.jpg</li>
+<li>hal.html</li>
+<li>hal-core.js</li>
+<li>hal-core-knowledge.js</li>
+<li>hal-core.css</li>
+<li>hal-custom.js</li>
+<li>speakClient.js</li>
+<li>speakGenerator.js</li>
+<li>speakWorker.js</li>
+</ul>
+<h2 id="the-metric-system">The metric system!</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to manipulate and analyse simple arrays and more complex ones.</li>
+<li>Know how to convert between different types (String, Number, Boolean...)</li>
+<li>Know how to do some Maths : add, multiply, round...</li>
+</ol>
+<h3>Context</h3>
+<p>Dave is American. Using the metric system is hard for him, even with <a href="http://xkcd.com/526/">XKCD&#39;s help</a>. We&#39;ll help Dave by giving HAL the ability to convert lenghts and temperatures.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have a look at <a href="../labs-files/open-the-pod-bay-doors-hal/hal-core-knowledge.js">hal-core-knowledge.js</a>. You&#39;ll see that HAL has all the conversion informations to convert lengths.</li>
+<li>Add some code in <code>hal-custom.js</code> to handle length conversions between the different imperial and metric units HAL knows about.</li>
+<li>As you can see in <a href="../labs-files/open-the-pod-bay-doors-hal/hal-core-knowledge.js">hal-core-knowledge.js</a>, HAL doesn&#39;t know anything about temperature conversion.</li>
+<li>Create a file named <code>hal-custom-knowledge.js</code> and add what HAL needs to know to convert temperatures.</li>
+<li>Add some code in <code>hal-custom.js</code> to handle temperature conversion between <a href="http://en.wikipedia.org/wiki/Celsius">Celsius</a> and <a href="http://en.wikipedia.org/wiki/Fahrenheit">Fahrenheit</a>.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>Length conversions queries <strong>MUST</strong> be like these examples : <code>4 ft in m</code>, <code>5.43 foot in meters</code>. It can be the unit&#39;s short hand or its full name (singular or plural).</li>
+<li>Length conversions answers <strong>MUST</strong> be like this example : <code>1 foot = 0.3048 meters</code>.</li>
+<li>Temperature conversions queries <strong>MUST</strong> be like this example : <code>19 degree celsius to degrees fahrenheit</code>.</li>
+<li>Temperature conversions answers <strong>MUST</strong> be like this example : <code>1 degree Celsius = 33.8 degrees Fahrenheit</code>.</li>
+<li>If the result is not exact, you <strong>MUST</strong> round it to 2 significant figures after decimal point.</li>
+<li><strong>ALWAYS</strong> use the unit&#39;s full name in answers. In English, only 1 is singular, the other numbers are plural.</li>
+<li>Questions to HAL <strong>MUST</strong> be case insensitive.</li>
+<li>If a query doesn&#39;t follow the specified format, HAL <strong>MUST</strong> answer with the default answer. Look at previous exercise.</li>
+<li>You <strong>MUST</strong> organize your code in several functions when you think it&#39;s necessary.</li>
+<li>All the functions and variables you add <strong>MUST</strong> start with the prefix <code>hal</code>.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>carbon-fibre.png</li>
+<li>hal.jpg</li>
+<li>hal.html</li>
+<li>hal-core.js</li>
+<li>hal-core-knowledge.js</li>
+<li>hal-core.css</li>
+<li>hal-custom.js</li>
+<li>hal-custom-knowledge.js</li>
+<li>speakClient.js</li>
+<li>speakGenerator.js</li>
+<li>speakWorker.js</li>
+</ul>
+<h2 id="open-the-pod-bay-doors-hal">Open the pod bay doors HAL!</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to organize big and complex code.</li>
+<li>Discover and experiment with all the methods of <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String">String</a>, <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Number">Number</a>, <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Math">Math</a> and <a href="https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array">Array</a>.</li>
+</ol>
+<h3>Context</h3>
+<p>HAL can do so much more. Try to find new very original and sophisticated services that HAL could help with. He could play games, solve problems, answer questions about general culture... Let your imagination do the work!</p>
+<p>Don&#39;t forget that a good chatbot always has easter eggs...</p>
+<h3>Steps</h3>
+<ul>
+<li>Add all your new functions and real code in <code>hal-custom.js</code>.</li>
+<li>Add all the new general variables HAL needs to know about in <code>hal-custom-knowledge.js</code>.</li>
+<li>If you need to have multiline answers just use <code>\n</code> to pass lines.</li>
+<li>If you want to change completely the way HAL look likes, create <code>hal-custom.css</code> and hack around...</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>MUST</strong> organize your code in several functions when you think it&#39;s necessary.</li>
+<li>All the functions and variables you add <strong>MUST</strong> start with the prefix <code>hal</code>.</li>
+<li>HAL <strong>CANNOT</strong> open the pod bay doors.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>carbon-fibre.png</li>
+<li>hal.jpg</li>
+<li>hal.html</li>
+<li>hal-core.js</li>
+<li>hal-core-knowledge.js</li>
+<li>hal-core.css</li>
+<li>hal-custom.js</li>
+<li>hal-custom-knowledge.js</li>
+<li>(hal-custom.css)</li>
+<li>speakClient.js</li>
+<li>speakGenerator.js</li>
+<li>speakWorker.js</li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

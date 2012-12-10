@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Olympic Games</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Advanced JavaScript exercises. Objects, Dates, closures...">
+<meta name="keywords" content="javascript, object, date, closure">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Olympic Games</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#what-time-is-it-ben">What time is it Ben?</a></li>
+<li><a href="#binding">Binding...</a></li>
+<li><a href="#once-upon-a-past">Once Upon a Past</a></li>
+</ul>
+</div>
+
+<img src="../img/olympic-rings.svg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to JavaScript references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h2 id="what-time-is-it-ben">What time is it Ben?</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to manipulate dates.</li>
+<li>Know how to properly build objects.</li>
+<li>Understand how functions can be passed as arguments.</li>
+<li>Understand how variable scope (local/global) behaves.</li>
+<li>Know how and when to use closures.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll try to display a proper Big Ben clock with additionnal infos about the London Olympics.</p>
+<h3>Steps</h3>
+<h4>Date</h4>
+<ul>
+<li>The markup in <a href="../labs-files/olympic-games/what-time-is-it-ben.html">what-time-is-it-ben.html</a> and the script <a href="../labs-files/olympic-games/big-ben.js">big-ben.js</a> are not important to understand and finish this lab. If you&#39;re curious, don&#39;t hesitate to have a look.</li>
+<li>Every second, a <code>setInterval</code> calls a function called <code>clock.displayDate</code> and passes a function as the only argument. Like this :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">setInterval(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  clock.displayDate(<span class="keyword">function</span>(text) {
+    <span class="comment">// inserts text in the correct place in the HTML document...</span>
+  });
+}, <span class="number">1000</span>);</code></pre>
+
+<ul>
+<li>The <code>clock.displayDate</code> function doesn&#39;t exist yet, create a file called <code>clock.js</code> and add some code so this function can be called.</li>
+<li>Since we haven&#39;t covered how to modify the HTML document yet, this part is provided to you. The function that can update the HTML document is passed as the first argument of your function <code>clock.displayDate</code>.</li>
+<li>You just need to compute the date according to the correct format (see rules) and pass the string to the function that <code>clock.displayDate</code> receives as an argument.</li>
+</ul>
+<h4>Hours and minutes</h4>
+<ul>
+<li>Every second, the <code>setInterval</code> also calls the <code>clock.displayTime</code> and passes two functions as arguments. Like this :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">setInterval(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  clock.displayDate(<span class="keyword">function</span>(text) {
+    <span class="comment">// inserts text in the correct place in the HTML document...</span>
+  });
+  clock.displayTime(<span class="keyword">function</span>(angleInDegreesForHours) {
+    <span class="comment">// rotate the hours hand by angleInDegreesForHours degrees</span>
+  }, <span class="keyword">function</span>(angleInDegreesForMinutes) {
+    <span class="comment">// rotate the minutes hand by angleInDegreesForMinutes degrees</span>
+  });
+}, <span class="number">1000</span>);</code></pre>
+
+<ul>
+<li>The <code>clock.displayTime</code> function doesn&#39;t exist yet, modify your <code>clock.js</code> and add some code so this function can be called.</li>
+<li>This behaves just like for the date. The functions that can update the hands rotation document are passed as arguments of your function <code>clock.displayTime</code>.</li>
+<li>You just need to compute the angles in degrees and pass the two values to the two functions that <code>clock.displayTime</code> receives as arguments.</li>
+</ul>
+<h4>London Time</h4>
+<ul>
+<li>It should be obvious that Big Ben is supposed to display London&#39;s time. It&#39;s a tricky thing to do. For this exercise, we&#39;ll just assume that the current Daylight Saving won&#39;t change. More details on daylight saving <a href="http://www.timeanddate.com/worldclock/clockchange.html?n=136">here</a>.</li>
+<li>Your visitors aren&#39;t always on the same timezone as you. Your code must work and display the correct time if you&#39;re in New-York, Sidney...</li>
+<li>In order to achieve that, the <a href="../labs-files/olympic-games/big-ben.js">big-ben.js</a> script calls a function <code>clock.setTimezoneShift</code> like this :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">clock.setTimezoneShift(<span class="number">60</span>);</code></pre>
+
+<ul>
+<li>It sets your clock to the current UTC time + 60 minutes for London (currently with daylight saving).</li>
+<li>Add a <code>clock.setTimezoneShift</code> function in your code. It takes one parameter, the shift from UTC in minutes.</li>
+<li>It will enable your code to handle more cities in the future...</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>Your date <strong>MUST</strong> be formatted with leading zeros (if needed like) these examples : <code>01 October 2012 AM</code>, <code>21 December 2012 PM</code>...</li>
+<li>You <strong>CANNOT</strong> have any global variables except <code>clock</code>.</li>
+<li>The hours hand <strong>MUST</strong> display intermediate states!! If it&#39;s 3:30, it should be between 3 and 4.</li>
+<li>You <strong>MUST</strong> display the time of London!!</li>
+<li>You <strong>CANNOT</strong> modify the HTML yourself, you the functions passed as arguments!!!!</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>big-ben-bg.png</li>
+<li>big-ben-hours.png</li>
+<li>big-ben-minutes.png</li>
+<li>olympic-games.css</li>
+<li>olympic-london.css</li>
+<li>what-time-is-it-ben.html</li>
+<li>big-ben.js</li>
+<li>clock.js</li>
+</ul>
+<h2 id="binding">Binding...</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how binding works.</li>
+<li>Know how to prevent binding problems.</li>
+</ol>
+<h3>Context</h3>
+<p>You&#39;ll be presented some binding examples that don&#39;t work. Modify the code so it does what it&#39;s supposed to do.</p>
+<h4>Olympic cities</h4>
+<p>In <a href="../labs-files/olympic-games/olympic-cities.js">olympic-cities.js</a>, the code doesn&#39;t use <code>setTimeout</code> the right way. It&#39;s supposed to call <code>olympics.displayAllGames</code> but <code>this</code> in the function doesn&#39;t seem to be correct.</p>
+<p>Modify the file so the code works as explained.</p>
+<h4>Olympic sports</h4>
+<p>In <a href="../labs-files/olympic-games/olympic-sports.js">olympic-sports.js</a>, the code doesn&#39;t use <code>setTimeout</code> the right way. It&#39;s supposed to call <code>displaySports</code> using all the objects in the <code>sports</code> array every 1 second.</p>
+<p>Modify the file so the code works as explained.</p>
+<h4>Questions</h4>
+<p>In both files <a href="../labs-files/olympic-games/olympic-sports.js">olympic-sports.js</a>, what is the purpose of the first and last lines ?</p>
+<pre data-language="javascript"><code class="language-javascript">(<span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span></code></pre>
+
+<pre data-language="javascript"><code class="language-javascript">})();</code></pre>
+
+<ul>
+<li>Try to explain in details what would happen if we remove those lines.</li>
+<li>Try to explain in details what they do.</li>
+<li>Create a file named <code>answers.txt</code> and write down you explanations in it.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> have any global variables except <code>olympics</code> (in Olympic cities).</li>
+<li>You <strong>CANNOT</strong> use the same techniques for both excercises.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>olympic-cities.js</li>
+<li>olympic-sports.js</li>
+<li>answers.txt</li>
+</ul>
+<h2 id="once-upon-a-past">Once Upon a Past</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how and when to use closures.</li>
+<li>Discover and experiment.</li>
+</ol>
+<h3>Context</h3>
+<p>We&#39;re going to use the first exercise and display some cities that hosted the Olympics in the past. Your result will be displayed in <a href="../labs-files/olympic-games/once-upon-a-past.html">once-upon-a-past.html</a>.</p>
+<h3>Steps</h3>
+<ul>
+<li>Modify <a href="../labs-files/olympic-games/olympic-cities.js">olympic-cities.js</a> and add a <code>timezoneShift</code> number property to all the games objects of <code>olympics.games</code>.</li>
+<li>Be sure to use the correct values (including current daylight saving times). London timezoneShift is currently 60 minutes, Turin is 120 minutes...</li>
+<li>Add a <code>getNextGame</code> function on the <code>olympics</code> object.</li>
+<li>Like the <code>getUniqueInt</code> in the lesson, <code>getNextGame</code> should always return the next game object in the <code>olympics.games</code> array.</li>
+<li>If you arrived at the end of the array, just return the first object to start the enumaration again.</li>
+<li>Create a file named <code>game-switcher.js</code> that calls <code>olympics.getNextGame</code> every 10 seconds.</li>
+<li>Once you retrieved a game object using <code>olympics.getNextGame</code>, get its <code>timezoneShift</code> and use <code>clock.setTimezoneShift</code>.</li>
+<li>Use the <code>olympics.update</code> function, give it a game object as argument to inject the informations in the page.</li>
+<li>You can add all the properties you want in the games objects, they will be added to the HTML. Be creative.</li>
+<li>You can modify <a href="../labs-files/olympic-games/once-upon-a-past.html">once-upon-a-past.html</a> to add more CSS for the different cities. Look at how the attribute selector on the <code>html</code> tag works in <a href="../labs-files/olympic-games/olympic-london.css">olympic-london.css</a></li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>MUST</strong> use a closure for the <code>getNextGame</code> function.</li>
+<li>You <strong>CANNOT</strong> have any global variables except <code>clock</code> and <code>olympics</code>.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>big-ben-bg.png</li>
+<li>big-ben-hours.png</li>
+<li>big-ben-minutes.png</li>
+<li>olympic-games.css</li>
+<li>olympic-london.css</li>
+<li>big-ben.js</li>
+<li>clock.js</li>
+<li>olympic-cities.js</li>
+<li>once-upon-a-past.html</li>
+<li>once-upon-a-past.js</li>
+<li>game-switcher.js</li>
+<li>(olympic-vancouver.css)</li>
+<li>(olympic-beijin.css)</li>
+<li>...</li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

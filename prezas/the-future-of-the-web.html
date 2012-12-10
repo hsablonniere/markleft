@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>The future of the web...</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Overall presentation of all the new stuffs arriving in our browsers.">
+<meta name="keywords" content="html5, svg, canvas, video, audio...">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/the-future-of-the-web.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>The future of the web...</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#history">History</a></li>
+<li><a href="#semantics">Semantics</a></li>
+<li><a href="#offline">Offline</a></li>
+<li><a href="#realtime-communications">Realtime communications</a></li>
+<li><a href="#files-and-hardware">Files and hardware</a></li>
+<li><a href="#new-apis">New APIs...</a></li>
+<li><a href="#graphics-and-multimedia"> Graphics and multimedia</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>This is heavy</h4>
+
+<p class="list incremental">The web is evolving at a <strong>very fast</strong> pace these days... The organizations and their process <strong>have</strong> <strong>changed</strong>. The language and the platform <strong>changes</strong> <strong>too</strong>. Today, we&#39;ll review which features are comming. Some of theme are <strong>quite new</strong>. Some of theme are <strong>small but very useful</strong>. Some of them <strong>look like what we already had</strong>.</p>
+</section>
+
+<section class="cover">
+<h2 id="history">History</h2>
+</section>
+
+<section>
+<h3>Back to the 90s</h3>
+
+<p class="list incremental">If you remember well, the <strong>first version of HTML</strong> was created along with the World Wide Web by Tim Berners-Lee <strong>in the early 90s</strong>.</p>
+
+<p class="list incremental">The <strong>version 2.0</strong> of the markup language came in <strong>1995 as RFC 1867</strong>.</p>
+
+<p class="list incremental">Two years later, in <strong>January 1997</strong> came the <strong>version 3.2</strong>, the first one published as a W3C recommandation. By the <strong>end of the year</strong> of 1997 the <strong>4.0 version</strong> was published in 3 variations : strict, transitionnal and frameset. In 1999, the 4.01 version came out. Very similar to 4.0, this version corrects some errata.</p>
+</section>
+
+<section>
+<h3>The WHATWG rises</h3>
+
+<p class="list incremental"><strong>At the beginning of the 00s</strong>, <strong>W3C decided to abandon HTML</strong> in favor of <strong>XML based technologies</strong>.</p>
+
+<p class="list incremental">It was the rising <strong>XHTML</strong>. It&#39;s a <strong>reformulation of HTML 4.01</strong> using XML 1.0. Two versions came out : XHTML 1.0 and XHTML 1.1.</p>
+
+<p class="list incremental">This decision did not really convinced every parties. That&#39;s why <strong>in 2004, the WHATWG</strong> was formed by <strong>Apple, Opera and Mozilla</strong> to <strong>expand work on HTML</strong>.</p>
+</section>
+
+<section>
+<h3>Back to the future</h3>
+
+<p class="list incremental"><strong>In 2007</strong>, <strong>W3C abandonned XHTML 2</strong> and decided to <strong>work with WHATWG</strong>. Together, they adopted what <strong>WHATWG early work</strong> as the <strong>starting point for HTML5</strong>.</p>
+</section>
+
+<section>
+<h3>88 specs per hour...</h3>
+
+<p class="list incremental">At the beginning, there was only <strong>one specification</strong> for HTML5. In order to simplify edition and focus, a lot of features were moved to <strong>separate specifications</strong>.</p>
+<p>Just like HTML5, CSS3 was split into a lot of separate specifications.</p>
+
+<p class="list incremental">Nowadays, HTML5 is more a <strong>commercial term</strong>, much like Web 2.0. It references the <strong>spec itself</strong> and all the other <strong>new web technologies around</strong> such as <strong>CSS3</strong>, <strong>JavaScript APIs</strong> and <strong>other features</strong>...</p>
+</section>
+
+<section class="cover">
+<h2 id="semantics">Semantics</h2>
+</section>
+
+<section class="cover">
+<h3>Tags</h3>
+<p>You already know them all, don&#39;t you. If not, just try this <a href="http://thehtml5quiz.com/">awesome HTML5 quiz</a>.</p>
+</section>
+
+<section>
+<h3>Forms</h3>
+<p>We already talked about forms new features. Here&#39;s a recap of the new types of input :</p>
+
+<pre data-language="html5" class="incremental"><code class="language-html5"><span class="comment">&lt;!-- New input types --></span>
+E-mail:  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"email"</span>></span>
+URL:     <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"url"</span>></span>
+Number:  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"number"</span><span class="attribute">min</span>=<span class="value">"1"</span> <span class="attribute">max</span>=<span class="value">"10"</span>></span>
+Tel:     <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"tel"</span>></span>
+Range:   <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"range"</span><span class="attribute">min</span>=<span class="value">"1"</span> <span class="attribute">max</span>=<span class="value">"10"</span>></span>
+Color:   <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"color"</span>></span>
+Date:    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"date"</span><span class="attribute">min</span>=<span class="value">"2010-08-14"</span>></span>
+Time:    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"time"</span>></span>
+Search:  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"search"</span> <span class="attribute">results</span>=<span class="value">"10"</span>></span></code></pre>
+
+<p>If the browser doesn&#39;t support the new input, it just falls back to a simple text input. Some of these example do not provide any kind of validation but the virtual keyboard on mobile devices adapts itself to the context.</p>
+<p>We also have new attributes that can be used on all of them</p>
+
+<pre data-language="html5" class="incremental"><code class="language-html5"><span class="comment">&lt;!-- New attributes --></span>
+Required:     <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">required</span>></span>
+Placeholder:  <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">placeholder</span>=<span class="value">"Some input indications..."</span>></span>
+Autocomplete: <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">autocomplete</span>=<span class="value">"off"</span>></span>
+Pattern:      <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">pattern</span>=<span class="value">'^p[0-9]{5}$'</span>></span>
+Readonly:     <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">readonly</span>></span>
+Spellcheck:   <span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">spellcheck</span>=<span class="value">"false"</span>></span></code></pre>
+
+</section>
+
+<section>
+<h3>Data attributes</h3>
+<p>Data attributes are a very simple feature but a lot of framework and libraries really needed it. Before that, they were forced to abuse HTML and do non-standard stuffs.</p>
+<p>The usage is really simple. You just put attributes starting with <code>data-</code> on your HTML tags. You can access them with a new JS DOM property : <code>dataset</code>.</p>
+<p>Let&#39;s take a simple HTML example :</p>
+
+<pre data-language="html5" class="incremental"><code class="language-html5"><span class="tag">&lt;<span class="title">blockquote</span> <span class="attribute">id</span>=<span class="value">"mph"</span> <span class="attribute">data-quote-author</span>=<span class="value">"Dr. Emmett Brown"</span>></span>If my calculations are correct, when this baby hits 88 miles per hour... you're gonna see some serious shit.<span class="tag">&lt;/<span class="title">blockquote</span>></span></code></pre>
+
+<p>Let&#39;s retrieve the DOM node.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> mph = document.getElementById(<span class="string">'mph'</span>);</code></pre>
+
+<p>Now we can retrieve the value of the data attribute. Notice that the HTML uses a snake case and the JS DOM property uses the camel case equivalent.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(mph.dataset.quoteAuthor);     <span class="comment">// => "Dr. Emmett Brown"</span>
+console.log(mph.dataset[<span class="string">'quoteAuthor'</span>]);  <span class="comment">// => "Dr. Emmett Brown"</span>
+console.log(mph.dataset[<span class="string">'quote-author'</span>]); <span class="comment">// => undefined</span></code></pre>
+
+<p>It&#39;s a live property you can modify, add and remove data attributes like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Edit</span>
+mph.dataset.quoteAuthor = <span class="string">'Marty Mc Fly'</span>;
+<span class="comment">// Add</span>
+mph.dataset.quoteTheme = <span class="string">'Sciences'</span>;
+<span class="comment">// Remove</span>
+<span class="keyword">delete</span> mph.dataset.quoteAuthor;</code></pre>
+
+</section>
+
+<section>
+<h3>Menus</h3>
+<p>This feature allows users to create menus and even add stuffs to context menu. It isn&#39;t not ready yet in current browsers. Firefox started some work on it though.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">menu</span> <span class="attribute">type</span>=<span class="value">"toolbar"</span>></span>
+  <span class="tag">&lt;<span class="title">label</span> <span class="attribute">for</span>=<span class="value">"goto"</span>></span>Go to...<span class="tag">&lt;/<span class="title">label</span>></span>
+  <span class="tag">&lt;<span class="title">menu</span> <span class="attribute">label</span>=<span class="value">"Go"</span>></span>
+    <span class="tag">&lt;<span class="title">select</span> <span class="attribute">id</span>=<span class="value">"goto"</span>></span>
+      <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">""</span> <span class="attribute">selected</span>=<span class="value">"selected"</span>></span> Select site: <span class="tag">&lt;/<span class="title">option</span>></span>
+      <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"http://www.mozilla.org/"</span>></span>Mozilla<span class="tag">&lt;/<span class="title">option</span>></span>
+      <span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"http://www.opera.com/"</span>></span>Opera<span class="tag">&lt;/<span class="title">option</span>></span>
+    <span class="tag">&lt;/<span class="title">select</span>></span>
+    <span class="tag">&lt;<span class="title">span</span>></span><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"submit"</span> <span class="attribute">value</span>=<span class="value">"Go"</span>></span><span class="tag">&lt;/<span class="title">span</span>></span>
+  <span class="tag">&lt;/<span class="title">menu</span>></span>
+<span class="tag">&lt;/<span class="title">menu</span>></span></code></pre>
+
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">menu</span> <span class="attribute">type</span>=<span class="value">"context"</span> <span class="attribute">id</span>=<span class="value">"supermenu"</span>></span>
+  <span class="tag">&lt;<span class="title">menuitem</span> <span class="attribute">label</span>=<span class="value">"rotate"</span> <span class="attribute">icon</span>=<span class="value">"./arrow_rotate_clockwise.png"</span>></span><span class="tag">&lt;/<span class="title">menuitem</span>></span>
+  <span class="tag">&lt;<span class="title">menuitem</span> <span class="attribute">label</span>=<span class="value">"resize"</span> <span class="attribute">icon</span>=<span class="value">"./image-resize.png"</span>></span><span class="tag">&lt;/<span class="title">menuitem</span>></span>
+  <span class="tag">&lt;<span class="title">menu</span> <span class="attribute">label</span>=<span class="value">"share"</span>></span>
+    <span class="tag">&lt;<span class="title">menuitem</span> <span class="attribute">label</span>=<span class="value">"twitter"</span>></span><span class="tag">&lt;/<span class="title">menuitem</span>></span>
+    <span class="tag">&lt;<span class="title">menuitem</span> <span class="attribute">label</span>=<span class="value">"facebook"</span>></span><span class="tag">&lt;/<span class="title">menuitem</span>></span>
+  <span class="tag">&lt;/<span class="title">menu</span>></span>
+<span class="tag">&lt;/<span class="title">menu</span>></span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://bug617528.bugzilla.mozilla.org/attachment.cgi?id=554309">https://bug617528.bugzilla.mozilla.org/attachment.cgi?id=554309</a></li>
+<li><a href="http://www.w3.org/TR/html5/the-menu-element.html#the-menu-element">http://www.w3.org/TR/html5/the-menu-element.html#the-menu-element</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="offline">Offline</h2>
+</section>
+
+<section>
+<h3>Web storage</h3>
+<p>Web storage is just a simple a key-value store. It allows developper to store simple information on visitors&#39; browser.</p>
+<p>There&#39;s two kinds of web storage : local and session. Both works with the same API. Here&#39;s an example :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Set</span>
+localStorage.setItem(<span class="string">'back to date'</span>, <span class="string">'1955-11-05T22:04:00.000Z'</span>);
+<span class="comment">// also works with sessionStorage.setItem(key, value);</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Get</span>
+<span class="keyword">var</span> backToDateStr = localStorage.getItem(<span class="string">'back to date'</span>);
+<span class="comment">// also works with sessionStorage.getItem(key);</span>
+<span class="keyword">var</span> backToDate = <span class="keyword">new</span> Date(backToDateStr);
+console.log(backToDate.getFullYear()); <span class="comment">// => 1955</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Remove</span>
+localStorage.removeItem(<span class="string">'back to date'</span>);
+<span class="comment">// also works with sessionStorage.removeItem(key);</span></code></pre>
+
+<p>The only difference between local and session is the way data are kept on the disk. Session is scoped to a tab and will be lost after tab close or browser restart.</p>
+</section>
+
+<section>
+<h3>Appcache</h3>
+<p>Appcache is the only way you can deliver a proper offline web experience.</p>
+<p>It works using a manifest. You reference it in your HTML pages like this :</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">manifest</span>=<span class="value">"manifest.appcache"</span>></span>
+<span class="comment">&lt;!--  ... --></span>
+<span class="tag">&lt;/<span class="title">html</span>></span></code></pre>
+
+<p>The file can optionnaly contain 3 sections : <code>CACHE</code>, <code>NETWORK</code> and <code>FALLBACK</code>. Stuffs in <code>CACHE</code> will be stored. Stuffs in <code>NETWORK</code> won&#39;t. You can use aliases <code>*</code> in this section. The <code>FALLBACK</code> section provides alternatives when you&#39;re offline.</p>
+<p>Adding a version in comments is advised to force updates.</p>
+
+<pre class="incremental"><code class="language-unknown"><span class="preprocessor"># File must be served with a MIME type text/cache-manifest</span>
+
+CACHE MANIFEST
+<span class="preprocessor"># v3</span>
+
+CACHE
+index<span class="variable">.html</span>
+index<span class="variable">.css</span>
+index<span class="variable">.js</span>
+
+NETWORK
+/api
+friends<span class="variable">.html</span>
+
+FALLBACK
+friends<span class="variable">.html</span> no-connection<span class="variable">.html</span></code></pre>
+
+</section>
+
+<section>
+<h3>How does it work?</h3>
+<p>Here&#39;s how it works in a few steps :</p>
+
+<ul class="incremental">
+<li>User visits an appcache enabled page</li>
+<li>Browser reads the manifest and downloads all the resources.</li>
+<li>User visits the page again</li>
+<li>Browser displays the offline version</li>
+<li>If online, the browser reads the manifest and updates the resources if needed.</li>
+</ul>
+<p>Be careful, the usage of this feature has some gotchas. If you read the steps correctly, it means that to view the updates of a page you have to browse it twice.</p>
+</section>
+
+<section>
+<h3>Is that all?</h3>
+<p>Appcache also provides some other features to interact with it.</p>
+<p>You can use the global object <code>applicationCache</code>. It has a useful <code>status</code> property :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(applicationCache.status);
+<span class="comment">// UNCACHED: 0, IDLE: 1, CHECKING: 2</span>
+<span class="comment">// DOWNLOADING: 3, UPDATEREADY: 4, OBSOLETE: 5</span></code></pre>
+
+<p>You can also call methods on this object.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">applicationCache.update();
+applicationCache.swapCache();
+applicationCache.abort();</code></pre>
+
+<p>The last way to interact with appcache is to use the different events that are fired...</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">appCache.addEventListener(<span class="string">'cached'</span>, handleCacheEvent, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'checking'</span>, handleCacheEvent, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'downloading'</span>, handleCacheEvent, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'error'</span>, handleCacheError, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'noupdate'</span>, handleCacheEvent, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'obsolete'</span>, handleCacheEvent, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'progress'</span>, handleCacheEvent, <span class="literal">false</span>);
+appCache.addEventListener(<span class="string">'updateready'</span>, handleCacheEvent, <span class="literal">false</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.html5rocks.com/en/tutorials/appcache/beginner/">http://www.html5rocks.com/en/tutorials/appcache/beginner/</a></li>
+<li><a href="http://appcachefacts.info/">http://appcachefacts.info/</a></li>
+<li><a href="http://www.alistapart.com/articles/application-cache-is-a-douchebag/">http://www.alistapart.com/articles/application-cache-is-a-douchebag/</a></li>
+</ul>
+</section>
+
+<section>
+<h3>IndexedDB</h3>
+
+<p class="list incremental">IndexedDB is an <strong>asynchronous API</strong> for <strong>client side storage</strong>. Unlike Web storage, it allows developpers to store structured data such as <strong>JavaScript objects</strong> or <strong>binary files</strong>.</p>
+</section>
+
+<section>
+<p>You can have many databases per origin. In a database you have object stores in which you store objects.</p>
+<h3>IndexedDB example</h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> bttf;
+
+indexedDB.open = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">var</span> request = indexedDB.open(<span class="string">'bttf'</span>);
+  request.onsuccess = <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> {</span>
+    bttf = e.target.result;
+
+    <span class="keyword">var</span> trs = bttf.transaction([<span class="string">'time-travels'</span>], <span class="string">'readwrite'</span>);
+    <span class="keyword">var</span> store = trs.objectStore(<span class="string">'time-travels'</span>);
+
+    <span class="keyword">var</span> cursorRequest = store.openCursor();
+    cursorRequest.onsuccess = <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> {</span>
+      <span class="keyword">var</span> result = e.target.result;
+      <span class="keyword">if</span>(!!result == <span class="literal">false</span>) {
+        <span class="keyword">return</span>;
+      }
+      console.log(result.value);
+      result.<span class="keyword">continue</span>();
+    };
+  };
+};</code></pre>
+
+<p>The asynchronous aspect of the API can be challenging but the feature is really powerful. Don&#39;t hesitate to dive into the details...</p>
+
+<ul class="useful-links">
+<li><a href="http://www.html5rocks.com/en/tutorials/indexeddb/todo/">http://www.html5rocks.com/en/tutorials/indexeddb/todo/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/IndexedDB">https://developer.mozilla.org/en-US/docs/IndexedDB</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="realtime-communications">Realtime communications</h2>
+</section>
+
+<section>
+<h3>Websockets</h3>
+
+<p class="list incremental">Websocket allows <strong>full-duplex</strong> communications <strong>between browsers and servers</strong>. Once the connection is established, <strong>no headers</strong> are exchanged, just the datas.</p>
+<p>Here&#39;s an example of the connection request which ressembles HTTP.</p>
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="request">GET <span class="string">/timeChat</span> HTTP/1.1</span>
+<span class="attribute">Host</span>: <span class="string">bttf.com</span>
+<span class="attribute">Upgrade</span>: <span class="string">websocket</span>
+<span class="attribute">Connection</span>: <span class="string">Upgrade</span>
+<span class="attribute">Sec-WebSocket-Key</span>: <span class="string">x3JJHMbDL1EzLkh9GBhXDw==</span>
+<span class="attribute">Sec-WebSocket-Protocol</span>: <span class="string">chat</span>
+<span class="attribute">Sec-WebSocket-Version</span>: <span class="string">13</span>
+<span class="attribute">Origin</span>: <span class="string">http://bttf.com</span></code></pre>
+
+<p>Here&#39;s an example of the response.</p>
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="status">HTTP/1.1 <span class="number">101</span> Switching Protocols</span>
+<span class="attribute">Upgrade</span>: <span class="string">websocket</span>
+<span class="attribute">Connection</span>: <span class="string">Upgrade</span>
+<span class="attribute">Sec-WebSocket-Accept</span>: <span class="string">HSmrc0sMlYUkAGmm5OPpG2HaGWk=</span>
+<span class="attribute">Sec-WebSocket-Protocol</span>: <span class="string">chat</span></code></pre>
+
+</section>
+
+<section>
+<h4>Websocket example</h4>
+<p>Now we&#39;ll see how we can do that using JavaScript and a simple example.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> timeChatSocket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://bttf.com/timeChat'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">timeChatSocket.send(<span class="string">"Hey Doc it's Marty. I'm in 1955!"</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">timeChatSocket.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+  console.log(event.data);
+}, <span class="literal">false</span>);</code></pre>
+
+
+<p class="useful-links"><a href="https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications">https://developer.mozilla.org/en-US/docs/WebSockets/Writing_WebSocket_client_applications</a>
+<a href="http://www.html5rocks.com/en/tutorials/websockets/basics/">http://www.html5rocks.com/en/tutorials/websockets/basics/</a></p>
+</section>
+
+<section>
+<h3>Server sent events</h3>
+
+<p class="list incremental">Server sent events allows <strong>one-way</strong> and <strong>real time</strong> <strong>from servers to browsers</strong>. You can onsider this as as standard way to do <strong>data streaming</strong> from the server.</p>
+<p>Let&#39;s see how we can use it using JavaScript and a simple example.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> travelEvents = <span class="keyword">new</span> EventSource(<span class="string">'./travel-events'</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">travelEvents.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+  console.log(event.data);
+}, <span class="literal">false</span>);</code></pre>
+
+
+<p class="useful-links"><a href="http://html5doctor.com/server-sent-events/">http://html5doctor.com/server-sent-events/</a>
+<a href="http://www.html5rocks.com/en/tutorials/eventsource/basics/">http://www.html5rocks.com/en/tutorials/eventsource/basics/</a></p>
+</section>
+
+<section>
+<h3>XHR II</h3>
+<p>There are many new features in the new version of the <code>XMLHttpRequest</code> :</p>
+
+<ul class="incremental">
+<li>Download and send blobs, arraybuffers...</li>
+<li>Listen to upload progress event</li>
+<li>Connect to different a different origin using CORS</li>
+</ul>
+
+<p class="useful-links"><a href="http://www.html5rocks.com/en/tutorials/file/xhr2/">http://www.html5rocks.com/en/tutorials/file/xhr2/</a></p>
+</section>
+
+<section>
+<h3>Cross origin resource sharing</h3>
+
+<p class="list incremental">This is a <strong>new specification</strong> that provides <strong>standards headers</strong> to allow <strong>cross origin</strong> resource sharing.</p>
+<p>The most useful and know header of this spec is this one :</p>
+
+<pre data-language="http" class="incremental"><code class="language-http"><span class="attribute">Access-Control-Allow-Origin</span>: <span class="string">delorean.com</span></code></pre>
+
+<p>If your server has this header, AJAX request from <code>delorean.com</code> pages will be possible.</p>
+<p>The spec also provides informations on other new headers :</p>
+
+<pre data-language="http" class="incremental"><code class="language-http">Access-Control-Allow-Credentials: ...
+Access-Control-Expose-Headers: ...
+Access-Control-Max-Age Response: ...
+Access-Control-Allow-Methods: ...
+Access-Control-Allow-Headers: ...
+Access-Control-Request-Method: ...
+Access-Control-Request-Headers: ...</code></pre>
+
+<p>Feel free to dig this out...</p>
+
+<p class="useful-links"><a href="http://www.w3.org/TR/cors/">http://www.w3.org/TR/cors/</a></p>
+</section>
+
+<section>
+<h3>Web workers</h3>
+
+<p class="list incremental"><strong>JavaScript is mono-threaded</strong>. Every <strong>computation costs</strong> and freezes the page. It prevents visitors from using it.</p>
+
+<p class="list incremental">A web worker is a <strong>separate JS environment</strong>. This environment have <strong>no access to the DOM</strong>. It can only <strong>send messages</strong> and <strong>receive messages</strong>.</p>
+</section>
+
+<section>
+<h3>Web worker example</h3>
+<p>In the web page, you declare your worker. You listen for messages on it.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> cryptoWorker = <span class="keyword">new</span> Worker(<span class="string">'crypto.js'</span>);
+cryptoWorker.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+  console.log(event.message);
+}, <span class="literal">false</span>);</code></pre>
+
+<p>You can send messages to your worker.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">cryptoWorker.postMessage(<span class="string">'Secret message from the past'</span>);</code></pre>
+
+<p>The script file <code>crypto.js</code> of your worker will receive and send messages using the global <code>self</code> object.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">self.addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+  <span class="keyword">var</span> message = event.data,
+      cryptedMessage;
+  <span class="comment">// Doing heavy computations on message...</span>
+  self.postMessage(cryptedMessage);
+}, <span class="literal">false</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/Using_web_workers">https://developer.mozilla.org/en-US/docs/DOM/Using_web_workers</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="files-and-hardware">Files and hardware</h2>
+</section>
+
+<section>
+<h3>Geolocation</h3>
+
+<p class="list incremental">Like many other new APIs, the geolocation API is <strong>asynchronous</strong> and allow web developers to retrieve visitors <strong>geoposition</strong>.</p>
+<p>Here&#39;s a usage example :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">navigator.geolocation.getCurrentPosition(<span class="function"><span class="keyword">function</span> <span class="params">(position)</span> {</span>
+  console.log(position.accuracy);
+  console.log(position.latitude);
+  console.log(position.longitude);
+  console.log(position.speed);
+  console.log(position.altitude);
+  console.log(position.altitudeAccuracy);
+});</code></pre>
+
+<p>You could also want to be informed each time the position changes... Here&#39;s how :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">navigator.geolocation.watchPosition(<span class="function"><span class="keyword">function</span> <span class="params">(position)</span> {</span>
+  console.log(position);
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.html5rocks.com/en/tutorials/geolocation/trip_meter/?redirect_from_locale=fr">http://www.html5rocks.com/en/tutorials/geolocation/trip_meter/?redirect_from_locale=fr</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Device orientation</h3>
+<p>Device orientation works with events. You can listen to <code>deviceorientation</code> like this :</p>
+<pre data-language="javascript"><code class="language-javascript">window.addEventListener(<span class="string">'deviceorientation'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(event)</span> {</span>
+  console.log(event.absolute);
+  console.log(event.alpha);
+  console.log(event.beta);
+  console.log(event.gamma);
+}, <span class="literal">false</span>);</code></pre>
+
+
+<p class="useful-links"><a href="https://developer.mozilla.org/en-US/docs/Detecting_device_orientation">https://developer.mozilla.org/en-US/docs/Detecting_device_orientation</a></p>
+</section>
+
+<section>
+<h3>Fullscreen</h3>
+<p>The fullscreen API allows web developers to go fullscreen on any element of the page.</p>
+<p>Here&#39;s a simple example.</p>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> div = document.querySelector(<span class="string">'#my-div'</span>);
+document.addEventListener(<span class="string">'keydown'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> {</span>
+  <span class="keyword">if</span> (e.keyCode === <span class="number">13</span>) {
+    div.requestFullscreen();
+  }
+}, <span class="literal">false</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/fullscreen/">http://www.w3.org/TR/fullscreen/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/Using_fullscreen_mode">https://developer.mozilla.org/en-US/docs/DOM/Using_fullscreen_mode</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Media Capture</h3>
+<p>This API allows web developers to receive video and/or audio from visitors web browser.</p>
+<p>Here&#39;s a simple example.</p>
+<pre data-language="javascript"><code class="language-javascript">navigator.getUserMedia({video: <span class="literal">true</span>, audio: <span class="literal">true</span>}, <span class="function"><span class="keyword">function</span> <span class="params">(stream)</span> {</span>
+  <span class="keyword">var</span> video = document.getElementById(<span class="string">'video'</span>);
+  video.src = source;
+}, <span class="function"><span class="keyword">function</span> <span class="params">(error)</span> {</span>
+  console.log(error);
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://shinydemos.com/photo-booth">http://shinydemos.com/photo-booth</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/getusermedia/intro/">http://www.html5rocks.com/en/tutorials/getusermedia/intro/</a></li>
+<li><a href="http://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamConstraints">http://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamConstraints</a></li>
+</ul>
+<!-- touch events, drag and drop -->
+
+<!--
+
+</section>
+
+<section class="cover">
+<!--
+
+## CSS3
+
+selectors
+fonts
+columns
+flexbox
+grid layout
+colors
+gradients
+background
+transition
+transform
+animation
+filter effects
+calc
+box-shadow
+media queries
+feature queries
+supports
+regions
+viewport units
+variables -->
+
+</section>
+
+<section class="cover">
+<h2 id="new-apis">New APIs...</h2>
+</section>
+
+<section>
+<h3>Page visibility</h3>
+<p>The Page visibility API allows web developers to know when a page is visible or in focus.</p>
+<pre data-language="javascript"><code class="language-javascript">document.addEventListener(<span class="string">'visibilitychange'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(document.visibilityState);
+}, <span class="literal">false</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/Using_the_Page_Visibility_API">https://developer.mozilla.org/en-US/docs/DOM/Using_the_Page_Visibility_API</a></li>
+<li><a href="http://www.w3.org/TR/page-visibility/">http://www.w3.org/TR/page-visibility/</a></li>
+</ul>
+</section>
+
+<section>
+<h3>History API</h3>
+<p>The History API allows web developers to manipulate the visitor history without reloading the page. Using that, we can finally implement proper back button an bookmarks with AJAX.</p>
+<p>Here&#39;s an example on how you can add stuffs into the history.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// The first object is user defined</span>
+history.pushState({}, <span class="string">'My page'</span>, <span class="string">'my-page.html'</span>);
+<span class="comment">// Same goes for history.replaceState(obj, title, url)</span></code></pre>
+
+<p>Each time a visitor clicks on the back button or <code>history.back()</code> is called with JavaScript, the <code>popstate</code> event is triggered...</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">window.addEventListener(<span class="string">'popstate'</span>, <span class="keyword">function</span>(event) {
+  console.log(<span class="string">'Back button detected...'</span>);
+  console.log(<span class="string">'State object was '</span> + JSON.stringify(event.state));
+}, <span class="literal">false</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history">https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history</a></li>
+<li><a href="http://html5doctor.com/history-api/">http://html5doctor.com/history-api/</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="graphics-and-multimedia"> Graphics and multimedia</h2>
+</section>
+
+<section>
+<h3>Request animation frame</h3>
+<p>If you want to develop some games, you must forget about <code>setInterval</code>. With <code>requestAnimationFrame</code> you can have a callback called up to 60 times per second.</p>
+<p>It&#39;s synchronized with CSS transitions and SVG SMIL. The big plus is that when the browser is not visible, the callback is not called. It&#39;s better for CPU, GPU, memory and battery ;-)</p>
+<p>Note that you have to manually call the <code>requestAnimationFrame</code> to loop.</p>
+<pre data-language="javascript"><code class="language-javascript">(<span class="function"><span class="keyword">function</span> <span class="title">animloop</span><span class="params">(timestamp)</span> {</span>
+  requestAnimationFrame(animloop);
+  renderMyGameState(timestamp);
+})();</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://paulirish.com/2011/requestanimationframe-for-smart-animating/">http://paulirish.com/2011/requestanimationframe-for-smart-animating/</a></li>
+<li><a href="https://developer.mozilla.org/fr/docs/DOM/window.requestAnimationFrame">https://developer.mozilla.org/fr/docs/DOM/window.requestAnimationFrame</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Canvas 2D</h3>
+<p>Canvas is a new way to draw pixels on a webpage. It&#39;s well suited for games.</p>
+<p>First, you&#39;ll need a <code>canvas</code> tag.</p>
+
+<pre data-language="html" class="incremental"><code class="language-html"><span class="tag">&lt;<span class="title">canvas</span> <span class="attribute">id</span>=<span class="value">"canvas"</span> <span class="attribute">width</span>=<span class="value">"300"</span> <span class="attribute">height</span>=<span class="value">"300"</span>></span><span class="tag">&lt;/<span class="title">canvas</span>></span></code></pre>
+
+<p>You&#39;ll also need to create a context.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> canvas = document.getElementById(<span class="string">'canvas'</span>);
+<span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</code></pre>
+
+<p>Now that you have your context, you can draw stuffs in it...</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Draw a rectangle</span>
+ctx.fillStyle = <span class="string">'#BADA55'</span>;
+ctx.fillRect (<span class="number">20</span>, <span class="number">10</span>, <span class="number">400</span>, <span class="number">300</span>);</code></pre>
+
+<p>You have a lot of methods on a context :</p>
+
+<ul class="incremental">
+<li><code>arc</code>, <code>arcTo</code>, <code>beginPath</code>, <code>bezierCurveTo</code>, <code>clearRect</code>, <code>clip</code>, <code>closePath</code>, <code>createImageData</code>, <code>createLinearGradient</code>, <code>createPattern</code>, <code>createRadialGradient</code>, <code>drawImage</code>, <code>drawCustomFocusRing</code>, <code>drawSystemFocusRing</code>, <code>fill</code>, <code>fillRect</code>, <code>fillText</code>, <code>getImageData</code>, <code>getLineDash</code>, <code>isPointInPath</code>, <code>lineTo</code>, <code>measureText</code>, <code>moveTo</code>, <code>putImageData</code>, <code>quadraticCurveTo</code>, <code>rect</code>, <code>restore</code>, <code>rotate</code>, <code>save</code>, <code>scale</code>, <code>scrollPathIntoView</code>, <code>setLineDash</code>, <code>setTransform</code>, <code>stroke</code>, <code>strokeRect</code>, <code>strokeText</code>, <code>transform</code>, <code>translate</code></li>
+</ul>
+<p>Don&#39;t hesitate to experiment an discover their usage...</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/CanvasRenderingContext2D">https://developer.mozilla.org/en-US/docs/DOM/CanvasRenderingContext2D</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/HTML/Canvas/Drawing_Graphics_with_Canvas">https://developer.mozilla.org/en-US/docs/HTML/Canvas/Drawing_Graphics_with_Canvas</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Canvas 3D and WebGL</h3>
+<p>Developing using WebGL and 3D in a canvas is possible and it works great. It is fairly complex to implement. If you want more details, look a the tutorials...</p>
+
+<ul class="useful-links">
+<li><a href="http://www.webdev20.pl/skins/default/js/demos/solar_system/index.html">http://www.webdev20.pl/skins/default/js/demos/solar_system/index.html</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/WebGL/Getting_started_with_WebGL">https://developer.mozilla.org/en-US/docs/WebGL/Getting_started_with_WebGL</a></li>
+</ul>
+</section>
+
+<section>
+<h3>SVG</h3>
+
+<p class="list incremental">Unlike canvas, SVG is <strong>vector based</strong>. It is basically an <strong>XML document</strong>. It can be <strong>infinitly zoomed</strong>. Drawings are described as <strong>lines</strong>, <strong>curves</strong> and <strong>shapes</strong>...</p>
+</section>
+
+<section>
+<h3>SVG example</h3>
+<p>Here&#39;s and example of an SVG document :</p>
+
+<pre data-language="xml" class="incremental"><code class="language-xml"><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?></span>
+<span class="tag">&lt;<span class="title">svg</span> <span class="attribute">xmlns</span>=<span class="value">"http://www.w3.org/2000/svg"</span> <span class="attribute">version</span>=<span class="value">"1.1"</span> <span class="attribute">width</span>=<span class="value">"600"</span> <span class="attribute">height</span>=<span class="value">"300"</span>></span>
+  <span class="tag">&lt;<span class="title">title</span>></span>Simple XML example<span class="tag">&lt;/<span class="title">title</span>></span>
+  <span class="tag">&lt;<span class="title">rect</span> <span class="attribute">width</span>=<span class="value">"200"</span> <span class="attribute">height</span>=<span class="value">"200"</span> <span class="attribute">x</span>=<span class="value">"20"</span> <span class="attribute">y</span>=<span class="value">"40"</span> <span class="attribute">fill</span>=<span class="value">"#BADA55"</span> /></span>
+  <span class="tag">&lt;<span class="title">circle</span> <span class="attribute">cx</span>=<span class="value">"590"</span> <span class="attribute">cy</span>=<span class="value">"190"</span> <span class="attribute">r</span>=<span class="value">"100"</span> <span class="attribute">fill</span>=<span class="value">"#00F"</span> /></span>
+  <span class="tag">&lt;<span class="title">line</span> <span class="attribute">x1</span>=<span class="value">"120"</span> <span class="attribute">y1</span>=<span class="value">"140"</span> <span class="attribute">x2</span>=<span class="value">"590"</span> <span class="attribute">y2</span>=<span class="value">"190"</span> <span class="attribute">stroke</span>=<span class="value">"#FFF"</span> /></span>
+  <span class="tag">&lt;<span class="title">text</span> <span class="attribute">x</span>=<span class="value">"20"</span> <span class="attribute">y</span>=<span class="value">"20"</span> <span class="attribute">fill</span>=<span class="value">"#FFF"</span>></span>My SVG document<span class="tag">&lt;/<span class="title">text</span>></span>
+<span class="tag">&lt;/<span class="title">svg</span>></span></code></pre>
+
+<p>Here&#39;s what it looks like :</p>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="700" height="300" class="incremental">
+  <title>Simple XML example</title>
+  <rect width="200" height="200" x="20" y="40" fill="#BADA55" />
+  <circle cx="590" cy="190" r="100" fill="#00F" />
+  <line x1="120" y1="140" x2="590" y2="190" stroke="#FFF" />
+  <text x="20" y="20" fill="#FFF">My SVG document</text>
+</svg>
+
+</section>
+
+<section>
+<h3>Audio</h3>
+<p>Simple audio tag is nice for playing music and podcasts. You can specify multiple sources if you want.</p>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">audio</span> <span class="attribute">controls</span> <span class="attribute">preload</span>=<span class="value">"auto"</span> <span class="attribute">autobuffer</span>></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"marty.mp3"</span> /></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"emmet.ogg"</span> /></span>
+<span class="tag">&lt;/<span class="title">audio</span>></span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://html5doctor.com/native-audio-in-the-browser/">http://html5doctor.com/native-audio-in-the-browser/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/audio">https://developer.mozilla.org/en-US/docs/HTML/Element/audio</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Video</h3>
+<p>This works a bit like the audio tag. You can specify multiple sources if you want.</p>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">video</span> <span class="attribute">poster</span>=<span class="value">"back-to-the-future.png"</span>></span>
+  <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"back-to-the-future.mp4"</span> <span class="attribute">type</span>=<span class="value">"video/mp4"</span>></span>
+    <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"back-to-the-future.ogv"</span> <span class="attribute">type</span>=<span class="value">"video/ogg"</span>></span>
+  <span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"subtitles"</span> <span class="attribute">src</span>=<span class="value">"back-to-the-future.en.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"en"</span> <span class="attribute">label</span>=<span class="value">"English"</span>></span>
+  <span class="tag">&lt;<span class="title">track</span> <span class="attribute">kind</span>=<span class="value">"subtitles"</span> <span class="attribute">src</span>=<span class="value">"back-to-the-future.sv.vtt"</span> <span class="attribute">srclang</span>=<span class="value">"fr"</span> <span class="attribute">label</span>=<span class="value">"French"</span>></span>
+<span class="tag">&lt;/<span class="title">video</span>></span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://html5doctor.com/the-video-element/">http://html5doctor.com/the-video-element/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/HTML/Element/video">https://developer.mozilla.org/en-US/docs/HTML/Element/video</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Web audio API</h3>
+<p>Because the audio tag is really bad for intense CPU work on audio, we need a better solution. Here comes the Web Audio API.</p>
+
+<p class="list incremental">The Web audio API is still <strong>only available in Chrome for now</strong>. Firefox has started working on it... This API works with <strong>sources</strong>, <strong>nodes</strong> and <strong>destinations</strong>.</p>
+
+<p class="list incremental">Sources can be the <strong>microphone</strong>, any <strong>sound file</strong> or even an <strong>oscillator</strong>.</p>
+
+<p class="list incremental">Nodes are just code that <strong>transforms a sound</strong> to another.</p>
+<p>Speakers often are the destination of all this stuffs.</p>
+<p>Demos speak better than words and code...</p>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/webaudio/">http://www.w3.org/TR/webaudio/</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/webaudio/intro/">http://www.html5rocks.com/en/tutorials/webaudio/intro/</a></li>
+<li><a href="http://patorjk.com/experiments/tones/">http://patorjk.com/experiments/tones/</a></li>
+<li><a href="http://chromium.googlecode.com/svn/trunk/samples/audio/samples.html">http://chromium.googlecode.com/svn/trunk/samples/audio/samples.html</a></li>
+<li><a href="http://www.soundstep.com/blog/experiments/jsdetection/">http://www.soundstep.com/blog/experiments/jsdetection/</a></li>
+<li><a href="http://labs.dinahmoe.com/ToneCraft">http://labs.dinahmoe.com/ToneCraft</a></li>
+<li><a href="http://tonematrix.audiotool.com/">http://tonematrix.audiotool.com/</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

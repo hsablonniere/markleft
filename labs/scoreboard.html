@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Scoreboard</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Experimenting with the DOM, create, manipulate, remove, transform...">
+<meta name="keywords" content="javascript, dom, tree, manipulation, json">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Scoreboard</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#filling-the-blanks">Filling the blanks</a></li>
+<li><a href="#memory">Memory</a></li>
+<li><a href="#adding-some-style">Adding some style</a></li>
+</ul>
+</div>
+
+<img src="../img/scoreboard.jpg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h4>Unfinished work</h4>
+<p>Today we&#39;ll get ourselves into a real work situation. Improving someone else code without having any indications.</p>
+<h2 id="filling-the-blanks">Filling the blanks</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to understand existing code</li>
+<li>Know how debug step by step</li>
+<li>Know how to use JavaScript inheritance</li>
+<li>Know how to use get/set</li>
+</ol>
+<h3>Context</h3>
+<p>The developer prepared listeners in <a href="../labs-files/scoreboard/listeners.js">listeners.js</a>. When an event is fired, he directly modifies the memory representation of the players available on <code>scoreboard.players</code>.</p>
+<p>In <a href="../labs-files/scoreboard/index.js">index.js</a>, he adds players in memory, but it doesn&#39;t add them to the DOM.</p>
+<p>Your goal is to code and adapt the object structure of <code>scoreboard.players</code> so the direct manipulation of the objects in memory impacts the DOM transparently. It&#39;s called data binding.</p>
+<h3>Steps</h3>
+<ul>
+<li>Add your code in <a href="../labs-files/scoreboard/index.js">index.js</a>.</li>
+<li>Start by finding out how you can execute a function when someone does that :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">scoreboard.players = [
+  {
+    id: <span class="string">'player-2nmeb1pa9csgg008soowg'</span>,
+    name: <span class="string">'John'</span>,
+    score: <span class="number">42</span>
+  },
+  <span class="comment">/* ... */</span>
+]</code></pre>
+
+<ul>
+<li>Iterate over the array an create the different DOM elements. Use the <a href="../labs-files/scoreboard/example-index.html">example-index.html</a> markup.</li>
+<li>We must be able to call these methods on <code>scoreboard.players</code> :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">scoreboard.players.get(<span class="string">'player-2nmeb1pa9csgg008soowg'</span>);
+scoreboard.players.remove(<span class="string">'player-2nmeb1pa9csgg008soowg'</span>);
+scoreboard.players.sort();
+scoreboard.players.put({
+  id: scoreboard.getRandomId(),
+  name: <span class="string">''</span>,
+  score: <span class="number">0</span>
+});</code></pre>
+
+<ul>
+<li>For the last one, you&#39;ll need a <code>scoreboard.getRandomId</code> function that returns <code>player-</code> with some alphanumeric random text. Keep the same lenght as the examples.</li>
+<li>Now you just need to find out how you can execute a function when someone does that :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">scoreboard.players.get(<span class="string">'player-2nmeb1pa9csgg008soowg'</span>).name = <span class="string">'John'</span>;
+scoreboard.players.get(<span class="string">'player-2nmeb1pa9csgg008soowg'</span>).score += <span class="number">1</span>;
+scoreboard.players.get(<span class="string">'player-2nmeb1pa9csgg008soowg'</span>).score -= <span class="number">1</span>;
+scoreboard.players.get(<span class="string">'player-2nmeb1pa9csgg008soowg'</span>).score = <span class="number">0</span>;</code></pre>
+
+<ul>
+<li>You&#39;ll probably need to add more functions to players like <code>updateDOM</code> etc...</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> modify the HTML.</li>
+<li>You <strong>CANNOT</strong> add any event listener.</li>
+<li>You <strong>CANNOT</strong> modify listeners.js.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>index.js</li>
+</ul>
+<h2 id="memory">Memory</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how use localStorage</li>
+</ol>
+<h3>Context</h3>
+<p>When you close the page, all the memory is lost.</p>
+<h3>Steps</h3>
+<ul>
+<li>Use the localStorage to keep the users and their scores in memory.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> modify the HTML.</li>
+<li>You <strong>CANNOT</strong> add any event listener.</li>
+<li>You <strong>CANNOT</strong> modify listeners.js.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>index.js</li>
+</ul>
+<h2 id="adding-some-style">Adding some style</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to build a fluid design.</li>
+<li>Know how to make a design that does not suck.</li>
+</ol>
+<h3>Context</h3>
+<p>Have a look at <a href="../labs-files/scoreboard/example-index.html">example-index.html</a>. It doesn&#39;t look pretty.</p>
+<h3>Steps</h3>
+<ul>
+<li>Modify <a href="../labs-files/scoreboard/index.css">index.css</a>.</li>
+<li>Center the page with the margin trick.</li>
+<li>Try to have a usable design for 320px wide screens (smartphones). You can do it without media queries. Have a look at <a href="https://developer.mozilla.org/en-US/docs/CSS/max-width">max-width</a>.</li>
+<li>Add colors, textures, fonts, animations, transitions : just be awesome.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> modify the HTML.</li>
+<li>Your CSS <strong>MUST</strong> be valid!!</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>index.css</li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

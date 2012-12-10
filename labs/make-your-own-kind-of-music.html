@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Make your own kind of music</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Experimenting with ajax, history using a music player">
+<meta name="keywords" content="javascript, events, keyboard, mouse, game">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Make your own kind of music</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#getting-some-help-no-jquery">Getting some help (no-jQuery)</a></li>
+<li><a href="#directories-and-tracks">Directories and tracks</a></li>
+<li><a href="#let-39-s-play-some-music">Let&#39;s play some music</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#to-infinity-and-beyond">To infinity and beyond...</a></li>
+</ul>
+</div>
+
+<img src="../img/cassettes.jpg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h4>Requirements</h4>
+<ul>
+<li>Install <a href="http://nodejs.org/">nodejs</a>. Linux users, just untar the archive and add the bin <code>node</code> and <code>npm</code> to your path. The packages from repos aren&#39;t always recent enough...</li>
+<li>Install the modules. Just go to the project root and type <code>npm install</code>.</li>
+<li>Start the server. Just type <code>node myokom-server</code> in the project root.</li>
+<li>You should see an ASCII are and the url at which the project can be browsed.</li>
+<li>Create a directory named <code>music</code> in the project root directory and add music directories and files into it.</li>
+<li>The project works with ogg files on all major recent browsers. You can use mp3 files but it won&#39;t work on Firefox and some others...</li>
+<li>If you need music just try <a href="http://www.jamendo.com/fr/">http://www.jamendo.com/fr/</a>. It&#39;s a free and creative common. Downloading ogg from the website is tricky, don&#39;t hesistate to ask for help.&amp;</li>
+</ul>
+<h2 id="getting-some-help-no-jquery">Getting some help (no-jQuery)</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to load some HTML using AJAX.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll display some help when the user needs it.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have a look at <code>myokom.html</code>. You&#39;ll see a <code>.display-help</code> button element.</li>
+<li>Create a file named <code>myokom-client.js</code> in the <code>public</code> directory.</li>
+<li>Add some code to detect clicks on <code>.display-help</code>.</li>
+<li>Add some code to load HTML from <code>/public/myokom-help.html</code> using AJAX and replace the content of <code>.help</code> with it when the button is clicked.</li>
+<li>If the person clicks on the <code>.close-help</code>, just remove the <code>.help</code> element.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>myokom.html</li>
+<li>myokom.css</li>
+<li>navy-blue.png</li>
+<li>next.png</li>
+<li>pause.png</li>
+<li>play.png</li>
+<li>previous.png</li>
+<li>jquery-1.8.2.min.js</li>
+<li>myokom-client.js</li>
+<li>myokom-help.html</li>
+</ul>
+<h2 id="directories-and-tracks">Directories and tracks</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to load some JSON using AJAX and jQuery.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll display the directories and the track-list.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have a look at <code>myokom.html</code>. You&#39;ll see a <code>.track-list</code> element.</li>
+<li>In your <code>myokom-client.js</code> file, add a <code>browseFromUrl</code> function.</li>
+<li>Listen to the <code>load</code> event on the window and use your <code>browseFromUrl</code> function.</li>
+<li>In this function, we&#39;ll use the API offered by the server. One of the URLs allows you to find out what&#39;s available on the server (directories and music files).</li>
+<li>Try to open a tab with <code>http://localhost:8080/browse/</code>, you&#39;ll see what&#39;s in your <code>music</code> directory as JSON.</li>
+<li>This URL works with any directory. If you have a directory called <code>Anitek</code> in your <code>music</code> directory, you can try <code>http://localhost:8080/browse/Anitek</code>. It work with sub directory and so on...</li>
+<li>Here&#39;s an example of what the informations retrieved in JSON can look like :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">{
+  <span class="string">"dirs"</span>: [
+    {
+      <span class="string">"name"</span>:<span class="string">"Anitek"</span>,
+      <span class="string">"path"</span>:<span class="string">"/Anitek"</span>
+    },
+    <span class="comment">/* other directories... */</span>
+  ],
+  <span class="string">"tracks"</span>: [
+    {
+      <span class="string">"name"</span>: <span class="string">"01 - Merlot Downer"</span>,
+      <span class="string">"path"</span>: <span class="string">"/music/Anitek/Tab &amp; Anitek : Project Monarch/01 - Merlot Downer.ogg"</span>,
+      <span class="string">"metadatas"</span>: <span class="string">"/metadatas/Anitek/Tab &amp; Anitek : Project Monarch/01 - Merlot Downer.ogg"</span>
+    },
+    <span class="comment">/* other music files... */</span>
+  ]
+}</code></pre>
+
+<ul>
+<li>In your <code>browseFromUrl</code> function, start an AJAX request to retrieve these informations.</li>
+<li>Use these informations and add <code>.dir</code> and <code>.track</code> elements to the DOM in <code>.track-list</code>, like this :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">class</span>=<span class="value">"dir"</span> <span class="attribute">href</span>=<span class="value">"/Anitek/"</span>></span>Anitek<span class="tag">&lt;/<span class="title">a</span>></span>
+<span class="comment">&lt;!-- and so on --></span></code></pre>
+
+<ul>
+<li>The <code>data-track-idx</code> attribute could be useful to go to previous or next track.</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"track"</span> <span class="attribute">data-track-idx</span>=<span class="value">"0"</span>></span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"track-name"</span>></span>01 - Merlot Downer<span class="tag">&lt;/<span class="title">span</span>></span><span class="tag">&lt;/<span class="title">button</span>></span>
+<span class="tag">&lt;<span class="title">button</span> <span class="attribute">class</span>=<span class="value">"track"</span> <span class="attribute">data-track-idx</span>=<span class="value">"1"</span>></span><span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"track-name"</span>></span>02 - Dormouse<span class="tag">&lt;/<span class="title">span</span>></span><span class="tag">&lt;/<span class="title">button</span>></span>
+<span class="comment">&lt;!-- and so on --></span></code></pre>
+
+<ul>
+<li>Because clicking on the <code>.dir</code> links will change the URL, reload the page and execute <code>browseFromUrl</code>, your AJAX call must use the URL.</li>
+<li>Add some code to retrieve the current pathname of the <code>location</code> global object and load information from the server via AJAX.</li>
+<li>If the pathname is <code>/</code>, you&#39;ll do a GET on <code>/browse/</code>. If the pathname is <code>/Anitek</code>, you&#39;ll do a GET on <code>/browse/Anitek</code>.</li>
+<li>Keep the informations object in memory, it will be useful after...</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>myokom.html</li>
+<li>myokom.css</li>
+<li>navy-blue.png</li>
+<li>next.png</li>
+<li>pause.png</li>
+<li>play.png</li>
+<li>previous.png</li>
+<li>jquery-1.8.2.min.js</li>
+<li>myokom-client.js</li>
+<li>myokom-help.html</li>
+</ul>
+<h2 id="let-39-s-play-some-music">Let&#39;s play some music</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to use event delegation.</li>
+<li>Know how to use the HTML5 audio tag.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll use events and audio. Clicks on tracks will start playing some sound...</p>
+<h3>Steps</h3>
+<ul>
+<li>Listen to clicks on <code>.track</code> buttons using event delegation.</li>
+<li>When a <code>.track</code> button is clicked, use the <code>.player</code> audio element and play the sound.</li>
+<li>Don&#39;t forget to update the <code>.current-track .track-title</code> contents.</li>
+<li>You&#39;ll also want to change the <code>[data-status]</code> attribute of <code>.current-track</code> from <code>stop</code> to <code>play</code>.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>myokom.html</li>
+<li>myokom.css</li>
+<li>navy-blue.png</li>
+<li>next.png</li>
+<li>pause.png</li>
+<li>play.png</li>
+<li>previous.png</li>
+<li>jquery-1.8.2.min.js</li>
+<li>myokom-client.js</li>
+<li>myokom-help.html</li>
+</ul>
+<h2 id="history">History</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Learn knew stuffs from the internet.</li>
+<li>Know how to use the History API.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll use the History API to prevent &quot;back button&quot; and bookmark problems.</p>
+<h3>Steps</h3>
+<ul>
+<li>Listen to clicks on <code>.dir</code> links and prevent the default behaviour. Use event delegation.</li>
+<li>Use the <code>href</code> attribute of the link that was clicked and push a new state on the history (look at documentation links).</li>
+<li>Once you pushed a new state, call your <code>browserFromUrl</code> function.</li>
+<li>To complete this history integration, we miss the back button thing. Listen to the event that is fired when someone clicks on the back button and call your <code>browserFromUrl</code> function (look at documentation links).</li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/DOM/Manipulating_the_browser_history">Manipulating the browser history (MDN)</a></li>
+<li><a href="http://diveintohtml5.info/history.html">MANIPULATING HISTORY FOR FUN &amp; PROFIT (dive into HTML5)</a></li>
+<li><a href="http://html5doctor.com/history-api/">Pushing and Popping with the History API (HTML5 doctor)</a></li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>myokom.html</li>
+<li>myokom.css</li>
+<li>navy-blue.png</li>
+<li>next.png</li>
+<li>pause.png</li>
+<li>play.png</li>
+<li>previous.png</li>
+<li>jquery-1.8.2.min.js</li>
+<li>myokom-client.js</li>
+<li>myokom-help.html</li>
+</ul>
+<h2 id="to-infinity-and-beyond">To infinity and beyond...</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Use your imagination and all you knowledge to implement useful feature correctly.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise, we&#39;ll add all the missing features and more.</p>
+<h3>Quick ideas</h3>
+<ul>
+<li>Use all the controls (previous, pause, play, next). Don&#39;t forget to use the <code>[data-status]</code> attribute on <code>.current-track</code>.</li>
+<li>Go to the next song once the current one is finished.</li>
+<li>Modify the CSS (use a <code>/public/custom-myokom.css</code> file), change the colors, the layout... Mobile is already handle, maybe a media center style (for big screen TVs) would be awesome.</li>
+</ul>
+<h3>Other ideas</h3>
+<ul>
+<li>Use the <a href="http://en.wikipedia.org/wiki/ID3">ID3</a> informations from the tracks. You can retrieve them by doing a GET on the metadatas link retrieved from the informations (previous exercise). For example, doing a GET on <code>/metadatas/Anitek/Tab%20&amp;%20Anitek%20:%20Project%20Monarch/01%20-%20Merlot%20Downer.ogg</code> retrieve those informations :</li>
+</ul>
+<pre data-language="javascript"><code class="language-javascript">{
+  <span class="string">"title"</span>: <span class="string">"Merlot Downer"</span>,
+  <span class="string">"artist"</span>: [<span class="string">"Anitek"</span>],
+  <span class="string">"albumartist"</span>: [],
+  <span class="string">"album"</span>: <span class="string">"Tab &amp; Anitek: Project Monarch"</span>,
+  <span class="string">"year"</span>: <span class="string">"2012-01-10"</span>,
+  <span class="string">"track"</span>: {<span class="string">"no"</span>: <span class="number">1</span>, <span class="string">"of"</span>: <span class="number">0</span>},
+  <span class="string">"genre"</span>: [<span class="string">"Psychedelic"</span>, <span class="string">"Triphop"</span>, <span class="string">"Experimental"</span>, <span class="string">"Electronica"</span>, <span class="string">"Conceptual"</span>],
+  <span class="string">"disk"</span>: {<span class="string">"no"</span>:<span class="number">0</span>, <span class="string">"of"</span>:<span class="number">0</span>},
+  <span class="string">"picture"</span>: {}
+}</code></pre>
+
+<ul>
+<li>Use <a href="http://www.lastfm.fr/api/intro">last.fm API</a> to retrieve informations about artists, albums... You&#39;ll have to learn what is JSONP and how to use it.</li>
+<li>Modify the <code>myokom-server.js</code> to retrieve the cover art from a JPEG file.</li>
+<li>Add a database to the server...</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> use jQuery.</li>
+<li>Your code <strong>CANNOT</strong> be global.</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>myokom.html</li>
+<li>myokom.css</li>
+<li>navy-blue.png</li>
+<li>next.png</li>
+<li>pause.png</li>
+<li>play.png</li>
+<li>previous.png</li>
+<li>jquery-1.8.2.min.js</li>
+<li>myokom-client.js</li>
+<li>myokom-help.html</li>
+<li>(custom-myokom.css)</li>
+</ul>
+
+</section>

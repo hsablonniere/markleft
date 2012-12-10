@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Don't you like my style?</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Review of the basics of CSS and focus on the important parts.">
+<meta name="keywords" content="css, stylesheet, box-model, float, position, display">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/don-t-you-like-my-style.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>Don&#39;t you like my style?</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#definition-and-syntax">Definition and syntax</a></li>
+<li><a href="#box-model">Box model</a></li>
+<li><a href="#floats">Floats</a></li>
+<li><a href="#positions">Positions</a></li>
+<li><a href="#display">Display</a></li>
+<li><a href="#css3-new-magic">CSS3 new magic</a></li>
+<li><a href="#frameworks">Frameworks</a></li>
+<li><a href="#preprocessors">Preprocessors</a></li>
+</ul>
+</div>
+
+</section>
+
+<section>
+<h2 id="definition-and-syntax">Definition and syntax</h2>
+
+<p class="list incremental">CSS is a <strong>stylesheet language</strong> used to describe the <strong>look and formatting</strong> of a document written in a markup language. The goal is to enable the <strong>separation</strong> of <strong>document content</strong> from <strong>document presentation</strong>. A CSS document is a set of rules. A rule applies to a specific set of HTML elements identified by a <strong>selector</strong>. The rule contains differents declarations of <strong>property/value</strong> pairs.</p>
+</section>
+
+<section>
+<h3>Selectors</h3>
+<p>CSS selectors allow authors to apply some rules to a selection of matching elements. Each selector has a behaviour to match document elements. Here&#39;s some examples :</p>
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">p</span> <span class="rules">{ <span class="comment">/* p elements */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="class">.important</span> <span class="rules">{ <span class="comment">/* elements with class="important" */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="id">#header</span> <span class="rules">{ <span class="comment">/* element with id="header" */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">p</span>, <span class="class">.important</span> <span class="rules">{ <span class="comment">/* p elements "AND" elements with class="important" */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">p</span><span class="class">.important</span> <span class="rules">{ <span class="comment">/* p elements with class="important" */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">p</span> <span class="class">.important</span> <span class="rules">{ <span class="comment">/* elements with class="important" having p as ancestor */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">a</span><span class="pseudo">:hover</span> <span class="rules">{ <span class="comment">/* a elements being hovered by mouse pointers */</span> <span class="rule">}</span></span></code></pre>
+
+</section>
+
+<section>
+<h3>Properties and values</h3>
+<p>Once you defined a selector you can add declarations to your CSS rule. A declaration consists of a property and a value. You can see on the example that you can use different units : px, em, %... Colors can also be declared in different notation. See CSS reference for more details.</p>
+<pre data-language="css"><code class="language-css"><span class="comment">/* CSS Examples */</span>
+<span class="tag">p</span> <span class="rules">{
+  <span class="rule"><span class="attribute">background</span>:<span class="value"> <span class="hexcolor">#EEEEEE</span></span>;</span>
+  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="hexcolor">#111</span></span>;</span>
+  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">1.2</span>em</span>;</span>
+  <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center</span>;</span>
+<span class="rule">}</span></span>
+  <span class="tag">p</span><span class="class">.important</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border</span>:<span class="value"> <span class="number">5</span>px solid red</span>;</span>
+<span class="rule">}</span></span></code></pre>
+
+</section>
+
+<section>
+<h2 id="box-model">Box model</h2>
+<p>In CSS, the term &quot;box model&quot; refers to the decoration and layout of an HTML element. We&#39;re talking about five properties : <code>margin</code>, <code>border</code>, <code>padding</code>, <code>height</code> and <code>width</code>. <code>height</code> and <code>width</code> are just responsible for content.</p>
+<p>The example consist of a div element (<code>#out</code>) with a thin black border and another div (<code>#in</code>) inside it with a blue border. The controls on the right interact with <code>#in</code> properties. Play with the different values you&#39;ll quickly understand how it works.</p>
+<iframe src="../examples/css-box-model.html" height="470" width="800"></iframe>
+
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/CSS2/box.html#box-dimensions">W3C box model schema</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="floats">Floats</h2>
+<p>The original usage of floating is to display a paragraph text and a block (ex: an image) inside it and having the text flow around. When used for layouts, it can be really tricky, but once you get it, it&#39;s really powerful!</p>
+<p>Do you remember the normal flow? Well once an element (<code>#green</code> for example) has <code>float:left</code> or <code>float:right</code> it is removed from the normal flow and pushed to the appropriate side. The other elements will be placed as if <code>#green</code> was never in the document and the floating element will float above them. Try it.</p>
+<p>The antidote to <code>float</code> is <code>clear</code>. When an element is cleared it aknowledge the previous floating lines. Reset everything and try to <code>float:left</code> <code>#green</code> and <code>#blue</code> and <code>clear:left</code> <code>#red</code>.</p>
+<iframe src="../examples/css-floats.html" height="470" width="800"></iframe>
+
+
+<ul class="useful-links">
+<li><a href="http://www.alistapart.com/articles/css-floats-101/">CSS Floats 101 (A list apart)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="positions">Positions</h2>
+<p>The <code>position</code> property can be used to position an element elsewhere on the page. Then <code>bottom</code>, <code>left</code>, <code>right</code> and <code>top</code> are useful.</p>
+<p><code>static</code> is the default value and let the element in the normal flow.</p>
+<p><code>fixed</code> allow an element to be positioned according to the browser window.</p>
+<p><code>relative</code> allow and element to be positioned according to its original place.</p>
+<p><code>absolute</code> allow and element to be positioned according the first parent that has a position other than <code>static</code>. <code>position:absolute</code> elements are removed from the normal flow.</p>
+<p>If elements are overlapping themselves, you can use <code>z-index</code> property. An element with greater value is always in front of an element with a lower value.</p>
+<p>If you have <code>width:auto</code> on an element, it can be streched using <code>left</code> and <code>right</code>. The same works with <code>height</code>, <code>bottom</code> and <code>top</code>.</p>
+<iframe src="../examples/css-positions.html" height="470" width="800"></iframe>
+
+
+<ul class="useful-links">
+<li><a href="http://www.alistapart.com/articles/css-positioning-101/">CSS Positionning 101 (A list apart)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="display">Display</h2>
+<p>The <code>display</code> property can be used to change the way an element flows. That&#39;s when the <code>vertical-align</code> property comes handy.</p>
+<p><code>block</code> is the default value of elements like <code>div</code>, <code>li</code>...</p>
+<p><code>inline</code> is the default value of elements like <code>span</code>, <code>a</code>...</p>
+<p><code>inline-block</code> comes hand for 2 reasons :</p>
+
+<ul class="details">
+<li>Forcing a block element to flow and behave like text.</li>
+<li>Forcing an inline element to behave like a block element and have dimensions and top/bottom margins and paddings.</li>
+</ul>
+<p><code>none</code> removes completely the element from the flow.</p>
+<p>If you want to use this to place 2 blocks next to each other horizontally, you&#39;ll have a small white space between them. Because these blocks behave like text, any spaces between them will be displayed. Look at useful links below for more details.</p>
+<iframe src="../examples/css-display.html" height="470" width="800"></iframe>
+
+
+<ul class="useful-links">
+<li><a href="http://css-tricks.com/fighting-the-space-between-inline-block-elements/">Fighting the Space Between Inline Block Elements (CSS Tricks)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="css3-new-magic">CSS3 new magic</h2>
+</section>
+
+<section>
+<h3>New selectors</h3>
+<p>CSS3 provides new selectors and new pseudo-classes. Here are a few examples. See CSS3 reference for more details.</p>
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">td</span><span class="pseudo">:nth-of-type(2n+1)</span> <span class="rules">{ <span class="comment">/* only odd td */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">p</span><span class="class">.important</span> ~ <span class="tag">p</span> <span class="rules">{ <span class="comment">/* p elements after p.important elements */</span> <span class="rule">}</span></span></code></pre>
+
+
+<pre data-language="css" class="incremental"><code class="language-css"><span class="tag">p</span><span class="pseudo">:not(</span><span class="class">.important</span>) <span class="rules">{ <span class="comment">/* p elements without class="important" */</span> <span class="rule">}</span></span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/css3-selectors/">CSS3 selectors (W3C)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>New properties and values</h3>
+<p>CSS3 provides a very large number of new features. A lots of them still need a vendor prefix because the specification is not ready yet (ex: <code>-webkit-transform</code>). Here are a few examples. See CSS3 reference for more details.</p>
+<pre data-language="css"><code class="language-css"><span class="tag">p</span> <span class="rules">{
+  <span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">5</span>px</span>;</span>
+  <span class="rule"><span class="attribute">box-shadow</span>:<span class="value"> <span class="number">0</span> <span class="number">0</span> <span class="number">10</span>px <span class="hexcolor">#000</span></span>;</span>
+  <span class="rule"><span class="attribute">color</span>:<span class="value"> <span class="function">rgba(<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.75</span>)</span></span>;</span>
+  <span class="rule"><span class="attribute">columns-count</span>:<span class="value"> <span class="number">2</span></span>;</span>
+  <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0.5</span></span>;</span>
+  <span class="rule"><span class="attribute">transform</span>:<span class="value"> <span class="function">rotate(<span class="number">7</span>deg)</span></span>;</span>
+  <span class="rule"><span class="attribute">transition</span>:<span class="value"> opacity <span class="number">2</span>s</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="tag">p</span><span class="pseudo">:hover</span> <span class="rules">{
+  <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">1</span></span>;</span>
+<span class="rule">}</span></span></code></pre>
+
+<p>Vendor prefixes are a really difficult problem. You shouldn&#39;t use non standard properties. If you use some that are not yet official, use all the vendor prefix. Don&#39;t break the web! Lea Verou wrote a small library to &quot;resolve&quot; the problem. It works great, but think it twice before putting it in production.</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en-US/docs/CSS/CSS_Reference">CSS reference (MDN)</a></li>
+<li><a href="http://www.w3.org/TR/css-2010/">CSS3 specification (W3C)</a></li>
+<li><a href="http://paulirish.com/2012/vendor-prefixes-are-not-developer-friendly/">Vendor prefixes are not developer-friendly </a></li>
+<li><a href="http://css-tricks.com/tldr-on-vendor-prefix-drama/">TL;DR on Vendor Prefix Drama</a></li>
+<li><a href="http://lea.verou.me/2012/02/vendor-prefixes-the-css-wg-and-me/">Vendor prefixes, the CSS WG and me</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Media queries</h3>
+<p>Media queries are designed to make different styles for one markup and adapt to the variety of devices and screen sizes. This technique is the key to the new movement called responsive web design. The goal is to rearrange and adapt content to the space allowed by the device.</p>
+<p>This examples comes directly from this document itself. The different iframes presenting examples look bad on small width. With this code, we only display them from a minimum of <code>800px</code>.</p>
+<p>It can look strang to hide it and show it again after under certain cases. It&#39;s called a <strong>mobile first approach</strong>. Look at useful links for more details.</p>
+<pre data-language="css"><code class="language-css"><span class="tag">iframe</span><span class="attr_selector">[width="800"]</span> <span class="rules">{
+  <span class="rule"><span class="attribute">display</span>:<span class="value"> none</span>;</span>
+<span class="rule">}</span></span>
+
+<span class="at_rule">@<span class="keyword">media</span> screen and (min-width: <span class="number">800</span>px) </span>{
+  <span class="tag">iframe</span><span class="attr_selector">[width="800"]</span> <span class="rules">{
+    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span>;</span>
+  <span class="rule">}</span></span>
+}</code></pre>
+
+<ul>
+<li><a href="http://www.smashingmagazine.com/">Smashing Magazine</a></li>
+<li><a href="http://10k.aneventapart.com/">10K an event apart</a></li>
+<li><a href="http://mediaqueri.es/">mediaqueri.es</a></li>
+<li><a href="http://2011.full-frontal.org/">Full frontal</a></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/css3-mediaqueries/">CSS media queries specification (W3C)</a></li>
+<li><a href="http://www.alistapart.com/articles/responsive-web-design/">Responsive web design (A list apart)</a></li>
+<li><a href="http://designshack.net/articles/css/mobilefirst/">Mobile First Design: Why It’s Great and Why It Sucks (design shack)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="frameworks">Frameworks</h2>
+<p>CSS Frameworks are meant to <strong>ease developement</strong>. Most of them answer the problematic of pure CSS <strong>layout</strong>. A specific kind of &quot;framework&quot; called <strong>reset</strong> helps developer in having consistant default values across web browsers.</p>
+<ul>
+<li><a href="http://meyerweb.com/eric/tools/css/reset/">Eric Meyer&#39;s CSS Reset</a></li>
+<li><a href="http://necolas.github.com/normalize.css/">normalize.css</a></li>
+<li><a href="http://twitter.github.com/bootstrap/">Twitter&#39;s Bootstrap</a></li>
+<li><a href="http://www.getskeleton.com">Skeleton</a></li>
+<li><a href="http://h5bp.com">HTML5 boilerplate</a></li>
+<li><a href="http://foundation.zurb.com/">Foundation</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="preprocessors">Preprocessors</h2>
+<p>CSS preprocessors are stylesheets language that add <strong>new features</strong> and/or <strong>simplicity</strong> to CSS original syntax. Using a <strong>client or server side</strong> program, the code is converted to correct CSS.</p>
+<ul>
+<li><a href="http://lesscss.org">LESS</a></li>
+<li><a href="http://sass-lang.com">SASS</a></li>
+<li><a href="http://compass-style.org/">Compass</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

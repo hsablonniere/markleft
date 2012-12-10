@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Have a look at my prototype</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Details about JavaScript inheritance and other OO concepts.">
+<meta name="keywords" content="javascript, prototype, inheritance, object-oriented">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/have-a-look-at-my-prototype.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>Have a look at my prototype</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#prototype-based-programming">Prototype-based programming</a></li>
+<li><a href="#the-javascript-way">The JavaScript way</a></li>
+<li><a href="#the-old-school-way">The old-school way</a></li>
+<li><a href="#exceptions">Exceptions</a></li>
+<li><a href="#ninja-stuffs">Ninja stuffs</a></li>
+<li><a href="#differences-with-other-oo-languagues">Differences with other OO Languagues</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>My precious prototype...</h4>
+
+<p class="list incremental">After two courses on the JavaScript language, we&#39;re still missing an <strong>important feature</strong> of JavaScript : inheritance. We&#39;ll try to understand how it works and how it differs form other languages. At the end of this course, your <strong>current powers</strong> will be <strong>much greater!</strong> You&#39;ll be able to build great JavaScript applications. It&#39;s not a reason to <strong>take a nap</strong>, a whole <strong>life of practice</strong> awaits you...</p>
+</section>
+
+<section class="cover">
+<h2 id="prototype-based-programming">Prototype-based programming</h2>
+<p>Most object-oriented programming languages are class-based. Classes are used to define a common set of properties and methods for all the objects/instances of this class. JavaScript doesn&#39;t have classes. There&#39;s no <code>class</code> keyword (yet).</p>
+<p>Instead of that, JavaScript for a prototype-based approach. Objects can serve as prototypes of other objects and share common behaviour and data structure. Objects can be build using <code>Object.create()</code> or using the <code>new</code> operator and a constructor function.</p>
+</section>
+
+<section class="cover">
+<h2 id="the-javascript-way">The JavaScript way</h2>
+</section>
+
+<section>
+<h3>Object literals</h3>
+<p>We already saw how to create object literals that can have properties and methods. Here&#39;s two examples :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> frodo = {
+  name: <span class="string">'Frodo'</span>,
+  fullname: <span class="string">'Frodo Baggins'</span>,
+  race: <span class="string">'Hobbit'</span>,
+  sayHello: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">"My name is "</span> + <span class="keyword">this</span>.name + <span class="string">" and I'm a "</span> + <span class="keyword">this</span>.race);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> sam = {
+  name: <span class="string">'Sam'</span>,
+  fullname: <span class="string">'Samwise Gamgee'</span>,
+  race: <span class="string">'Hobbit'</span>,
+  sayHello: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">"My name is "</span> + <span class="keyword">this</span>.name + <span class="string">" and I'm a "</span> + <span class="keyword">this</span>.race);
+  }
+};</code></pre>
+
+<p>These examples don&#39;t follow the <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Don&#39;t Repeat Yourself pattern</a>. We have a lot of code duplication. As you can see, we declared the <code>sayHello</code> function twice. Event if the code is the same, it&#39;s not the same function. It takes more place in memory and creating a function has always a cost. Imagine you have one thousand hobbits to create!!</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Code duplication &amp; Bad performances !!</span>
+console.log(frodo.sayHello === sam.sayHello); <span class="comment">// => false</span></code></pre>
+
+</section>
+
+<section>
+<h3>Object.create()</h3>
+<h4>Usage</h4>
+<p>Using JavaScript&#39;s prototype-based inheritance, we can use an object as a prototype to create other ones like it.</p>
+<p>Remember the <code>frodo</code> object?</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> frodo = {
+  name: <span class="string">'Frodo'</span>,
+  fullname: <span class="string">'Frodo Baggins'</span>,
+  race: <span class="string">'Hobbit'</span>,
+  sayHello: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">"My name is "</span> + <span class="keyword">this</span>.name + <span class="string">" and I'm a "</span> + <span class="keyword">this</span>.race);
+  }
+};</code></pre>
+
+<p>Let&#39;s create a <code>sam</code> using <code>frodo</code> as a prototype.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> sam = Object.create(frodo);
+sam.name = <span class="string">'Sam'</span>;
+sam.fullname = <span class="string">'Samwise Gamgee'</span>;</code></pre>
+
+<p>Now we have true code reuse!!</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// No code duplication &amp; Better performances !!</span>
+sam.sayHello();                               <span class="comment">// => "My name is Sam and I'm a Hobbit"</span>
+console.log(sam.race);                        <span class="comment">// => "Hobbit"</span>
+console.log(frodo.sayHello === sam.sayHello); <span class="comment">// => true</span></code></pre>
+
+</section>
+
+<section>
+<h4>Modifications on the object used as a prototype</h4>
+<p>If I modify the object used as a prototype like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Modifications on the object used as a prototype</span>
+frodo.sayHello = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(<span class="keyword">this</span>.name + <span class="string">' ('</span> + <span class="keyword">this</span>.race + <span class="string">')'</span>);
+};
+frodo.race = <span class="string">'HOBBIT'</span>;</code></pre>
+
+<p>The objects created with it are impacted :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Objects with it are impacted</span>
+sam.sayHello();                               <span class="comment">// => "Sam (HOBBIT)"</span>
+console.log(sam.race);                        <span class="comment">// => 'HOBBIT'</span>
+console.log(frodo.sayHello === sam.sayHello); <span class="comment">// => true</span></code></pre>
+
+</section>
+
+<section>
+<h4>Modifications on the created objects</h4>
+<p>If I do direct modifications on created objects like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Modifications on created objects</span>
+sam.sayHello = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(<span class="string">"Hello, I'm Sam ;-)"</span>);
+};
+sam.race = <span class="string">"a hobbit but I'm not sure..."</span>;</code></pre>
+
+<p>The object used as a prototype won&#39;t be altered :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Objects with it are impacted</span>
+frodo.sayHello();                             <span class="comment">// => "Frodo (HOBBIT)"</span>
+sam.sayHello();                               <span class="comment">// => "Hello, I'm Sam ;-)"</span>
+console.log(frodo.race);                      <span class="comment">// => "HOBBIT"</span>
+console.log(sam.race);                        <span class="comment">// => "a hobbit but I'm not sure..."</span>
+console.log(frodo.sayHello === sam.sayHello); <span class="comment">// => false</span></code></pre>
+
+</section>
+
+<section>
+<h4>Best practices</h4>
+<p>It often feels better to create a <code>hobbit</code> object and create <code>frodo</code> and <code>sam</code> based on it.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> hobbit = {
+  race: <span class="string">'Hobbit'</span>,
+  sayHello: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">"My name is "</span> + <span class="keyword">this</span>.name + <span class="string">" and I'm a "</span> + <span class="keyword">this</span>.race);
+  }
+};</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> frodo = Object.create(hobbit);
+frodo.name = <span class="string">'Frodo'</span>;
+frodo.fullname = <span class="string">'Frodo Baggins'</span>;</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> sam = Object.create(hobbit);
+sam.name = <span class="string">'Sam'</span>;
+sam.fullname = <span class="string">'Samwise Gamgee'</span>;</code></pre>
+
+
+<p class="warning">Don&#39;t be confused with what we just did. <code>hobbit</code> is not a class. It has many differences.</p>
+</section>
+
+<section class="cover">
+<h3>Prototype chain</h3>
+<p>When you try to access a property of an object, if the object doesn&#39;t have the property on its own, the JavaScript runtime transparently looks for the property on the prototype of the object.</p>
+</section>
+
+<section>
+<h4> hasOwnProperty()</h4>
+<p>You can verify if an object has the property on its own using <code>hasOwnProperty</code> on it.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(sam.hasOwnProperty(<span class="string">'race'</span>));    <span class="comment">// => false</span>
+console.log(hobbit.hasOwnProperty(<span class="string">'race'</span>)); <span class="comment">// => true</span>
+console.log(sam.race);                      <span class="comment">// => "Hobbit"</span></code></pre>
+
+<p>Because prototypes are objects, if the property can&#39;t be found on the prototype, the runtime transparently looks for the property on the prototype of the prototype and so on until there&#39;s no prototype.</p>
+<p>This is known as the prototype chain.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// hasOwnProperty</span>
+<span class="keyword">var</span> merry = Object.create(sam);
+merry.name = <span class="string">'Merry'</span>;
+merry.fullname = <span class="string">'Meriadoc Brandybuck'</span>;
+console.log(merry.hasOwnProperty(<span class="string">'race'</span>));  <span class="comment">// => false</span>
+console.log(sam.hasOwnProperty(<span class="string">'race'</span>));    <span class="comment">// => false</span>
+console.log(hobbit.hasOwnProperty(<span class="string">'race'</span>)); <span class="comment">// => true</span>
+console.log(merry.race);                    <span class="comment">// => "Hobbit"</span></code></pre>
+
+</section>
+
+<section>
+<h4> isPrototypeOf() &amp; Object.getPrototypeOf()</h4>
+<p>We just used <code>hasOwnProperty</code> on <code>hobbit</code>. If you&#39;re following, you must suspect <code>hobbit</code> to have a prototype even if we didn&#39;t assign one.</p>
+<p>When you use an object literal (like we did to create <code>hobbit</code>, the runtime adds implicitly a prototype to your object. This special prototype is the object <code>Object.prototype</code>.</p>
+<p>If you want to verify if an object is the prototype of another one, you can use <code>isPrototypeOf()</code>. Be careful it works for all the prototype chain.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(hobbit.isPrototypeOf(frodo)); <span class="comment">// => true</span>
+console.log(hobbit.isPrototypeOf(sam));   <span class="comment">// => true</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(hobbit.isPrototypeOf(merry)); <span class="comment">// => true</span></code></pre>
+
+<p>You can retrieve the prototype of an object using <code>Object.getPrototypeOf()</code>.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(Object.getPrototypeOf(hobbit) === Object.prototype);   <span class="comment">// => true</span>
+console.log(Object.getPrototypeOf({}) === Object.prototype);       <span class="comment">// => true</span></code></pre>
+
+<p>You can create object with no prototype if you want.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> nakedObj = Object.create(<span class="literal">null</span>);
+console.log(Object.getPrototypeOf(nakedObj) === Object.prototype); <span class="comment">// => false</span></code></pre>
+
+</section>
+
+<section class="cover">
+<h2 id="the-old-school-way">The old-school way</h2>
+<p>JavaScript was written in ten days and it was supposed to seduce Java developpers and classical-inheritance language users. Because of that, the <code>Object.create()</code> and stuff wasn&#39;t available on the first versions.</p>
+<p>To attract classical-inheritance language users and hide a little the prototype nature of the language, constructor functions and the <code>new</code> operator were introduced from the beginning.</p>
+</section>
+
+<section>
+<h3>Constructor functions</h3>
+<p>Like <code>Object.create()</code>, constructor functions can create objects. It has a small advantage but the syntax tricky and weird.</p>
+<p>Let&#39;s take our example back :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> hobbit = {
+  race: <span class="string">'Hobbit'</span>,
+  sayHello: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    console.log(<span class="string">"My name is "</span> + <span class="keyword">this</span>.name + <span class="string">" and I'm a "</span> + <span class="keyword">this</span>.race);
+  }
+};</code></pre>
+
+<p>This way, you can write some code that helps to create an object giving parameters to your function. It&#39;s one of the only advantages with this method.</p>
+<p>The object being created is accessible with <code>this</code>. New properties (and maybe functions) must be assigned to <code>this</code>.</p>
+<p>The convention is to always use uppercase for the first letter.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> Hobbit = <span class="function"><span class="keyword">function</span> <span class="params">(name, fullname)</span> {</span>
+  <span class="keyword">this</span>.name = name;
+  <span class="keyword">this</span>.fullname = fullname;
+};
+Hobbit.prototype.race = <span class="string">'Hobbit'</span>;
+Hobbit.prototype.sayHello = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  console.log(<span class="string">"My name is "</span> + <span class="keyword">this</span>.name + <span class="string">" and I'm a "</span> + <span class="keyword">this</span>.race);
+};</code></pre>
+
+<p>It becomes weird when you want to add functions to your new objects. If you add them in the constructor on <code>this</code>, all objects created with it will have a different function instance.</p>
+<p>Instead, you must use the <code>prototype</code> property of the constructor function. Be careful, the <code>prototype</code> property of the function is not the same thing as the prototype of the function.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">console.log(<span class="string">'race'</span> <span class="keyword">in</span> Hobbit);           <span class="comment">// => false</span>
+console.log(<span class="string">'race'</span> <span class="keyword">in</span> Hobbit.prototype); <span class="comment">// => true</span>
+console.log(<span class="string">'call'</span> <span class="keyword">in</span> Hobbit);           <span class="comment">// => true</span>
+console.log(<span class="string">'call'</span> <span class="keyword">in</span> Hobbit.prototype); <span class="comment">// => false</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Working_with_Objects#Using_a_Constructor_Function">Using a constructor function (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>The new operator</h3>
+<p>Once you have a constructor function, you can use it but you must do it the right way with the <code>new</code> operator.</p>
+<p>Instead of using <code>Object.create()</code> and do assignation like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> frodo = Object.create(hobbit);
+frodo.name = <span class="string">'Frodo'</span>;
+frodo.fullname = <span class="string">'Frodo Baggins'</span>;</code></pre>
+
+<p>You can do this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> frodo = <span class="keyword">new</span> Hobbit(<span class="string">'Frodo'</span>, <span class="string">'Frodo Baggins'</span>);</code></pre>
+
+<p>The usage is simpler but again, it&#39;s one of the only advantages.</p>
+<p>If you don&#39;t use the <code>new</code> operator, it will explode in your face. Remember this warning because it will happen some day... Uppercase letter should be a reminder.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// no new operator, DON'T DO THAT AT HOME KIDS</span>
+<span class="keyword">var</span> frodo = Hobbit(<span class="string">'Frodo'</span>, <span class="string">'Frodo Baggins'</span>);
+console.log(frodo);                      <span class="comment">// => undefined</span>
+console.log(window.name);                <span class="comment">// => "Frodo" (global var)</span>
+console.log(window.fullname);            <span class="comment">// => "Frodo Baggins" (global var)</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/new">new operator reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="exceptions">Exceptions</h2>
+<p>Exceptions in JavaScript are similar to those in C++. They are objects that can be thrown and catched with a <code>try/catch</code> block.</p>
+<p>The simplest way to throw an exception is this one :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> bearRing = <span class="function"><span class="keyword">function</span> <span class="params">(person)</span> {</span>
+  <span class="keyword">if</span> (person === <span class="string">'Gandalf'</span>) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">'Gandalf cannot bear the ring!'</span>);
+  } <span class="comment">/* some code */</span>
+};</code></pre>
+
+<p>You&#39;ll catch it like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">try</span> {
+  bearRing(<span class="string">'Gandalf'</span>);
+} <span class="keyword">catch</span> (e) {
+  console.error(e.name + <span class="string">': '</span> + e.message);
+};</code></pre>
+
+<p>You can also use the <code>Error</code> constructor or create a new constructor, but it&#39;s often not necessary.</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> RingError = <span class="function"><span class="keyword">function</span> <span class="params">(person)</span> {</span>
+  <span class="keyword">this</span>.name = <span class="string">"RingError"</span>;
+  <span class="keyword">this</span>.message = <span class="string">"The ring can't be beared by "</span> + person + <span class="string">"."</span>;
+};
+RingError.prototype = <span class="keyword">new</span> Error();</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> bearRing = <span class="function"><span class="keyword">function</span> <span class="params">(person)</span> {</span>
+  <span class="keyword">if</span> (person === <span class="string">'Gandalf'</span>) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> RingError(person);
+  } <span class="comment">/* some code */</span>
+};</code></pre>
+
+
+<p class="warning">Exception are rarely used in JavaScript. One reason is that it cost CPU and memory. Use them for exceptional behaviour and never in a loop.</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Statements/try...catch">try/catch reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Error">Error reference (MDN)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="ninja-stuffs">Ninja stuffs</h2>
+</section>
+
+<section>
+<h3>get &amp; set</h3>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> elf = {
+  get age() {
+    <span class="keyword">return</span> <span class="keyword">this</span>._age;
+  },
+  set age(age) {
+    <span class="keyword">if</span> (!isNaN(age)) {
+      <span class="keyword">this</span>._age = age;
+    } <span class="keyword">else</span> {
+      <span class="keyword">throw</span> {
+        name: <span class="string">'TypeError'</span>,
+        message: <span class="string">'Age type error'</span>
+      };
+    }
+  }
+};
+<span class="comment">// Doesn't work on IE &lt; 9   :-(</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> arwen = Object.create(elf);
+arwen.age = <span class="number">2901</span>;
+<span class="keyword">var</span> legolas = Object.create(elf);
+legolas.age = <span class="string">'veryOld'</span>; <span class="comment">// Fails!!</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/get">get reference (MDN)</a></li>
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Operators/Special/set">set reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>defineProperty</h3>
+<p>Once an object has been defined like this :</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> elf = {
+  race: <span class="string">'Elf'</span>,
+  canBeVeryOld: <span class="literal">true</span>,
+  pointyEars: <span class="literal">true</span>
+};</code></pre>
+
+<p>You can still define special properties on it like configurable, enumerable, value, writable, get, set...</p>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">Object.defineProperty(elf, <span class="string">"age"</span>, {
+  get: <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="keyword">this</span>._age;
+  },
+  set: <span class="function"><span class="keyword">function</span> <span class="params">(age)</span> {</span>
+    <span class="keyword">if</span> (!isNaN(age)) {
+      <span class="keyword">this</span>._age = age;
+    } <span class="keyword">else</span> {
+      <span class="keyword">throw</span> <span class="keyword">new</span> TypeError(<span class="string">'zefze'</span>);
+    }
+  }
+});
+<span class="comment">// Doesn't work on IE &lt; 9   :-(</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperty">defineProperty reference (MDN)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="differences-with-other-oo-languagues">Differences with other OO Languagues</h2>
+</section>
+
+<section>
+<h3>Encapsultation</h3>
+<p>By encapsulation, we often mean that an object is like a black box and we just need to worry about the interface and not what&#39;s inside.</p>
+
+<p class="list incremental">Following this definition, JavaScript does not support this feature because there&#39;s <strong>no <code>private</code> keyword</strong>.</p>
+
+<p class="list incremental">However, we already saw that <strong>hiding properties</strong> or methods <strong>can be done using closures </strong>.</p>
+
+<p class="list incremental">We also learnt how we can specify <strong>getter and setter</strong> that <strong>hide behaviour</strong> under a <strong>simple <code>=</code> assignation</strong>.</p>
+</section>
+
+<section>
+<h3>Destructors</h3>
+
+<p class="list incremental">JavaScript <strong>doesn&#39;t need destructors</strong> since it has a <strong>garbage collector</strong>...</p>
+</section>
+
+<section>
+<h3>Multiple inheritance</h3>
+
+<p class="list incremental">Because of its prototype-based inheritance, JavaScript <strong>doesn&#39;t support multiple inheritance</strong> <strong>as class-based languagues mean it</strong>. But using the <strong>prototype chain</strong> and/or the fact that function are <strong>first-class citizens</strong>, <strong>you can emulate it</strong>.</p>
+</section>
+
+<section>
+<h3>Static members</h3>
+
+<p class="list incremental">If you need <strong>&quot;static&quot; members</strong> <strong>on classes</strong> like in class-based languages, just <strong>use the constructor function</strong> <strong>and augment it</strong>...</p>
+</section>
+
+<section>
+<h3>Polymorphism &amp; Duck typing</h3>
+
+<p class="list incremental">This concept allow us to <strong>handle objects of different types</strong> <strong>using a uniform interface</strong>. In a dynamic language like JavaScript, you <strong>don&#39;t have to bother about types</strong>. You just need to <strong>worry about given properties and methods</strong> of an object. <strong>It&#39;s called duck typing</strong>.</p>
+</section>
+
+<section>
+
+<blockquote class="quote">
+<p>&quot;When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.&quot;</p>
+<p>James Whitcomb Riley</p>
+</blockquote>
+</section>
+
+<section>
+
+<blockquote class="quote">
+<p>Learning something doesn&#39;t mean you have to forget the rest...</p>
+<p>Someone! (maybe me, don&#39;t remember...)</p>
+</blockquote>
+</section>
+
+<section class="last-question">
+<p>It is really important to understand that JavaScript is different from language X and Y... You should write JavaScript with JavaScript style and features.</p>
+<p>Don&#39;t use it the exact same way you use other languages...</p>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

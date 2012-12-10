@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Asynchronous awesomeness</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Introduction to AJAX and surrounding techniques...">
+<meta name="keywords" content="javascript, asynchronous, ajax, jsonp, history, bookmark">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/asynchronous-awesomeness.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>Asynchronous awesomeness</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#what-39-s-the-point">What&#39;s the point ?</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#how-does-it-work">How does it work ?</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#jquery-amp-ajax">jQuery &amp; AJAX</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>Thousand, twenty-two THOUSAND...</h4>
+
+<p class="list incremental">If you wanna build the next billion user website, you need <strong>cool stuffs like AJAX</strong> or you&#39;ll end up running after <strong>others</strong>...</p>
+</section>
+
+<section>
+<h2 id="definition">Definition</h2>
+
+<p class="list incremental">AJAX stands for <strong>Asynchronous JavaScript + XML</strong>. It is <strong>not a technology</strong> but a <strong>mix of existing technologies</strong> :</p>
+
+<ul class="incremental">
+<li>(X)HTML/CSS</li>
+<li>DOM</li>
+<li>XML (or JSON)</li>
+<li>XMLHttpRequest</li>
+<li>JavaScript</li>
+</ul>
+<p>Nowadays, JSON is often prefered to XML as a data exchange format. It&#39;s not a reason to stop calling it AJAX...</p>
+</section>
+
+<section>
+<h2 id="what-39-s-the-point">What&#39;s the point ?</h2>
+
+<p class="list incremental">The main idea behind the word AJAX is simply the ability to make <strong>asynchronous HTTP requests</strong> between <strong>web page</strong> and <strong>server</strong>. It can be summarized as <strong>update without reload</strong> the whole page.</p>
+<p>At the time, it was considered as a new approach to web applications. Probably because it was a good way to improve user experience and interaction design.</p>
+
+<p class="list incremental">When the term was introduced, well known web sites or features like <strong>Google Suggest</strong> or <strong>Google Maps</strong> were used to <strong>illustrate the idea</strong>.</p>
+<p>Because the whole thing is asynchronous, requests are handled in parallel.</p>
+</section>
+
+<section>
+<h2 id="history">History</h2>
+
+<p class="list incremental">The term AJAX was <strong>coined in 2005</strong> by <strong>Jesse James Garret</strong>. The technologies needed appeared sooner. The key ingredient of this receipe, the <strong>XMLHttpRequest</strong> is older than that. The <strong>concept behind</strong> it was originally created by developers of Outlook Web Access for <strong>Microsoft in 1999</strong> as an ActiveX component. A short time after, a Mozilla implementation was modelled to work like Microsoft&#39;s one. It&#39;s only in <strong>2006</strong> that <strong>W3C specifications started</strong>.</p>
+
+<ul class="useful-links">
+<li><a href="http://adaptivepath.com/ideas/ajax-new-approach-web-applications">Article that coined the term AJAX by Jesse James Garret in 2005</a></li>
+<li><a href="http://www.w3.org/TR/XMLHttpRequest/">XMLHttpRequest specification (W3C)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="how-does-it-work">How does it work ?</h2>
+</section>
+
+<section>
+<h3>Protocol</h3>
+<p>In order to send/post data to/from server and use the informations on the web page, there&#39;s several steps to follow :</p>
+
+<ul class="incremental">
+<li>Get an XMLHttpRequest instance</li>
+<li>Create the HTTP request</li>
+<li>Listen for <code>readystatechange</code></li>
+<li>Send the request</li>
+<li>Handle the response</li>
+</ul>
+</section>
+
+<section>
+<h3>Get an XMLHttpRequest instance</h3>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// W3C standard</span>
+<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// IE6 and IE7 for local files</span>
+<span class="keyword">var</span> xhr = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Feature detection needs try/catch</span>
+<span class="keyword">var</span> xhr;
+<span class="keyword">try</span> {
+  xhr = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);
+} <span class="keyword">catch</span>(e) {}</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/XMLHttpRequest">XMLHttpRequest reference (MDN)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Create the HTTP request</h3>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="keyword">var</span> httpMethod = <span class="string">'GET'</span>;   <span class="comment">// could be POST, PUT, DELETE...</span>
+<span class="keyword">var</span> url = <span class="string">'https://www.facebook.com/markzuckerberg/friends'</span>;
+<span class="keyword">var</span> asynchronous = <span class="literal">true</span>;  <span class="comment">// false means synchronous</span>
+                          <span class="comment">// it frozes your browser</span>
+                          <span class="comment">// until response if received</span></code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript">xhr.open(httpMethod, url, asynchronous);</code></pre>
+
+</section>
+
+<section>
+<h3>Listen for <code>readystatechange</code></h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="comment">// Listens for readystatechange events</span>
+<span class="comment">// The callback is fired on each states : LOADING, LOADED, (INTERACTIVE), COMPLETED...</span>
+xhr.onreadystatechange = callback;</code></pre>
+
+</section>
+
+<section>
+<h3>Send the request</h3>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Without request body</span>
+xhr.open(<span class="string">'GET'</span>, <span class="string">'https://www.facebook.com/markzuckerberg/friends'</span>, <span class="literal">true</span>);
+xhr.send();</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// With request URL encoded body</span>
+xhr.open(<span class="string">'POST'</span>, <span class="string">'https://www.facebook.com/login'</span>, <span class="literal">true</span>);
+<span class="keyword">var</span> requestBody = <span class="string">'email=mark.zuckerberg%40facebook.com&amp;password=imceobitch'</span>;
+xhr.send(requestBody);</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// With request JSON body</span>
+xhr.open(<span class="string">'POST'</span>, <span class="string">'https://www.facebook.com/login'</span>, <span class="literal">true</span>);
+<span class="keyword">var</span> requestBody = <span class="string">'{"email":"mark.zuckerberg%40facebook.com","password":"imceobitch"}'</span>;
+xhr.send(requestBody);</code></pre>
+
+</section>
+
+<section>
+<h3>Handle the response</h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span> <span class="params">()</span> {</span>
+  <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span> &amp;&amp; xhr.status === <span class="number">200</span>) {
+    <span class="comment">// use xhr.responseText if response is text based format (like JSON)</span>
+    <span class="comment">// use xhr.responseXML if response is XML</span>
+    console.log(xhr.responseText);
+  }
+};</code></pre>
+
+</section>
+
+<section class="cover">
+<h2 id="limitations">Limitations</h2>
+</section>
+
+<section>
+<h3>Same origin policy (SOP)</h3>
+
+<p class="list incremental">For <strong>security reasons</strong>, modern browsers implement the same origin policy. It prevents <strong>attacks such as XSS</strong>.</p>
+
+<p class="list incremental">An origin is defined by the <strong>scheme, host and port</strong> of a URL. If one of these variables is <strong>different from page URL</strong>, the origin is considered different and the <strong>XHR fails</strong>.</p>
+
+<p class="list incremental">With <strong>HTML5</strong> and all the new fancy stuffs around it, came a new specification : <strong>XMLHttpRequest level 2</strong> and the ability to do <strong>Cross-Origin Resource Sharing (CORS)</strong>. CORS works with new HTTP response headers.</p>
+
+<p class="list incremental">There&#39;s actually a few <strong>techniques to work around SOP</strong> : using JSONP and iframes.</p>
+
+<ul class="useful-links">
+<li><a href="https://developer.mozilla.org/en/Same_origin_policy_for_JavaScript">Same origin policy for JavaScript (MDN)</a></li>
+<li><a href="http://dvcs.w3.org/hg/cors/raw-file/tip/Overview.html">XMLHttpRequest Level 2 specification (W3C)</a></li>
+<li><a href="http://www.w3.org/TR/XMLHttpRequest2/">Cross-Origin Resource Sharing specification (W3C)</a></li>
+<li><a href="http://www.kendoui.com/blogs/teamblog/posts/11-10-04/using_cors_with_all_modern_browsers.aspx">Using CORS with All (Modern) Browsers (kendoui.com)</a></li>
+<li><a href="http://en.wikipedia.org/wiki/JSONP">JSONP (wikipedia)</a></li>
+<li><a href="http://ajaxpatterns.org/IFrame_Call">IFrame Call</a></li>
+</ul>
+</section>
+
+<section>
+<h3>File upload</h3>
+
+<p class="list incremental">Again for <strong>security reasons</strong>, file uploads <strong>aren&#39;t allowed with XHR</strong>.</p>
+
+<p class="list incremental">New <strong>HTML5 work on XHR</strong> and <strong>FileAPI is in progress</strong> to work around this problem with standards.</p>
+
+<p class="list incremental">A lot of websites actually provide such capabilities, using <strong>work around techniques</strong> such as <strong>flash</strong> or <strong>iframes</strong>.</p>
+
+<ul class="useful-links">
+<li><a href="http://www.webappers.com/2011/01/24/jquery-file-upload-with-upload-progress-bar/">jQuery plugin to handle AJAX file upload (webappers.com)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Two way communications</h3>
+
+<p class="list incremental">With AJAX, the clients makes a requests and the server responses. But the <strong>server can&#39;t initiate a request</strong> to a client on its own. One simple way to simulate that is to <strong>poll every n seconds</strong>.</p>
+<p>Applications attempts to eliminate this limitation through various techniques :</p>
+
+<ul class="incremental">
+<li>Streaming</li>
+<li>Long polling</li>
+</ul>
+
+<p class="list incremental">These techniques have a major drawback, each time a request or a response is sent, the informations transfered is often composed of <strong>huge headers</strong> and <strong>small data</strong>.</p>
+
+<p class="list incremental">The emerging standards such <strong>WebSockets</strong> or Server Sent Events will allow every website to enter a new area like the one we entered with AJAX. WebSockets allow <strong>bi-directional and full-duplex</strong> communications over a single TCP socket.</p>
+
+<ul class="useful-links">
+<li><a href="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-17">The WebSocket protocol draft (IETF)</a></li>
+<li><a href="http://dev.w3.org/html5/websockets/">The WebSocket API (W3C)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Search engines</h3>
+
+<p class="list incremental"><strong>Web crawlers</strong> used by search engines <strong>handles JavaScript and AJAX</strong> <strong>but it&#39;s far from perfect</strong>. <strong>Be careful with SEO</strong>. It is really important and to <strong>take AJAX into account</strong>.</p>
+
+<ul class="useful-links">
+<li><a href="http://googlewebmastercentral.blogspot.com/2011/11/get-post-and-safely-surfacing-more-of.html">GET, POST, and safely surfacing more of the web</a></li>
+</ul>
+</section>
+
+<section>
+<h3>History and bookmarks</h3>
+
+<p class="list incremental">Because AJAX is often used to modify a part of the page, one could think that browser <strong>back button </strong> would allow visitors to <strong>view what was displayed before </strong>.</p>
+<p>If you don&#39;t do anything about it, your website will suffer from bad user experience and you don&#39;t really want that.</p>
+
+<p class="list incremental">The other drawback is bookmarking, in a world wide web where <strong>everyone share anything</strong> every millisecond, being able to <strong>retrieve state with unique URL </strong> is fundamental.</p>
+
+<p class="list incremental">Common <strong>work around technique</strong> is to use <strong>iframes and URL fragments </strong> (part after # in URL) to provide such features. Look how Gmail does it, it works really well.</p>
+
+<p class="list incremental">The <strong>HTML5 history API</strong> will allow lots of cool behaviours to <strong>address these problems </strong>. It&#39;s currently used by Github&#39;s file browser.</p>
+
+<ul class="useful-links">
+<li><a href="http://www.w3.org/TR/html5/history.html">HTML5 History API (W3C)</a></li>
+<li><a href="https://github.com/jquery/jquery">Github&#39;s jquery file browser</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="jquery-amp-ajax">jQuery &amp; AJAX</h2>
+</section>
+
+<section>
+<h3>GET</h3>
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Low level method</span>
+$.ajax({
+  url: <span class="string">'hhttps://www.facebook.com/markzuckerberg/friends'</span>,
+  success: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+    $(<span class="string">'h1'</span>).html(data);
+  }
+});</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Short hand method</span>
+$.get(<span class="string">'https://www.facebook.com/markzuckerberg/friends'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+  $(<span class="string">'.friends'</span>).html(data);
+});</code></pre>
+
+
+<pre data-language="javascript" class="incremental"><code class="language-javascript"><span class="comment">// Fast AJAX partial reload</span>
+$(<span class="string">'.friends'</span>).load(<span class="string">'https://www.facebook.com/markzuckerberg/friends'</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/jQuery.ajax/">$.ajax documentation (jQuery)</a></li>
+<li><a href="http://api.jquery.com/jQuery.get/">$.get documentation (jQuery)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>POST</h3>
+<pre data-language="javascript"><code class="language-javascript"><span class="comment">// Low level method</span>
+$.ajax({
+  type: <span class="string">'POST'</span>,
+  url: <span class="string">'https://www.facebook.com/login'</span>,
+  data: <span class="string">'email=mark.zuckerberg%40facebook.com&amp;password=imceobitch'</span>,
+  success: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span> <span class="comment">/* some code */</span> }
+});</code></pre>
+
+<pre data-language="javascript"><code class="language-javascript"><span class="comment">// Short hand method</span>
+$.post(<span class="string">'https://www.facebook.com//login'</span>,
+  <span class="string">'email=mark.zuckerberg%40facebook.com&amp;password=imceobitch'</span>,
+  <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span> <span class="comment">/* some code */</span> });</code></pre>
+
+<pre data-language="javascript"><code class="language-javascript"><span class="comment">// Short hand method with data object</span>
+$.post(<span class="string">'/login'</span>,
+  { email: <span class="string">'mark.zuckerberg@facebook.com'</span>, password: <span class="string">'imceobitch'</span> },
+  <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span> <span class="comment">/* some code */</span> });</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/jQuery.ajax/">$.ajax documentation (jQuery)</a></li>
+<li><a href="http://api.jquery.com/jQuery.post/">$.post documentation (jQuery)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h3>More...</h3>
+</section>
+
+<section>
+<h4>Callbacks</h4>
+<pre data-language="javascript"><code class="language-javascript">$.ajax({
+  url: <span class="string">'https://www.facebook.com/friends'</span>,
+  complete: <span class="function"><span class="keyword">function</span> <span class="params">(jqXHR, textStatus)</span> {</span>
+    console.log(<span class="string">'AJAX response received: '</span> + textStatus);
+  },
+  success: <span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+    $(<span class="string">'.friends'</span>).html(data);
+  },
+  error: <span class="function"><span class="keyword">function</span> <span class="params">(jqXHR, textStatus, errorThrown)</span> {</span>
+    console.error(<span class="string">'Error: '</span> + textStatus);
+  }
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/jQuery.ajax/">$.ajax documentation (jQuery)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Functional style callbacks</h4>
+<pre data-language="javascript"><code class="language-javascript">$.ajax({
+  url: <span class="string">'https://www.facebook.com/friends'</span>
+})
+.always(<span class="function"><span class="keyword">function</span> <span class="params">(data)</span> {</span>
+  $(<span class="string">'.friends'</span>).html(data);
+})
+.done(<span class="function"><span class="keyword">function</span> <span class="params">(jqXHR, textStatus)</span> {</span>
+  console.log(<span class="string">'AJAX response received: '</span> + textStatus);
+})
+.fail(<span class="function"><span class="keyword">function</span> <span class="params">(jqXHR, textStatus, errorThrown)</span> {</span>
+  console.error(<span class="string">'Error: '</span> + textStatus);
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/jQuery.ajax/">$.ajax documentation (jQuery)</a></li>
+<li><a href="http://api.jquery.com/deferred.always/">deferred.always documentation (jQuery)</a></li>
+<li><a href="http://api.jquery.com/deferred.done/">deferred.done documentation (jQuery)</a></li>
+<li><a href="http://api.jquery.com/deferred.fail/">deferred.fail documentation (jQuery)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Status codes</h4>
+<pre data-language="javascript"><code class="language-javascript">$.ajax({
+  url: <span class="string">'https://www.facebook.com/friends'</span>,
+  statusCode: {
+    <span class="number">404</span>: <span class="function"><span class="keyword">function</span> <span class="params">(jqXHR, textStatus, errorThrown)</span> {</span>
+      console.error(<span class="string">'Page could not be found'</span>);
+    }
+  }
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/jQuery.ajax/">$.ajax documentation (jQuery)</a></li>
+</ul>
+</section>
+
+<section>
+<h4>Script loading</h4>
+<pre data-language="javascript"><code class="language-javascript">$.getScript(<span class="string">'https://www.facebook.com/fb-core.js'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(data, textStatus)</span> {</span>
+   console.log(data);
+   console.log(textStatus);
+});</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://api.jquery.com/jQuery.getScript/">$.getScript documentation (jQuery)</a></li>
+</ul>
+</section>
+
+<section class="last-question">
+<p>Have you understand <strong>all the concepts</strong>?</p>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

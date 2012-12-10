@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Lab : Miller columns</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Experimenting with PHP objects and classes">
+<meta name="keywords" content="php, classes, objects, inheritance">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Miller columns</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#first-class">First class!</a></li>
+<li><a href="#files">Files...</a></li>
+<li><a href="#-directories">...Directories</a></li>
+<li><a href="#finder-is-for-loosers">Finder is for loosers ;-)</a></li>
+</ul>
+</div>
+
+<img src="../img/parthenon.jpg" alt="lab-logo">
+<p>Welcome to your new lab, here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Read the lesson entirely!!!!</li>
+<li>Identify your learning goals.</li>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Commit <strong>ONLY</strong> the files that are indicated.</li>
+</ul>
+<p>You must try to find documentation and solution by yourself. The course contains links to references and a lot of other interesting websites. Don&#39;t forget : the web is your friend ;-)</p>
+<p>Bon courage...</p>
+<h4>What are miller columns?</h4>
+<p>Like always, wikipedia has <a href="http://en.wikipedia.org/wiki/Miller_columns">the answer</a> ;-)</p>
+<p>In this lab we&#39;ll create a file browser displaying infos as miller columns.</p>
+<p>You can have a look at the existing files before starting...</p>
+<h2 id="first-class">First class!</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to call static method and understand the principle of a Singleton.</li>
+<li>Know how to create simple abstract classes.</li>
+<li>Know how to manipulate paths strings and be OS agnostic.</li>
+</ol>
+<h3>Context</h3>
+<p>Because our file browser file have to manipulate files and directories, we&#39;ll create an abstract class that can represent both. We&#39;ll call it a <code>MillerPath</code>.</p>
+<h3>Steps</h3>
+<ul>
+<li>Before we start, let&#39;s get the root path from configuration file. Use the <code>Config</code> class correctly and set the value of <code>$rootPath</code> in <a href="../labs-files/miller-columns/public/index.php">public/index.php</a> at line 11. Change the value in <a href="../labs-files/miller-columns/config.json">config.json</a> if you need to.</li>
+<li>Create an abstract class named <code>MillerPath</code> in <a href="../labs-files/miller-columns/model/MillerPath.class.php">model/MillerPath.class.php</a>.</li>
+<li>Add a private property named <code>path</code>, it will represent the absolute path of the directory or the file.</li>
+<li>Add a private property named <code>parentPath</code>, it will represent the absolute path of the parent directory of the directory or the file.</li>
+<li>Add a private property named <code>name</code>, it will represent name (last part of the path) of the directory or the file.</li>
+<li>Add a constructor that takes an absolute path as only argument and sets the <code>path</code>, <code>parentPath</code> and <code>name</code> properties correctly.You&#39;ll have to retrieve the last part of the path to get the name. Parent path will also be quick to retrieve.</li>
+<li>Add the appropriate getters for your properties : <code>getPath</code>, <code>getParentPath</code> and <code>getName</code>. If you use a decent IDE, it should be able to generate them ;-)</li>
+<li>Override the <code>__toString</code> method and return the name.</li>
+<li>Uncomment the parts of the code that needs to.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>model/MillerPath.class.php</li>
+<li>view/layout.php</li>
+<li>view/directory.php</li>
+</ul>
+<h2 id="files">Files...</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to inherit from an abstract class.</li>
+<li>Know how to get mime type from for a given file.</li>
+</ol>
+<h3>Context</h3>
+<p>Now that we have a <code>MillerPath</code>, we can create a <code>MillerFile</code> that inherits from it.</p>
+<h3>Steps</h3>
+<ul>
+<li>Create a class named <code>MillerFile</code> in <a href="../labs-files/miller-columns/model/MillerFile.class.php">model/MillerFile.class.php</a> that inherits from the <code>MillerPath</code> class.</li>
+<li>Add a private property named <code>mimeType</code>, it will contain the mime type of the file.</li>
+<li>Override the constructor so you can initialize the mime type. Don&#39;t forget to call the parent&#39;s constructor at the beginning.</li>
+<li>Add the appropriate getter for your property : <code>getMimeType</code>.</li>
+<li>Uncomment the parts of the code that needs to.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>model/MillerFile.class.php</li>
+<li>view/layout.php</li>
+<li>view/directory.php</li>
+</ul>
+<h2 id="-directories">...Directories</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to inherit from an abstract class.</li>
+<li>Know how to sort an array using a custom compare function.</li>
+</ol>
+<h3>Context</h3>
+<p>Now that we have a <code>MillerPath</code>, we can create a <code>MillerDirectory</code> that inherits from it.</p>
+<h3>Steps</h3>
+<ul>
+<li>Create a class named <code>MillerDirectory</code> in <a href="../labs-files/miller-columns/model/MillerDirectory.class.php">model/MillerDirectory.class.php</a> that inherits from the <code>MillerPath</code> class.</li>
+<li>Add a private property named <code>directories</code>, it will contain an array of <code>MillerDirectory</code>.</li>
+<li>Add a private property named <code>files</code>, it will contain an array of <code>MillerFile</code>.</li>
+<li>Add a private method name <code>readDir</code> that initializes the <code>directories</code> and <code>files</code>. Just iterate over the contents of the current directory. Detect if it&#39;s a directory or an item, create a new <code>MillerDirectory</code> or a new <code>MillerFile</code> and add it to the correct private array <code>directories</code> or <code>files</code>.</li>
+<li>Before ending this function sort the <code>directories</code> or <code>files</code>. Sort them by name. Your sort must be case insensitive and should not be troubled by hidden dirs and files. This means that <code>.gnome</code> should be treated as <code>gnome</code>.</li>
+<li>Add the appropriate getters for your properties : <code>getDirectories</code> and <code>getFiles</code>. If the private properties aren&#39;t already set up, just call the <code>readDir</code> function in this getters.</li>
+<li>Uncomment the parts of the code that needs to.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>model/MillerDirectory.class.php</li>
+<li>view/layout.php</li>
+<li>view/directory.php</li>
+</ul>
+<h2 id="finder-is-for-loosers">Finder is for loosers ;-)</h2>
+<p>This is a <em>&quot;be awesome&quot;</em> exercise!</p>
+<h3>Learning goals</h3>
+<ol>
+<li>Use your imagination and all you knowledge to implement useful feature correctly.</li>
+</ol>
+<h3>Context</h3>
+<p>We now have a basic file tree browser displayed as Miller columns. Here&#39;s some ideas to improve it.</p>
+<h3>Ideas</h3>
+<ul>
+<li>Change the style, add some textures, icons, 3D effects, transitions...</li>
+<li>Add a link to go to parent path.</li>
+<li>Don&#39;t reload the hole page for the navigation. Use AJAX. Using HTML5 History API with it would be awesome.</li>
+<li>Use the mimetype info, display it as text or as an icon...</li>
+<li>Highlight the current directory of a column.</li>
+<li>Preview files that can be previewed in the browser : text, images, audio, videos, pdf (using pdf.js)...</li>
+<li>Provide a mechanism to show/hide hidden files.</li>
+<li>Anything you want...</li>
+</ul>
+<h3>Deliveries</h3>
+
+<ul class="deliveries">
+<li>public/index.php</li>
+<li>public/index.css</li>
+<li>public/index.js</li>
+<li>model/MillerConfig.class.php</li>
+<li>model/MillerPath.class.php</li>
+<li>model/MillerFile.class.php</li>
+<li>model/MillerDirectory.class.php</li>
+<li>view/layout.php</li>
+<li>view/directory.php</li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

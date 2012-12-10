@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Devoxx Schedule</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Complete overview of the first lessons about CSS, JavaScript, DOM, Events and AJAX...">
+<meta name="keywords" content="css, javascript, dom, events, ajax">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet">
+<link href="../css/theme-2012-lab.css" rel="stylesheet">
+<link href="../css/hljs-github.css" rel="stylesheet">
+
+<h1>Devoxx Schedule</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#columns">Columns++</a></li>
+<li><a href="#first-things-first">First things first</a></li>
+<li><a href="#day-by-day">Day by day...</a></li>
+<li><a href="#async-data">Async data</a></li>
+<li><a href="#navigation">Navigation</a></li>
+</ul>
+</div>
+
+<img src="../img/devoxx-logo.png" alt="lab-logo">
+<p>Today, we&#39;ll build the schedule for the Devoxx Conference. Here&#39;s the instructions for each exercise :</p>
+<ul>
+<li>Understand the context.</li>
+<li>Follow the steps and rules carefully.</li>
+<li>Verify that you&#39;ve created the appropriate files.</li>
+</ul>
+<h4>Introduction</h4>
+<p>This lab requires AJAX support. Because of that we&#39;ll need an HTTP server. We&#39;ll be using Node.js just like we did for the M.Y.O.K.O.M. lab.</p>
+<p>Go to the root directory and enter this command :</p>
+<pre><code class="language-unknown"><span class="title">node</span> devoxx-server.js</code></pre>
+
+<p>You should be able to browse this page : <a href="http://localhost:8080/columns-plus-plus.html">http://localhost:8080/columns-plus-plus.html</a></p>
+<p>Bon courage...</p>
+<h2 id="columns">Columns++</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how the box model works</li>
+<li>Know how clear/float works</li>
+</ol>
+<h3>Context</h3>
+<p>Have a look at <a href="http://localhost:8080/columns-plus-plus.html">http://localhost:8080/columns-plus-plus.html</a>. It should look like this :</p>
+<img src="../labs-files/devoxx-schedule/columns-plus-plus-before.png" alt="Columns++ before">
+<p>After completing the steps, it should look like this :</p>
+<img src="../labs-files/devoxx-schedule/columns-plus-plus-after.png" alt="Columns++ after">
+<h3>Steps</h3>
+<ul>
+<li>Before changing the CSS, note that when you hover the <code>.schedule-from-to</code> with the mouse, a box shadow is displayed.</li>
+<li>Use the already existing file <a href="http://localhost:8080/columns-plus-plus.css">public/columns-plus-plus.css</a>.</li>
+<li>Add some code to put the <code>.schedule-talk-room</code> name on the right without using floats!</li>
+<li>Change the width of the <code>.schedule-talk</code> so you&#39;ll be able to put two of them on the same line.</li>
+<li>Because of the box-model, <code>width: 50%</code> will be too much. Comment in details how you calculated the width value that works.</li>
+<li>Now that your <code>.schedule-talk</code> have the correct width, you can float them so they can be displayed in two columns.</li>
+<li>Now that you changed the floats inside <code>.schedule-from-to</code> children elements, the box-shadow isn&#39;t displayed properly. Use the &quot;clearfloat&quot; technique to fix the problem.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CANNOT</strong> use floats for the <code>.schedule-talk-room</code> on the right.</li>
+<li>Your CSS <strong>MUST</strong> be valid!!</li>
+<li>You <strong>MUST</strong> have a similar result as the image.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>public/columns-plus-plus.css</li>
+</ul>
+<h2 id="first-things-first">First things first</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to build simple JavaScript</li>
+</ol>
+<h3>Context</h3>
+<p>In the other exercises, we&#39;ll use simple utility functions. We&#39;ll implement them right now.</p>
+<p>You can browse this page <a href="http://localhost:8080/utils-testing.html">http://localhost:8080/utils-testing.html</a> and use the console to test your functions.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have look at <a href="http://localhost:8080/devoxx-utils.js">public/devoxx-core-utils.js</a>. You&#39;ll see functions on the <code>utils</code> property of the global <code>dvx</code> object.</li>
+<li>You can notice that they don&#39;t do what the comments say.</li>
+</ul>
+<h4>Capitalize</h4>
+<ul>
+<li>Replace the code in the <code>dvx.utils.capitalize</code> function with a working implementation.</li>
+<li>Use the comments to understand how the function should behave.</li>
+</ul>
+<h4>Leading zero</h4>
+<ul>
+<li>Replace the code in the <code>dvx.utils.leadingZero</code> function with a working implementation.</li>
+<li>Use the comments to understand how the function should behave.</li>
+</ul>
+<h4>Format time</h4>
+<ul>
+<li>Replace the code in the <code>dvx.utils.formatTime</code> function with a working implementation.</li>
+<li>Use the comments to understand how the function should behave.</li>
+<li>You&#39;ll need to convert a string representation of a date to a date object and extract the hours and minutes.</li>
+<li>If you need examples for string representation of dates, have look at <a href="http://localhost:8080/devoxx-schedule.json">public/devoxx-schedule.json</a> and use <code>fromTime</code> or <code>toTime</code>.</li>
+</ul>
+<h4>Compare talks</h4>
+<ul>
+<li>Replace the code in the <code>dvx.utils.compareTalks</code> function with a working implementation.</li>
+<li>Use the comments to understand how the function should behave.</li>
+<li>You&#39;ll need to compare <code>fromTime</code> (and <code>toTime</code> when needed). Be careful, these properties are strings, you&#39;ll need to convert them to date just like you did for <code>dvx.utils.formatTime</code>.</li>
+<li>If you need examples for talk objects, have look at <a href="http://localhost:8080/devoxx-schedule.json">public/devoxx-schedule.json</a>.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>You <strong>CAN</strong> only modify inside of the functions. The rest of the code <strong>CANNOT</strong> change.</li>
+<li>You <strong>CANNOT</strong> change the parameters of the functions.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>public/devoxx-utils.js</li>
+</ul>
+<h2 id="day-by-day">Day by day...</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to use the DOM to display informations.</li>
+</ol>
+<h3>Context</h3>
+<p>In this exercise we&#39;ll build the schedule page day by day and talk by talk.</p>
+<h3>Steps</h3>
+<h4>Preparation</h4>
+<ul>
+<li>Have a look at <a href="http://localhost:8080/day-by-day.html">http://localhost:8080/day-by-day.html</a>, it doesn&#39;t display the schedule yet.</li>
+<li>Parse the JSON string <code>dvx.schedule.json</code> and try to figure out how it is structured. Use console.log and/or the JavaScript debugger.</li>
+<li>Start by modifying the empty file <a href="http://localhost:8080/devoxx-schedule-by-variable.js">public/devoxx-schedule-by-variable.js</a>.</li>
+<li>Add some code to call <code>dvx.schedule.display</code> function and give it the parsed object.</li>
+<li>Your code in this file should be very simple : 1 line. It&#39;s normal.</li>
+</ul>
+<h4>Titles</h4>
+<ul>
+<li>Modify the title of the document using the parsed object title property.</li>
+<li>Modify the <code>.app-title</code> using the parsed object title property.</li>
+</ul>
+<h4>Days</h4>
+<ul>
+<li>Have a look at <a href="http://localhost:8080/devoxx-schedule-display.js">public/devoxx-schedule-display.js</a>, it contains an empty function.</li>
+<li>Add some code into the empty function to iterate over the different days.</li>
+<li>For each day, create a <code>.schedule-day</code> element like this example :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-day"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"schedule-day-name"</span>></span>Monday<span class="tag">&lt;/<span class="title">h2</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>Use the <code>dvx.utils.dayName</code> function for the <code>h2</code>.</li>
+<li>Add this <code>.schedule-day</code> element to <code>.schedule</code>.</li>
+</ul>
+<h4>Talks</h4>
+<ul>
+<li>For each day, add some code to sort the talks array before iterating over it. Use the <code>dvx.utils.compareTalks</code> function.</li>
+<li>Now that the talks are sorted, add some code to iterate over them.</li>
+<li>For each talk, create a <code>.schedule-day</code> element like this example :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk-title"</span>></span>Android Development Code Lab<span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk-speakers"</span>></span>Nick Butcher, Richard Hyndman<span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk-room"</span>></span>BOF 1<span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>Converting the array of speakers to a string separated by <code>, </code> should be very simple. Look at Array documentation.</li>
+<li>Add this <code>.schedule-talk</code> element to the appropriate <code>.schedule-day</code>.</li>
+</ul>
+<h4>From/to grouping</h4>
+<ul>
+<li>Right now, visitors don&#39;t have informations on &quot;start&quot; and &quot;end&quot; time of the different talks.</li>
+<li>Add some code to group your talk elements by from/to time. Instead of have this example :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-day"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"schedule-day-name"</span>></span>Monday<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>You should have this :</li>
+</ul>
+<pre data-language="html"><code class="language-html"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-day"</span>></span>
+  <span class="tag">&lt;<span class="title">h2</span> <span class="attribute">class</span>=<span class="value">"schedule-day-name"</span>></span>Monday<span class="tag">&lt;/<span class="title">h2</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-from-to"</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-from-to-title"</span>></span>09:30 - 12:30<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-from-to"</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-from-to-title"</span>></span>13:30 - 16:30<span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"schedule-talk"</span>></span><span class="comment">&lt;!-- children elements --></span><span class="tag">&lt;/<span class="title">div</span>></span>
+  <span class="tag">&lt;/<span class="title">div</span>></span>
+<span class="tag">&lt;/<span class="title">div</span>></span></code></pre>
+
+<ul>
+<li>Use the <code>dvx.utils.formatTime</code> function.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>public/devoxx-schedule-by-variable.js</li>
+<li>public/devoxx-schedule-display.js</li>
+</ul>
+<h2 id="async-data">Async data</h2>
+<h3>Learning goals</h3>
+<ol>
+<li>Know how to make AJAX calls</li>
+</ol>
+<h3>Context</h3>
+<p>This exercise is very similar to the previous one. Instead of reading the JSON string from a variable. We&#39;ll use AJAX to load the data from the server.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have a look at <a href="http://localhost:8080/async-data.html">http://localhost:8080/async-data.html</a>, it doesn&#39;t display the schedule yet.</li>
+<li>Start by modifying the empty file <a href="http://localhost:8080/devoxx-schedule-by-ajax.js">public/devoxx-schedule-by-ajax.js</a>.</li>
+<li>Add some code to start an AJAX GET request on <a href="http://localhost:8080/devoxx-schedule.json">http://localhost:8080/devoxx-schedule.json</a>. Be smart, don&#39;t hard-code the domain and port.</li>
+<li>Once the server response is received, call the <code>dvx.schedule.display</code> function and give it the JavaScript object (not the JSON string!!).</li>
+<li>Your code in this file should be very simple : around 5 lines. It&#39;s normal.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>public/devoxx-schedule-by-ajax.js</li>
+</ul>
+<h2 id="navigation">Navigation</h2>
+<h3>Controlled skills</h3>
+<ol>
+<li>Know how to handle keyboard events.</li>
+</ol>
+<h3>Context</h3>
+<p>To ease the navigation in the document, we&#39;ll provide keyboard shortcuts.</p>
+<h3>Steps</h3>
+<ul>
+<li>Have a look at <a href="http://localhost:8080/navigation.html">http://localhost:8080/navigation.html</a>, it contains some keyboard shortcuts informations.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>Start by modifying the empty file <a href="http://localhost:8080/devoxx-keyboard.js">public/devoxx-keyboard.js</a>.</li>
+<li>Add some code to listen to keyboard events and intercept only <code>left</code>, <code>right</code>, <code>up</code> and <code>down</code> arrow keys.</li>
+<li>If the user presses the <code>down</code> arrow key, you should scroll to the next day using the <code>dvx.utils.nav.nextDay</code> function.</li>
+<li>If the user presses the <code>up</code> arrow key, you should scroll to the previous day using the <code>dvx.utils.nav.previousDay</code> function.</li>
+<li>You should not try to scroll if you&#39;re on the first or the last day. Use <code>dvx.utils.nav.isFirstDay</code> and <code>dvx.utils.nav.isLastDay</code> functions.</li>
+<li>If the user presses the <code>right</code> arrow key, you should scroll to the next time slot using the <code>dvx.utils.nav.nextFromTo</code> function.</li>
+<li>If the user presses the <code>left</code> arrow key, you should scroll to the previous time slot using the <code>dvx.utils.nav.previousFromTo</code> function.</li>
+<li>If you are on the first time slot of a day, <code>left</code> arrow key should scroll to the last time slot of the previous day. Use the <code>dvx.utils.nav.isFirstFromTo</code> and <code>dvx.utils.nav.previousDayLastFromTo</code> functions.</li>
+<li>If you are on the last time slot of a day, <code>right</code> arrow key should scroll to the first time slot of the next day. Use the <code>dvx.utils.nav.isLastFromTo</code> and <code>dvx.utils.nav.nextDay</code> functions.</li>
+</ul>
+<h3>Files to edit</h3>
+
+<ul class="deliveries">
+<li>public/devoxx-keyboard.js</li>
+</ul>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

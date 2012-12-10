@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>PHP : classes and objects.</title>
+<meta name="author" content="Hubert SABLONNIÈRE">
+<meta name="description" content="Object oriented PHP.">
+<meta name="keywords" content="php, classes, objects, inheritance">
+
+<link href="../css/bootstrap.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/hljs-github.css" rel="stylesheet">
+<link href="../css/theme-2012.css" rel="stylesheet">
+<link href="../css/theme-2012-common.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-article.css" rel="stylesheet" data-dztheme="article">
+<link href="../css/theme-2012-presentation.css" rel="alternate stylesheet" data-dztheme="presentation">
+<link href="../css/php-classes-and-objects.css" rel="alternate stylesheet" data-dztheme="presentation">
+
+<section class="cover">
+<h1>PHP : classes and objects.</h1>
+<div class="toc well">
+<ul class="nav nav-list">
+<li class="nav-header">Table of contents</li>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#inheritance">Inheritance</a></li>
+<li><a href="#paamayim-nekudotayim">Paamayim Nekudotayim</a></li>
+<li><a href="#it-39-s-a-kind-of-magic">It&#39;s a kind of magic</a></li>
+<li><a href="#exceptions">Exceptions</a></li>
+<li><a href="#there-39-s-more">There&#39;s more...</a></li>
+</ul>
+</div>
+
+</section>
+
+<section class="introduction">
+<h4>That language belongs in a museum.</h4>
+
+<p class="list incremental">When it comes to PHP, you master the <strong>basic</strong> <strong>stuffs</strong> of the language. It&#39;s good PHP4, <strong>you know some stuffs</strong> but what about the <strong>true powers</strong> of the language. In this course, we&#39;ll introduce concepts that will save the day in <strong>real situations</strong>. You&#39;ll be able to use PHP5 features to build <strong>great websites</strong>. You&#39;ll forget about your <strong>previous attemps</strong> and become a real <strong>PHP programmer</strong>.</p>
+</section>
+
+<section class="cover">
+<h2 id="classes">Classes</h2>
+</section>
+
+<section>
+<h3>Declaration</h3>
+<p>Like in other classical inheritance object oriented languages, class are declared with the <code>class</code> keyword.</p>
+<p>You just have to declare your properties and methods in it. Here&#39;s an example :</p>
+<pre data-language="php"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="comment">// Property declaration</span>
+  <span class="keyword">public</span> <span class="variable">$name</span> = <span class="string">'a default name'</span>;
+
+  <span class="comment">// Method declaration</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span> {</span>
+    <span class="comment">// Some code...</span>
+    <span class="keyword">return</span> <span class="variable">$translatedMessage</span>;
+  }
+}</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.basic.php">Classes, the basics (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Encapsulation &amp; visibility</h3>
+<p>Unlink JavaScript, PHP provides true encapsulation and visibility keywords. You can set properties and methods to either <code>public</code>, <code>protected</code> or <code>private</code>.</p>
+<pre data-language="php"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="comment">// Accessible everywhere</span>
+  <span class="keyword">public</span> <span class="variable">$name</span> = <span class="string">'a default name'</span>;
+
+  <span class="comment">// Accessible from within children instances</span>
+  <span class="keyword">protected</span> <span class="variable">$jobSecrets</span>;
+
+  <span class="comment">// Accessible only from current instance</span>
+  <span class="keyword">private</span> <span class="variable">$personalSecrets</span>;
+
+  <span class="comment">// Encapsulated getter</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getPersonalSecrets</span><span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="variable">$this</span>->personalSecrets;        <span class="comment">// $this => current object</span>
+  }
+
+  <span class="comment">// Public method getter</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$text</span>, <span class="variable">$fromLang</span>, <span class="variable">$toLang</span>)</span> {</span>
+    <span class="comment">// Some actual translation code</span>
+    <span class="keyword">return</span> <span class="variable">$text</span>;
+  }
+}</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.visibility.php">Visibility (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Basic usages</h3>
+<p>Instantiating an object from a class is fairly simple and very similar to other languages like Java.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$indianaJones</span> = <span class="keyword">new</span> Archaeologist();</code></pre>
+
+<p>You can access public properties and methods using an thin arrow <code>-&gt;</code>.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// OK   :-)</span>
+<span class="keyword">echo</span> <span class="variable">$indianaJones</span>->name;
+<span class="keyword">echo</span> <span class="variable">$indianaJones</span>->translate(<span class="string">'שלום עולם!'</span>, <span class="string">'hebrew'</span>, <span class="string">'english'</span>);</code></pre>
+
+<p>Of course, you cannot access protected or private properties and methods.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// Cannot access protected property Archaeologist::$jobSecrets</span>
+<span class="keyword">echo</span> <span class="variable">$indianaJones</span>->jobSecrets;
+<span class="comment">// Cannot access private property Archaeologist::$personalSecrets</span>
+<span class="keyword">echo</span> <span class="variable">$indianaJones</span>->personalSecrets;</code></pre>
+
+</section>
+
+<section>
+<h3>Default parameters and overloading</h3>
+<p>In PHP, you cannot define two or more methods with the same name and different arguments. One thing you can do is to define default parameters.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">dig</span><span class="params">(<span class="variable">$tool1</span>, <span class="variable">$tool2</span> = <span class="string">'spade'</span>)</span> {</span>
+    <span class="keyword">echo</span>(<span class="string">'Digging using a '</span> . <span class="variable">$tool1</span> . <span class="string">' and a '</span> . <span class="variable">$tool2</span> . <span class="string">"\n"</span>);
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$indianaJones</span> = <span class="keyword">new</span> Archaeologist();
+<span class="variable">$indianaJones</span>->dig(<span class="string">'shovel'</span>);          <span class="comment">// => Digging using a shovel and a spade</span>
+<span class="variable">$indianaJones</span>->dig(<span class="string">'shovel'</span>, <span class="string">'pick'</span>);  <span class="comment">// => Digging using a shovel and a pick</span></code></pre>
+
+</section>
+
+<section>
+<h3>Meta programming</h3>
+<p>If you have the name of a class or a method as a string you can use it to create objects or call methods. It kinda meta programming...</p>
+<p>Here&#39;s an example for creating objects :</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$className</span> = <span class="string">'Archaeologist'</span>;
+<span class="variable">$benjaminGates</span> = <span class="keyword">new</span> <span class="variable">$className</span>();</code></pre>
+
+<p>Here&#39;s an example for accessing a property :</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$propertyName</span> = <span class="string">'name'</span>;
+<span class="keyword">echo</span> <span class="variable">$benjaminGates</span>-><span class="variable">$propertyName</span>;</code></pre>
+
+<p>Here&#39;s an example for calling a function :</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$methodName</span> = <span class="string">'translate'</span>;
+<span class="variable">$benjaminGates</span>-><span class="variable">$methodName</span>(<span class="string">'שלום עולם!'</span>, <span class="string">'hebrew'</span>, <span class="string">'english'</span>);</code></pre>
+
+</section>
+
+<section>
+<h3>Constructors</h3>
+<p>If you want to do initializations when creating objects, you can using a constructor. You just have to define a special function called <code>__construct</code>.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="variable">$name</span>;
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(<span class="variable">$name</span>)</span> {</span>
+    <span class="variable">$this</span>->name = <span class="variable">$name</span>;
+  }
+}</code></pre>
+
+<p>The function is called when you use the <code>new</code> operator.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$rickOConnell</span> = <span class="keyword">new</span> Archaeologist(<span class="string">"Rick O'Donnel"</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.decon.php">Constructors and Destructors (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Destructors</h3>
+<p>Destructors aren&#39;t use often but they exist. You just have to define a special function called <code>__destruct</code>. It&#39;s called at the end of the script.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="variable">$name</span>;
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(<span class="variable">$name</span>)</span> {</span>
+    <span class="variable">$this</span>->name = <span class="variable">$name</span>;
+  }
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> {</span>
+    <span class="keyword">echo</span> <span class="string">'My name is '</span> . <span class="variable">$this</span>->name . <span class="string">' and I was an archaeologist...'</span>;
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$laraCroft</span> = <span class="keyword">new</span> Archaeologist(<span class="string">"Lara Croft"</span>);
+<span class="comment">// __destruct() is called at the end of the script</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.decon.php">Constructors and Destructors (php.net)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="inheritance">Inheritance</h2>
+</section>
+
+<section>
+<h3>Simple</h3>
+<p>In PHP, inheritance of classes is done using the <code>extends</code> keyword. For example, if we have an <code>Archaeologist</code> like this :</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="variable">$name</span>;
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(<span class="variable">$name</span>)</span> {</span>
+    <span class="variable">$this</span>->name = <span class="variable">$name</span>;
+  }
+}</code></pre>
+
+<p>We can create a subclass <code>IndianaJones</code> like this :</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">IndianaJones</span> <span class="keyword">extends</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="variable">$bullwhip</span> = <span class="keyword">TRUE</span>;
+  <span class="keyword">public</span> <span class="variable">$fedora</span> = <span class="keyword">TRUE</span>;
+  <span class="keyword">public</span> <span class="variable">$leatherJacket</span> = <span class="keyword">TRUE</span>;
+}</code></pre>
+
+<p>Objects created using the subclass will inherit public and protected code...</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$harissonFord</span> = <span class="keyword">new</span> IndianaJones(<span class="string">'ford'</span>);
+<span class="variable">$seanPatrickFlanery</span> = <span class="keyword">new</span> IndianaJones(<span class="string">'flanery'</span>);
+<span class="keyword">echo</span> <span class="variable">$harissonFord</span>->bullwhip;
+<span class="keyword">echo</span> <span class="variable">$seanPatrickFlanery</span>->name;  <span class="comment">// inherited from Archaeologist</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.inheritance.php">Object Inheritance (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Abstract 1/2</h3>
+<p>Sometimes you need a class hierarchy but some root classes shouldn&#39;t be instantiated. In thoses cases, it&#39;s better to use an <code>abstract class</code>.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// This class can't be instanciated</span>
+<span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">travelTo</span><span class="params">(<span class="variable">$destination</span>)</span> {</span>
+    <span class="comment">// Some code...</span>
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$harissonFord</span> = <span class="keyword">new</span> Archaeologist(); <span class="comment">// => PHP Fatal error...</span></code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// This class can be instanciated</span>
+<span class="class"><span class="keyword">class</span> <span class="title">IndianaJones</span> <span class="keyword">extends</span> <span class="title">Archaeologist</span> {</span>
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$harissonFord</span> = <span class="keyword">new</span> IndianaJones();
+<span class="variable">$harissonFord</span>->travelTo(<span class="string">'India'</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.abstract.php">Class Abstraction (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Abstract 2/2</h3>
+<p>You can also force people to implement method by adding the <code>abstract</code> keyword.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// This class can't be instanciated</span>
+<span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">travelTo</span><span class="params">(<span class="variable">$destination</span>)</span> {</span> <span class="comment">/* Some code... */</span> }
+  <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span>;
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// This class can be instanciated</span>
+<span class="comment">// This class must implement each abstract method of its parent</span>
+<span class="class"><span class="keyword">class</span> <span class="title">IndianaJones</span> <span class="keyword">extends</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span> {</span>
+    <span class="comment">// Some code...</span>
+    <span class="keyword">return</span> <span class="variable">$translatedMessage</span>;
+  }
+}</code></pre>
+
+<p>In this example, if you forget to implement the <code>translate</code> function, you&#39;ll get a messag like this : <code>PHP Fatal error:  Class IndianaJones contains 1 abstract method and must therefore be declared abstract or implement the remaining methods...
+</code></p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$harissonFord</span> = <span class="keyword">new</span> IndianaJones();
+<span class="variable">$harissonFord</span>->travelTo(<span class="string">'India'</span>); <span class="comment">// inherited from class Archaeologist</span>
+<span class="variable">$harissonFord</span>->translate(<span class="string">'שלום עולם!'</span>, <span class="string">'hebrew'</span>, <span class="string">'english'</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.abstract.php">Class Abstraction (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Interfaces</h3>
+<p>If you need an abstract class without any code and only abstract methods, just use an <code>interface</code> like this :</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// Interfaces can't be instanciated</span>
+<span class="keyword">interface</span> Archaeologist {
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span>;
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="comment">// This class can be instanciated</span>
+<span class="comment">// This class must implement each method of its interface(s)</span>
+<span class="class"><span class="keyword">class</span> <span class="title">IndianaJones</span> <span class="title">implements</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span> {</span>
+    <span class="comment">// Some code...</span>
+    <span class="keyword">return</span> <span class="variable">$translatedMessage</span>;
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$harissonFord</span> = <span class="keyword">new</span> IndianaJones();
+<span class="variable">$harissonFord</span>->translate(<span class="string">'שלום עולם!'</span>, <span class="string">'hebrew'</span>, <span class="string">'english'</span>);</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.interfaces.php">Object Interfaces (php.net)</a></li>
+</ul>
+</section>
+
+<section class="cover">
+<h2 id="paamayim-nekudotayim">Paamayim Nekudotayim</h2>
+<p>The paamayim nekudotayim is a scope resolution operator. It&#39;s represented as <code>::</code>. It&#39;s used in several cases in PHP. Let&#39;s review them.</p>
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.paamayim-nekudotayim.php">Paamayim Nekudotayim, scope resolution operator (::) (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3><code>const</code></h3>
+<p>The <code>::</code> operator can be used to access constants.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">const</span> YEAR_OF_STUDY = <span class="number">5</span>;
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="keyword">echo</span> Archaeologist::YEAR_OF_STUDY;</code></pre>
+
+</section>
+
+<section>
+<h3><code>static</code></h3>
+<p>The <code>::</code> operator can be used to access static methods.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span><span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="string">'Hello!'</span>;
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="keyword">echo</span> Archaeologist::sayHello();</code></pre>
+
+</section>
+
+<section>
+<h3><code>self</code></h3>
+<p>The <code>::</code> operator can be used to access static methods from within an instance method.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">const</span> YEAR_OF_STUDY = <span class="number">5</span>;
+
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">greetings</span><span class="params">()</span> {</span>
+    <span class="keyword">return</span> <span class="string">'Hello!'</span>;
+  }
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">introduceHimself</span><span class="params">()</span> {</span>
+    <span class="variable">$hello</span> = <span class="keyword">self</span>::greetings() . <span class="string">", I've been studying archaeology for "</span>;
+    <span class="variable">$hello</span> .= <span class="keyword">self</span>::YEAR_OF_STUDY . <span class="string">' years.'</span>;
+    <span class="keyword">return</span> <span class="variable">$hello</span>;
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$indianaJones</span> = <span class="keyword">new</span> Archaeologist();
+<span class="variable">$indianaJones</span>->introduceHimself();</code></pre>
+
+</section>
+
+<section>
+<p>The <code>::</code> operator can be used to access the parent class and its methods or properties.</p>
+<h3><code>parent</code></h3>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span> {</span>
+    <span class="comment">// Some code...</span>
+    <span class="keyword">echo</span> <span class="string">"I'm the original translate method"</span>;
+    <span class="keyword">return</span> <span class="variable">$translatedMessage</span>;
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">IndianaJones</span> <span class="keyword">extends</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">translate</span><span class="params">(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>)</span> {</span>
+    <span class="keyword">echo</span> <span class="string">"I'm Indiana Jones translate method"</span>;
+    <span class="keyword">return</span> <span class="keyword">parent</span>::translate(<span class="variable">$msg</span>, <span class="variable">$srcLanguage</span>, <span class="variable">$destLanguage</span>);
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$indianaJones</span> = <span class="keyword">new</span> IndianaJones();
+<span class="variable">$indianaJones</span>->translate(<span class="string">'שלום עולם!'</span>, <span class="string">'hebrew'</span>, <span class="string">'english'</span>);</code></pre>
+
+</section>
+
+<section class="cover">
+<h2 id="it-39-s-a-kind-of-magic">It&#39;s a kind of magic</h2>
+<p>Magic properties and methods allow PHP developers to hide behaviour and implementation and create very smart code reuse.</p>
+</section>
+
+<section>
+<h3>Magic properties</h3>
+<p>Like in JavaScript, you can hide code behind property assignement (setter) and retrieve (getter).</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">private</span> <span class="variable">$data</span> = <span class="keyword">array</span>();
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$value</span>)</span> {</span>
+    <span class="keyword">echo</span> <span class="string">'Setting '</span> . <span class="variable">$name</span> . <span class="string">' to '</span> . <span class="variable">$value</span>;
+    <span class="variable">$this</span>->data[<span class="variable">$name</span>] = <span class="variable">$value</span>;
+  }
+
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">(<span class="variable">$name</span>)</span> {</span>
+    <span class="keyword">echo</span> <span class="string">'Getting '</span> . <span class="variable">$name</span>;
+    <span class="keyword">if</span> (array_key_exists(<span class="variable">$name</span>, <span class="variable">$this</span>->data)) {
+      <span class="keyword">return</span> <span class="variable">$this</span>->data[<span class="variable">$name</span>];
+    } <span class="keyword">else</span> { <span class="comment">/* Some code to trigger_error... */</span> }
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$benjaminGates</span> = <span class="keyword">new</span> Archaeologist();
+<span class="variable">$benjaminGates</span>->father = <span class="string">'Patrick Henry Gates'</span>;  <span class="comment">// Enters __set method</span>
+<span class="variable">$benjaminGatesFather</span> = <span class="variable">$benjaminGates</span>->father;   <span class="comment">// Enters __get method</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.overloading.php#language.oop5.overloading.members">Property overloading (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Magic methods</h3>
+<p>If a method doesn&#39;t exist you can intercept call and do some code accordingly.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="class"><span class="keyword">class</span> <span class="title">Archaeologist</span> {</span>
+  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$arguments</span>)</span> {</span>
+    <span class="keyword">echo</span> <span class="variable">$name</span> . <span class="string">' called with '</span> . count(<span class="variable">$arguments</span>) . <span class="string">' args'</span>;
+  }
+
+  <span class="comment">/**  As of PHP 5.3.0  */</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__callStatic</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$arguments</span>)</span> {</span>
+    <span class="keyword">echo</span> <span class="variable">$name</span> . <span class="string">' static called with '</span> . count(<span class="variable">$arguments</span>) . <span class="string">' args'</span>;
+  }
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="variable">$laraCroft</span> = <span class="keyword">new</span> Archaeologist();
+<span class="variable">$laraCroft</span>->travelTo(<span class="string">'Africa'</span>);        <span class="comment">// Enters __call method</span>
+Archaeologist::findOneByName(<span class="string">'Lara'</span>);  <span class="comment">// Enters __callStatic method</span></code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.overloading.php#language.oop5.overloading.methods">Method overloading (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h3>Other ones...</h3>
+<p>You have some other magic methods, <code>__construct()</code> and <code>__destruct()</code> are part of them...</p>
+<ul>
+<li><code>__construct()</code></li>
+<li><code>__destruct()</code></li>
+<li><code>__sleep()</code></li>
+<li><code>__wakeup()</code></li>
+<li><code>__toString()</code></li>
+<li><code>__invoke()</code></li>
+<li><code>__set_state()</code></li>
+<li><code>__clone()</code></li>
+</ul>
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.oop5.magic.php">Magic Methods (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="exceptions">Exceptions</h2>
+<p>Like we saw in JavaScript, code can throw and catch exceptions.</p>
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="function"><span class="keyword">function</span> <span class="title">divide</span><span class="params">(<span class="variable">$a</span>, <span class="variable">$b</span>)</span> {</span>
+  <span class="keyword">if</span> (<span class="variable">$b</span> === <span class="number">0</span>) {
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">'Are you mad?'</span>);
+  }
+  <span class="keyword">return</span> <span class="variable">$a</span> / <span class="variable">$b</span>;
+}</code></pre>
+
+
+<pre data-language="php" class="incremental"><code class="language-php"><span class="keyword">try</span> {
+  <span class="keyword">echo</span> divide(<span class="number">12</span>, <span class="number">4</span>);
+  <span class="keyword">echo</span> divide(<span class="number">12</span>, <span class="number">0</span>);
+} <span class="keyword">catch</span> (<span class="keyword">Exception</span> <span class="variable">$e</span>) {
+  <span class="keyword">echo</span> <span class="string">'Caught exception: '</span> . <span class="variable">$e</span>->getMessage();
+}</code></pre>
+
+
+<ul class="useful-links">
+<li><a href="http://www.php.net/manual/en/language.exceptions.php">Exceptions (php.net)</a></li>
+</ul>
+</section>
+
+<section>
+<h2 id="there-39-s-more">There&#39;s more...</h2>
+<p>The language is far stronger that what we saw today. Just experiment and try stuffs, you&#39;ll discover a lot...</p>
+<ul>
+<li><a href="http://www.php.net/manual/en/language.oop5.autoload.php">Autoloading</a></li>
+<li><a href="http://www.php.net/manual/en/language.oop5.traits.php">Traits</a></li>
+<li><a href="http://www.php.net/manual/en/language.oop5.final.php">Final Keyword</a></li>
+<li><a href="http://www.php.net/manual/en/language.oop5.iterations.php">Object Iteration</a></li>
+<li><a href="http://www.php.net/manual/en/language.oop5.cloning.php">Object Cloning</a></li>
+<li><a href="http://www.php.net/manual/en/language.oop5.references.php">Objects and references</a></li>
+</ul>
+<div id="progress-bar"></div>
+
+<script src="../js/dzslides.core.js"></script>
+<script src="../js/jquery-1.8.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</section>

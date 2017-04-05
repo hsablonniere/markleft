@@ -95,7 +95,7 @@ In JavaScript, **Typing is dynamic**. Therefore, there is **NO type declaration*
 
 ### Number
   
-Numbers like in any other languages are really important. Don't forget that a computer is primarly a super calculator. Integers and floats have the same type : `Number`. Of course, a variable can only be identified as type `Number` at execution time..
+Numbers like in any other languages are really important. Don't forget that a computer is primarily a super calculator. Integers and floats have the same type : `Number`. Of course, a variable can only be identified as type `Number` at execution time..
 
 If you want to manipulate numbers, the objects `Number` and `Math` has lots of useful properties and methods. The other useful way to manipulate them is operators of course. See reference for more details.
 
@@ -208,7 +208,7 @@ neo = null;   // Type is object
 
 ## Arrays
   
-An array is an ordered colleciton of values. Values can be of different types. Each value is called an element and is positioned in the array with a numeric index starting at zero.
+An array is an ordered collection of values. Values can be of different types. Each value is called an element and is positioned in the array with a numeric index starting at zero.
 
 The `Array` object has several properties and methods. The most important property is `length`, it contains the size of the array. See reference for more details.
 
@@ -426,9 +426,9 @@ var h = -1 >>> 2 // h => 1073741823  (Shift right with zero fill)
 
 <!-- slide -->
 
-### Assignement
+### Assignment
   
-Assignement operators saves you some place and can improve code readability. Use them carefuly!
+Assignment operators saves you some place and can improve code readability. Use them carefully!
 
 ```javascript
 var a = 1, b = 0;
@@ -526,7 +526,7 @@ var d = Boolean("true");      // d => true
 
 ### Implicit
   
-There's a lot of ways to convert a string to a number. Performances can differ a lot depending on the technique used and the plateform. A shorter syntax is often prefered for bandwith uses.
+There's a lot of ways to convert a string to a number. Performances can differ a lot depending on the technique used and the platform. A shorter syntax is often preferred for bandwidth uses.
 
 Look carefully how the `+` operator behaves with strings and numbers.
 
@@ -605,11 +605,11 @@ Here's a little summary of conversions results. Pay attention especially to "any
 
 <!-- slide -->
 
-### Conditionnal
+### Conditional
   
-In JavaScript, conditionnal statements behaves pretty much like in other common languages.
+In JavaScript, conditional statements behaves pretty much like in other common languages.
 
-Note that the conditional ternary operator should only be used in simple cases. It is often use for variable assignment and its usage is synonym of shorter syntax and readability. If you think it doesn't make your code better, use a classic `if`.
+Note that the conditional ternary operator should only be used in simple cases. It is often used for variable assignment and its usage is synonym of shorter syntax and readability. If you think it doesn't make your code better, use a classic `if`.
   
 #### if/else
 
@@ -786,7 +786,7 @@ var a = lastName;           // ReferenceError lastName is not defined
 
 ### Don't forget `var`
   
-If you ommit the `var` keyword inside a function, the variable is automatically considered global. It can have serious side effects. It's considered bad practice, you shouldn't use this.
+If you omit the `var` keyword inside a function, the variable is automatically considered global. It can have serious side effects. It's considered bad practice, you shouldn't use this.
 
 <!-- .incremental -->
 ```javascript
@@ -839,7 +839,7 @@ The best way to integrate JavaScript in a web page is through a JavaScript file 
 Putting your scripts at the just before the `</body>` is a good practice. We'll see that in details in performances lesson.
 
 <!-- .useful-links -->
-* [Unobstrusive JavaScript (labs.adobe.com)](http://labs.adobe.com/technologies/spry/articles/best_practices/separating_behavior.html)
+* [Unobtrusive JavaScript (labs.adobe.com)](http://labs.adobe.com/technologies/spry/articles/best_practices/separating_behavior.html)
 * [Why Inline CSS And JavaScript Code Is Such A Bad Thing (http://robertnyman.com/)](http://robertnyman.com/2008/11/20/why-inline-css-and-javascript-code-is-such-a-bad-thing/)
 * [Where To Include JavaScript Files In A Document](http://robertnyman.com/2008/04/23/where-to-include-javascript-files-in-a-document/)
 
@@ -847,7 +847,7 @@ Putting your scripts at the just before the `</body>` is a good practice. We'll 
 
 ### Browser objects
   
-Every JavaScript plateform/environment adds objects with global scope. They're meant to provide helpful features to developers. In web browsers the most important ones are : `document` and `window`.
+Every JavaScript platform/environment adds objects with global scope. They're meant to provide helpful features to developers. In web browsers the most important ones are : `document` and `window`.
 
 Another object is present but only in modern browsers : `console`. Since it's not standard, implementations may differ, see references for more details. Remember that older browsers don't support it, so don't let `console.log('foo')` etc... in production code.
 

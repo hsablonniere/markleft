@@ -770,7 +770,7 @@ Variables declared outside of any function are defined everywhere in your code. 
 Variables declared inside a function are defined only within the function body. They are considered local to the function.
   
 ```javascript
-var name = "Andy";             // not in a function => variable is global
+var name = "Lilly";             // not in a function => variable is global
 
 function foo() {
   var lastName = "WACHOWSKI";   // inside a function => variable is local
